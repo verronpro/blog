@@ -6,8 +6,7 @@ baseurl: ""
 url: "https://blog.verron.pro"
 twitter_username: j_verron
 github_username:  josephverron
-
-remote_theme: pages-themes/tactile@v0.2.0
+repository: verronpro/blog
+theme: jekyll-text-theme
 plugins:
   - jekyll-feed
-  - jekyll-remote-theme
