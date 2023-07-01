@@ -3,10 +3,13 @@ email: joseph@verron.pro
 description: >- 
   "Agile Software Crafts" is a blog dedicated to software professionals with insights and techniques to excel in agile development, and to discuss about automating process, reducing technical debt, assessing and developing team's skills, and creating productivity tools.
 baseurl: ""
+
 url: "https://blog.verron.pro"
 twitter_username: j_verron
 github_username:  josephverron
 repository: verronpro/blog
 theme: jekyll-text-theme
+text_skin: "dark"
+highlight_theme: "tomorrow-night"
 plugins:
   - jekyll-feed
