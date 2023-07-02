@@ -1,2 +1,2 @@
 # blog
-Joseph Verron professional blog content
+Joseph Verron professional blog
