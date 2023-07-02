@@ -2,7 +2,7 @@
 layout: article
 title:  "Little helper Workshop"
 date:   2023-06-01 09:00:00
-categories: workshop
+categories: [workshop]
 ---
 Here is a short workshop you can use in your teams to help discover holes in
  your developers' environment documentation.
@@ -13,7 +13,7 @@ I created it to make the action of actively finding missing points in our
  around every 1 or 2 months to verify that all those documents are still
  up-to-date.
 
-![A hole in your foundations - Photo by Bruce Kee on Unsplash](https://cdn-images-1.medium.com/max/1000/0*yeZKGhbmElPAiCgB "A hole in your foundations - Photo by Bruce Kee on Unsplash"){: width="50%" }{: margin="auto" }
+![A hole in your foundations - Photo by Bruce Kee on Unsplash](https://cdn-images-1.medium.com/max/1000/0*yeZKGhbmElPAiCgB "A hole in your foundations - Photo by Bruce Kee on Unsplash"){: width="50%" }
 
 ## Goal
 We try to put in evidence the possible lack of developer documentation by
