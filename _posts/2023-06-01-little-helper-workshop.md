@@ -1,10 +1,9 @@
 ---
-layout: post
+layout: article
 title:  "Little helper Workshop"
 date:   2023-06-01 09:00:00
 categories: workshop
 ---
-# Little helper Workshop
 Here is a short workshop you can use in your teams to help discover holes in
  your developers' environment documentation.
 
