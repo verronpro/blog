@@ -2,8 +2,6 @@
 layout: page
 ---
 
-# About
-
 Process automation, technical debt reduction, teams’ skill assessment &
  development, tools creation, sharing good practices....
 
@@ -13,7 +11,7 @@ To give everyone access to the complexities of modern technologies, we must
  
 I bring my skills, my knowledge, and good spirit everywhere I work!
 
-## Where to find me
+# Where to find me
 - [blog](https://blog.verron.pro/)
 - [linkedin](https://www.linkedin.com/in/josephverron/)
 - [medium](https://medium.com/@joseph.verron)
@@ -24,24 +22,23 @@ I bring my skills, my knowledge, and good spirit everywhere I work!
 - [freelancer](https://www.freelancer.com/u/josephverr)
 - [holopin](https://www.holopin.io/@josephverron#)
 - [projecteuler](https://projecteuler.net/progress=j_verron)
-  
-## Projects 
+ 
+# Projects 
 
-### Familial
+## Familial
 - [Le cloud familial](https://cloud.verron.pro/)
 - [L'espace de Pascal](https://pascal.verron.pro/)
 - [Les recettes d'Yvette](https://yvette.verron.pro/)
 
-### Open Source
+## Open Source
 - [docx-stamper](https://verronpro.github.io/docx-stamper/)
 
-### Maybe one day...
+## Maybe one day...
 - [Archivage collégial de photo](http://vieilles.photos)
 - [Prototypage de recette et formules](http://creation.best)
 - [Le coin des fantasmes](http://fantas.me)
 - [Best emails](http://isda.best)
 
-## Friends projects
+# Friends projects
 - [Isabelle Muñoz, Ennoblisseur textile à l'habit en roses, ](https://habit-en-roses.fr/)
 - [Hugues Malbreil, Sculpteur](https://malbreil.fr/)
-
