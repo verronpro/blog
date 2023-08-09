@@ -2,26 +2,21 @@
 layout: page
 ---
 
-Process automation, technical debt reduction, teams’ skill assessment &
- development, tools creation, sharing good practices....
+As a coach in software craftsmanship at TotalEnergies, I help teams and projects achieve high-quality, reliable, and sustainable software solutions that meet the complex and evolving needs of the energy industry. I leverage my skills in software craftsmanship to provide guidance, training, and support to developers, engineers, and managers across the organization.
 
-To give everyone access to the complexities of modern technologies, we must
- know to use adapted tools, languages and make sure we apply them at every
- level & steps of the projects concerned.
- 
-I bring my skills, my knowledge, and good spirit everywhere I work!
+I worked for various companies in banking, insurance, energy, and communications and successfully delivered solutions that improve automation, technical debt, and help diffusing good practices. I am passionate about sharing my expertise and learning from others, as well as contributing to the advancement and innovation of the software field.
 
 # Where to find me
 - [blog](https://blog.verron.pro/)
 - [linkedin](https://www.linkedin.com/in/josephverron/)
-- [medium](https://medium.com/@joseph.verron)
+- [medium](https://medium.com/@caring_coder)
 - [codingame](https://www.codingame.com/profile/60e9b0f5e26f8a109f4fb4abd55f03d76149351)
 - [credly](https://www.credly.com/users/joseph-verron)
-- [deviantart](https://www.deviantart.com/josmun)
+- [deviantart](https://www.deviantart.com/caring-coder)
 - [docker](https://hub.docker.com/u/verronpro)
 - [freelancer](https://www.freelancer.com/u/josephverr)
 - [holopin](https://www.holopin.io/@josephverron#)
-- [projecteuler](https://projecteuler.net/progress=j_verron)
+- [projecteuler](https://projecteuler.net/progress=caring_coder)
  
 # Projects 
 
