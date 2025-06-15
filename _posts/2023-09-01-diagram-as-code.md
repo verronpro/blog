@@ -1,7 +1,7 @@
 ---
 layout: article
 title:  "Diagrams as Code: Practical Benefits in Real-World Projects"
-date:   2023-08-01 09:00:00
+date:   2023-09-01 09:00:00
 categories: [plantuml, graphviz, developerexperience, documentation]
 ---
 
