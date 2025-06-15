@@ -1,11 +1,9 @@
 ---
 layout: article
-title:  "Nextcloud Self-Hosting: Interests and Hurdles"
+title:  "Diagrams as Code: Practical Benefits in Real-World Projects"
 date:   2023-08-01 09:00:00
 categories: [plantuml, graphviz, developerexperience, documentation]
 ---
-
-# Diagrams as Code: Practical Benefits in Real-World Projects
 
 In several of my projects, I’ve integrated **Graphviz** and **PlantUML** into the development and documentation workflows. These tools allow diagrams to be described and stored in plain text format — a practice often referred to as *Diagrams as Code*.
 
