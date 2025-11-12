@@ -1,6 +1,6 @@
 ---
 layout: article
-title:  "2023-01-25 — Nested Repeats in Word Templates: Making repeatDocPart Robust"
+title:  "Nested Repeats in Word Templates: Making repeatDocPart Robust"
 date:   2023-02-01 09:00:00
 categories: [agility, craftsmanship, docs-as-code, solo-maintainer, enterprise, maintenance, wordprocessingml, repetition]
 ---
