@@ -6,6 +6,25 @@ As a coach in software craftsmanship at TotalEnergies, I help teams and projects
 
 I worked for various companies in banking, insurance, energy, and communications and successfully delivered solutions that improve automation, technical debt, and help diffusing good practices. I am passionate about sharing my expertise and learning from others, as well as contributing to the advancement and innovation of the software field.
 
+# How I can help
+
+<div class="cards" style="margin:1rem 0 2rem">
+  <div class="card">
+    <h3>Engineering practices</h3>
+    <p>Observability, test strategy, safer refactors, and feedback loops tailored to your context.</p>
+  </div>
+  <div class="card">
+    <h3>Docs‑as‑Code</h3>
+    <p>Policies, pipelines, and templates that make docs reliable and reviewable.</p>
+  </div>
+  <div class="card">
+    <h3>Office‑stamper</h3>
+    <p>Integration support, template invariants, and migration guidance.</p>
+  </div>
+  <p><a class="btn btn-primary" href="mailto:{{ site.email | default: 'joseph@verron.pro' }}?subject=Consulting%20inquiry">Book a call</a>
+     <a class="btn btn-ghost" href="https://github.com/{{ site.github_username | strip }}">GitHub</a></p>
+</div>
+
 # Where to find me
 - [blog](https://blog.verron.pro/)
 - [linkedin](https://www.linkedin.com/in/josephverron/)
@@ -37,3 +56,5 @@ I worked for various companies in banking, insurance, energy, and communications
 # Friends projects
 - [Isabelle Muñoz, Ennoblisseur textile à l'habit en roses, ](https://habit-en-roses.fr/)
 - [Hugues Malbreil, Sculpteur](https://malbreil.fr/)
+
+{% include footer/custom.html %}

@@ -126,7 +126,13 @@ Audience for this document: advanced contributors who will maintain and evolve t
 
 - Graphical styling
   - Logo SVG lives in `_includes/svg/logo.svg`; favicons under `_includes/head` and root `favicon*.png/ico` plus `browserconfig.xml` and `ms-icon*` variants.
-  - Keep palette and typography consistent with the site theme. If altering theme, document CSS entry points and variables in this file.
+  - Custom CSS entry point: `assets/css/custom.css` is linked from `_includes/head/favicon.html`. Use this file to define design tokens and light component styling; avoid heavy theme overrides.
+  - Design tokens (CSS variables) currently defined: `--cc-primary`, `--cc-accent`, `--cc-text`, `--cc-muted`, `--cc-bg`, `--cc-border`. Components: `.btn`, `.btn-primary`, `.btn-ghost`, `.tag`, `.author-box`, `.cards`, `.card`, `.posts-grid`, `.post-card`, `.post-meta`.
+  - Reusable includes for presentation live under `_includes/home/*`, `_includes/post/*`, and `_includes/footer/*`:
+    - `_includes/home/hero.html`: top landing hero with CTA. `_includes/home/cards.html`: 3 services cards.
+    - `_includes/post/author-box.html`: author bio and CTA to add at end of posts.
+    - `_includes/footer/custom.html`: site footer with quick links and social.
+  - Keep palette and typography consistent with the theme. Prefer system font stacks for performance; ensure WCAG AA contrast.
 
 - Linting and sanity checks (manual, lightweight)
   - Run local build before pushing: `bundle exec jekyll build`.

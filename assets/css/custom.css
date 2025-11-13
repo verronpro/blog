@@ -1,0 +1,62 @@
+/* Caring-Coder brand customizations */
+:root{
+  --cc-primary:#2563EB; /* blue-600 */
+  --cc-accent:#10B981;  /* emerald-500 */
+  --cc-text:#111827;    /* gray-900 */
+  --cc-muted:#6B7280;   /* gray-500 */
+  --cc-bg:#FFFFFF;
+  --cc-border:#E5E7EB;  /* gray-200 */
+}
+
+/* Prefer system fonts for performance */
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+h1,h2,h3,h4{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+
+/* Containers */
+.container{max-width:72ch;margin-inline:auto;padding-inline:1rem}
+.container-wide{max-width:1200px;margin-inline:auto;padding-inline:1rem}
+
+/* Buttons */
+.btn{display:inline-block;padding:.5rem .9rem;border-radius:.5rem;font-weight:600;text-decoration:none}
+.btn-primary{background:var(--cc-primary);color:#fff}
+.btn-ghost{border:1px solid currentColor;color:var(--cc-primary);background:transparent}
+.btn:hover{filter:brightness(0.95)}
+
+/* Badges (tags) */
+.tag{display:inline-block;padding:.15rem .5rem;border-radius:.375rem;background:rgba(37,99,235,.10);color:#2563EB;font-size:.85em}
+
+/* Callouts (use Markdown blockquote, optionally start with Tip:/Note:/Warning:) */
+blockquote{border-left:4px solid var(--cc-primary);padding:.5rem 1rem;background:rgba(37,99,235,.05)}
+
+/* Code blocks */
+pre{background:#0b1220;border:1px solid #1f2937;border-radius:.5rem;padding:1rem;overflow:auto}
+pre code{background:transparent}
+code{background:rgba(17,24,39,.06);padding:.1rem .3rem;border-radius:.25rem}
+
+/* Hero and cards */
+.hero{padding:3rem 0}
+.hero h1{font-size:2.25rem;line-height:1.2;margin:0 0 .5rem}
+.hero p.lead{font-size:1.125rem;color:var(--cc-muted);margin:.5rem 0 1rem}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:2rem}
+@media (min-width: 800px){.hero-grid{grid-template-columns:1.4fr .6fr}}
+
+.cards{display:grid;grid-template-columns:1fr;gap:1rem}
+@media (min-width: 800px){.cards{grid-template-columns:repeat(3,1fr)}}
+.card{border:1px solid var(--cc-border);border-radius:.75rem;padding:1rem;background:#fff}
+.card h3{margin-top:0}
+
+/* Posts grid */
+.posts-grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
+@media (min-width: 900px){.posts-grid{grid-template-columns:repeat(3,1fr)}}
+.post-card{border:1px solid var(--cc-border);border-radius:.75rem;padding:1rem;background:#fff}
+.post-card h3{margin:.25rem 0 .5rem;font-size:1.1rem}
+.post-meta{color:var(--cc-muted);font-size:.9rem}
+
+/* Author box */
+.author-box{display:flex;gap:1rem;align-items:center;padding:1rem;border:1px solid var(--cc-border);border-radius:.75rem;background:#f9fafb}
+.author-box img{width:64px;height:64px;border-radius:50%}
+
+/* Skip link */
+.skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.skip-link:focus{position:static;width:auto;height:auto;padding:.5rem;background:#fff;border:2px solid var(--cc-primary)}

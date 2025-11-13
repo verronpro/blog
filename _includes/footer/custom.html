@@ -1,0 +1,26 @@
+<footer style="border-top:1px solid var(--cc-border);margin-top:2rem;background:#fff">
+  <div class="container-wide" style="padding:2rem 1rem;display:grid;gap:1.5rem;grid-template-columns:1fr;">
+    <div>
+      <strong>Joseph Verron — Caring‑Coder</strong>
+      <p style="color:var(--cc-muted)">Consultant in engineering practices and docs‑as‑code. Maintainer of Office‑stamper.</p>
+      <p>
+        <a class="btn btn-primary" href="mailto:{{ site.email | default: 'joseph@verron.pro' }}?subject=Consulting%20inquiry">Hire me</a>
+      </p>
+    </div>
+    <div>
+      <strong>Links</strong>
+      <p><a href="{{ site.baseurl }}/archive.html">Archive</a> · <a href="{{ site.baseurl }}/about.html">About</a> · <a href="{{ site.baseurl }}{{ site.data.variables.default.paths.rss }}">RSS</a></p>
+    </div>
+    <div>
+      <strong>Social</strong>
+      <p>
+        <a href="https://github.com/{{ site.github_username | strip }}">GitHub</a>
+        · <a href="https://www.linkedin.com/in/{{ site.data.authors.Joseph.linkedin | default: 'josephverron' }}">LinkedIn</a>
+        · <a rel="me" href="https://fosstodon.org/@caringcoder">Mastodon</a>
+      </p>
+    </div>
+  </div>
+  <div style="border-top:1px solid var(--cc-border);padding:.75rem 0;color:var(--cc-muted);text-align:center">
+    © {{ "now" | date: "%Y" }} Joseph Verron. Some rights reserved.
+  </div>
+</footer>
