@@ -107,3 +107,22 @@ a:hover{text-decoration:underline}
   /* Ensure links show their URLs */
   a[href^="http"]::after{content:" (" attr(href) ")"}
 }
+
+/* Diagrams as Code: layout + responsiveness */
+.diagram{margin:1.25rem 0}
+.diagram-title{font-weight:600;margin:.25rem 0 .5rem;color:var(--cc-muted)}
+.diagram-grid{display:grid;grid-template-columns:1fr;gap:1rem;align-items:start}
+@media (min-width: 900px){.diagram-grid{grid-template-columns:1fr 1fr}}
+.diagram-source pre{max-height:28rem}
+.diagram-source pre, .diagram-render{border:1px solid var(--cc-border);border-radius:.5rem;background:var(--cc-surface);padding:.5rem}
+.diagram-render{display:flex;align-items:center;justify-content:center;overflow:auto;min-height:6rem}
+.diagram-render img, .diagram-render svg{max-width:100%;height:auto}
+
+@media (prefers-color-scheme: dark){
+  .diagram-source pre, .diagram-render{border-color:var(--cc-border);background:var(--cc-surface)}
+}
+
+@media print{
+  .diagram-grid{grid-template-columns:1fr}
+  .diagram-source pre{max-height:none}
+}
