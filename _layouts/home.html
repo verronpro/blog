@@ -22,22 +22,7 @@ layout: default
         {% endfor %}
       </div>
     </div>
-    <aside class="home-sidebar" aria-label="About Joseph">
-      <h3>About</h3>
-      <p>I'm Joseph Verron — software craftsmanship coach and docs‑as‑code practitioner. I help teams build reliable systems and clear documentation.
-      </p>
-      <h4 style="margin-top:1rem">Interests</h4>
-      <ul class="list-compact">
-        <li>Docs‑as‑Code and tooling pipelines</li>
-        <li>Template semantics and invariants</li>
-        <li>Testing and safer refactoring</li>
-        <li>Developer experience and automation</li>
-      </ul>
-      <p class="muted" style="margin-top:1rem">
-        <a href="{{ site.baseurl }}/about.html">More about me</a> ·
-        <a href="{{ site.baseurl }}/archive.html">Archive</a>
-      </p>
-    </aside>
+    {% include sidebar/default.html %}
   </div>
 
 </section>

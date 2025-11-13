@@ -1,4 +1,5 @@
-layout: default
+---
+layout: page
 title: About
 author: joseph-verron
 ---
