@@ -1,242 +1,98 @@
 ---
 layout: page
-title: Subjects
+title: Inspiration, Motivations, and How They Fit
 aside:
   toc: true
 ---
 
-# Diagrams as code and other print oriented DSLs
+Purpose
 
-## Dot language, Graphviz and layout engines
-  - https://www.graphviz.org/docs/layouts/
-  - https://gitlab.com/graphviz/graphviz
-  - https://graphviz.org/
-## Mermaid
-  - https://github.com/mermaid-js/mermaid-cli
-  - Flowchart
-  - Sequence Diagram
-  - Gantt Diagram
-  - Pie
-  - User Journey Diagram
-  - Entity Relationship Diagram
-  - State Diagram
-  - Class Diagram
-## Mingram
-## Blockdiag, nwdiag, seqdiag, actdiag
-## GnuPlot
-  - [GnuPlot Introduction](https://www.phys.uconn.edu/~rozman/Courses/P2200_16F/downloads/gnuplot-introduction-2016-10-25.pdf#:~:text=The%20de%EF%AC%81nitions%20of%20functions%20in%20gnuplot%20are%20straight,We%20can%20also%20abbreviate%20commands%20%28%E2%80%99w%E2%80%99for%20with%2C%20etc.%29.)
-  - plot
-  - splot
-## svgBob
-## ditaa
-## shaape
-## ascii2svg
-## Chart.js
-  - Line Chart
-  - Bar Chart
-  - Radar Chart
-  - Polar Area Chart
-  - Pie Chart
-  - Doughnut Chart
-  - Bubble Chart
-## Mathjax
-## Markdown
-## Jekyll
-  - https://jekyllrb.com/
-## AsciiDoc
-  - Reveal.js https://docs.asciidoctor.org/reveal.js-converter/latest/
-    - Syntax highlighting https://docs.asciidoctor.org/reveal.js-converter/latest/converter/syntax/syntax-highlighting/
-  - Barcode https://docs.asciidoctor.org/diagram-extension/latest/diagram_types/barcode/
-  - Admonition https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/#admonitions
-  - Memes
-## PlantUML
-  - https://plantuml.com/
-  - Themes https://plantuml.com/skinparam
-  - Sequence Diagram
-  - Use Case Diagram
-  - Class Diagram
-  - Activity Diagram
-  - Component Diagram
-  - State Diagram
-  - Network Time diagram
-  - Json & Yaml visualisation
-  - SALT GUI prototyping
-  - Gantt diagram
-  - Mindmap
-  - Work Breakdown Structure
-  - Entity Relationship diagram
-## Kroki.IO
-## Markdown
+This page organizes the ideas, practices, and sources that shape my work. It’s written for my future partners who want a pragmatic partner to deliver results and leave systems healthier than they were found.
 
-# Developer Setup
-## Git, SSH and GitHub configuration for multiple identities
-  - https://thucnc.medium.com/how-to-specify-different-ssh-keys-for-git-push-for-a-given-domain-bef56639dc02
-  - https://stackoverflow.com/questions/21615431/git-pushes-with-wrong-user-from-terminal
-  - https://www.howtogeek.com/devops/how-to-fix-git-using-the-wrong-ssh-key-account/ 
-  - https://stackoverflow.com/questions/60786635/git-uses-the-wrong-identity-ssh-config-file-not-read
-## Ubuntu & Java
-  - https://attacomsian.com/blog/change-default-java-version-ubuntu
-## Spring Boot
-  - https://www.baeldung.com/spring-boot-h2-database
-## WSL
-  - https://www.bing.com/search?pglt=169&q=ubuntu+wsl+update+time&cvid=6469b67d51b14f8a98e8a7b350459ed2&aqs=edge.0.0l9j69i11004.14262j0j1&FORM=ANNAB1&PC=U531
-  - https://github.com/microsoft/WSL
+What you should take away: my influences are deliberate, complementary, and operational. They translate into repeatable ways of working that reduce delivery risk, make quality observable, and keep documentation, code, and architecture aligned.
 
-# Experiments with generative AI
-- https://chat.openai.com/
-- https://platform.openai.com/
+Looking for the long, curated resource list? See the Resources page: [/resources.html](/resources.html).
 
-# Web hosting
-- gandi.net
+# Core motivations
 
-# Organisational practices
-## Conway's law
-## Commit naming rules
-  - Conventional commits https://www.conventionalcommits.org/en/v1.0.0/
-  - https://developerexperience.io/articles/commit-naming-rules
-  - https://github.com/naming-convention/naming-convention-guides/blob/master/git/tag-naming.md
-## Team topologies
-  - https://teamtopologies.com/
-  - https://teamtopologies.com/workbook
-  - https://teamtopologies.com/infographic/team-topologies-in-a-nutshell-infographic
-  - https://github.com/TeamTopologies/Team-Shape-Templates
-## Jugement Majoritaire https://app.mieuxvoter.fr/
+- Make complex work visible early and often. If we can see it, we can steer it.
+- Prefer small, safe steps that ship value continuously.
+- Treat docs, code, and diagrams as one artifact set. Reduce drift by generating and validating where possible.
+- Leave teams with tools and habits they can sustain without me.
 
-# Product development
-## BDD
-  - https://cucumber.io/docs/bdd/
-## https://blog.frankel.ch/it-depends/
-## User Story splitting
-  - https://www.linkedin.com/advice/3/what-best-tools-techniques-splitting
-  - https://techbeacon.com/app-dev-testing/practical-guide-user-story-splitting-agile-teams
-  - https://ancaonuta.medium.com/how-to-split-user-stories-b55f20ea0a4e
+# Influences I stand on
 
-# Software Craftsmanship
-## Agile Manifesto https://agilemanifesto.org/principles.html
-## Software Craftsmanship Manifesto
-## Continuous Learning
-## TDD
-  - https://osherove.com/tdd-kata-1
-  - https://www.amazon.com/Test-Driven-Development-Kent-Beck-ebook/dp/B095SQ9WP4?ref_=ast_author_dp
-## Sonarqube
-## Legacy Code
-  - https://www.perforce.com/blog/qac/8-tips-working-legacy-code
-## Testing Strategy
-## Code Kata
-  - https://osherove.com/tdd-kata-1
-  - https://kata-log.rocks/string-calculator-kata
-  - https://github.com/topics/string-calculator-kata
-  - https://codereview.stackexchange.com/questions/128361/tdd-kata-string-calculator
-  - https://github.com/gamontal/awesome-katas
-  - https://blog.codinghorror.com/the-ultimate-code-kata/
-  - https://simpleprogrammer.com/dont-code-katas/
-  - https://github.com/HoucemNaffati/A-Software-Craftsmanship-KATA
-  - https://github.com/Gianfrancoalongi/incremental_katas/tree/master
-  - http://fundamentalsofsoftwarearchitecture.com/katas/
-  - https://katas.softwarecraftsmanship.org/
-  - https://www.dyalog.com/blog/2015/01/the-diamond-kata/
-  - https://github.com/emilybache/trivia
-## Design patterns & refactorings
-  - https://refactoring.guru/design-patterns
-  - https://www.digitalocean.com/community/tutorials/gangs-of-four-gof-design-patterns
-  - https://www.gofpatterns.com/
-  - http://w3sdesign.com/GoF_Design_Patterns_Reference0100.pdf
-  - https://www.martinfowler.com/books/r2p.html
-## Clean architecture
-  - https://betterprogramming.pub/the-clean-architecture-beginners-guide-e4b7058c1165
-  - https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
-## Git
-  - https://dangitgit.com/
+These are not name‑drops; they shape concrete choices in how I work with you.
 
-# Programming Language
-## Ballerina https://ballerina.io/
-## Clojure
-## J
-## APL
-  - https://www.dyalog.com/blog/2015/01/the-diamond-kata/
-## Java & JEPs
-## JavaScript
-  - node.js et https://github.com/nvm-sh/nvm
+- Team Topologies — structure teams for fast flow and clear responsibilities.
+- Docs‑as‑Code and Diagram‑as‑Code — text, versioned, reviewable, automated.
+- BDD and example‑guided development — make intent executable.
+- Conventional Commits and lightweight governance — predictable history, easier automation.
+- Solo‑maintainer discipline — ruthless clarity on scope, automation, and quality gates.
 
-# Experiments with Minitel
+# Practices I bring to your project
 
-# Repository
-- https://github.com/verronpro/blog
-- https://github.com/verronpro/welcome
-- https://github.com/verronpro/docx-stamper
-- https://github.com/verronpro/vieilles.photos
-- https://github.com/josephverron/hyrule-id-generator
-- https://github.com/josephverron/http-workshop
-- https://github.com/josephverron/scrapy
-- https://github.com/josephverron/workshop-secure-messenger
-- https://github.com/josephverron/Gource
-- https://github.com/josephverron/GitHubVisualizer
-- https://github.com/josephverron/adventofcode
-- https://github.com/josephverron/orgnosis
-- https://github.com/josephverron/trip-service-kata
-- https://github.com/josephverron/dojo
-- https://github.com/josephverron/gource-action
-- https://github.com/josephverron/josephverron
-- https://github.com/josephverron/sonar-extractor
-- https://github.com/josephverron/talon
-- https://github.com/josephverron/presentations
-- https://github.com/josephverron/manga_library
-- https://github.com/josephverron/graphical-sorter
-- https://github.com/josephverron/java-evolutions
-- https://github.com/josephverron/euler
-- https://github.com/josephverron/codingame
-- https://github.com/josephverron/disk-store
-- https://github.com/josephverron/notes
-- https://github.com/josephverron/codeology
-- https://github.com/josephverron/code_swarm
+1) Docs‑as‑Code foundation
+- Your documentation, run‑books, and decisions live with your code in Markdown, with CI checks. Fewer stale wikis; more trustworthy knowledge.
+- Diagram‑as‑Code (PlantUML, Mermaid, Graphviz) keeps architecture current. Diagrams update when code or config changes.
 
-# Webcomics
-## Geek and Poke https://geek-and-poke.com/
-## Glasbergen https://www.glasbergen.com/
-## Commitstrip
-## XKCD
+2) Template and document automation
+- I maintain Office‑stamper, a small Java library used to generate .docx/.pptx/.xlsx from real templates safely and testably.
+- I apply strong template semantics (placeholders, invariants, pre/post‑processing) so documents are robust and evolvable.
 
-# NDC Oslo
-- https://nelly-sattari.atlassian.net/wiki/spaces/4Cs/pages/21299251/Be+a+Compass
-- https://www.youtube.com/@NDC/videos
+3) Testing as infrastructure
+- Characterization tests make legacy safer to change.
+- CI pipelines validate docs, diagrams, and generated artifacts along with code.
 
-# Miscellaneous Tools
-## QRCode https://qr.io/
+4) Developer experience and maintainability
+- Git hygiene, commit conventions, minimal branching rules, and helpful automation.
+- Clear contribution pathways for occasional contributors.
 
-# Accessibility
-- https://github.com/ksylor/images-for-everyone
-- https://github.com/pa11y/pa11y-ci
-- https://open-indy.github.io/Koa11y/
+# How it fits together (operating model)
+
+Think of it as a small, reliable factory:
+
+- Inputs: business intent, examples, existing assets, and constraints.
+- Process: capture intent as text (docs), examples as tests, architecture as diagrams; automate generation and validation; iterate in small PRs.
+- Outputs: working software or automations, repeatable documentation, accurate diagrams, and a CI pipeline that keeps them in sync.
+
+You get rapid feedback, lower integration risk, and artifacts you can evolve without me.
+
+# Engagement patterns
+
+- Discovery and setup (1–2 weeks)
+  - Map desired outcomes and constraints.
+  - Stand up docs‑as‑code, diagram‑as‑code, and CI checks.
+  - Baseline architecture and operational docs from what actually runs.
+
+- Delivery cycles (2–6 weeks)
+  - Prioritized increments with measurable checks.
+  - Weekly demos with generated artifacts and diff‑based changes.
+
+- Handover and enablement (1–2 weeks)
+  - Maintainership checklist, contribution guide, and working examples.
+
+# Proof points and open work
+
+- Office‑stamper (Java) — source: https://github.com/verron.pro/office-stamper/
+- Presentations‑as‑Code — post: /agility/craftsmanship/docs-as-code/solo-maintainer/enterprise/maintenance/platform/ci-cd/2024/01/01/presentations-as-code.html
+- Monthly Commit series — see Archive for concrete improvements shipped in small steps.
+
+# Selected tools and references I use
+
+- Diagram‑as‑Code: PlantUML, Mermaid, Graphviz, Kroki
+- Generators and docs: Jekyll (this site), Markdown, MathJax
+- Testing: characterization tests, CI with simple Ruby/Java toolchains
+- Governance: Conventional Commits, lightweight ADRs
+- Team design: Team Topologies
 
 # Where to find me
-- [blog](https://blog.verron.pro/)
-- [linkedin](https://www.linkedin.com/in/josephverron/)
-- [medium](https://medium.com/@caring_coder)
-- [codingame](https://www.codingame.com/profile/60e9b0f5e26f8a109f4fb4abd55f03d76149351)
-- [credly](https://www.credly.com/users/joseph-verron)
-- [deviantart](https://www.deviantart.com/caring-coder)
-- [docker](https://hub.docker.com/u/verronpro)
-- [freelancer](https://www.freelancer.com/u/josephverr)
-- [holopin](https://www.holopin.io/@josephverron#)
-- [projecteuler](https://projecteuler.net/progress=caring_coder)
 
-# Projects
+- Blog: https://blog.verron.pro/
+- LinkedIn: https://www.linkedin.com/in/josephverron/ & https://www.linkedin.com/company/caring-coder
+- GitHub: https://github.com/caring-coder & https://github.com/verronpro
+- Medium: https://medium.com/@caring_coder
 
-## Familial
-- [Le cloud familial](https://cloud.verron.pro/)
-- [L'espace de Pascal](https://pascal.verron.pro/)
-- [Les recettes d'Yvette](https://yvette.verron.pro/)
+# Contact
 
-## Open Source
-- [office-stamper](https://github.com/verron.pro/office-stamper/)
-- Update: use Documentero as base for my own word processing SaaS
-
-## Maybe one day...
-- [Archivage collégial de photo](http://vieilles.photos)
-- [Prototypage de recette et formules](http://creation.best)
-- [Le coin des fantasmes](http://fantas.me)
-- [Best emails](http://isda.best)
-
-# Friends projects
-- [Isabelle Muñoz, Ennoblisseur textile à l'habit en roses, ](https://habit-en-roses.fr/)
-- [Hugues Malbreil, Sculpteur](https://malbreil.fr/)
+If this operating model matches your needs, reach out via LinkedIn or the blog. I’m open to short, outcome‑focused engagements and happy to start with a small audit or a spike to prove value quickly.
