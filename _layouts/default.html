@@ -151,6 +151,37 @@
                     renderKroki(wrapCodeInDiagramContainer(code, krokiMap, lang));
                 });
             });
+
+            // Enable click-to-zoom on rendered diagrams (img or svg)
+            function createZoomOverlay(contentEl) {
+                const overlay = document.createElement('div');
+                overlay.className = 'diagram-zoom-overlay';
+                const inner = document.createElement('div');
+                inner.className = 'diagram-zoom-overlay__inner';
+                // Clone the element for isolation (preserves SVG content)
+                const clone = contentEl.cloneNode(true);
+                // Remove tabindex/focus handlers if any
+                clone.removeAttribute && clone.removeAttribute('tabindex');
+                inner.appendChild(clone);
+                overlay.appendChild(inner);
+                // Clicking anywhere closes the overlay
+                overlay.addEventListener('click', function () {
+                    overlay.remove();
+                });
+                return overlay;
+            }
+
+            document.body.addEventListener('click', function (e) {
+                // Only act when clicking on the rendered diagram's main visual
+                const target = e.target;
+                if (!target) return;
+                // Match img or svg inside .diagram-render (avoid capturing clicks on anchors)
+                const isZoomable = (target.tagName === 'IMG' || target.tagName === 'SVG') && target.closest('.diagram-render');
+                if (!isZoomable) return;
+                // Create and show overlay
+                const overlay = createZoomOverlay(target);
+                document.body.appendChild(overlay);
+            });
         });
     </script>
 </head>

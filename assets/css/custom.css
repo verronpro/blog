@@ -143,11 +143,19 @@ a:hover{text-decoration:underline}
 .diagram{margin:1.25rem 0}
 .diagram-title{font-weight:600;margin:.25rem 0 .5rem;color:var(--cc-muted)}
 .diagram-grid{display:grid;grid-template-columns:1fr;gap:1rem;align-items:start}
+/* On large screens, enforce a strict 50/50 split. Use min-width:0 on children so long lines don't blow the grid. */
 @media (min-width: 900px){.diagram-grid{grid-template-columns:1fr 1fr}}
+.diagram-source, .diagram-render{min-width:0}
 .diagram-source pre{max-height:28rem}
 .diagram-source pre, .diagram-render{border:1px solid var(--cc-border);border-radius:.5rem;background:var(--cc-surface);padding:.5rem}
 .diagram-render{display:flex;align-items:center;justify-content:center;overflow:auto;min-height:6rem}
 .diagram-render img, .diagram-render svg{max-width:100%;height:auto}
+
+/* Zoom affordance + overlay */
+.diagram-render img, .diagram-render svg{cursor:zoom-in}
+.diagram-zoom-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;z-index:1000;padding:2rem;cursor:zoom-out}
+.diagram-zoom-overlay__inner{max-width:95vw;max-height:95vh;overflow:auto;background:transparent}
+.diagram-zoom-overlay__inner img, .diagram-zoom-overlay__inner svg{display:block;max-width:95vw;max-height:95vh;height:auto}
 
 @media (prefers-color-scheme: dark){
   .diagram-source pre, .diagram-render{border-color:var(--cc-border);background:var(--cc-surface)}
