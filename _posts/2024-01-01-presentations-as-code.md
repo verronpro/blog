@@ -68,3 +68,20 @@ Reveal.js + AsciiDoctor lets me work on slides the same way I work on code:
 Writing presentations as code is more than a formatting choice — it’s a mindset that treats documentation and communication as first-class citizens of the software process.
 
 If you're tired of syncing slides with code manually, this approach is worth exploring.
+
+---
+
+### Live diagram example (side-by-side)
+
+Below is a small Mermaid flowchart rendered at build time in your browser. The source is shown side-by-side with the generated diagram.
+
+{% capture mermaid_example %}
+flowchart TD
+  A[Idea] --> B{Prototype?}
+  B -- Yes --> C[Demo]
+  B -- No  --> D[Spike]
+  C --> E{Ship?}
+  E -- Yes --> F[Release]
+  E -- No  --> D
+{% endcapture %}
+{% include diagram.html type="mermaid" title="Presentation authoring loop" code=mermaid_example %}

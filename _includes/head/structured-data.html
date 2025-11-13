@@ -1,0 +1,49 @@
+{%- comment -%}
+  JSON-LD structured data for SEO
+  - Person and WebSite on home/about and most non-post pages
+  - BlogPosting on posts (layout: post/article) when title and date are available
+{%- endcomment -%}
+{%- assign site_url = site.url | append: site.baseurl -%}
+{%- assign author = site.data.authors.Joseph -%}
+
+{%- if page.layout == 'post' or page.layout == 'article' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ site_url }}{{ page.url }}"
+  },
+  "headline": {{ page.title | jsonify }},
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+  "author": {
+    "@type": "Person",
+    "name": {{ author.name | default: 'Joseph Verron' | jsonify }},
+    "url": {{ author.url | default: site.url | jsonify }}
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": {{ author.name | default: 'Joseph Verron' | jsonify }}
+  }
+}
+</script>
+{%- else -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ site.title | jsonify }},
+  "url": "{{ site.url }}{{ site.baseurl }}",
+  "publisher": {
+    "@type": "Person",
+    "name": {{ author.name | default: 'Joseph Verron' | jsonify }},
+    "sameAs": [
+      {{ 'https://github.com/' | append: site.github_username | strip | jsonify }},
+      {{ 'https://www.linkedin.com/in/' | append: author.linkedin | default: 'josephverron' | jsonify }}
+    ]
+  }
+}
+</script>
+{%- endif -%}
