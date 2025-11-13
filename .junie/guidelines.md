@@ -24,12 +24,10 @@ Audience for this document: advanced contributors who will maintain and evolve t
      - `JEKYLL_ENV=production bundle exec jekyll build` (on PowerShell: `$env:JEKYLL_ENV = 'production'; bundle exec jekyll build`).
 
 - Drafts workflow
-  - Drafts live in `drafts/` (both `.md` and `.adoc` are present). These are NOT auto-rendered by default Jekyll.
-  - Options to preview drafts:
-    - Quick: temporarily move a draft to `_posts/` and give it a valid filename and front matter (see naming below). Revert before commit if not ready.
-    - Or enable the drafts feature: `bundle exec jekyll serve --drafts`. This renders files from `_drafts/` by convention; this repo uses `drafts/`. If you want `--drafts` to work without moving files, either:
-      - Rename `drafts/` to `_drafts/` (repo-wide change), or
-      - Add a small rake/script to symlink/copy `drafts` to `_drafts` in local dev only.
+  - Drafts live in `_drafts/` (Markdown only). These are NOT published, but Jekyll will render them in dev when using `--drafts`.
+  - Preview drafts locally:
+    - `bundle exec jekyll serve --drafts` (works out of the box with `_drafts/`).
+    - Alternatively, temporarily move a draft to `_posts/` and give it a valid filename/front matter. Revert before commit if not ready.
 
 - AsciiDoc support (important)
   - There are several `.adoc` drafts. If you want to publish AsciiDoc posts directly, enable `jekyll-asciidoc` (Asciidoctor) in `Gemfile` and `_config.yml`:
@@ -108,7 +106,7 @@ Audience for this document: advanced contributors who will maintain and evolve t
 
 - Repository layout essentials
   - `_posts/`: only published Markdown with Jekyll-compliant filenames: `YYYY-MM-DD-slug.md`.
-  - `drafts/`: working area for upcoming posts; includes `.adoc` and `.md`. Consider renaming to `_drafts/` for Jekyll-native previews.
+  - `_drafts/`: working area for upcoming posts; Markdown `.md` only. Works with `jekyll serve --drafts`.
   - `_data/*.yml`: structured data. Keep keys kebab-case or snake_case consistently; avoid spaces.
   - `_includes/`: shared snippets (favicons, SVG). Avoid hardcoding paths in posts.
   - Root pages: `index.md`, `about.md`, `archive.html`.
