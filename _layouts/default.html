@@ -1,170 +1,183 @@
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: 'en' }}">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
-  <meta name="description" content="{{ page.description | default: site.description | strip | escape }}">
-  {% include head/favicon.html %}
-  <!-- Diagrams-as-Code dependencies: Mermaid (client-side) and Pako (for Kroki compression) -->
-  <script defer src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function(){
-      // Initialize Mermaid (do not auto-start on load; we'll run explicitly)
-      if (window.mermaid) {
-        window.mermaid.initialize({ startOnLoad: false, theme: 'default' });
-      }
-
-      function base64UrlEncode(bytes){
-        // bytes: Uint8Array
-        var binary = '';
-        var len = bytes.byteLength;
-        for (var i = 0; i < len; i++) {
-          binary += String.fromCharCode(bytes[i]);
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description | strip | escape }}">
+    {% include head/favicon.html %}
+    <!-- Diagrams-as-Code dependencies: Mermaid (client-side) and Pako (for Kroki compression) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script>
+    <script>
+        function createDiagramElement(className) {
+            const element = document.createElement('div');
+            element.className = className;
+            return element;
         }
-        var b64 = btoa(binary)
-          .replace(/\+/g, '-')
-          .replace(/\//g, '_')
-          .replace(/=+$/,'');
-        return b64;
-      }
 
-      function renderKroki(container){
-        var type = container.dataset.diagramType;
-        var codeEl = container.querySelector('.diagram-source code');
-        if (!type || !codeEl) return;
-        var source = codeEl.textContent;
-        try{
-          var deflated = window.pako ? window.pako.deflateRaw(source, { level: 9 }) : null;
-          if (!deflated) return;
-          var encoded = base64UrlEncode(deflated);
-          var img = document.createElement('img');
-          img.loading = 'lazy';
-          img.alt = (container.getAttribute('aria-label') || 'Diagram') + ' (rendered)';
-          img.src = 'https://kroki.io/' + type + '/svg/' + encoded;
-          var target = container.querySelector('.diagram-render');
-          if (target) {
-            target.innerHTML = '';
-            target.appendChild(img);
-          }
-        }catch(e){
-          // Fallback: show an error message in the render box
-          var target = container.querySelector('.diagram-render');
-          if (target){
-            var pre = document.createElement('pre');
-            pre.textContent = 'Failed to render diagram via Kroki: ' + (e && e.message ? e.message : e);
-            target.innerHTML = '';
-            target.appendChild(pre);
-          }
+        function wrapCodeInDiagramContainer(code, krokiMap, lang) {
+            const pre = code.parentElement;
+            if (pre.closest('.diagram')) return;
+
+            const wrapper = createDiagramElement('diagram');
+            wrapper.dataset.diagramType = krokiMap[lang];
+
+            const grid = createDiagramElement('diagram-grid');
+
+            const srcCol = createDiagramElement('diagram-source');
+            srcCol.appendChild(pre.cloneNode(true));
+
+            const rendCol = createDiagramElement('diagram-render');
+
+            grid.appendChild(srcCol);
+            grid.appendChild(rendCol);
+            wrapper.appendChild(grid);
+
+            pre.replaceWith(wrapper);
+            return wrapper;
         }
-      }
 
-      function renderMermaid(container){
-        var codeEl = container.querySelector('.diagram-source code');
-        if (!codeEl || !window.mermaid) return;
-        var code = codeEl.textContent;
-        var slot = document.createElement('div');
-        slot.className = 'mermaid';
-        slot.textContent = code;
-        var target = container.querySelector('.diagram-render');
-        if (target) {
-          target.innerHTML = '';
-          target.appendChild(slot);
-          // Let mermaid enhance the inserted element
-          window.mermaid.run({ querySelector: '.diagram-render .mermaid' });
+        function base64UrlEncode(bytes) {
+            let binary = '';
+            const len = bytes.byteLength;
+            for (let i = 0; i < len; i++) {
+                binary += String.fromCharCode(bytes[i]);
+            }
+            return btoa(binary)
+                .replaceAll('+', '-')
+                .replaceAll('/', '_')
+                .replace(/=+$/, '');
         }
-      }
 
-      // Enhance explicit diagram includes
-      document.querySelectorAll('.diagram[data-diagram-type]').forEach(function(container){
-        var type = container.dataset.diagramType;
-        if (type === 'mermaid') {
-          renderMermaid(container);
-        } else {
-          renderKroki(container);
+        function renderKroki(container) {
+            let target;
+            const type = container.dataset.diagramType;
+            const codeEl = container.querySelector('.diagram-source code');
+            if (!type || !codeEl) return;
+            const source = codeEl.textContent;
+            try {
+                const deflated = window.pako ? window.pako.deflate(source, {level: 9}) : null;
+                if (!deflated) return;
+                const encoded = base64UrlEncode(deflated);
+                const img = document.createElement('img');
+                img.loading = 'lazy';
+                img.alt = (container.getAttribute('aria-label') || 'Diagram') + ' (rendered)';
+                img.src = 'https://kroki.io/' + type + '/svg/' + encoded;
+                target = container.querySelector('.diagram-render');
+                if (target) {
+                    target.innerHTML = '';
+                    target.appendChild(img);
+                }
+            } catch (e) {
+                // Fallback: show an error message in the render box
+                target = container.querySelector('.diagram-render');
+                if (target) {
+                    const pre = document.createElement('pre');
+                    pre.textContent = 'Failed to render diagram via Kroki: ' + (e && e.message ? e.message : e);
+                    target.innerHTML = '';
+                    target.appendChild(pre);
+                }
+            }
         }
-      });
 
-      // Progressive enhancement for fenced code blocks without the include
-      // Mermaid: convert standalone ```mermaid blocks into rendered diagrams (keeping code visible above)
-      document.querySelectorAll('pre > code.language-mermaid').forEach(function(code){
-        var pre = code.parentElement;
-        // Skip if already inside a diagram container
-        if (pre.closest('.diagram')) return;
-        var wrapper = document.createElement('div');
-        wrapper.className = 'diagram';
-        wrapper.setAttribute('data-diagram-type','mermaid');
+        function renderMermaid(container) {
+            const codeEl = container.querySelector('.diagram-source code');
+            if (!codeEl || !window.mermaid) return;
+            const code = codeEl.textContent;
+            const slot = document.createElement('div');
+            slot.className = 'mermaid';
+            slot.textContent = code;
+            const target = container.querySelector('.diagram-render');
+            if (target) {
+                target.innerHTML = '';
+                target.appendChild(slot);
+                // Let mermaid enhance the inserted element
+                window.mermaid.run({querySelector: '.diagram-render .mermaid'});
+            }
+        }
 
-        var grid = document.createElement('div');
-        grid.className = 'diagram-grid';
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize Mermaid (do not auto-start on load; we'll run explicitly)
+            if (window.mermaid) {
+                window.mermaid.initialize({startOnLoad: false, theme: 'default'});
+            }
 
-        var srcCol = document.createElement('div');
-        srcCol.className = 'diagram-source';
-        srcCol.appendChild(pre.cloneNode(true));
+            // Enhance explicit diagram includes
+            document.querySelectorAll('.diagram[data-diagram-type]').forEach(function (container) {
+                const type = container.dataset.diagramType;
+                if (type === 'mermaid') {
+                    renderMermaid(container);
+                } else {
+                    renderKroki(container);
+                }
+            });
 
-        var rendCol = document.createElement('div');
-        rendCol.className = 'diagram-render';
+            // Progressive enhancement for fenced code blocks without the include
+            // Mermaid: convert standalone ```mermaid blocks into rendered diagrams (keeping code visible above)
+            document.querySelectorAll('pre > code.language-mermaid').forEach(function (code) {
+                const pre = code.parentElement;
+                // Skip if already inside a diagram container
+                if (pre.closest('.diagram')) return;
+                const wrapper = document.createElement('div');
+                wrapper.className = 'diagram';
+                wrapper.dataset.diagramType = 'mermaid';
 
-        grid.appendChild(srcCol);
-        grid.appendChild(rendCol);
-        wrapper.appendChild(grid);
-        pre.replaceWith(wrapper);
-        renderMermaid(wrapper);
-      });
+                const grid = document.createElement('div');
+                grid.className = 'diagram-grid';
 
-      // Kroki-enhanced: plantuml and dot code blocks
-      var krokiMap = { 'plantuml': 'plantuml', 'dot': 'graphviz' };
-      Object.keys(krokiMap).forEach(function(lang){
-        document.querySelectorAll('pre > code.language-' + lang).forEach(function(code){
-          var pre = code.parentElement;
-          if (pre.closest('.diagram')) return;
-          var wrapper = document.createElement('div');
-          wrapper.className = 'diagram';
-          wrapper.setAttribute('data-diagram-type', krokiMap[lang]);
+                const srcCol = document.createElement('div');
+                srcCol.className = 'diagram-source';
+                srcCol.appendChild(pre.cloneNode(true));
 
-          var grid = document.createElement('div');
-          grid.className = 'diagram-grid';
-          var srcCol = document.createElement('div');
-          srcCol.className = 'diagram-source';
-          srcCol.appendChild(pre.cloneNode(true));
-          var rendCol = document.createElement('div');
-          rendCol.className = 'diagram-render';
-          grid.appendChild(srcCol);
-          grid.appendChild(rendCol);
-          wrapper.appendChild(grid);
-          pre.replaceWith(wrapper);
-          renderKroki(wrapper);
+                const rendCol = document.createElement('div');
+                rendCol.className = 'diagram-render';
+
+                grid.appendChild(srcCol);
+                grid.appendChild(rendCol);
+                wrapper.appendChild(grid);
+                pre.replaceWith(wrapper);
+                renderMermaid(wrapper);
+            });
+
+            // Kroki-enhanced: plantuml and dot code blocks
+            const krokiMap = {'plantuml': 'plantuml', 'dot': 'graphviz'};
+            Object.keys(krokiMap).forEach(function (lang) {
+                document.querySelectorAll('.language-' + lang + ' div > pre > code').forEach(function (code) {
+                    renderKroki(wrapCodeInDiagramContainer(code, krokiMap, lang));
+                });
+                document.querySelectorAll('pre > code.language-' + lang).forEach(function (code) {
+                    renderKroki(wrapCodeInDiagramContainer(code, krokiMap, lang));
+                });
+            });
         });
-      });
-    });
-  </script>
+    </script>
 </head>
 <body class="layout-{{ page.layout | default: 'default' }}">
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
     <div class="site-header__inner container-wide">
-      <a class="site-header__brand" href="{{ site.baseurl }}/">
-        <span class="logo" aria-hidden="true">{% include svg/logo.svg %}</span>
-        <span>{{ site.title }}</span>
-      </a>
-      <nav class="site-header__nav" aria-label="Main">
-        {% for item in site.data.navigation.header %}
-          {% assign current_lang = site.lang | default: 'en' %}
-          {% assign label = item.titles[current_lang] | default: item.titles.en %}
-          <a href="{{ item.url | prepend: site.baseurl }}">{{ label }}</a>
-        {% endfor %}
-      </nav>
+        <a class="site-header__brand" href="{{ site.baseurl }}/">
+            <span class="logo" aria-hidden="true">{% include svg/logo.svg %}</span>
+            <span>{{ site.title }}</span>
+        </a>
+        <nav class="site-header__nav" aria-label="Main">
+            {% for item in site.data.navigation.header %}
+            {% assign current_lang = site.lang | default: 'en' %}
+            {% assign label = item.titles[current_lang] | default: item.titles.en %}
+            <a href="{{ item.url | prepend: site.baseurl }}">{{ label }}</a>
+            {% endfor %}
+        </nav>
     </div>
-  </header>
+</header>
 
-  <main id="main" class="container">
+<main id="main" class="container">
     {{ content }}
-  </main>
+</main>
 
-  <footer class="site-footer" role="contentinfo">
+<footer class="site-footer" role="contentinfo">
     {% include footer/custom.html %}
-  </footer>
+</footer>
 </body>
 </html>
