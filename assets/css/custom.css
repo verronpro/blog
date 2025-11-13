@@ -54,6 +54,9 @@ code{background:rgba(17,24,39,.06);padding:.1rem .3rem;border-radius:.25rem}
 .post-card h3{margin:.25rem 0 .5rem;font-size:1.1rem}
 .post-meta{color:var(--cc-muted);font-size:.9rem}
 
+/* Force single-column variant (used on home page) */
+.posts-grid--single{grid-template-columns:1fr !important}
+
 /* Author box */
 .author-box{display:flex;gap:1rem;align-items:center;padding:1rem;border:1px solid var(--cc-border);border-radius:.75rem;background:#f9fafb}
 .author-box img{width:64px;height:64px;border-radius:50%}
@@ -95,6 +98,14 @@ a:hover{text-decoration:underline}
   .author-box{background:#0f172a;border-color:var(--cc-border)}
   .skip-link:focus{background:var(--cc-surface)}
 }
+
+/* Footer styling (theme-aware, no inline styles) */
+.site-footer{margin-top:2rem;border-top:1px solid var(--cc-border);background:var(--cc-surface)}
+.site-footer__inner{padding:2rem 1rem;display:grid;gap:1.5rem;grid-template-columns:1fr}
+@media (min-width: 900px){.site-footer__inner{grid-template-columns:2fr 1fr 1fr}}
+.site-footer__bottom{border-top:1px solid var(--cc-border);padding:.75rem 1rem;color:var(--cc-muted);text-align:center}
+.site-footer a{color:inherit}
+.site-footer .muted{color:var(--cc-muted)}
 
 /* Print styles: simplify for paper */
 @media print{
