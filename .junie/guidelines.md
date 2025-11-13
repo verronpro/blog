@@ -7,7 +7,7 @@ Audience for this document: advanced contributors who will maintain and evolve t
 
 - Stack
   - Static site generator: Jekyll (Ruby).
-  - Content formats used today: Markdown for published posts (`_posts/*.md`), Markdown and AsciiDoc for drafts (`drafts/*.md`, `drafts/*.adoc`).
+  - Content formats used today: Markdown only — for both published posts (`_posts/*.md`) and drafts (`_drafts/*.md`).
   - Data-driven settings: `_config.yml`, `_data/*.yml`.
 
 - Prerequisites
@@ -29,13 +29,8 @@ Audience for this document: advanced contributors who will maintain and evolve t
     - `bundle exec jekyll serve --drafts` (works out of the box with `_drafts/`).
     - Alternatively, temporarily move a draft to `_posts/` and give it a valid filename/front matter. Revert before commit if not ready.
 
-- AsciiDoc support (important)
-  - There are several `.adoc` drafts. If you want to publish AsciiDoc posts directly, enable `jekyll-asciidoc` (Asciidoctor) in `Gemfile` and `_config.yml`:
-    - Gemfile: `gem 'jekyll-asciidoc'`
-    - _config.yml: 
-      - `plugins:` include `jekyll-asciidoc`
-      - Recommended Asciidoctor attributes: `source-highlighter=rouge`, `sectanchors`, `idprefix`, `idseparator=-`
-  - Alternative path: keep drafts in `.adoc` but convert to Markdown before publishing (AsciiDoctor `asciidoctor -b docbook` + pandoc), then place `.md` into `_posts`.
+- Content format policy
+  - Markdown-only site: AsciiDoc is not supported in the build. If you have a legacy `.adoc` draft, convert it to Markdown before committing. Suggested path: `asciidoctor -b docbook INPUT.adoc` then `pandoc -f docbook -t gfm -o OUTPUT.md` (verify code blocks and admonitions by hand).
 
 - Configuration touch points
   - `_config.yml`: site title, baseurl, url, plugins, markdown/asciidoc engines.
@@ -138,7 +133,7 @@ Audience for this document: advanced contributors who will maintain and evolve t
   - Validate links with a one-off tool when posts are heavy with references (e.g., `htmlproofer` or a simple script). Not enforced here by default.
 
 - Adding a new post (checklist)
-  1) Pick type (see section 2) and draft under `drafts/`.
+  1) Pick type (see section 2) and draft under `_drafts/`.
   2) Ensure front matter meets the contract; set accurate `date`.
   3) Add images under `assets/YYYY/MM/slug/` if needed; update paths.
   4) Run locally; fix build warnings.
@@ -147,7 +142,7 @@ Audience for this document: advanced contributors who will maintain and evolve t
   7) If post relates to Office‑stamper, link to the exact tag/release and migration notes.
 
 - Taxonomy
-  - Keep tags small in number and consistent across posts: `docs-as-code`, `office-stamper`, `java`, `templates`, `testing`, `toolchain`, `ci`, `asciidoc`, `diagram-as-code`, etc.
+  - Keep tags small in number and consistent across posts: `docs-as-code`, `office-stamper`, `java`, `templates`, `testing`, `toolchain`, `ci`, `diagram-as-code`, etc.
   - Avoid introducing near-duplicates (e.g., `doc-as-code` vs `docs-as-code`).
 
 - Content previews and screenshots
@@ -159,7 +154,7 @@ Audience for this document: advanced contributors who will maintain and evolve t
 
 4. Operational Notes and Sharp Edges
 
-- The repository mixes `.md` and `.adoc` in drafts. Decide per-post whether to publish as Markdown (convert) or enable AsciiDoc site-wide. If enabling AsciiDoc, update both Gemfile and `_config.yml`, and test code blocks rendering.
+- Markdown-only policy: New content must be `.md`. Legacy `.adoc` drafts should be converted to Markdown prior to commit. Verify fenced code blocks, tables, and admonitions post-conversion.
 - Do not rename `_posts/` or `_data/` without checking Jekyll expectations and GitHub Pages compatibility.
 - If adding CI (link check, build), prefer minimal GitHub Actions with `ruby/setup-ruby` and `bundle install --deployment` to mirror production.
 - Renovate config (`renovate.json`) exists at root; if adding Ruby dependencies automation, extend it carefully to avoid surprise PRs.
