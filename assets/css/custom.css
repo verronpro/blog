@@ -4,12 +4,13 @@
   --cc-accent:#10B981;  /* emerald-500 */
   --cc-text:#111827;    /* gray-900 */
   --cc-muted:#6B7280;   /* gray-500 */
-  --cc-bg:#FFFFFF;
+  --cc-bg:#FFFFFF;      /* page background */
+  --cc-surface:#FFFFFF; /* cards/blocks background */
   --cc-border:#E5E7EB;  /* gray-200 */
 }
 
 /* Prefer system fonts for performance */
-body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--cc-bg);color:var(--cc-text)}
 h1,h2,h3,h4{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif}
 code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
 
@@ -43,13 +44,13 @@ code{background:rgba(17,24,39,.06);padding:.1rem .3rem;border-radius:.25rem}
 
 .cards{display:grid;grid-template-columns:1fr;gap:1rem}
 @media (min-width: 800px){.cards{grid-template-columns:repeat(3,1fr)}}
-.card{border:1px solid var(--cc-border);border-radius:.75rem;padding:1rem;background:#fff}
+.card{border:1px solid var(--cc-border);border-radius:.75rem;padding:1rem;background:var(--cc-surface)}
 .card h3{margin-top:0}
 
 /* Posts grid */
 .posts-grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
 @media (min-width: 900px){.posts-grid{grid-template-columns:repeat(3,1fr)}}
-.post-card{border:1px solid var(--cc-border);border-radius:.75rem;padding:1rem;background:#fff}
+.post-card{border:1px solid var(--cc-border);border-radius:.75rem;padding:1rem;background:var(--cc-surface)}
 .post-card h3{margin:.25rem 0 .5rem;font-size:1.1rem}
 .post-meta{color:var(--cc-muted);font-size:.9rem}
 
@@ -60,3 +61,49 @@ code{background:rgba(17,24,39,.06);padding:.1rem .3rem;border-radius:.25rem}
 /* Skip link */
 .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
 .skip-link:focus{position:static;width:auto;height:auto;padding:.5rem;background:#fff;border:2px solid var(--cc-primary)}
+
+/* Accessible links */
+a{color:var(--cc-primary);text-underline-offset: .15em}
+a:hover{text-decoration:underline}
+
+/* Header (sticky with simple responsive layout) */
+.site-header{position:sticky;top:0;z-index:50;background:var(--cc-surface);border-bottom:1px solid var(--cc-border)}
+.site-header__inner{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.5rem 1rem}
+.site-header__brand{display:flex;align-items:center;gap:.5rem;font-weight:700;color:inherit;text-decoration:none}
+.site-header__brand .logo{filter:grayscale(1)}
+.site-header__nav{display:flex;align-items:center;gap:.75rem}
+.site-header__nav a{color:inherit;text-decoration:none;padding:.25rem .4rem}
+.site-header__nav a:hover{text-decoration:underline}
+@media (max-width: 640px){
+  .site-header__inner{flex-wrap:wrap}
+  .site-header__nav{width:100%;justify-content:flex-start;gap:.5rem}
+}
+
+/* Dark mode tokens */
+@media (prefers-color-scheme: dark){
+  :root{
+    --cc-text:#E5E7EB;      /* gray-200 */
+    --cc-muted:#9CA3AF;     /* gray-400 */
+    --cc-bg:#0B1220;        /* deep navy */
+    --cc-surface:#111827;   /* gray-900 */
+    --cc-border:#1F2937;    /* gray-800 */
+  }
+  body{background:var(--cc-bg);color:var(--cc-text)}
+  .card,.post-card{background:var(--cc-surface);border-color:var(--cc-border)}
+  blockquote{background:rgba(37,99,235,.10);border-left-color:var(--cc-primary)}
+  pre{background:#0b1220;border-color:#1f2937}
+  .author-box{background:#0f172a;border-color:var(--cc-border)}
+  .skip-link:focus{background:var(--cc-surface)}
+}
+
+/* Print styles: simplify for paper */
+@media print{
+  /* Use a serif for readability on paper */
+  body{font-family: Georgia, "Times New Roman", serif; color:#000; background:#fff}
+  /* Hide navigation/interactive-only elements if present */
+  .btn, nav, header, footer{display:none !important}
+  /* Remove card chrome */
+  .card, .post-card, .author-box, pre{border:none; background:#fff}
+  /* Ensure links show their URLs */
+  a[href^="http"]::after{content:" (" attr(href) ")"}
+}

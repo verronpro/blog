@@ -2,6 +2,7 @@
 layout: home
 ---
 
+{% include header/cta.html %}
 {% include home/hero.html %}
 {% include home/cards.html %}
 

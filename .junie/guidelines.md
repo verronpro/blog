@@ -127,11 +127,16 @@ Audience for this document: advanced contributors who will maintain and evolve t
 - Graphical styling
   - Logo SVG lives in `_includes/svg/logo.svg`; favicons under `_includes/head` and root `favicon*.png/ico` plus `browserconfig.xml` and `ms-icon*` variants.
   - Custom CSS entry point: `assets/css/custom.css` is linked from `_includes/head/favicon.html`. Use this file to define design tokens and light component styling; avoid heavy theme overrides.
-  - Design tokens (CSS variables) currently defined: `--cc-primary`, `--cc-accent`, `--cc-text`, `--cc-muted`, `--cc-bg`, `--cc-border`. Components: `.btn`, `.btn-primary`, `.btn-ghost`, `.tag`, `.author-box`, `.cards`, `.card`, `.posts-grid`, `.post-card`, `.post-meta`.
+  - Design tokens (CSS variables) currently defined: `--cc-primary`, `--cc-accent`, `--cc-text`, `--cc-muted`, `--cc-bg`, `--cc-surface`, `--cc-border`.
+    - Components styled: `.btn`, `.btn-primary`, `.btn-ghost`, `.tag`, `.author-box`, `.cards`, `.card`, `.posts-grid`, `.post-card`, `.post-meta`, `.site-header*`.
+    - Dark mode: tokens switch via `@media (prefers-color-scheme: dark)`; surfaces and borders adapt automatically.
+    - Print stylesheet: `@media print` hides nav/footer/buttons, removes chrome, and appends URLs to links.
   - Reusable includes for presentation live under `_includes/home/*`, `_includes/post/*`, and `_includes/footer/*`:
     - `_includes/home/hero.html`: top landing hero with CTA. `_includes/home/cards.html`: 3 services cards.
     - `_includes/post/author-box.html`: author bio and CTA to add at end of posts.
     - `_includes/footer/custom.html`: site footer with quick links and social.
+  - Header include: `_includes/header/cta.html` provides a sticky header with simple nav and a persistent “Hire me” CTA. Include it at the top of pages if the theme layout doesn’t already render a header, or when you want this variant.
+  - Structured data: `_includes/head/structured-data.html` injects JSON‑LD (`WebSite` for general pages, `BlogPosting` for posts). It’s included from `_includes/head/favicon.html` so it’s available across the site.
   - Keep palette and typography consistent with the theme. Prefer system font stacks for performance; ensure WCAG AA contrast.
 
 - Linting and sanity checks (manual, lightweight)
@@ -146,6 +151,11 @@ Audience for this document: advanced contributors who will maintain and evolve t
   5) Move to `_posts/` with final filename on publish.
   6) If navigation needs an entry, update `_data/navigation.yml`.
   7) If post relates to Office‑stamper, link to the exact tag/release and migration notes.
+  8) Optional: add `{% include post/author-box.html %}` near the end to show the author box (until a global layout override is introduced).
+
+- Global author box (optional improvement)
+  - The theme `jekyll-text-theme` provides layouts via a gem. To enable a global author box without editing each post, copy the appropriate post layout from the theme into `_layouts/` (usually `article.html` or `post.html`) and insert `{% include post/author-box.html %}` before the layout’s footer/related posts block.
+  - Caution: Jekyll layouts don’t support inheritance; ensure you copy the up‑to‑date layout HTML and keep includes/variables intact. Test locally before pushing.
 
 - Taxonomy
   - Keep tags small in number and consistent across posts: `docs-as-code`, `office-stamper`, `java`, `templates`, `testing`, `toolchain`, `ci`, `diagram-as-code`, etc.

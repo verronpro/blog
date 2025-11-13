@@ -2,6 +2,8 @@
 layout: page
 ---
 
+{% include header/cta.html %}
+
 As a coach in software craftsmanship at TotalEnergies, I help teams and projects achieve high-quality, reliable, and sustainable software solutions that meet the complex and evolving needs of the energy industry. I leverage my skills in software craftsmanship to provide guidance, training, and support to developers, engineers, and managers across the organization.
 
 I worked for various companies in banking, insurance, energy, and communications and successfully delivered solutions that improve automation, technical debt, and help diffusing good practices. I am passionate about sharing my expertise and learning from others, as well as contributing to the advancement and innovation of the software field.
