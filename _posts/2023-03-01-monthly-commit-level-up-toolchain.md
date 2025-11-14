@@ -2,8 +2,10 @@
 layout: article
 title:  "Leveling Up the Toolchain: Java 17, JUnit 5, and a Dev Container"
 date:   2023-03-01 09:00:00
-categories: [agility, craftsmanship, docs-as-code, solo-maintainer, enterprise, maintenance, platform, ci-cd]
+categories: [ci-cd, java17, junit5, devcontainers, agility, craftsmanship, docs-as-code, solo-maintainer, enterprise, maintenance, platform, maven]
 ---
+
+TL;DR: Migrating to Java 17 LTS, JUnit 5, and a dev container turned maintenance overhead into competitive advantage—giving enterprise adopters predictable builds, modern tooling, and zero-friction onboarding in a solo-maintained project.
 
 **Commits:**
 - Java 17: [49b6c09](https://github.com/verronpro/office-stamper/commit/49b6c09)
@@ -14,27 +16,28 @@ categories: [agility, craftsmanship, docs-as-code, solo-maintainer, enterprise, 
 
 ## Why this stands out
 
-Upgrading the foundation of a project is rarely glamorous, but it's exactly what keeps a small codebase alive and useful to large organizations over time. In February 2023, the project moved to Java 17 (the then‑current LTS), ported its tests to JUnit 5, and documented a ready‑to‑code dev container. The combination matters: a modern runtime unlocks language and performance improvements; a modern test stack streamlines developer experience; and a containerized setup makes sporadic contributors effective within minutes instead of hours.
+Upgrading the foundation of a project is rarely glamorous, but it's exactly what keeps a small codebase alive and useful to large organizations over time. The project moved to Java 17 (last LTS), ported its tests to JUnit 5, and documented a ready‑to‑code dev container. The combination matters: a modern runtime unlocks language and performance improvements; a modern test stack streamlines developer experience; and a containerized setup makes sporadic contributors effective within minutes instead of hours.
 
-For a solo‑maintained project used in big‑company projects, those are not "nice to have" tweaks—they are survival tools. Enterprises typically pin on LTS JDKs and require predictable builds; contractors rotate in and out; security scanners and compliance checks look for sane defaults. Shipping these changes in one focused epoch reduces friction for everyone who touches the code or the CLI.
+For a solo‑maintained project used in big‑company projects, those are not "nice to have" tweaks—they are survival tools. Enterprises pin on LTS JDKs and require predictable builds; contractors rotate in and out; security scanners and compliance checks look for sane defaults. Shipping these changes in one focused epoch reduces friction for everyone who touches the code or the CLI.
 
 ---
 
 ## What the commits reveal
 
-### [49b6c09](https://github.com/verronpro/office-stamper/commit/49b6c09) — Java 17 migration
+### Java 17: Future-Proofing Without Breaking Production (commit [49b6c09](https://github.com/verronpro/office-stamper/commit/49b6c09))
 
-This commit systematically upgraded the entire build toolchain from Java 11 to Java 17:
+**Problem:** Java 11 reaches EOL; enterprises standardize on LTS versions.  
+**Solution:** Unified upgrade across build, CI, and docs.
 
-- **Build files:** Updated all GitHub Actions workflows (`codeql.yml`, `maven.yml`, `pages.yml`, `release.yml`) to use JDK 17 with the Temurin distribution, ensuring consistent behavior across CI environments.
-- **Compiler configuration:** Changed Maven compiler plugin `source` and `target` from `1.8` to `17`, enabling modern language features and performance optimizations.
-- **Dependency updates:** Upgraded Spring dependencies from 5.x to 6.0.5, aligning with Java 17 requirements and bringing in framework improvements.
-- **JVM arguments cleanup:** Removed workaround flags (`--add-opens java.base/java.lang=ALL-UNNAMED`) from Javadoc plugin configuration, indicating that compatibility hacks from earlier JDK transitions were no longer needed.
-- **Build tool integration:** Updated `.lift.toml` to reflect JDK 17, ensuring third-party analysis tools run against the correct version.
+**Key moves:**
+- CI consistency: All workflows → Temurin 17
+- Language unlock: Compiler target 1.8 → 17 (enables records, pattern matching)
+- Cleaner builds: Removed reflection workaround flags
+- Dependency leap: Spring 5 → 6 (security + perf)
 
-The changes touch five workflow files and the main `pom.xml`, demonstrating a holistic approach: every build path (local, CI, documentation generation, release) moves forward together. This eliminates version mismatch surprises and ensures the LTS promise holds everywhere.
+**Impact:** No breaking changes for end users; dev environment matches enterprise standards.
 
-### [428d5d5](https://github.com/verronpro/office-stamper/commit/428d5d5) — JUnit 5 migration
+### JUnit 5 migration (commit [428d5d5](https://github.com/verronpro/office-stamper/commit/428d5d5))
 
 This large commit completed the transition from JUnit 4 to JUnit 5 across the entire test suite (50 files changed):
 
@@ -46,15 +49,23 @@ This large commit completed the transition from JUnit 4 to JUnit 5 across the en
 
 The migration wasn't just find-and-replace; it involved rethinking test patterns (optional returns, cleaner assertions) and establishing a consistent style that future contributors can follow without re-learning old conventions.
 
-### [2f53681](https://github.com/verronpro/office-stamper/commit/2f53681) — Dev container documentation
+### Dev Container: From "Works on My Machine" to "Works Everywhere" (commit [2f53681](https://github.com/verronpro/office-stamper/commit/2f53681))
 
-This commit added a `.devcontainer/devcontainer.json` file specifying:
+The contributor journey:
+*Without devcontainer:*
+1. Install JDK 17 (which vendor?)
+2. Install Maven (which version?)
+3. Configure IDE
+4. Debug PATH issues
+5. ~2 hours later: Run first test
 
-- **Base image:** Microsoft's Java 17 dev container image (`mcr.microsoft.com/devcontainers/java:0-17-buster`)
-- **Build tools:** Maven pre-installed (Gradle explicitly excluded), matching the project's build system
-- **Environment guarantee:** A single-command setup that gives any contributor—internal or external—the exact environment the maintainer uses
+*With devcontainer:*
+1. Click "Reopen in Container"
+2. 5 minutes later: Run `mvn test ✅`
 
-The 27-line file is executable documentation: it tells VS Code, GitHub Codespaces, or any devcontainer-compatible tool exactly how to provision a working workspace. For sporadic contributors or enterprise teams evaluating the project, this removes hours of "works on my machine" debugging.
+*The file:* 27 lines that encode the entire environment contract. Works in VS Code, Codespaces, or any devcontainer-compatible tool.
+
+*Enterprise benefit:* Security teams can audit the environment spec in one file instead of reverse-engineering setup docs.
 
 ---
 
@@ -64,34 +75,32 @@ The 27-line file is executable documentation: it tells VS Code, GitHub Codespace
 - **Clarity over cleverness:** JUnit 5's parameterized tests and extensions make intent visible. When tests read like documentation, they *are* documentation-as-code.
 - **Eliminate setup tax:** The dev container is executable onboarding. It encodes the environment contract so a contributor—or future you—doesn't rediscover dependencies on every machine.
 
----
+> **💭 Maintainer Note:**  
+> "As a solo maintainer, every hour spent helping someone set up their environment is an hour *not* spent fixing bugs or adding features. The dev container isn't laziness—it's survival. When a contractor opens a PR and their first message is 'tests pass locally,' not 'how do I install Maven?', that's a win."
 
-## Solo maintainer + enterprise usage angle
+## Design Decisions
 
-When you're the only maintainer, **the build must be boring**. Java 17 is broadly supported by corporate JDK distributions and build farms; JUnit 5 is the default in most organizations. That means fewer surprises when a large company consumes office-stamper in a sporadic project or invokes the CLI in a constrained runner.
+**Decision: Java 17 as minimum runtime**  
+*Trade-off:* Excludes Java 8/11 users.  
+*Rationale:* LTS support, security patches, modern APIs. Users stuck on older JDKs can use office-stamper 1.x.  
+*Safety net:* Full test suite on Temurin, Corretto, and Azul Zulu.
 
-The dev container is a welcome mat: it tells a security or platform team exactly what's needed to reproduce the environment. For teams adopting the tool, this translates into predictable onboarding—a developer can clone, open the container, run tests, and start reading code that uses the same testing style they use elsewhere. That minimizes context switching and builds confidence.
-
----
-
-## Risks and mitigations
-
-### Risk: Dependency drift or subtle runtime changes with Java 17.  
-**Mitigation:** Run the full test suite on multiple JDK vendors; pin versions in Maven; document supported JDKs explicitly.
-
-### Risk: Contributors stuck on older JDKs.  
-**Mitigation:** Keep the CLI runnable on standard JREs; document the minimal runtime for end users separately from the development baseline.
-
-### Risk: Devcontainer lock-in.  
-**Mitigation:** Treat it as optional scaffolding; keep plain Maven commands the source of truth so local builds remain first-class.
+**Decision: Devcontainer as optional**  
+*Trade-off:* Not everyone uses VS Code.  
+*Rationale:* Plain Maven remains primary; devcontainer is a productivity boost, not a requirement.  
+*Safety net:* CONTRIBUTING.md documents both paths.
 
 ---
 
-## How to apply this
-
-1. **Plan platform upgrades as small steps:** Upgrade the JDK, fix the build, migrate tests, then document the environment. Ship each step with CI green.
-2. **Use JUnit 5 features** to make tests intention-revealing (parameterized tests, `@Nested`, temporary directories).
-3. **Provide an executable environment spec** (devcontainer, `Dockerfile`, or wrapper) that a newcomer can run untouched. Pair it with a short "Getting started" doc.
+## Your Platform Upgrade Checklist
+Planning a similar migration? Use this:
+- *Audit dependencies* for LTS compatibility
+- *Pin versions* in CI (JDK vendor + version)
+- *Migrate tests incrementally* (one package at a time)
+- *Run full suite* on multiple JDK vendors (Temurin, Corretto, OpenJDK)
+- *Document runtime requirements* separately from dev requirements
+- *Provide executable environment* (devcontainer, Dockerfile, or Nix flake)
+- *Tag a release* immediately after green CI (makes rollback trivial)
 
 ---
 
