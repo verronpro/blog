@@ -156,10 +156,6 @@ stamper.stampAndLoad(template, new School(grades));
 ## References
 
 - Commit: [0a774c1](https://github.com/verronpro/office-stamper/commit/0a774c1)
--
-
-Issue: [When commentWrapper's children comments have their own children · Issue #92 · verronpro/office-stamper.](https://github.com/verronpro/office-stamper/issues/92)
--
-PR: [Nesting support for repeatDocPart commentWrapper #92 by NoNException · Pull Request #100 · verronpro/office-stamper.](https://github.com/verronpro/office-stamper/pull/100)
-
+- Issue: [Issue #92 · verronpro/office-stamper.](https://github.com/verronpro/office-stamper/issues/92)
+- PR: [Pull Request #100 · verronpro/office-stamper.](https://github.com/verronpro/office-stamper/pull/100)
 - Contributors: [NoNException](https://github.com/NoNException), [zongzi](https://github.com/zongzi)
