@@ -28,8 +28,8 @@ sprint's documentation work.
 | **Output**         | Prioritized documentation backlog       |
 | **Repeat cadence** | Every 1–2 months or when onboarding     |
 
-```plantuml
-Setup (5 min) → Round 1 (15 min) → Feedback (5 min) → Round 2 (15 min) → Feedback (5 min) → Backlog Creation (10 min)
+```dot
+"Setup (5 min)" → "Round 1 (15 min)" → "Feedback (5 min)" → "Round 2 (15 min)" → "Feedback (5 min)" → "Backlog Creation (10 min)"
 ```
 
 ## Why run it (Goal)
