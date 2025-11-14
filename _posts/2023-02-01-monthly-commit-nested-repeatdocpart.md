@@ -1,8 +1,8 @@
 ---
 layout: article
-title: "Nested Repeats in Word Templates: Making repeatDocPart Robust"
+title: "Solving Nested Repeats in Word Templates"
 date: 2023-02-01 09:00:00
-categories: [ agility, craftsmanship, docs-as-code, solo-maintainer, enterprise, maintenance, wordprocessingml, repetition ]
+categories: [ wordprocessingml, agility, craftsmanship, docs-as-code, solo-maintainer, enterprise, maintenance repetition ]
 ---
 
 TL;DR: office-stamper now supports arbitrary nesting depth for repeated document sections. A 13-line recursive fix lets
