@@ -40,6 +40,60 @@ pre{background:#0b1220;border:1px solid #1f2937;border-radius:.5rem;padding:1rem
 pre code{background:transparent}
 code{background:rgba(17,24,39,.06);padding:.1rem .3rem;border-radius:.25rem}
 
+/* Rouge syntax highlighting (GitHub-like, tuned for dark pre background) */
+/* Base wrappers produced by Jekyll + Rouge */
+.highlighter-rouge .highlight{background:#0b1220;color:#E5E7EB}
+.highlight{line-height:1.45}
+.highlight pre{background:transparent;border:none;padding:0;margin:0}
+
+/* Token colors */
+.highlight .c, /* Comment */
+.highlight .cm, .highlight .c1 {color:#9CA3AF;font-style:italic}
+.highlight .cp {color:#FBBF24} /* Comment.Preproc */
+
+.highlight .k,  /* Keyword */
+.highlight .kd, /* Keyword.Declaration */
+.highlight .kn, /* Keyword.Namespace */
+.highlight .kp, /* Keyword.Pseudo */
+.highlight .kr, /* Keyword.Reserved */
+.highlight .kt  /* Keyword.Type */{color:#93C5FD}
+
+.highlight .n,  /* Name */
+.highlight .nx {color:#E5E7EB}
+.highlight .nc {color:#F59E0B} /* Name.Class */
+.highlight .no {color:#F59E0B} /* Name.Constant */
+.highlight .na {color:#A7F3D0} /* Name.Attribute */
+.highlight .ni {color:#FBBF24} /* Name.Entity */
+.highlight .ne {color:#F87171} /* Name.Exception */
+.highlight .nf {color:#34D399} /* Name.Function */
+.highlight .nn {color:#93C5FD} /* Name.Namespace */
+.highlight .nt {color:#60A5FA} /* Name.Tag (HTML/XML) */
+
+.highlight .l,  /* Literal */
+.highlight .m,  /* Literal.Number */
+.highlight .mb, .highlight .mf, .highlight .mh,
+.highlight .mi, .highlight .il, .highlight .mo {color:#F472B6}
+
+.highlight .s,  /* Literal.String */
+.highlight .sa, .highlight .sb, .highlight .sc,
+.highlight .sd, .highlight .s1, .highlight .s2,
+.highlight .se, .highlight .sh, .highlight .si,
+.highlight .sr, .highlight .ss, .highlight .sx {color:#34D399}
+
+.highlight .o,  /* Operator */
+.highlight .ow {color:#FDE68A}
+.highlight .p  {color:#E5E7EB} /* Punctuation */
+
+.highlight .gd {color:#FCA5A5;background:rgba(239,68,68,.10)} /* Generic.Deleted */
+.highlight .gi {color:#86EFAC;background:rgba(16,185,129,.10)} /* Generic.Inserted */
+.highlight .gr {color:#F87171}
+.highlight .gh {color:#93C5FD;font-weight:600}
+.highlight .gs {font-weight:600}
+.highlight .ge {font-style:italic}
+
+/* Ensure inline code inside headings retains readable contrast */
+h1 code, h2 code, h3 code{background:rgba(17,24,39,.2)}
+
 /* Hero and cards */
 .hero{padding:3rem 0}
 .hero h1{font-size:2.25rem;line-height:1.2;margin:0 0 .5rem}
@@ -117,6 +171,12 @@ a:hover{text-decoration:underline}
   pre{background:#0b1220;border-color:#1f2937}
   .author-box{background:#0f172a;border-color:var(--cc-border)}
   .skip-link:focus{background:var(--cc-surface)}
+
+  /* Slightly brighter token colors in dark mode environments */
+  .highlighter-rouge .highlight{background:#0b1220;color:#E5E7EB}
+  .highlight .c, .highlight .cm, .highlight .c1{color:#9CA3AF}
+  .highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt{color:#A5B4FC}
+  .highlight .s, .highlight .sa, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s1, .highlight .s2, .highlight .se, .highlight .sh, .highlight .si, .highlight .sr, .highlight .ss, .highlight .sx{color:#6EE7B7}
 }
 
 /* Footer styling (theme-aware, no inline styles) */
