@@ -29,7 +29,9 @@ sprint's documentation work.
 | **Repeat cadence** | Every 1–2 months or when onboarding     |
 
 ```dot
-"Setup (5 min)" → "Round 1 (15 min)" → "Feedback (5 min)" → "Round 2 (15 min)" → "Feedback (5 min)" → "Backlog Creation (10 min)"
+digraph D {
+  "Setup (5 min)" -> "Round 1 (15 min)" -> "Feedback (5 min)" -> "Next Round (15 min)" -> "Feedback (5 min)" -> "Backlog Creation (10 min)"
+}
 ```
 
 ## Why run it (Goal)
