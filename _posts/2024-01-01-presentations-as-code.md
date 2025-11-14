@@ -3,6 +3,9 @@ layout: article
 title:  "Writing Presentations as Code with Reveal.js and AsciiDoctor"
 date:   2024-01-01 09:00:00
 categories: [revealjs, asciidoctor, developerexperience, documentationascode]
+author: Joseph
+tags: [revealjs, asciidoctor, docs-as-code]
+description: "Presentations‑as‑code with Reveal.js and AsciiDoctor: versioned slides, live examples, and build‑time automation for technical talks."
 ---
 
 In my technical presentations, I’ve adopted a *presentations as code* approach using **Reveal.js** in combination with **AsciiDoctor**. This method lets me build slide decks that live alongside the codebase, with the same versioning, traceability, and automation benefits that we expect from source code.

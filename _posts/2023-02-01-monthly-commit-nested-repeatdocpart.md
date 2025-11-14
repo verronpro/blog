@@ -3,6 +3,9 @@ layout: article
 title: "Solving Nested Repeats in Word Templates"
 date: 2023-02-01 09:00:00
 categories: [ wordprocessingml, agility, craftsmanship, docs-as-code, solo-maintainer, enterprise, maintenance repetition ]
+author: Joseph
+tags: [office-stamper, templates, docs-as-code, testing]
+description: "Office‑stamper now supports arbitrarily nested repeat blocks via a small recursive change and comprehensive tests, letting templates mirror deep domain hierarchies safely."
 ---
 
 TL;DR: office-stamper now supports arbitrary nesting depth for repeated document sections. A 13-line recursive fix lets

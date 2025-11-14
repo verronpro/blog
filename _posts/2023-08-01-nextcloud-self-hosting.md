@@ -3,6 +3,9 @@ layout: article
 title:  "Nextcloud Self-Hosting: Interests and Hurdles"
 date:   2023-08-01 09:00:00
 categories: [nextcloud,hosting]
+author: Joseph
+tags: [nextcloud]
+description: "Self‑hosting Nextcloud for family needs: practical interests, real hurdles, and what it took to run it reliably at home."
 ---
 
 Hey there, tech enthusiasts and fellow adventurers in the digital realm! Joseph Verron here, ready to share an exciting chapter from my recent tech escapades. In this article, we'll embark on a journey into the world of self-hosting, as I delve into the interests and challenges of setting up my very own Nextcloud instance for my family's digital needs.

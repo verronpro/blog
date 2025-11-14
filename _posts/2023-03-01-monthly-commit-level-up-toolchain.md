@@ -3,6 +3,9 @@ layout: article
 title:  "Leveling Up the Toolchain: Java 17, JUnit 5, and a Dev Container"
 date:   2023-03-01 09:00:00
 categories: [ci-cd, java17, junit5, devcontainers, agility, craftsmanship, docs-as-code, solo-maintainer, enterprise, maintenance, platform, maven]
+author: Joseph
+tags: [toolchain, java, ci, devex]
+description: "Java 17 + JUnit 5 migration with a ready‑to‑code dev container—predictable builds, modern tests, and faster onboarding for enterprise adopters."
 ---
 
 TL;DR: Migrating to Java 17 LTS, JUnit 5, and a dev container turned maintenance overhead into competitive advantage—giving enterprise adopters predictable builds, modern tooling, and zero-friction onboarding in a solo-maintained project.

@@ -3,6 +3,9 @@ layout: article
 title:  "Diagrams as Code: Practical Benefits in Real-World Projects"
 date:   2023-09-01 09:00:00
 categories: [plantuml, graphviz, developerexperience, documentation]
+author: Joseph
+tags: [diagram-as-code, plantuml, graphviz]
+description: "Why diagrams‑as‑code scales better than drag‑and‑drop tools, with PlantUML and Graphviz examples you can embed and version alongside code."
 ---
 
 In several of my projects, I’ve integrated **Graphviz** and **PlantUML** into the development and documentation workflows. These tools allow diagrams to be described and stored in plain text format — a practice often referred to as *Diagrams as Code*.
