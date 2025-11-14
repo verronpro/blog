@@ -36,15 +36,20 @@ code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono
 blockquote{border-left:4px solid var(--cc-primary);padding:.5rem 1rem;background:rgba(37,99,235,.05)}
 
 /* Code blocks */
-pre{background:#0b1220;border:1px solid #1f2937;border-radius:.5rem;padding:1rem;overflow:auto}
-pre code{background:transparent}
+/* Show the visible border on Rouge's wrapper; keep base pre without border to avoid double borders in various containers */
+pre{background:#0b1220;border-radius:.5rem;padding:1rem;overflow:auto}
+/* Remove inline-code padding inside pre to avoid first-line indent; make code block-level */
+pre code{background:transparent;padding:0;display:block}
 /* Inline code: deepen the background for better contrast */
 code{background:rgba(17,24,39,.12);padding:.1rem .3rem;border-radius:.25rem}
 
 /* Rouge syntax highlighting (GitHub-like, tuned for dark pre background) */
 /* Base wrappers produced by Jekyll + Rouge */
-.highlighter-rouge .highlight{background:#0b1220;color:#E5E7EB}
-.highlight{line-height:1.45}
+/* Provide the visible box (padding, border, radius) on the Rouge wrapper so inner <pre> can be unstyled */
+.highlighter-rouge .highlight{background:#0b1220;color:#E5E7EB;border:1px solid #1f2937;border-radius:.5rem;padding:1rem;overflow:auto}
+/* Guard: some themes add a border on generic .highlight; explicitly remove it to avoid double borders.
+   The Rouge wrapper above (more specific selector) re-adds the single intended border. */
+.highlight{line-height:1.45; border:none}
 .highlight pre{background:transparent;border:none;padding:0;margin:0}
 
 /* Token colors */
@@ -169,7 +174,9 @@ a:hover{text-decoration:underline}
   body{background:var(--cc-bg);color:var(--cc-text)}
   .card,.post-card{background:var(--cc-surface);border-color:var(--cc-border)}
   blockquote{background:rgba(37,99,235,.10);border-left-color:var(--cc-primary)}
-  pre{background:#0b1220;border-color:#1f2937}
+  /* Keep dark background for code blocks; border is handled by the Rouge wrapper */
+  pre{background:#0b1220}
+  .highlighter-rouge .highlight{background:#0b1220;border-color:#1f2937}
   /* Inline code background tuned for dark mode */
   code{background:rgba(229,231,235,.10)}
   .author-box{background:#0f172a;border-color:var(--cc-border)}
