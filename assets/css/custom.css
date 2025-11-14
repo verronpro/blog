@@ -38,7 +38,8 @@ blockquote{border-left:4px solid var(--cc-primary);padding:.5rem 1rem;background
 /* Code blocks */
 pre{background:#0b1220;border:1px solid #1f2937;border-radius:.5rem;padding:1rem;overflow:auto}
 pre code{background:transparent}
-code{background:rgba(17,24,39,.06);padding:.1rem .3rem;border-radius:.25rem}
+/* Inline code: deepen the background for better contrast */
+code{background:rgba(17,24,39,.12);padding:.1rem .3rem;border-radius:.25rem}
 
 /* Rouge syntax highlighting (GitHub-like, tuned for dark pre background) */
 /* Base wrappers produced by Jekyll + Rouge */
@@ -169,6 +170,8 @@ a:hover{text-decoration:underline}
   .card,.post-card{background:var(--cc-surface);border-color:var(--cc-border)}
   blockquote{background:rgba(37,99,235,.10);border-left-color:var(--cc-primary)}
   pre{background:#0b1220;border-color:#1f2937}
+  /* Inline code background tuned for dark mode */
+  code{background:rgba(229,231,235,.10)}
   .author-box{background:#0f172a;border-color:var(--cc-border)}
   .skip-link:focus{background:var(--cc-surface)}
 
@@ -177,6 +180,17 @@ a:hover{text-decoration:underline}
   .highlight .c, .highlight .cm, .highlight .c1{color:#9CA3AF}
   .highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt{color:#A5B4FC}
   .highlight .s, .highlight .sa, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s1, .highlight .s2, .highlight .se, .highlight .sh, .highlight .si, .highlight .sr, .highlight .ss, .highlight .sx{color:#6EE7B7}
+}
+
+/* Tables: improve visibility with borders and subtle striping */
+table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--cc-border);background:var(--cc-surface)}
+th,td{padding:.5rem .75rem;border:1px solid var(--cc-border);text-align:left;vertical-align:top}
+thead th{background:rgba(17,24,39,.04)}
+tbody tr:nth-child(even){background:rgba(17,24,39,.02)}
+
+@media (prefers-color-scheme: dark){
+  thead th{background:rgba(255,255,255,.04)}
+  tbody tr:nth-child(even){background:rgba(255,255,255,.02)}
 }
 
 /* Footer styling (theme-aware, no inline styles) */
