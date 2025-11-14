@@ -8,9 +8,7 @@ tags: [docs-as-code, office-stamper, documentation, ci, asciidoctor]
 description: "Turning the website into a first-class, build-verified artifact: clearer concepts, copy‑paste examples, and CI‑friendly docs that scale a solo‑maintained library inside enterprises."
 ---
 
-## TL;DR
-
-Docs are product. This change turns the site into a first‑class, build‑verified artifact: clearer concepts, copy‑paste examples that compile, and CI hooks so docs don’t drift.
+TL;DR: Docs are product. This change turns the site into a first‑class, build‑verified artifact: clearer concepts, copy‑paste examples that compile, and CI hooks so docs don’t drift.
 
 ## Quick Facts
 
