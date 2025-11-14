@@ -52,6 +52,7 @@ The migration wasn't just find-and-replace; it involved rethinking test patterns
 ### Dev Container: From "Works on My Machine" to "Works Everywhere" (commit [2f53681](https://github.com/verronpro/office-stamper/commit/2f53681))
 
 The contributor journey:
+
 *Without devcontainer:*
 1. Install JDK 17 (which vendor?)
 2. Install Maven (which version?)
@@ -76,7 +77,7 @@ The contributor journey:
 - **Eliminate setup tax:** The dev container is executable onboarding. It encodes the environment contract so a contributor—or future you—doesn't rediscover dependencies on every machine.
 
 > **💭 Maintainer Note:**  
-> "As a solo maintainer, every hour spent helping someone set up their environment is an hour *not* spent fixing bugs or adding features. The dev container isn't laziness—it's survival. When a contractor opens a PR and their first message is 'tests pass locally,' not 'how do I install Maven?', that's a win."
+> As a solo maintainer, every hour spent helping someone set up their environment is an hour *not* spent fixing bugs or adding features. The dev container isn't laziness—it's survival. When a contractor opens a PR and their first message is 'tests pass locally,' not 'how do I install Maven?', that's a win.
 
 ## Design Decisions
 
