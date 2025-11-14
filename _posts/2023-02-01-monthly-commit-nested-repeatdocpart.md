@@ -5,7 +5,7 @@ date:   2023-02-01 09:00:00
 categories: [agility, craftsmanship, docs-as-code, solo-maintainer, enterprise, maintenance, wordprocessingml, repetition]
 ---
 
-Commit: https://github.com/verronpro/office-stamper/commit/0a774c1[0a774c1]
+Commit: [0a774c1](https://github.com/verronpro/office-stamper/commit/0a774c1)
 
 ## Why this stands out
 
@@ -17,9 +17,7 @@ From an Agile perspective, this delivers a complete vertical slice: the feature 
 
 The core change is in `RepeatDocPartProcessor.extractSubTemplate()`:
 
-*Before:* Only direct children of a comment wrapper were extracted:
-
-Before: Only direct children of a comment wrapper were extracted:
+**Before:** Only direct children of a comment wrapper were extracted:
 
 ```java
 private void extractedSubComments(CommentWrapper commentWrapper, Comments comments) {
@@ -61,13 +59,13 @@ This isn't a toy example—it mirrors real enterprise scenarios like org charts,
 ## Agile/craftsmanship/docs-as-code lens
  * Small batches, big impact:* The production change is 13 lines. The test infrastructure (context classes, fixtures) is larger, but that's the right ratio—tests define the contract and protect against regression.
 
- * Recursive simplicity:* Instead of managing explicit stacks or breadth-first queues, the code leverages natural recursion. The call stack is the traversal state. This aligns with the WordprocessingML structure (comments form a tree) and keeps the cognitive load low.
+ * Recursive simplicity:* Instead of managing explicit stacks or breadth-first queues, the code leverages a natural recursion. The call stack is the traversal state. This aligns with the WordprocessingML structure (comments form a tree) and keeps the cognitive load low.
 
  * Documentation through fixtures:* The RepeatDocPartNestingTest.docx template itself is documentation. Future maintainers can open it in Word, see the comment structure, and understand the feature without parsing code.
 
 ## Solo maintainer + enterprise usage angle
 
-For a solo maintainer, recursion is a double-edged sword—it's elegant but can hide stack-overflow risks. The mitigation here is *structural*: WordprocessingML comments have finite depth (typically 2–4 levels in practice), and the Spring `CollectionUtils.isEmpty()` guard prevents infinite loops on malformed trees.
+For a solo maintainer, recursion is a double-edged sword—it is elegant but can hide stack-overflow risks. The mitigation here is *structural*: WordprocessingML comments have finite depth (typically 2–4 levels in practice), and the Spring `CollectionUtils.isEmpty()` guard prevents infinite loops on malformed trees.
 
 For enterprise users, this removes a major adoption blocker. Before, nested repeats required flattening the data model or splitting templates. Now, the document structure can mirror the domain model directly. That reduces impedance mismatch between business stakeholders (who think hierarchically) and template authors.
 
@@ -91,7 +89,7 @@ For enterprise users, this removes a major adoption blocker. Before, nested repe
 
 ## References
 
-- Commit: https://github.com/verronpro/office-stamper/commit/0a774c1[0a774c1]
-- Issue: https://github.com/verronpro/office-stamper/issues/92[When commentWarapper's children comments have their own children · Issue #92 · verronpro/office-stamper]
-- PR: https://github.com/verronpro/office-stamper/pull/100[Nesting support for repeatDocPart commentWrapper #92 by NoNException · Pull Request #100 · verronpro/office-stamper]
-- Contributors: NoNException, zongzi
+- Commit: [0a774c1](https://github.com/verronpro/office-stamper/commit/0a774c1)
+- Issue: [When commentWrapper's children comments have their own children · Issue #92 · verronpro/office-stamper.](https://github.com/verronpro/office-stamper/issues/92)
+- PR: [Nesting support for repeatDocPart commentWrapper #92 by NoNException · Pull Request #100 · verronpro/office-stamper.](https://github.com/verronpro/office-stamper/pull/100)
+- Contributors: [NoNException](https://github.com/NoNException), [zongzi](https://github.com/zongzi)
