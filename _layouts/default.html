@@ -187,13 +187,14 @@
 </head>
 <body class="layout-{{ page.layout | default: 'default' }}">
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header">
+<header class="site-header" data-menu-collapsed="true">
     <div class="site-header__inner container-wide">
         <a class="site-header__brand" href="{{ site.baseurl }}/">
             <span class="logo" aria-hidden="true">{% include svg/logo.svg %}</span>
             <span>{{ site.title }}</span>
         </a>
-        <nav class="site-header__nav" aria-label="Main">
+        <button class="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">Menu</button>
+        <nav id="primary-nav" class="site-header__nav" aria-label="Main">
             {% for item in site.data.navigation.header %}
             {% assign current_lang = site.lang | default: 'en' %}
             {% assign label = item.titles[current_lang] | default: item.titles.en %}
@@ -201,6 +202,35 @@
             {% endfor %}
         </nav>
     </div>
+    <script>
+        (function(){
+            const header = document.currentScript && document.currentScript.parentElement;
+            const btn = header && header.querySelector('.menu-toggle');
+            const nav = header && header.querySelector('#primary-nav');
+            if (!header || !btn || !nav) return;
+            function setCollapsed(collapsed){
+                header.setAttribute('data-menu-collapsed', String(collapsed));
+                btn.setAttribute('aria-expanded', String(!collapsed));
+            }
+            btn.addEventListener('click', function(){
+                const collapsed = header.getAttribute('data-menu-collapsed') !== 'false';
+                setCollapsed(!collapsed);
+            });
+            // Ensure desktop state shows nav even if attribute lingers
+            const mq = window.matchMedia('(min-width: 801px)');
+            function handleMQ(e){
+                if (e.matches) {
+                    // On desktop, expand
+                    setCollapsed(false);
+                } else {
+                    // On mobile, start collapsed
+                    setCollapsed(true);
+                }
+            }
+            if (mq.addEventListener) mq.addEventListener('change', handleMQ); else mq.addListener(handleMQ);
+            handleMQ(mq);
+        })();
+    </script>
 </header>
 
 <main id="main" class="container">
