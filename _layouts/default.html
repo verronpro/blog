@@ -209,11 +209,11 @@
             const nav = header && header.querySelector('#primary-nav');
             if (!header || !btn || !nav) return;
             function setCollapsed(collapsed){
-                header.setAttribute('data-menu-collapsed', String(collapsed));
+                header.dataset.menuCollapsed = String(collapsed);
                 btn.setAttribute('aria-expanded', String(!collapsed));
             }
             btn.addEventListener('click', function(){
-                const collapsed = header.getAttribute('data-menu-collapsed') !== 'false';
+                const collapsed = header.dataset.menuCollapsed !== 'false';
                 setCollapsed(!collapsed);
             });
             // Ensure desktop state shows nav even if attribute lingers
