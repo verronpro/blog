@@ -9,7 +9,9 @@ description: Why I practice Advent of Code every December, how it keeps core alg
 
 Every December, Advent of Code (AoC) drops two small programming puzzles each day. They are bite-sized, story‑flavored, and perfectly tuned to fit in a coffee break or an evening session. Over the years, this event has become my favorite way to keep my algorithmic muscles warm and to nudge peers into a friendly, productive competition.
 
-My solutions and notes live here: https://github.com/caring-coder/adventofcode
+Reality check: keeping up for all 25 days is hard. The difficulty ramps up, and some days jump far outside a comfortable timebox. When that happens, I intentionally keep the workload light and spread the tougher puzzles across the year. The goal is sustainable practice, not a perfect streak.
+
+My solutions and notes live here: https://github.com/caring-coder/adventofcode (use for ideas only—don’t copy the scaffolding; it’s personal and Java‑oriented).
 
 ## What makes Advent of Code effective
 
@@ -92,7 +94,7 @@ Here’s a minimal, copy‑paste‑able pattern that worked for me:
 
 ## From AoC to an internal kata platform
 
-AoC inspired me to build a tiny platform to run internal events as a software craftsman coach—especially to facilitate an Extreme Startup Kata. The idea is a small server that:
+AoC inspired me to build a tiny platform to run internal events as a software craftsman coach—especially to facilitate an Extreme Startup Kata. In this format, teams register their own server, which must answer a stream of real‑time requests with progressively more challenging and varied questions. The idea is a small coordinating server that:
 
 - Serves a sequence of problems with increasing difficulty.
 - Accepts teams’ submissions via HTTP.
@@ -104,6 +106,7 @@ A sketch of the API surface:
 ```http
 GET  /api/challenges            # list available challenges
 GET  /api/challenges/{id}       # fetch statement, samples, constraints
+POST /api/teams/register        # body: { team, callbackUrl } for team servers
 POST /api/submissions           # body: { team, challengeId, answer }
 GET  /api/leaderboard           # current ranking with timestamps
 ```
@@ -131,13 +134,16 @@ This internal platform borrows AoC’s strengths—tight feedback, incremental d
 ## Getting started (checklist)
 
 - Join AoC and pick your language for this year.
-- Clone my repo for quick scaffolding and notes: https://github.com/caring-coder/adventofcode
+- Choose or build minimal scaffolding in your preferred language. Do not copy mine—it’s highly personal and Java‑oriented. Use my repo only to skim ideas: https://github.com/caring-coder/adventofcode
 - Set up a micro-harness to parse input and run parts 1/2 quickly.
 - Schedule two short group sessions per week in December.
 - If coaching, prepare 3–5 Extreme Startup challenges on your internal server to keep the momentum after AoC.
 
+Community: if you want to discuss approaches or compare heuristics, join existing forums with many active participants:
+
+- Reddit: https://www.reddit.com/r/adventofcode/
+- Hacker News: search for the daily “Advent of Code Day N” threads on https://news.ycombinator.com/
+
 ## Closing
 
 Advent of Code works because it turns deliberate practice into a tiny, rewarding habit. It keeps our fundamentals sharp and creates space for peers to learn from each other. For me, it also triggered a durable asset: a small internal events server that powers Extreme Startup‑style katas all year long.
-
-{% include post/author-box.html %}
