@@ -98,3 +98,28 @@ header:
       fr-LU   : *FR
       # @end locale config
     url: /resources.html
+
+  - titles:
+      # @start locale config
+      en      : &EN       Ideas & Ongoing Projects
+      en-GB   : *EN
+      en-US   : *EN
+      en-CA   : *EN
+      en-AU   : *EN
+      zh-Hans : &ZH_HANS  Ideas & Ongoing Projects
+      zh      : *ZH_HANS
+      zh-CN   : *ZH_HANS
+      zh-SG   : *ZH_HANS
+      zh-Hant : &ZH_HANT  Ideas & Ongoing Projects
+      zh-TW   : *ZH_HANT
+      zh-HK   : *ZH_HANT
+      ko      : &KO       Ideas & Ongoing Projects
+      ko-KR   : *KO
+      fr      : &FR       Idées et projets en cours
+      fr-BE   : *FR
+      fr-CA   : *FR
+      fr-CH   : *FR
+      fr-FR   : *FR
+      fr-LU   : *FR
+      # @end locale config
+    url: /ideas.html
