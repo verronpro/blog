@@ -97,7 +97,11 @@ blockquote {
 /* Code blocks */
 /* Show the visible border on Rouge's wrapper; keep base pre without border to avoid double borders in various containers */
 pre {
-    overflow: auto
+    /* Ensure long lines do not expand the page on mobile; allow horizontal scroll inside the block */
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
 }
 
 /* Rouge syntax highlighting (GitHub-like, tuned for dark pre background) */
@@ -108,7 +112,11 @@ pre {
     background: var(--cc-surface);
     border: none;
     border-radius: .5rem;
-    overflow: auto
+    /* Same containment rule for the Rouge wrapper */
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%
 }
 
 /*
@@ -117,9 +125,20 @@ pre {
   - Ensure media and tables scale within the viewport
 */
 #main {
-    /* Allow long words/URLs to wrap instead of overflowing */
-    overflow-wrap: anywhere;
-    word-break: break-word;
+    /* Natural wrapping for regular text; avoid mid-word breaks */
+    overflow-wrap: break-word;
+    word-break: normal;
+}
+
+/* Make code blocks scroll horizontally instead of widening the page */
+#main pre,
+#main .highlight,
+#main .highlighter-rouge .highlight,
+#main figure.highlight {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 #main img,
@@ -138,9 +157,25 @@ pre {
     -webkit-overflow-scrolling: touch;
 }
 
+/* Final guard: never let the overall page become wider than the viewport */
+html, body {
+    max-width: 100%;
+}
+
 /* Prevent inline code from forcing overflow */
 #main code {
+    /* Inline code should behave like normal text */
+    overflow: auto;
     overflow-wrap: anywhere;
+    max-width: 100%;
+    white-space: pre-wrap;
+}
+
+/* Allow long URLs in text to break to protect layout on mobile */
+#main a {
+    overflow-wrap: anywhere;
+    /* keep legacy behavior for older engines that prefer word-break */
+    word-break: break-word;
 }
 
 /* Guard: some themes add a border on generic .highlight; explicitly remove it to avoid double borders.
