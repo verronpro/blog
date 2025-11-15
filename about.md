@@ -1,10 +1,8 @@
 ---
 layout: page
 title: About
-author: joseph-verron
+author: Joseph
 ---
-
-# About Joseph
 
 I’m Joseph Verron. I help software teams build reliable systems and clear documentation. My work sits at the intersection of software craftsmanship and docs‑as‑code: practical techniques, repeatable pipelines, and small improvements that compound over time.
 

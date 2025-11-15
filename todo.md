@@ -5,9 +5,7 @@ aside:
   toc: true
 ---
 
-Purpose
-
-This page organizes the ideas, practices, and sources that shape my work. It’s written for my future partners who want a pragmatic partner to deliver results and leave systems healthier than they were found.
+This page organizes the ideas, practices, and sources that shape my work. It is written for my future partners looking for someone pragmatic to deliver results and leave systems healthier than they were found.
 
 What you should take away: my influences are deliberate, complementary, and operational. They translate into repeatable ways of working that reduce delivery risk, make quality observable, and keep documentation, code, and architecture aligned.
 
@@ -33,20 +31,17 @@ These are not name‑drops; they shape concrete choices in how I work with you.
 # Practices I bring to your project
 
 1) Docs‑as‑Code foundation
-- Your documentation, run‑books, and decisions live with your code in Markdown, with CI checks. Fewer stale wikis; more trustworthy knowledge.
-- Diagram‑as‑Code (PlantUML, Mermaid, Graphviz) keeps architecture current. Diagrams update when code or config changes.
-
+    - Your documentation, run‑books, and decisions live with your code in Markdown, with CI checks. Fewer stale wikis; more trustworthy knowledge.
+    - Diagram‑as‑Code (PlantUML, Mermaid, Graphviz) keeps architecture current. Diagrams update when code or config changes.
 2) Template and document automation
-- I maintain Office‑stamper, a small Java library used to generate .docx/.pptx/.xlsx from real templates safely and testably.
-- I apply strong template semantics (placeholders, invariants, pre/post‑processing) so documents are robust and evolvable.
-
+    - I maintain Office‑stamper, a small Java library used to generate .docx/.pptx/.xlsx from real templates safely and testably.
+    - I apply strong template semantics (placeholders, invariants, pre/post‑processing) so documents are robust and evolvable.
 3) Testing as infrastructure
-- Characterization tests make legacy safer to change.
-- CI pipelines validate docs, diagrams, and generated artifacts along with code.
-
+   - Characterization tests make legacy safer to change.
+   - CI pipelines validate docs, diagrams, and generated artifacts along with code.
 4) Developer experience and maintainability
-- Git hygiene, commit conventions, minimal branching rules, and helpful automation.
-- Clear contribution pathways for occasional contributors.
+    - Git hygiene, commit conventions, minimal branching rules, and helpful automation.
+    - Clear contribution pathways for occasional contributors.
 
 # How it fits together (operating model)
 
