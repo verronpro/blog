@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: "Nextcloud self‑hosting: interests and hurdles"
 date: 2023-08-01 09:00:00
 categories: [ nextcloud, hosting ]
@@ -14,7 +14,7 @@ As a software engineer who prefers owning the tooling and data, I hosted a small
 
 ## Why Nextcloud (the interests)
 
-- Data ownership and privacy: all files and calendars live under an account/infrastructure I control; no third‑party   retention surprises.
+- Data ownership and privacy: all files and calendars live under an account/infrastructure I control; no third‑party retention surprises.
 - Family collaboration: file sharing, calendar sync, and notes are good enough out of the box, with mature mobile/desktop clients.
 - Flexibility: apps and integrations let you tune the feature set; you decide the trade‑offs (features vs. simplicity).
 
@@ -36,5 +36,5 @@ Self‑hosting Nextcloud does what it says on the tin: you get control and usefu
 
 ## Addendum (2025‑11)
 
-I stopped maintaining this particular Nextcloud instance. The decision was not about product quality—I remained satisfied with Nextcloud itself. It simply no longer aligned with my professional workload and my personal plan to move to China, where my priorities and constraints changed. If I need a private cloud again under similar conditions, I would
+I stopped maintaining this particular Nextcloud instance. The decision was not about product quality—I remained satisfied with Nextcloud itself. It simply no longer aligned with my professional workload, and my personal plan to move to China, where my priorities and constraints changed. If I need a private cloud again under similar conditions, I would
 consider Nextcloud without hesitation.
