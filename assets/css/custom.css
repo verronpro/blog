@@ -24,17 +24,20 @@ code, pre {
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace
 }
 
-/* Widen the main content on key layouts to enable two-column grid */
+/* Main content width rules
+   - Cap the main container to at most 80% of the viewport on ultra-wide displays
+   - Still keep a hard ceiling to preserve readability
+ */
 .layout-home #main.container {
-    max-width: 1200px
+    max-width: min(1200px, 80vw);
 }
 
 .layout-article #main.container {
-    max-width: 1200px
+    max-width: min(1200px, 80vw);
 }
 
 .layout-page #main.container {
-    max-width: 1200px
+    max-width: min(1200px, 80vw);
 }
 
 /* Containers */
@@ -106,6 +109,38 @@ pre {
     border: none;
     border-radius: .5rem;
     overflow: auto
+}
+
+/*
+  Responsive content safety nets
+  - Prevent horizontal overflow on small screens
+  - Ensure media and tables scale within the viewport
+*/
+#main {
+    /* Allow long words/URLs to wrap instead of overflowing */
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+#main img,
+#main svg,
+#main video,
+#main canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Make wide tables scroll instead of pushing layout */
+#main table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent inline code from forcing overflow */
+#main code {
+    overflow-wrap: anywhere;
 }
 
 /* Guard: some themes add a border on generic .highlight; explicitly remove it to avoid double borders.
@@ -572,8 +607,6 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin: 1rem 0;
-    border: 1px solid var(--cc-border);
-    background: var(--cc-surface)
 }
 
 th, td {
