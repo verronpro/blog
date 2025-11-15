@@ -5,7 +5,7 @@ aside:
   toc: true
 ---
 
-This page preserves the long resource list that previously lived on `todo.md`. It’s an organized catalog of tools, references, and inspirations I use. For an overview of how these fit together, see the page “Inspiration, Motivations, and How They Fit”.
+This page is an organized catalog of tools, references, and inspirations I use. For an overview of how these fit together, see the Operating Model page: [/operating-model.html](/operating-model.html).
 
 # Diagrams as code and other print‑oriented DSLs
 

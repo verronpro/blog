@@ -51,28 +51,28 @@ header:
 
   - titles:
       # @start locale config
-      en      : &EN       Todo Topics
+      en      : &EN       Operating Model
       en-GB   : *EN
       en-US   : *EN
       en-CA   : *EN
       en-AU   : *EN
-      zh-Hans : &ZH_HANS  待办
+      zh-Hans : &ZH_HANS  Operating Model
       zh      : *ZH_HANS
       zh-CN   : *ZH_HANS
       zh-SG   : *ZH_HANS
-      zh-Hant : &ZH_HANT  關於
+      zh-Hant : &ZH_HANT  Operating Model
       zh-TW   : *ZH_HANT
       zh-HK   : *ZH_HANT
-      ko      : &KO       소개
+      ko      : &KO       Operating Model
       ko-KR   : *KO
-      fr      : &FR       Sujets à faire
+      fr      : &FR       Modèle opérationnel
       fr-BE   : *FR
       fr-CA   : *FR
       fr-CH   : *FR
       fr-FR   : *FR
       fr-LU   : *FR
       # @end locale config
-    url: /todo.html
+    url: /operating-model.html
 
   - titles:
       # @start locale config
@@ -98,3 +98,28 @@ header:
       fr-LU   : *FR
       # @end locale config
     url: /resources.html
+
+  - titles:
+      # @start locale config
+      en      : &EN       Ideas & Ongoing Projects
+      en-GB   : *EN
+      en-US   : *EN
+      en-CA   : *EN
+      en-AU   : *EN
+      zh-Hans : &ZH_HANS  Ideas & Ongoing Projects
+      zh      : *ZH_HANS
+      zh-CN   : *ZH_HANS
+      zh-SG   : *ZH_HANS
+      zh-Hant : &ZH_HANT  Ideas & Ongoing Projects
+      zh-TW   : *ZH_HANT
+      zh-HK   : *ZH_HANT
+      ko      : &KO       Ideas & Ongoing Projects
+      ko-KR   : *KO
+      fr      : &FR       Idées et projets en cours
+      fr-BE   : *FR
+      fr-CA   : *FR
+      fr-CH   : *FR
+      fr-FR   : *FR
+      fr-LU   : *FR
+      # @end locale config
+    url: /ideas.html

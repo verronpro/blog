@@ -1,6 +1,7 @@
 ---
 layout: page
-title: Inspiration, Motivations, and How They Fit
+title: Operating Model — Influences and Practices
+permalink: /operating-model.html
 aside:
   toc: true
 ---
