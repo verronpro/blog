@@ -1,0 +1,43 @@
+---
+layout: article
+title:  ""
+date:   202X-XX-XX 09:00:00
+categories: []
+author: Joseph
+tags: [agility, craftsmanship, solo-maintainer, enterprise, platform, ci-cd, risk-management]
+description: ""
+---
+
+Commit:
+[a54e7b1](https://github.com/verronpro/office-stamper/commit/a54e7b1)
+
+# Why this commit is interesting
+
+Replacing text inside Word paragraphs is deceptively tricky—runs split,
+styles vary, and comments or fields can interleave. Adding an explicit
+`replace` method to `Paragraph` makes text surgery a first-class,
+testable API instead of a hand-rolled sequence at every call site.
+
+# What changed
+
+- Introduced `Paragraph.replace` and implemented it for
+  `StandardParagraph`.
+
+- Centralized range calculations and validation, reducing duplication
+  and subtle bugs.
+
+# Craftsmanship and Agile angle
+
+- Encapsulate complexity behind well-named methods; push correctness
+  checks to the boundary.
+
+- Tests now target a single API, improving confidence and speeding up
+  reviews.
+
+# How to apply this
+
+- When you find yourself copy-pasting mutation sequences, stop and
+  design the API you wish you had.
+
+- Add precondition validation and precise error messages; they pay off
+  quickly in triage.
