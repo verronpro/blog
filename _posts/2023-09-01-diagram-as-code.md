@@ -12,8 +12,6 @@ In several of my projects, I’ve integrated **Graphviz** and **PlantUML** into 
 
 While traditional tools like draw\.io or Visio are familiar and visual, they don’t scale well in collaborative environments. In contrast, diagram DSLs (domain-specific languages) make it possible to treat visuals like any other code artifact: version-controlled, diffable, and automation-friendly.
 
----
-
 ## Why Diagrams as Code?
 
 There are a few recurring reasons why I now prefer this approach:
@@ -22,8 +20,6 @@ There are a few recurring reasons why I now prefer this approach:
 * **Automation**: I integrate diagram generation into CI pipelines and IDE plugins to ensure documentation stays up to date.
 * **Traceability**: Changes to diagrams are tracked in Git alongside the code they describe.
 * **Developer proximity**: Keeping diagrams close to the code encourages developers to maintain them.
-
----
 
 ## Example: Gantt Diagram in PlantUML
 
@@ -63,8 +59,6 @@ digraph classes {
 
 This quick sketch helped align the team during sprint planning, and the DOT file was committed next to the design document. As the domain evolved, we updated the graph just like any other source file.
 
----
-
 ## Team Adoption
 
 Initial reactions to text-based diagramming were mixed. Some team members were hesitant due to the unfamiliar syntax. But over time, most appreciated the gains:
@@ -72,8 +66,6 @@ Initial reactions to text-based diagramming were mixed. Some team members were h
 * Easy to grep/search in a large codebase
 * Merge conflicts are easier to handle than binary diagram formats
 * Enables “documentation as living code,” rather than a separate, neglected deliverable
-
----
 
 ## Conclusion
 

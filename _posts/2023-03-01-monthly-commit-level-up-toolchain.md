@@ -15,15 +15,11 @@ TL;DR: Migrating to Java 17 LTS, JUnit 5, and a dev container turned maintenance
 - JUnit 5: [428d5d5](https://github.com/verronpro/office-stamper/commit/428d5d5)
 - Devcontainer docs: [2f53681](https://github.com/verronpro/office-stamper/commit/2f53681)
 
----
-
 ## Why this stands out
 
 Upgrading the foundation of a project is rarely glamorous, but it's exactly what keeps a small codebase alive and useful to large organizations over time. The project moved to Java 17 (last LTS), ported its tests to JUnit 5, and documented a ready‑to‑code dev container. The combination matters: a modern runtime unlocks language and performance improvements; a modern test stack streamlines developer experience; and a containerized setup makes sporadic contributors effective within minutes instead of hours.
 
 For a solo‑maintained project used in big‑company projects, those are not "nice to have" tweaks—they are survival tools. Enterprises pin on LTS JDKs and require predictable builds; contractors rotate in and out; security scanners and compliance checks look for sane defaults. Shipping these changes in one focused epoch reduces friction for everyone who touches the code or the CLI.
-
----
 
 ## What the commits reveal
 
@@ -71,8 +67,6 @@ The contributor journey:
 
 *Enterprise benefit:* Security teams can audit the environment spec in one file instead of reverse-engineering setup docs.
 
----
-
 ## Agile/craftsmanship/docs-as-code lens
 
 - **Small, verifiable changes:** Grouping platform upgrades behind green CI reduces the solo maintainer's cognitive load and limits the blast radius of issues.
@@ -94,8 +88,6 @@ The contributor journey:
 *Rationale:* Plain Maven remains primary; devcontainer is a productivity boost, not a requirement.  
 *Safety net:* CONTRIBUTING.md documents both paths.
 
----
-
 ## Your Platform Upgrade Checklist
 Planning a similar migration? Use this:
 - *Audit dependencies* for LTS compatibility
@@ -105,8 +97,6 @@ Planning a similar migration? Use this:
 - *Document runtime requirements* separately from dev requirements
 - *Provide executable environment* (devcontainer, Dockerfile, or Nix flake)
 - *Tag a release* immediately after green CI (makes rollback trivial)
-
----
 
 ## References
 

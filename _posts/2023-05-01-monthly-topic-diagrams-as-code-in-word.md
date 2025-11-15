@@ -19,8 +19,6 @@ TL;DR: Keep your Word documents honest by generating diagrams from source and st
 | Tooling    | Office‑stamper (Java), Maven/Gradle task, CI runner  |
 | Best for   | Architecture reviews, audits, proposals, living docs |
 
----
-
 ## Why diagrams as code?
 
 Traditional drag‑and‑drop tools are comfortable but don’t scale. By switching to text‑based generation, you get:
@@ -31,8 +29,6 @@ Traditional drag‑and‑drop tools are comfortable but don’t scale. By switch
 
 This is especially useful for proposals, audit reports, and architecture overviews where you need trustworthy diagrams synchronized with the real system state.
 
----
-
 ## PlantUML vs Mermaid (quick taxonomy)
 
 - Use Mermaid for quick, readable diagrams and browser‑native rendering.
@@ -42,8 +38,6 @@ This is especially useful for proposals, audit reports, and architecture overvie
   - skinparams/themes and broader UML coverage
 
 I routinely mix both: keep simple flows in Mermaid; use PlantUML for architecture.
-
----
 
 ## Minimal wiring in Java (Office‑stamper)
 
@@ -73,8 +67,6 @@ public class DiagramStampingExample {
 ```
 
 If the architecture or sequence changes, the image regenerates, and your document stays right—no manual updates.
-
----
 
 ## Build integration (Maven example)
 
@@ -120,8 +112,6 @@ Generate diagrams before stamping the Word template.
 
 Wire your stamping step after diagrams exist (e.g., during `package`), pointing template variables to the generated files under `target/diagrams`.
 
----
-
 ## Run‑of‑show (authoring workflow)
 
 1. Write the diagram source (`.puml` or Markdown block with Mermaid).
@@ -129,8 +119,6 @@ Wire your stamping step after diagrams exist (e.g., during `package`), pointing 
 3. Reference image paths from your Word template using `${variable}` placeholders.
 4. Stamp with Office‑stamper in your build.
 5. Verify output locally; commit sources and let CI recreate artifacts.
-
----
 
 ## Troubleshooting and sharp edges
 
@@ -140,8 +128,6 @@ Wire your stamping step after diagrams exist (e.g., during `package`), pointing 
 - Paths: generate into the build directory and use relative paths from the stamping process.
 - Mermaid in CI: use `@mermaid-js/mermaid-cli` in a Node step, pin the version for stability.
 
----
-
 ## Production checklist
 
 - [ ] Diagram sources tracked in Git (reviewable in PRs)
@@ -150,8 +136,6 @@ Wire your stamping step after diagrams exist (e.g., during `package`), pointing 
 - [ ] Stamping wired into CI (fail fast on missing images)
 - [ ] Style/theme consolidated (PlantUML `skinparam` or Mermaid config)
 - [ ] Representative example embedded in a published report
-
----
 
 ## Example: live diagram block
 
@@ -169,9 +153,6 @@ ctx --> stamper
 stamper --> doc
 @enduml
 ```
-
----
-
 ## Conclusion
 
 Treating diagrams as code turns documentation into a repeatable pipeline. Generate images from text, stamp them into Word at build time, and your reports will remain accurate without manual syncing.
