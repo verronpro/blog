@@ -1,49 +1,40 @@
 ---
-layout: article
-title:  "Nextcloud Self-Hosting: Interests and Hurdles"
-date:   2023-08-01 09:00:00
-categories: [nextcloud,hosting]
+layout: post
+title: "Nextcloud self‑hosting: interests and hurdles"
+date: 2023-08-01 09:00:00
+categories: [ nextcloud, hosting ]
 author: Joseph
-tags: [nextcloud]
-description: "Self‑hosting Nextcloud for family needs: practical interests, real hurdles, and what it took to run it reliably at home."
+tags: [ nextcloud, self-hosting, privacy, hosting ]
+description: "Self‑hosting Nextcloud for family needs on a Gandi host: what worked, what didn’t, and the operational cost of running it with a provider."
 ---
 
-Hey there, tech enthusiasts and fellow adventurers in the digital realm! Joseph Verron here, ready to share an exciting chapter from my recent tech escapades. In this article, we'll embark on a journey into the world of self-hosting, as I delve into the interests and challenges of setting up my very own Nextcloud instance for my family's digital needs.
+TL;DR — I self‑hosted Nextcloud on my Gandi host for family file sharing, calendars, and photos. It was a practical tool that delivered on privacy and flexibility, but still required steady maintenance (updates, backups, uptime). I later retired the instance for personal/professional reasons, not due to product dissatisfaction.
 
-## The Spark of Curiosity
+As a software engineer who prefers owning the tooling and data, I hosted a small Nextcloud instance on my Gandi infrastructure for my family. It let us run a truly practical shared tool without relying on a consumer SaaS. Below is a concise record of the interests that made it appealing, and the hurdles that matter if you operate it yourself.
 
-It all began with a spark of curiosity. As an advocate for software craftsmanship and a firm believer in taking control of my digital life, I found myself pondering the possibilities of self-hosting a cloud solution. Enter Nextcloud – a robust and open-source platform that promised to put me in charge of my data, while providing a suite of features tailored to collaboration, storage, and more.
+## Why Nextcloud (the interests)
 
-## The Tempting Interests
+- Data ownership and privacy: all files and calendars live under an account/infrastructure I control; no third‑party   retention surprises.
+- Family collaboration: file sharing, calendar sync, and notes are good enough out of the box, with mature mobile/desktop clients.
+- Flexibility: apps and integrations let you tune the feature set; you decide the trade‑offs (features vs. simplicity).
 
-### Data Ownership and Privacy
-First and foremost, the prospect of having complete control over my data was a tantalizing proposition. No more surrendering my personal information to big corporations or third-party services. With Nextcloud, I could safeguard my family's precious memories, sensitive documents, and valuable data on my own terms.
+## The hurdles that matter
 
-### Tailored Collaboration
-Nextcloud offered a cornucopia of tools for seamless collaboration. Calendar syncing, file sharing, and even a note-taking app meant that my family could effortlessly stay organized and connected, all while residing within the comforting confines of our self-hosted haven.
+- Initial setup: web server, TLS, database, storage layout on the host. Nothing exotic, but you need working backups and tested restores from day one.
+- Ongoing maintenance: regular security updates (OS + Nextcloud + apps), rotating credentials, and monitoring for disk usage/quotas at the provider.
+- Reliability and availability: provider incidents and planned maintenance happen. Plan for downtime windows and communicate with users; mind DNS/SMTP constraints when running on a shared host.
 
-### Flexibility and Customization
-One of the most alluring aspects of self-hosting is the sheer flexibility it provides. I had the freedom to shape Nextcloud according to our needs and preferences, integrating additional plugins and extensions as we saw fit.
+## What worked well
 
-## The Hurdles We Faced
+- Keep the stack simple (reverse proxy + Nextcloud + database + object/file storage).
+- Automate upgrades and backups; test restoring a snapshot before you need it.
+- Limit extra apps to the ones you truly use; fewer moving parts equals fewer surprises.
 
-### Technical Learning Curve
-Setting up a Nextcloud instance wasn't without its challenges. While I had a solid foundation in software engineering, navigating server configurations, database setups, and SSL certificates did require a bit of a learning curve. But hey, isn't mastering new tech skills half the fun?
+## Wrapping up
 
-### Maintenance and Updates
-Self-hosting, as empowering as it is, also comes with the responsibility of regular maintenance. Ensuring the system runs smoothly, keeping software up to date, and maintaining security patches demanded a level of diligence that I wasn't entirely prepared for.
+Self‑hosting Nextcloud does what it says on the tin: you get control and useful collaboration features, in exchange for operational responsibility. If that trade‑off fits your goals and time budget, it is a solid option.
 
-### Reliability and Availability
-In a world of 24/7 connectivity, ensuring that our self-hosted Nextcloud instance remained reliable and available was crucial. Handling unexpected downtime and addressing potential bottlenecks in our network setup became essential aspects of our self-hosting adventure.
+## Addendum (2025‑11)
 
-## The Triumphs and Smiles
-
-But oh, the triumphs were sweet, my friends. The satisfaction of successfully setting up our Nextcloud instance, customizing it to fit our needs, and basking in the glory of ownership over our data was a truly gratifying experience.
-
-The beaming smiles on my family's faces as they seamlessly accessed files, shared calendars, and collaborated effortlessly were worth every tech-induced wrinkle on my brow.
-
-## Wrapping Up
-
-So, my dear readers, what have I learned from this voyage into self-hosting our own Nextcloud instance? It's a journey of empowerment, a dance between challenges and victories, and a reminder that taking charge of our digital lives is both a noble pursuit and a deeply rewarding endeavor.
-
-As you embark on your own self-hosting adventures, remember that the road might be winding, but the vistas from the summit are worth the climb. Until next time, keep coding, keep crafting, and keep caring for your digital world. Stay tuned for more insights and adventures from The Caring Coder and yours truly, Joseph Verron. Happy self-hosting, everyone! 🌟
+I stopped maintaining this particular Nextcloud instance. The decision was not about product quality—I remained satisfied with Nextcloud itself. It simply no longer aligned with my professional workload and my personal plan to move to China, where my priorities and constraints changed. If I need a private cloud again under similar conditions, I would
+consider Nextcloud without hesitation.
