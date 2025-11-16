@@ -401,23 +401,6 @@ html, body {
     grid-template-columns:1fr !important
 }
 
-/* Author box */
-.author-box {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    padding: 1rem;
-    border: 1px solid var(--cc-border);
-    border-radius: .75rem;
-    background: #f9fafb
-}
-
-.author-box img {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%
-}
-
 /* Home layout: wide posts column with a smaller sidebar */
 .home-grid {
     display: grid;
@@ -614,11 +597,6 @@ a:hover {
         border: none
     }
 
-    .author-box {
-        background: #0f172a;
-        border-color: var(--cc-border)
-    }
-
     .skip-link:focus {
         background: var(--cc-surface)
     }
@@ -719,7 +697,7 @@ tbody tr:nth-child(even) {
     }
 
     /* Remove card chrome */
-    .card, .post-card, .author-box, pre {
+    .card, .post-card, pre {
         border: none;
         background: #fff
     }

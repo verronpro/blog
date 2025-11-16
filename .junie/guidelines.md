@@ -191,14 +191,13 @@ Custom CSS entry point: `assets/css/custom.css` is linked from `_includes/head/f
 
 Design tokens (CSS variables) currently defined: `--cc-primary`, `--cc-accent`, `--cc-text`, `--cc-muted`,
   `--cc-bg`, `--cc-surface`, `--cc-border`.
-- Components styled: `.btn`, `.btn-primary`, `.btn-ghost`, `.tag`, `.author-box`, `.cards`, `.card`,
+- Components styled: `.btn`, `.btn-primary`, `.btn-ghost`, `.tag` `.cards`, `.card`,
   `.posts-grid`, `.post-card`, `.post-meta`, `.site-header*`.
 - Dark mode: tokens switch via `@media (prefers-color-scheme: dark)`; surfaces and borders adapt automatically.
 - Print stylesheet: `@media print` hides nav/footer/buttons, removes chrome, and appends URLs to links.
 
 Reusable includes for presentation live under `_includes/home/*`, `_includes/post/*`, and `_includes/footer/*`:
 - `_includes/home/hero.html`: top landing hero with CTA. `_includes/home/cards.html`: 3 services cards.
-- `_includes/post/author-box.html`: author bio and CTA to add at end of posts.
 - `_includes/footer/custom.html`: site footer with quick links and social.
 
 Header include: `_includes/header/cta.html` provides a sticky header with simple nav and a persistent “Hire me”
