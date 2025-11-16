@@ -1,8 +1,9 @@
 ---
 layout: article
-title:  "Presentations as Code with Asciidoctor, Reveal.js, and Maven"
-date:   2024-01-01 09:00:00
-tags: [docs-as-code, revealjs, asciidoctor, presentations]
+title: "Presentations as Code with Asciidoctor, Reveal.js, and Maven"
+date: 2024-01-01 09:00:00
+categories: [ documentation-as-code ]
+tags: [ docs-as-code, revealjs, asciidoctor, presentations ]
 author: Joseph
 description: "How I build and publish slide decks as code using Asciidoctor Reveal.js and a reproducible Maven build — with live code and diagram generation."
 ---

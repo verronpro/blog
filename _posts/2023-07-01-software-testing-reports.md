@@ -2,9 +2,9 @@
 layout: article
 title: "How-to — Unified Test Reports across Java, Python, and TypeScript"
 date: 2023-07-01 09:00:00
-categories: [qa,test,report,java,python,typescript]
+categories: [ docs-as-code ]
 author: joseph-verron
-tags: [testing, docs-as-code, ci]
+tags: [ testing, docs-as-code, ci, qa,test,report,java,python,typescript ]
 description: "Practical steps to produce JUnit-style reports in Java, Python, and TypeScript, then aggregate them under the Open Test Reporting initiative."
 ---
 

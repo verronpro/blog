@@ -2,8 +2,8 @@
 layout: article
 title: "Diagrams as Code in Word Templates with Office‑stamper"
 date: 2023-05-01 09:00:00
-categories: [officestamper, diagramsascode, documentationascode, automation]
-tags: [docs-as-code, office-stamper, diagram-as-code, word, plantuml, mermaid]
+categories: [ documentation-as-code ]
+tags: [ documentation-as-code, office-stamper, diagram-as-code, word, plantuml, mermaid,  automation ]
 author: joseph-verron
 description: Treat diagrams as code and stamp generated images into Word templates with Office‑stamper. PlantUML vs Mermaid, build integration, pitfalls, and a production checklist.
 ---

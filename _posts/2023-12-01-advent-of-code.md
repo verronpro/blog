@@ -2,7 +2,8 @@
 layout: article
 title: "Advent of Code — A Small Daily Habit to Sharpen Algorithms and Team Energy"
 date: 2023-12-01
-tags: [algorithms, craftsmanship, coaching, community]
+categories: [ community ]
+tags: [ algorithms, craftsmanship, coaching, community, challenge ]
 author: Joseph
 description: Why I practice Advent of Code every December, how it keeps core algorithmic skills fresh, and how it inspired a tiny internal platform to run Extreme Startup-style katas with colleagues.
 ---

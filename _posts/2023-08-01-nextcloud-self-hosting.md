@@ -2,9 +2,9 @@
 layout: article
 title: "Nextcloud self‑hosting: interests and hurdles"
 date: 2023-08-01 09:00:00
-categories: [ nextcloud, hosting ]
+categories: [ self-hosting ]
 author: Joseph
-tags: [ nextcloud, self-hosting, privacy, hosting ]
+tags: [ self-hosting, privacy, hosting, nextcloud ]
 description: "Self‑hosting Nextcloud for family needs on a Gandi host: what worked, what didn’t, and the operational cost of running it with a provider."
 ---
 

@@ -3,8 +3,8 @@ layout: article
 title: "Making Knowledge a Feature: Improved Site Documentation"
 author: joseph-verron
 date: 2023-06-15 09:00:00
-categories: [docs-as-code, agility, craftsmanship, solo-maintainer, enterprise, developer-experience]
-tags: [docs-as-code, office-stamper, documentation, ci, asciidoctor]
+categories: [office-stamper]
+tags: [docs-as-code, office-stamper, documentation, ci, asciidoctor, agility, craftsmanship, solo-maintainer, enterprise, developer-experience]
 description: "Turning the website into a first-class, build-verified artifact: clearer concepts, copy‑paste examples, and CI‑friendly docs that scale a solo‑maintained library inside enterprises."
 ---
 

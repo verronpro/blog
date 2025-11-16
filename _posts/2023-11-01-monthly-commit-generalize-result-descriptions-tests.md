@@ -2,8 +2,8 @@
 layout: article
 title: "Make Tests Tell a Story: Generalizing Result Descriptions"
 date: 2023-11-01
-categories: [testing, maintainability]
-tags: [testing, craftsmanship, agility, docs-as-code, solo-maintainer, enterprise, readability]
+categories: [ office-stamper ]
+tags: [ office-stamper,testing, craftsmanship, agility, docs-as-code, solo-maintainer, enterprise, readability, maintainability ]
 author: Joseph
 description: Centralized test assertion descriptions to make failures readable, replacing brittle object dumps with domain-meaningful narratives that accelerate debugging and onboard contributors.
 ---

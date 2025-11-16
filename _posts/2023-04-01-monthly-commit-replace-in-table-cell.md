@@ -2,9 +2,9 @@
 layout: article
 title: "Debugging Docx Generation with Inspectable Output"
 date: 2023-04-01 09:00:00
-categories: [wordprocessingml, agility, craftsmanship, test-infrastructure, refactoring, tables, java17, debugging-tool]
+categories: [office-stamper]
 author: Joseph
-tags: [testing, java, templates, docs-as-code]
+tags: [office-stamper,testing, java, templates, docs-as-code,wordprocessingml, agility, craftsmanship, test-infrastructure, refactoring, tables, java17, debugging-tool]
 description: "Before fixing a tricky table‑cell bug, we invested in inspectable outputs, modern Java patterns, and stable assertions—turning infrastructure into leverage for complex WordprocessingML debugging."
 ---
 

@@ -1,9 +1,9 @@
 ---
 layout: article
-title:  "Workshop: Developer Onboarding Workshop Template"
-date:   2023-06-01 09:00:00
-categories: [workshop, onboarding, documentation, devex, team-practices]
-tags: [ onboarding, docs-as-code, developer-experience, workshop ]
+title: "Workshop: Developer Onboarding Workshop Template"
+date: 2023-06-01 09:00:00
+categories: [ workshop ]
+tags: [ onboarding, docs-as-code, developer-experience, workshop, documentation, team-practices ]
 author: Joseph
 description: A timed, gamified workshop to reveal onboarding documentation gaps and turn them into an actionable backlog your team can execute.
 ---

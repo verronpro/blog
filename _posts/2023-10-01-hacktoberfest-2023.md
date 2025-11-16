@@ -2,7 +2,8 @@
 layout: article
 title: "Hacktoberfest 2023 — Office‑stamper is in"
 date: 2023-10-01
-tags: [office-stamper, community, contributing]
+categories: [ community ]
+tags: [ office-stamper, community, contributing ]
 author: Joseph
 description: An invitation to contribute to Office‑stamper during Hacktoberfest 2023 with practical pointers and a lightweight workflow.
 ---
