@@ -2,18 +2,22 @@
 layout: default
 ---
 <section class="container">
-  <h1>Archive</h1>
-  <ul style="list-style:none;padding-left:0">
-    {% for post in site.posts %}
-      <li style="margin:.5rem 0;padding:.5rem 0;border-bottom:1px solid var(--cc-border)">
-        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
-        · <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        {% if post.tags %}
-          <span class="post-meta">
-            · {% for tag in post.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
-          </span>
-        {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
+    <h1>Archive</h1>
+    <ul style="list-style:none;padding-left:0">
+        {% for post in site.posts %}
+        <li style="margin:.5rem 0;padding:.5rem 0;border-bottom:1px solid var(--cc-border)">
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+            ·
+            <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+            {% if post.tags %}
+            <span class="post-meta">
+            ·
+            {% for tag in post.tags %}
+            <span class="tag">{{ tag }}</span>
+            {% endfor %}
+            </span>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
 </section>
