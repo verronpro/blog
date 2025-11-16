@@ -7,46 +7,32 @@ This site renders diagrams client‑side to stay compatible with GitHub Pages (n
 
 Supported authoring patterns:
 
-- Mermaid: fenced blocks or the `diagram.html` include
-- PlantUML and Graphviz/DOT: rendered via Kroki (https://kroki.io) using client‑side compression
+- Mermaid: fenced blocks
+- PlantUML and Graphviz/DOT: rendered via Kroki (https://kroki.io) using client‑side compression.
 
 How to write diagrams
 1) Mermaid with fenced code (auto‑enhanced):
+    ````markdown
+    ```mermaid
+    flowchart TD
+      A --> B
+    ```
+    ````
+2) PlantUML (via Kroki), fenced block (auto‑enhanced):
+    ````markdown
+    ```plantuml
+    @startuml
+    Alice -> Bob: Hello
+    @enduml
+    ```
+    ````
+3) Graphviz/DOT (via Kroki), fenced block (auto‑enhanced):
 
-````markdown
-```mermaid
-flowchart TD
-  A --> B
-```
-````
-
-2) Mermaid with side‑by‑side include (code + rendered diagram):
-
-```liquid
-{% capture m %}
-flowchart TD
-  A[Idea] --> B{Prototype?}
-{% endcapture %}
-{% include diagram.html type="mermaid" title="Flow" code=m %}
-```
-
-3) PlantUML (via Kroki), fenced block (auto‑enhanced):
-
-````markdown
-```plantuml
-@startuml
-Alice -> Bob: Hello
-@enduml
-```
-````
-
-4) Graphviz/DOT (via Kroki), fenced block (auto‑enhanced):
-
-````markdown
-```dot
-digraph G { A -> B }
-```
-````
+    ````markdown
+    ```dot
+    digraph G { A -> B }
+    ```
+    ````
 
 Notes
 - Rendering happens in the browser. Internet access to cdn.jsdelivr.net and kroki.io is required for full rendering.
