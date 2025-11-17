@@ -24,33 +24,11 @@ code, pre {
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace
 }
 
-/* Main content width rules
-   - Cap the main container to at most 80% of the viewport on ultra-wide displays
-   - Still keep a hard ceiling to preserve readability
- */
-.layout-home #main.container {
-    max-width: min(1200px, 80vw);
-}
-
-.layout-article #main.container {
-    max-width: min(1200px, 80vw);
-}
-
-.layout-page #main.container {
-    max-width: min(1200px, 80vw);
-}
-
 /* Containers */
-.container {
-    max-width: 72ch;
-    margin-inline: auto;
-    padding-inline: 1rem
-}
-
 .container-wide {
-    max-width: 1200px;
+    max-width: min(1200px, 80vw);
     margin-inline: auto;
-    padding-inline: 1rem
+    padding-inline: 1rem;
 }
 
 /* Buttons */
@@ -406,12 +384,13 @@ html, body {
     display: grid;
     grid-template-columns:1fr;
     gap: 1.5rem;
-    align-items: start
+    align-items: start;
 }
 
 @media (min-width: 900px) {
     .home-grid {
-        grid-template-columns:2.5fr 1fr
+        /* Prevent the sidebar from being squished on wide pages with long content */
+        grid-template-columns: minmax(0, 2.5fr) minmax(280px, 1fr)
     }
 }
 
@@ -420,7 +399,9 @@ html, body {
 }
 
 .home-sidebar {
-    padding: 1rem
+    padding: 1rem;
+    /* Make sure the sidebar keeps a reasonable minimum width */
+    min-width: 280px
 }
 
 .list-compact {
@@ -484,6 +465,34 @@ a {
 
 a:hover {
     text-decoration: underline
+}
+
+/* Post content defaults to avoid layout breakage from long words/URLs and media */
+.post-content {
+    overflow-wrap: anywhere; /* allow long URLs to wrap */
+    word-break: break-word;
+}
+
+.post-content img,
+.post-content svg,
+.post-content video,
+.post-content table {
+    max-width: 100%;
+}
+
+/* Ensure very long URLs/words inside list items and anchors can wrap gracefully
+   This specifically addresses cases like a single, very long URL inside an <li>
+   which could otherwise force the grid to compress the sidebar. */
+.post-content li,
+.post-content p,
+.post-content a {
+    overflow-wrap: anywhere;   /* modern preferred */
+    word-break: break-word;    /* pragmatic fallback for Safari/older engines */
+}
+
+/* As a last resort for pathological long strings in links, allow aggressive breaking */
+@supports not (overflow-wrap: anywhere) {
+    .post-content a { word-break: break-all; }
 }
 
 /* Header (sticky with simple responsive layout + compact mobile menu) */
