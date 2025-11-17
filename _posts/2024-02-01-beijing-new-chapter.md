@@ -15,8 +15,7 @@ reunite with my significant other.
 
 February has always marked new beginnings for me. This year feels especially transformative. After years apart due to
 pandemic restrictions, I'm finally moving to Beijing to reunite with my significant other. We've been together since
-
-2010. Our relationship survived unprecedented global challenges. Now we're building our life together in the same city.
+2010, our relationship survived unprecedented global challenges. Now we're building our life together in the same city.
 
 ## Professional Transition
 
