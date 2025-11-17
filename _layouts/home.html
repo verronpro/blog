@@ -16,8 +16,7 @@ layout: default
                         {% endfor %}
                         {% endif %}
                     </div>
-                    <p>{{ post.excerpt | strip_html | truncatewords: 40 }}</p>
-                    <p><a class="btn btn-ghost" href="{{ post.url | prepend: site.baseurl }}">Read more</a></p>
+                    <p>{{ post.excerpt | strip_html | truncatewords: 40 }} · <a href="{{ post.url | prepend: site.baseurl }}">Read more...</a></p>
                 </article>
                 {% endfor %}
             </div>
