@@ -1,13 +1,100 @@
 ---
 layout: article
-title: "A Contribution Workflow for Sporadic Contributors"
+title: "How I Learned to Love Sporadic Contributors (Even Though I Miss Mob Programming)"
 date: 202X-XX-XX 09:00:00
 categories: [ TODO ]
 tags: [ agility, craftsmanship, docs-as-code, solo-maintainer, enterprise,
         contribution, governance ]
 author: Joseph
-description: " TODO "
+description: "Why I had to adapt my teamwork-loving approach to accommodate the reality of sporadic open source contributions, and how I make it work."
 ---
+
+# Missing Mob Programming in Solo Land
+
+I love mob programming. There's something magical about having a whole team tackle a problem together - the real-time
+feedback, the collective problem solving, the instant code review. In my corporate days, this high-quality gatekeeping
+enhanced our long-term velocity, even when it seemed slow at first.
+
+But now I'm a solo maintainer. No more mobs, no more instant feedback, no more team discussions. Just me, my code, and
+the occasional contributor who appears every few months with a problem to solve.
+
+# The Sporadic Contributor Challenge
+
+Office-stamper is used by teams inside big companies who integrate it for a few weeks, then disappear for months. When
+they reappear, it's with different constraints and new problems. These contributors don't have time to learn the entire
+codebase - they need to make their change and move on.
+
+Initially, I treated these contributions like I would in a team setting. I expected detailed discussions, multiple
+iterations, and deep understanding of the codebase. What a waste of everyone's time!
+
+# My Adapted Workflow: Teamwork Principles, Solo Implementation
+
+I realized I needed to preserve the quality mindset I loved from mob programming while adapting to the reality of
+sporadic contributions. Here's what I do now:
+
+## Start with the Problem, Not the Solution
+
+Before any code, contributors open an issue describing the user problem. I don't need them to understand the entire
+codebase - just explain what they're trying to accomplish. This mirrors the problem-framing part of mob programming
+where we'd spend time understanding the issue before diving into solutions.
+
+## Tiny Reproductions Are Gold
+
+Contributors provide a minimal reproduction - either a tiny .docx file or a code snippet. This is like the "example
+test" we'd write first in mob programming. It captures the essence of the problem without the noise.
+
+## Small, Focused Changes
+
+I insist on small, focused PRs. This isn't just about reviewability - it's about maintaining the quality feedback loop I
+miss from mob programming. Small changes are easier to review thoroughly, and I can provide more targeted feedback.
+
+## Documentation as Collaboration
+
+Every behavior change must include updated documentation. This serves multiple purposes:
+
+- It forces contributors to think about how others will use their feature
+- It provides a communication channel between us
+- It helps future users (and future me) understand the intent
+
+# The Automation Layer: My Virtual Teammates
+
+Since I can't mob program, I've built a virtual team using automation:
+
+- **CI/CD** provides immediate feedback on build and test failures
+- **CodeQL and SonarQube** catch common issues automatically
+- **Renovate** keeps dependencies current without manual effort
+- **Maven checks** enforce documentation requirements
+
+These tools provide the kind of immediate, consistent feedback that teammates would give in a mob programming session.
+
+# What I Tell Enterprise Contributors
+
+Enterprise contributors work under constraints - timeboxed sprints, restricted environments, corporate firewalls. My
+workflow honors that reality:
+
+- Keep all context in the issue/PR, not in private messages
+- Expect asynchronous review - many enterprise networks block GitHub notifications
+- Link to relevant documentation and previous discussions
+- Focus on user-facing behavior, not implementation details
+
+# The Reality Check
+
+This isn't ideal. I miss the energy of a good mob programming session, the satisfaction of solving a problem together,
+the learning that comes from seeing how others approach challenges.
+
+But this system works. It keeps office-stamper maintainable, makes contributors feel heard, and preserves the quality
+standards I believe in - even when I'm flying solo.
+
+# For Contributors: How to Get Your PR Merged Faster
+
+1. **Explain the problem clearly** - Don't assume I know your use case
+2. **Include a minimal reproduction** - Help me understand and test your issue
+3. **Keep changes small and focused** - Large changes are hard to review thoroughly
+4. **Update the documentation** - Help future users understand your feature
+5. **Be patient with asynchronous review** - I'm not ignoring you, I'm just one person
+
+The goal is to make contributions feel like cooperation, not negotiation - even when we're not in the same room (or even
+the same time zone).
 
 # Why this topic for September
 

@@ -1,102 +1,84 @@
 ---
 layout: article
-title: "Testing WordprocessingML the Practical Way:
-Characterization Tests and Fixtures"
+title: "Why I Ditched Traditional Unit Tests for Office-Stamper (And What I Use Instead)"
 date: 202X-XX-XX 09:00:00
 categories: [ TODO ]
 tags: [ testing, craftsmanship, agility, docs-as-code, solo-maintainer, enterprise,
         wordprocessingml ]
 author: Joseph
-description: " TODO "
+description: "How I learned that characterization tests work better than traditional unit tests for document processing, and why documentation tools are now part of my testing strategy."
 ---
 
-# Why this topic for August
+# The Testing Epiphany That Changed Everything
 
-Not every month yields a flashy feature commit, but every month offers a
-chance to strengthen the foundation. In August 2023, the most valuable
-work was codifying how we test changes to WordprocessingML
-behaviors—especially in a project used sporadically inside large
-organizations. Teams come and go, templates vary wildly, and yet the
-engine must behave predictably. This post documents a pragmatic approach
-to testing that has kept Office‑stamper changeable without turning into
-a museum of brittle assertions.
+Early in the office-stamper journey, I was writing traditional unit tests like I did in my corporate days. You know the
+type - assert that this object has exactly these properties, in this exact order. What a nightmare!
 
-# The testing problem in this domain
+DOCX files are wild beasts. They're trees of paragraphs, runs, fields, comments, SDTs, footnotes, and whatever
+copy-paste oddities users throw at them. Small refactors would surface as layout shifts, run splits/merges, or different
+ordering of equivalent nodes. My tests were so brittle they'd break on perfectly valid changes.
 
-DOCX files are trees of paragraphs, runs, fields, comments, SDTs,
-footnotes, and oddities from copy‑paste history. Small refactors can
-surface as layout shifts, run splits/merges, or different ordering of
-equivalent nodes. Tests that assert a precise object graph tend to be
-noisy and fragile. On the other hand, tests that only look at final text
-risk missing structural invariants we care about (comment ranges,
-placeholder boundaries, SDT containment).
+# Why Traditional Unit Tests Failed Me
 
-# A characterization‑first strategy
+Traditional unit tests made me afraid to refactor. Every improvement required updating dozens of assertions that were
+checking implementation details rather than user-facing behavior. I was trapped by my own test suite!
 
-- Start with the real thing Build tiny, realistic fixtures that model a
-  single tricky pattern: a comment crossing SDT boundaries, a paragraph
-  with interleaved fields and comments, a nested repeat section. Keep
-  fixtures focused and hand‑crafted so intent is obvious.
+Then it hit me - I wasn't testing what users cared about. They don't care if paragraph 3 has exactly 4 runs with these
+specific properties. They care that:
 
-- Characterize current behavior, then lock it in Before refactoring,
-  write a test that stamps the fixture and records what matters: the
-  presence/absence of control comments after processing, the text
-  content, and a few structural predicates (e.g., no
-  `w:commentRangeStart` remains inside the target SDT). Don’t
-  over‑specify the exact sequence of runs unless your feature depends on
-  it.
+- Control comments get removed after processing
+- Placeholders remain atomic
+- SDT boundaries are respected
 
-- Assert invariants, not accidents Focus on properties you want to
-  preserve: idempotency, containment (no cross‑SDT spans), atomic
-  placeholders, removal of control scaffolding. If multiple object‑graph
-  shapes are equivalent for users, prefer semantic checks.
+# My Asciidoctor-Inspired Approach to Testing
 
-- Test specific helpers with focused unit tests For utilities like
-  `WmlUtils` or `Paragraph.replace`, add small, direct tests. When you
-  refactor, these tests tell you if you’ve broken the contract, while
-  higher‑level characterization tests keep feature intent intact.
+I took inspiration from Asciidoctor's approach to complex document generation. Just like how Asciidoctor focuses on
+output quality rather than internal structure, I shifted to characterization tests.
 
-# Agile and docs‑as‑code lens
+Here's what I do now:
 
-- Faster iterations Characterization tests let you make confident,
-  incremental changes. They capture what the system does today (warts
-  and all) and provide a safe baseline to improve it tomorrow.
+- Build tiny, realistic fixtures that model specific tricky patterns
+- Write tests that check for user-facing invariants, not implementation details
+- Focus on semantic properties rather than exact object graph shapes
 
-- Living documentation Each test is a runnable example that shows how a
-  specific pattern behaves. Link to them from the docs, or embed
-  snippets in AsciiDoc so reader and compiler agree. When behavior
-  changes by design, update both together.
+For example, instead of asserting that a paragraph has exactly these runs in this order, I check that "no leftover
+control comments remain" or "placeholders stay atomic."
 
-# Solo maintainer + enterprise usage angle
+# Documentation as Testing Scaffolding
 
-As a solo maintainer, I can’t afford fragile tests that turn refactors
-into hostage situations. I also can’t afford tests that miss regressions
-users will notice. Enterprises adopting Office‑stamper for a few weeks
-need predictable behavior and clear error messages; they also appreciate
-when we can point to a failing test that mirrors their case. By
-grounding tests in small, realistic fixtures and asserting invariants, I
-keep the suite resilient and the maintenance load sane.
+Here's where it gets interesting. I've embraced tools like:
 
-# How to apply this now
+- **Asciidoctor** for living documentation that can be part of the test suite
+- **PlantUML/Mermaid** for visual documentation that helps understand complex behaviors
+- **Test engine reports** as documentation of what the system actually does
 
-- Identify your top three tricky patterns from user templates. Build one
-  fixture per pattern.
+I even embed test snippets in AsciiDoc so readers and compilers agree. When behavior changes by design, I update both
+together.
 
-- Add invariants to your suite: “no leftover control comments,”
-  “placeholders remain atomic,” “no cross‑SDT spans.”
+# The Solo Maintainer's Testing Reality
 
-- Introduce semantic helpers for assertions (e.g.,
-  `hasNoCommentRangesIn(Node)`, `placeholderCount()`), so test intent is
-  readable and resilient to benign graph changes.
+As a solo maintainer, I can't afford fragile tests that turn refactors into hostage situations. I also can't afford
+tests that miss regressions users will notice.
 
-- Wire test references into your docs. A short “see test X for
-  before/after” note saves hours of support later.
+Characterization tests give me confidence to make changes while keeping the suite resilient. When an enterprise team
+reports an issue, I can create a test that mirrors their case exactly, then fix the problem with confidence that I'm not
+breaking something else.
 
-# References
+# Practical Implementation
 
-- Related posts: Post‑processing in `DocxStamper` (Dec 2024), Delete
-  comments from `SdtRun` (Jun 2025), PreparePlaceholders preprocessor
-  (Nov 2025).
+If you're working on document processing tools:
 
-- Code areas: `WmlUtils`, `Paragraph.replace`, iterators under
-  `DocxIterator`.
+1. Identify your top 3-5 tricky patterns from real user templates
+2. Create focused fixtures for each pattern
+3. Test invariants rather than implementation details
+4. Use semantic helpers for assertions (e.g., `hasNoCommentRangesIn(Node)`)
+5. Link your tests to documentation so users can see real examples
+
+# The Unexpected Benefit
+
+This approach has made me a better developer overall. By focusing on what users actually care about rather than
+implementation details, I write code that's more robust and easier to change. My tests document the behavior, and my
+documentation validates the tests.
+
+It's not the traditional approach, but it works beautifully for sporadic enterprise usage where predictability matters
+more than perfection.

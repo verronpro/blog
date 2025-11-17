@@ -1,109 +1,116 @@
 ---
 layout: article
-title: "CI for Document Processing in Constrained
-Environments"
+title: "How I Stopped Trying to Control Everything and Learned to Love Boring CI"
 date: 202X-XX-XX 09:00:00
 categories: [ TODO ]
 tags: [ ci-cd, agility, craftsmanship, docs-as-code,
         solo-maintainer, enterprise, windows, ubuntu ]
 author: Joseph
-description: " TODO "
+description: "Why I embraced boring, constraint-friendly CI after realizing I'm not Google and don't need fancy pipelines."
 ---
 
-# Why this topic for February
+# The Fancy Pipeline Trap
 
-Office‑stamper is often adopted by teams inside large companies with
-restrictive CI environments: outbound network locked down, custom
-certificate stores, no desktop apps installed, and strict JDK baselines.
-In February 2024 I invested time in codifying a CI approach that keeps
-the pipeline reliable under those constraints. For a solo‑maintained
-project with sporadic adopters, CI doubles as both guardrail and
-documentation: it has to be readable, reproducible, and portable between
-Windows and Linux runners.
+When I first started with office-stamper, I was enamored with sophisticated CI/CD pipelines. I wanted everything: custom
+runners, complex deployment strategies, fancy monitoring, and bleeding-edge tools. After all, that's what I was used to
+in corporate environments.
 
-# The constraints we design for
+What a waste of time.
 
-- No interactive tools: everything must run headless and
-  deterministically.
+# The Solo Maintainer Reality Check
 
-- Limited network: builds can’t fetch arbitrary URLs; dependencies must
-  come from configured repositories.
+As a solo maintainer, I'm not Google. I don't have a platform team, dedicated DevOps engineers, or 24/7 monitoring. More
+importantly, office-stamper is used by teams in large organizations with restrictive environments:
 
-- OS diversity: users run Windows and Linux; tests should pass on both.
+- Outbound network locked down
+- Custom certificate stores
+- No desktop apps installed
+- Strict JDK baselines
 
-- Standard images only: organizations prefer stock runners
-  (GitHub/enterprise runners) with minimal customizations.
+If my CI required exotic setups, it would be irrelevant to my users' reality.
 
-These constraints shape how we structure tests and scripts. If CI passes
-in this environment, chances are high that the library and CLI will work
-in the adopter’s pipeline without tickets to platform teams.
+# My Asciidoctor-Inspired Approach to CI Simplicity
 
-# A pragmatic CI blueprint
+Just like how I learned to appreciate Asciidoctor's balance of power and simplicity, I realized that CI needed to be
+boring to be effective. Here's what I mean by "boring":
 
-- Keep the build boring Use mainstream plugins (Maven Surefire,
-  Failsafe, Asciidoctor) and avoid exotic runners. Prefer LTS JDKs and
-  explicit toolchain configuration so the compiler/version is
-  unambiguous.
+## Use Mainstream Tools
 
-- Test on Windows and Ubuntu Matrix your workflow to run the full build
-  on both OSes. This catches path, encoding, and file‑system differences
-  early. If a test is platform‑sensitive, document why and fix the root
-  cause rather than ignore it.
+I stick to widely supported tools like Maven Surefire, Failsafe, and Asciidoctor plugins. No experimental runners or
+cutting-edge technologies that might break in six months.
 
-- Treat docs as part of the build Build the AsciiDoc site in CI. Broken
-  anchors or includes should fail the build; docs drift is a functional
-  failure in a project where documentation is a primary interface for
-  sporadic adopters.
+## Explicit Over Implicit
 
-- Validate formats like a user would Exercise the CLI with small samples
-  (CSV, JSON, XML/HTML, Properties) so adapters are verified end‑to‑end.
-  Keep samples tiny and committed to the repo to avoid network
-  dependencies.
+Everything is explicitly configured. JDK versions, toolchains, dependencies - nothing is left to environment
+assumptions. This makes the pipeline readable and reproducible.
 
-- Emit helpful logs by default When a test fails in CI, the logs should
-  explain what happened in domain terms. Reuse the generalized result
-  description helpers from tests so failures are actionable without
-  reproducing locally.
+## Cross-Platform from Day One
 
-# Agile and craftsmanship lens
+I test on both Windows and Ubuntu because my users run both. This catches path, encoding, and filesystem differences
+early - before my users encounter them.
 
-- Optimize for changeability under constraints: tests that run in narrow
-  environments are a forcing function toward simpler code and clearer
-  contracts.
+# Documentation as Part of the Build
 
-- Keep feedback loops short: fast, platform‑diverse CI turns “works on
-  my machine” into “works in our reality.”
+Here's where my love for documentation tools really shines. I treat documentation as part of the build process, not an
+afterthought:
 
-- Prefer explicitness: pinned toolchains, explicit JDK vendors, and
-  versioned docs make reviews and audits easier.
+- Build the AsciiDoc site in CI
+- Fail the build on broken links or missing documentation
+- Validate that documentation examples actually work
 
-# Solo maintainer + enterprise usage angle
+This approach comes from my experience with tools like Doxygen - documentation that's validated and maintained alongside
+code.
 
-As a solo maintainer, a readable CI file is my runbook and my support
-playbook. When an enterprise team reports an issue, I can point to a
-workflow that demonstrates how we build, test, and publish—no secrets,
-no snowflakes. For adopters, this transparency reduces risk: they see a
-pipeline that mirrors their constraints, which shortens the path to
-approval and lowers the chance of surprises after integration.
+# The Constraint-Driven Development Revelation
 
-# How to apply this now
+Working with constrained environments taught me an important lesson: constraints drive better design. When I can't rely
+on fancy tools or complex setups, I'm forced to write simpler, more robust code.
 
-- Start with a two‑axis matrix (OS × JDK LTS). Keep it minimal but
-  representative of your users.
+This is similar to how Markdown wins over more complex markup languages - not because it's more powerful, but because
+it's simpler and more widely supported.
 
-- Build docs in CI and treat failures as regressions. It’s cheaper than
-  answering the same questions in tickets.
+# My CI Philosophy: Predictable Over Powerful
 
-- Add a small CLI smoke test that stamps a template with a tiny dataset
-  for each supported format.
+After trying to be clever with CI, I've embraced being predictable:
 
-- Document the workflow in your repository and link to it from your
-  contribution guide.
+## Keep the Build Boring
 
-# References
+Use mainstream plugins and avoid exotic runners. Prefer LTS JDKs and explicit toolchain configuration. When someone
+looks at my CI configuration, they should understand it immediately.
 
-- Example CI entries in this repository around late 2023/early 2024 show
-  Windows + Ubuntu integration.
+## Test Like a User
 
-- Related posts: Java 21 migration (Nov 2023); Post‑processing in
-  `DocxStamper` (Dec 2024); Multi‑format CLI support (Oct 2025).
+I exercise the CLI with small samples (CSV, JSON, XML/HTML, Properties) to verify end-to-end functionality. These
+samples are committed to the repo to avoid network dependencies.
+
+## Helpful Logs by Default
+
+When a test fails in CI, the logs explain what happened in domain terms. This comes from my experience with test engine
+reports - good error messages are as important as good code.
+
+# The Solo Maintainer's CI Toolkit
+
+As a solo maintainer, my CI configuration serves multiple purposes:
+
+1. **Runbook**: It documents how the project is built and tested
+2. **Support Playbook**: When users report issues, I can point to a working example
+3. **Quality Gate**: It prevents regressions and maintains standards
+4. **Communication Tool**: It shows enterprise users that I understand their constraints
+
+# Practical Implementation for Solo Maintainers
+
+If you're maintaining a project alone:
+
+1. **Start simple**: A basic matrix build on standard platforms
+2. **Add documentation**: Make docs part of your build process
+3. **Embrace constraints**: They'll make your code better
+4. **Automate quality checks**: Use tools like CodeQL and SonarQube
+5. **Keep it readable**: Future you (and potential contributors) will thank you
+
+# The Unexpected Benefit
+
+Boring CI made me a better developer. By focusing on simplicity and reliability rather than cleverness, I created a
+system that works for both me and my users. My CI pipeline became documentation, quality assurance, and a communication
+tool all in one.
+
+Sometimes the most sophisticated solution is the simplest one.

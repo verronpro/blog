@@ -1,14 +1,79 @@
 ---
 layout: article
-title:  "Sustainable Solo‑Maintenance: Cadence, Quality, and
-Saying No"
-date:   202X-XX-XX 09:00:00
+title: "Embracing the Rhythm of Solo Maintenance: Why I Stopped Treating Office-Stamper Like My Day Job"
+date: 202X-XX-XX 09:00:00
 categories: [ TODO ]
 author: Joseph
-tags: [agility, craftsmanship, docs-as-code, solo-maintainer,
-       enterprise, process, quality]
-description: " TODO "
+tags: [ agility, craftsmanship, docs-as-code, solo-maintainer,
+        enterprise, process, quality ]
+description: "How I learned to shift from corporate development patterns to sustainable solo maintenance after leaving my software engineering role."
 ---
+
+# The Harsh Reality Check
+
+For a long time, I treated office-stamper like it was my day job. Even after leaving my software engineering role and
+moving in with my partner, I kept applying the same routines and patterns I used in corporate environments. Big mistake.
+
+I'm not paid to maintain this project. I can't dedicate my full time to it. Yet I was still trying to harmonize this
+repository with "company codebase" practices - as if there was still a company codebase to harmonize with! This approach
+was burning me out and not benefiting the project or its users.
+
+# The Mindset Shift: Small Steps, Clear Documentation
+
+The turning point came when I realized that every effort invested in office-stamper should focus on small, iterative
+improvements and self-evident documentation. No more grand refactorings or trying to make the codebase look like
+something from my corporate past.
+
+This meant:
+
+- Accepting that good enough is often good enough
+- Prioritizing clarity over cleverness
+- Making sure every change is small enough that I can pick it up months later and understand what I was thinking
+
+# My Controversial Love Affair with Teamwork (As a Solo Developer)
+
+I'm a big believer in mob programming and having many eyes on code. In a team environment, this high-quality gatekeeping
+actually enhances long-term velocity, even if it seems slow at first. As a solo maintainer, I've had to adapt this
+mindset.
+
+Instead of mob programming, I now:
+
+- React quickly to sporadic contributors' feedback
+- Set up automated feedback loops (Maven fail modes for failed tests, missing Javadoc)
+- Integrate GitHub automated review tools (CodeQL, SonarQube, Renovate)
+
+It's not the same as having teammates, but it's the closest I can get to maintaining that quality mindset.
+
+# Quality Over Quantity: The New Approach
+
+I've learned to embrace constraints rather than fight them. Instead of trying to do everything, I focus on:
+
+- **Time-boxed maintenance windows**: I group chores into focused blocks rather than spreading them thin
+- **Documentation as a first-class citizen**: I co-locate AsciiDoc with code and require docs updates for user-visible
+  changes
+- **Small, verifiable steps**: Every PR keeps the repo releasable
+
+# Saying No (Loudly and Proudly)
+
+Every feature is a maintenance contract. As the sole maintainer, I've gotten comfortable saying "no for now" or "yes,
+but behind an adapter." This protects the core from format-specific leakage or niche behaviors that aren't broadly
+useful.
+
+This restraint is actually a benefit to enterprise adopters - a smaller, stable surface area is easier to review and
+approve under their constraints.
+
+# Practical Takeaways
+
+If you're maintaining a project solo:
+
+1. Stop treating it like your day job - it's not
+2. Focus on small improvements and clear documentation
+3. Automate quality checks to simulate team review
+4. Embrace saying no to features that don't serve the core purpose
+5. Create systems that work with your available time, not against it
+
+The goal isn't to maximize commits - it's to keep the project healthy and welcoming for when sporadic contributors do
+appear.
 
 # Why this topic for January
 

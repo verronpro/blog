@@ -1,113 +1,132 @@
 ---
 layout: article
-title:  "ADRs for Extension Points: Documenting Decisions as
-Operating Leverage"
-date:   202X-XX-XX 09:00:00
+title: "How I Learned That Code Comments Aren't Enough (And Why I Started Writing Design Docs)"
+date: 202X-XX-XX 09:00:00
 categories: [ TODO ]
 author: Joseph
-tags: [docs-as-code, agility, craftsmanship,
-       solo-maintainer, enterprise, governance, adr, extensibility]
-description: " TODO "
+tags: [ docs-as-code, agility, craftsmanship,
+        solo-maintainer, enterprise, governance, adr, extensibility ]
+description: "Why I stopped relying on commit messages and code comments to explain design decisions and started writing proper design documentation."
 ---
 
-# Why this topic for December
+# The Solo Maintainer's Memory Problem
 
-December closed a year of steady, pragmatic improvements. Some months
-were feature‑heavy; others were about the system’s operability. This
-post tackles a practice that quietly compounds value for a
-solo‑maintained project used in sporadic enterprise projects:
-Architecture Decision Records (ADRs) focused on extension points. If
-comment processors and resolvers are the seams where users extend
-Office‑stamper, ADRs are the documents that explain why those seams
-exist, what is stable, and what should not be relied upon. For teams who
-may only touch the code once a quarter, ADRs are a map and a contract.
+When you're a solo maintainer, you think you remember everything. You remember why you designed that API a certain way,
+why you chose one approach over another, what you intended to support and what you didn't.
 
-# The problem: tacit intent is expensive
+Then three months pass. Then six. Then a year.
 
-When a single maintainer evolves an API, a lot of the “why” lives in
-their head or behind short commit messages. That’s fine until an
-external team needs to extend behavior, or a future refactor risks
-breaking an implicit constraint. Without an explicit record, reviewers
-debate taste instead of intent; contributors re‑learn context; and
-adopters cargo‑cult examples without understanding which are supported
-and which are just convenient hacks. In enterprise settings, this slows
-security and architecture reviews and increases the perceived risk of
-adoption.
+Suddenly, you're looking at your own code wondering "What was I thinking?" and "Why did I do it this way instead of the
+obvious alternative?"
 
-# ADRs as the minimum viable governance
+# The Enterprise Adoption Reality Check
 
-ADRs are lightweight—one page per decision, written in plain language,
-stored in the repo. For extension points, an ADR answers:
+The problem got worse when enterprise teams started adopting office-stamper. They'd show up with questions:
 
-- What problem are we solving? (e.g., users need to inject custom value
-  rendering → resolvers)
+- "Is this extension point stable?"
+- "Can we rely on this behavior?"
+- "What happens if we do this?"
 
-- What options did we consider? (e.g., subclassing vs. composition vs.
-  strategy interfaces)
+I couldn't just say "trust me" - they needed documentation, stability guarantees, and clear contracts. These teams work
+under security and architecture review constraints where undocumented behavior is risky behavior.
 
-- What did we choose and why? (e.g.,
-  `ObjectResolver`/`StringResolver<T>` with explicit registration)
+# My Documentation Tooling Evolution
 
-- What is in scope and out of scope? (e.g., resolvers must be pure and
-  idempotent; no side effects or network calls)
+Coming from experience with tools like Asciidoctor and Doxygen, I understood the value of living documentation. But I
+needed something more focused than full system documentation - I needed a way to document specific design decisions.
 
-- What are the stability guarantees? (e.g., method signatures are stable
-  across minor versions; packages are public API)
+That's when I discovered Architecture Decision Records (ADRs), but I quickly realized I needed to adapt them for the
+solo maintainer context.
 
-- How do users apply this? (e.g., code snippet with
-  `DocxStamperConfiguration` wiring)
+# Why I Ditched Commit Messages for Real Documentation
 
-This is governance without ceremony. It gives contributors a rubric for
-proposals, helps reviewers align on principles, and reassures adopters
-that today’s extension won’t become tomorrow’s breaking change.
+Early on, I tried to capture design decisions in commit messages and code comments. This didn't work because:
 
-# Agile and craftsmanship lens
+- Commit messages get buried in version control history
+- Code comments become outdated when code changes
+- Neither provides the context enterprise users need
+- Both are terrible for future-me trying to remember what past-me was thinking
 
-- Shorten feedback loops: ADRs prevent design debates from re‑starting
-  on every PR. Link an ADR and move on.
+# My Lightweight Decision Documentation Approach
 
-- Prefer explicit constraints over folklore: write down invariants for
-  processors (idempotency, locality) and resolvers (determinism, purity,
-  performance expectations). When a change challenges an invariant, the
-  ADR becomes the forum.
+I created a simplified ADR approach that works for solo maintainers:
 
-- Keep it simple: one page, a few headings, a commit link to the first
-  implementation, and references to tests.
+## Focus on Extension Points
 
-# Solo maintainer + enterprise usage angle
+I only document significant design decisions, especially those related to extension points. If users can extend
+office-stamper through comment processors or resolvers, those APIs need clear documentation.
 
-As a solo maintainer, ADRs let me scale my intent across time zones and
-quarters. I can point a sporadic enterprise team to an ADR that says,
-“Here is the sanctioned way to plug in a custom resolver; here is what
-we promise to keep stable.” Procurement and platform reviewers
-appreciate the traceability: a decision with rationale, alternatives
-considered, and a record of when it shipped. That clarity reduces
-meeting load and speeds up “go/no‑go” calls on using the library or CLI
-in regulated environments.
+## Keep It Simple
 
-# How to apply this now
+Each decision record answers just a few key questions:
 
-- Start with two ADRs: one for comment processors, one for resolvers.
-  Capture problem, options, decision, consequences, stability
-  guarantees, and examples.
+- What problem are we solving?
+- What options did we consider?
+- What did we choose and why?
+- What's in scope and out of scope?
+- What stability guarantees do we provide?
 
-- Place ADRs under `docs/adr` or alongside the site docs; link them from
-  `how-to-custom.adoc` and relevant Javadoc.
+## Make It Living Documentation
 
-- Establish a tiny workflow: new extension‑related PRs must reference an
-  ADR (existing or new). Reviewers ask for ADR updates when behavior
-  shifts.
+Unlike traditional ADRs that are write-once documents, mine evolve with the code. When guarantees change or APIs evolve,
+I update the corresponding decision records.
 
-- Keep ADRs living: update when guarantees change; note deprecations and
-  migration tips. Keep them terse—aim for a page.
+# The Solo Maintainer + Enterprise Sweet Spot
 
-# References
+This approach solves several problems at once:
 
-- Related docs: `engine/src/site/asciidoc/how-to-custom.adoc`
+## Scaling Intent Across Time Zones
 
-- Core APIs: `pro.verron.officestamper.api.CommentProcessor`,
-  `ObjectResolver`, `StringResolver<T>`, configuration wiring in
-  `DocxStamperConfiguration`
+When enterprise teams touch the code quarterly, they can read decision records to understand the rationale behind APIs.
+They don't need to schedule time with me - the documentation is self-service.
 
-- Inspiration: Michael Nygard’s ADRs; "Decisions, not discussions" as a
-  team habit.
+## Reducing Meeting Load
+
+Procurement and platform reviewers appreciate traceability. Instead of scheduling meetings to explain design decisions,
+I point them to documented decisions with rationale and alternatives considered.
+
+## Supporting Sporadic Contributors
+
+External contributors can understand not just what the code does, but why it does it that way. This helps them make
+changes that align with the project's design philosophy.
+
+# My Asciidoctor-Inspired Decision Documentation
+
+Drawing from my experience with documentation tools, I treat decision records like any other documentation:
+
+- Store them with the code in version control
+- Link them from relevant Javadoc and user documentation
+- Reference them in PRs and issues
+- Keep them updated as decisions evolve
+
+This approach mirrors how tools like Doxygen create living documentation that evolves with the codebase.
+
+# Practical Implementation
+
+If you're a solo maintainer dealing with enterprise users:
+
+1. **Start small**: Document just your most important extension points
+2. **Keep it focused**: One decision per document, a few paragraphs each
+3. **Link it up**: Connect decision records to code and user documentation
+4. **Make it evolve**: Update records when decisions change
+5. **Use it**: Reference records in PR reviews and user support
+
+# The Unexpected Transformation
+
+Writing decision records changed how I design features. Knowing I'd have to explain my choices forced me to think more
+carefully about tradeoffs. The documentation became a design tool, not just a record of decisions.
+
+It also made me a better communicator with users. Instead of trying to explain complex design choices in GitHub
+comments, I could point to well-written documentation.
+
+# For Enterprise Users and Contributors
+
+When you're working with a solo-maintained project:
+
+- Check the decision records before designing your extensions
+- Understand what's supported vs. what's accidental behavior
+- Contribute back by helping improve documentation
+- Be patient with the solo maintainer - good documentation takes time
+
+The goal is to create a project that's self-service for users while sustainable for the maintainer. Decision records are
+how I've achieved that balance.

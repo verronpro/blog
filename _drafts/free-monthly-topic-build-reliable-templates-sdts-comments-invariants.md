@@ -1,109 +1,105 @@
 ---
 layout: article
-title: "Build Reliable Templates: SDTs, Comments, and Invariants"
+title: "Why I Stopped Chasing Perfect Templates and Started Embracing Chaos"
 date: 202X-XX-XX 09:00:00
 categories: [ TODO ]
 tags: [ wordprocessingml, docs-as-code, craftsmanship, agility, solo-maintainer,
         enterprise, sdt, comments, invariants ]
 author: Joseph
-description: " TODO "
+description: "How I learned to work with the messy reality of WordprocessingML instead of fighting it, and why documentation tools became part of my development toolkit."
 ---
 
-# Why this topic for June
+# The Template Perfectionist Phase
 
-June 2023 didn’t bring a standout human‑authored commit, so I’m using
-this month to document a practice that quietly makes or breaks
-real‑world stamping projects: designing reliable templates. If you’ve
-ever opened a .docx full of content controls (SDTs), comments, fields,
-and half a dozen variations of the same placeholder, you know that the
-template—not the engine—is your primary source of truth. As a solo
-maintainer whose library is adopted sporadically by large organizations,
-I’ve learned that the best way to ship on time is to set clear
-invariants for templates and treat them as code.
+Early in the office-stamper journey, I was obsessed with perfect templates. I wanted to create a system where users
+could only do the "right" things, where templates would be pristine and predictable, where every document would behave
+exactly as expected.
 
-# The problem we keep seeing
+Spoiler alert: that didn't work.
 
-WordprocessingML is a flexible, sometimes unpredictable tree. Authors
-mix comments that drive processors (e.g., `displayIf`, `repeat`,
-`replaceWith`) with SDTs that encapsulate repeating sections or forms.
-They paste content from other documents, bringing along styles, fields,
-and phantom runs. The result is fragile: placeholders cross SDT
-boundaries, comments start in one run and end three runs later, and
-empty paragraphs proliferate. Downstream, the stamping pipeline has to
-guess intent, and “heisenbugs” appear when a slight layout change breaks
-an assumption.
+# The Reality of Real-World Templates
 
-# Invariants that make templates robust
+WordprocessingML is a beautiful mess. Users mix comments that drive processors with SDTs that encapsulate sections,
+paste content from other documents (bringing along styles and phantom runs), and generally create the kind of chaotic
+structures that make computer scientists weep.
 
-- Keep control metadata local and ephemeral Control comments that drive
-  a transformation should live as close as possible to the region they
-  affect and be removed once the transformation runs. This prevents
-  later processors—or downstream tools—from reinterpreting stale
-  metadata.
+I used to see this as a problem to solve. "If only we could educate users," I thought. "If only we could create better
+tooling." I was fighting the reality instead of working with it.
 
-- Respect SDT boundaries SDTs define ownership. Avoid starting a
-  comment‑driven operation in one SDT and ending it in another. Treat
-  each SDT as a mini‑document: repeat within it, display/hide within it,
-  and keep placeholders contiguous.
+# My Asciidoctor-Inspired Revelation
 
-- Make placeholders atomic Resist the urge to split a placeholder across
-  multiple runs for visual effects. Keep them contiguous text when
-  possible, and use explicit APIs like `Paragraph.replace` in the engine
-  to perform “text surgery” instead of ad‑hoc string hacks in the
-  template. Atomic placeholders mean fewer surprises during traversal.
+Then I remembered my experience with Asciidoctor. Here was a tool that embraced complexity instead of fighting it.
+Asciidoctor doesn't try to constrain what you can write - it gives you powerful tools to create complex documents. Yet
+it remains approachable for simple use cases.
 
-- Prefer declarative spans to implicit guesses If an operation targets a
-  specific range, mark it with a comment range
-  (`w:commentRangeStart`/`End`) rather than relying on positional
-  heuristics. Named, visible spans are easier to reason about and test.
+I realized I needed to shift from "constraint" to "enablement."
 
-# Agile and craftsmanship lens
+# Working with Chaos Instead of Against It
 
-- Shift quality left Normalize inputs before stamping. A preprocessor
-  such as `PreparePlaceholders` can clean up placeholder boundaries so
-  processors downstream assume cleaner inputs. This narrows edge cases
-  and speeds up delivery.
+Instead of trying to prevent users from creating messy templates, I focused on making office-stamper robust enough to
+handle the mess:
 
-- Treat templates as code Store canonical templates under version
-  control. Review them like PRs. Keep an ADR for conventions (e.g.,
-  where to place comments, how to name SDTs, which placeholders are
-  allowed in headers/footers). Small, explicit rules beat folklore.
+## Local, Ephemeral Control Metadata
 
-- Test with fixtures For tricky structures—nested SDTs, interleaved
-  fields and comments—build tiny fixtures in tests. Characterization
-  tests will catch regressions and give contributors a concrete
-  reference. These fixtures double as documentation‑as‑code.
+Control comments live close to the regions they affect and get removed after processing. This prevents stale metadata
+from confusing later processors - just like how Asciidoctor handles temporary processing instructions.
 
-# Solo maintainer + enterprise usage angle
+## Respect Natural Boundaries
 
-A team inside a big company might only adopt Office‑stamper for a few
-weeks each quarter. They don’t have time to learn WordprocessingML
-internals, and I can’t pair with every team. Clear invariants make the
-system hospitable: newcomers can apply recipes (“place comment ranges
-like this,” “avoid crossing SDT boundaries”) and get predictable
-results. Security and platform reviewers value the discipline
-too—well‑scoped SDTs and ephemeral comments reduce the risk of
-unexpected behavior in post‑processing or downstream tools.
+SDTs define ownership areas. Instead of fighting users who cross these boundaries, I embraced them as natural
+containers - much like how Markdown embraces the natural flow of text documents.
 
-# How to apply this now
+## Atomic Placeholders as a Sanity Check
 
-- Create a short “Template Conventions” page in your repo. Include
-  do/don’t examples with before/after screenshots.
+Rather than splitting placeholders across runs for visual effects, I insisted on atomic placeholders. This isn't about
+constraining users - it's about creating predictable behavior in an unpredictable world.
 
-- Add a pre‑normalization step to your stamping configuration (see
-  `PreparePlaceholders`). Keep it deterministic and fast.
+# Documentation Tooling: My Unexpected Allies
 
-- Put a linter checklist in PRs for template changes: contiguous
-  placeholders, comment ranges do not cross SDTs, no empty control
-  scaffolding left behind.
+Here's where my experience with documentation tools became invaluable. I've learned to love:
 
-- Build a small library of test fixtures that mirror your most common
-  patterns. Reference them from your docs.
+- **Asciidoctor** for complex, structured documentation that can evolve with the project
+- **Markdown** for simple, straightforward explanations that anyone can edit
+- **PlantUML/Mermaid** for visual explanations of complex template behaviors
+- **Pandoc** for bridging the gap between different documentation formats
 
-# References
+These tools became part of my development workflow, not just my documentation workflow. I embed test snippets in
+AsciiDoc so the documentation and code stay in sync.
 
-- Engine features that help: `PreparePlaceholders` preprocessor,
-  `Paragraph.replace`, `DocxIterator` helpers.
+# The Solo Maintainer's Template Reality
 
-- Related posts: Post‑processing in `DocxStamper` (Dec 2024), Delete
-  comments from `SdtRun` (Jun 2025).
+As a solo maintainer working with sporadic enterprise teams, I can't pair with every user to help them create "perfect"
+templates. They don't have time to learn WordprocessingML internals, and I don't have time to become their template
+consultant.
+
+Clear invariants make the system hospitable: users can apply simple rules ("place comment ranges like this," "avoid
+crossing SDT boundaries") and get predictable results.
+
+# My Documentation-as-Code Evolution
+
+I've stopped treating documentation as a separate activity. Instead, I:
+
+- Store templates and documentation together in version control
+- Create small libraries of test fixtures that double as documentation examples
+- Link documentation directly to code and tests
+- Treat broken documentation links as seriously as broken code
+
+This approach mirrors what I love about tools like Doxygen - documentation that lives with the code and evolves with it.
+
+# Practical Guidelines for Messy Templates
+
+If you're creating templates for document processing tools:
+
+1. **Accept imperfection** - Real users create real messes, and that's okay
+2. **Focus on invariants** - What must be true, regardless of structure?
+3. **Create small examples** - Tiny fixtures are easier to understand and test
+4. **Document the chaos** - Help others navigate the messy reality
+5. **Build robust processors** - Handle variations gracefully instead of rejecting them
+
+# The Unexpected Benefit
+
+Embracing template chaos made me a better developer. Instead of spending time fighting reality, I focused on creating
+robust solutions. My processors became more resilient, my documentation became more helpful, and my users became more
+successful.
+
+Sometimes the best way to solve a problem is to stop treating it as a problem.
