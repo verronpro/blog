@@ -1,9 +1,9 @@
 <div class="site-footer__inner container-wide">
   <div>
-    <strong>Joseph Verron — Caring‑Coder</strong>
+    <strong>{{ site.title }}</strong>
     <p class="muted">Consultant in engineering practices and docs‑as‑code. Maintainer of Office‑stamper.</p>
     <p>
-      <a class="btn btn-primary" href="mailto:{{ site.email | default: 'joseph@verron.pro' }}?subject=Consulting%20inquiry">Hire me</a>
+      <a href="mailto:{{ site.email | default: 'joseph@verron.pro' }}?subject=Consulting%20inquiry">Hire me</a>
     </p>
   </div>
   <nav class="site-footer__links" aria-label="Footer">
@@ -20,5 +20,7 @@
   </div>
 </div>
 <div class="site-footer__bottom">
-  © {{ "now" | date: "%Y" }} Joseph Verron. Some rights reserved.
+  <div class="container-wide">
+    © {{ "now" | date: "%Y" }} Joseph Verron. Some rights reserved.
+  </div>
   </div>

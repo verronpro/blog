@@ -2,13 +2,13 @@
   <div class="container-wide site-header__inner">
     <a class="site-header__brand" href="{{ site.baseurl }}/">
       <span class="logo" aria-hidden="true">⚙️</span>
-      <span class="text">Joseph Verron — Caring‑Coder</span>
+      <span class="text">{{ site.title }}</span>
     </a>
     <nav class="site-header__nav" aria-label="Primary">
       <a href="{{ site.baseurl }}/archive.html">Archive</a>
       <a href="{{ site.baseurl }}/about.html">About</a>
       <a href="https://github.com/{{ site.github_username | strip }}">GitHub</a>
-      <a class="btn btn-primary" href="mailto:{{ site.email | default: 'joseph@verron.pro' }}?subject=Consulting%20inquiry">Hire me</a>
+      <a href="mailto:{{ site.email | default: 'joseph@verron.pro' }}?subject=Consulting%20inquiry">Hire me</a>
     </nav>
   </div>
 </header>
