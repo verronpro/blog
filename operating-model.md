@@ -12,14 +12,14 @@ What you should take away: my influences are deliberate, complementary, and oper
 
 Looking for the long, curated resource list? See the Resources page: [/resources.html](/resources.html).
 
-# Core motivations
+## Core motivations
 
 - Make complex work visible early and often. If we can see it, we can steer it.
 - Prefer small, safe steps that ship value continuously.
 - Treat docs, code, and diagrams as one artifact set. Reduce drift by generating and validating where possible.
 - Leave teams with tools and habits they can sustain without me.
 
-# Influences I stand on
+## Influences I stand on
 
 These are not name‑drops; they shape concrete choices in how I work with you.
 
@@ -29,7 +29,7 @@ These are not name‑drops; they shape concrete choices in how I work with you.
 - Conventional Commits and lightweight governance — predictable history, easier automation.
 - Solo‑maintainer discipline — ruthless clarity on scope, automation, and quality gates.
 
-# Practices I bring to your project
+## Practices I bring to your project
 
 1) Docs‑as‑Code foundation
     - Your documentation, run‑books, and decisions live with your code in Markdown, with CI checks. Fewer stale wikis; more trustworthy knowledge.
@@ -44,7 +44,7 @@ These are not name‑drops; they shape concrete choices in how I work with you.
     - Git hygiene, commit conventions, minimal branching rules, and helpful automation.
     - Clear contribution pathways for occasional contributors.
 
-# How it fits together (operating model)
+## How it fits together (operating model)
 
 Think of it as a small, reliable factory:
 
@@ -54,7 +54,7 @@ Think of it as a small, reliable factory:
 
 You get rapid feedback, lower integration risk, and artifacts you can evolve without me.
 
-# Engagement patterns
+## Engagement patterns
 
 - Discovery and setup (1–2 weeks)
   - Map desired outcomes and constraints.
@@ -68,13 +68,13 @@ You get rapid feedback, lower integration risk, and artifacts you can evolve wit
 - Handover and enablement (1–2 weeks)
   - Maintainership checklist, contribution guide, and working examples.
 
-# Proof points and open work
+## Proof points and open work
 
 - Office‑stamper (Java) — source: https://github.com/verron.pro/office-stamper/
 - Presentations‑as‑Code — post: /agility/craftsmanship/docs-as-code/solo-maintainer/enterprise/maintenance/platform/ci-cd/2024/01/01/presentations-as-code.html
 - Monthly Commit series — see Archive for concrete improvements shipped in small steps.
 
-# Selected tools and references I use
+## Selected tools and references I use
 
 - Diagram‑as‑Code: PlantUML, Mermaid, Graphviz, Kroki
 - Generators and docs: Jekyll (this site), Markdown, MathJax
@@ -82,13 +82,13 @@ You get rapid feedback, lower integration risk, and artifacts you can evolve wit
 - Governance: Conventional Commits, lightweight ADRs
 - Team design: Team Topologies
 
-# Where to find me
+## Where to find me
 
 - Blog: https://blog.verron.pro/
 - LinkedIn: https://www.linkedin.com/in/josephverron/ & https://www.linkedin.com/company/caring-coder
 - GitHub: https://github.com/caring-coder & https://github.com/verronpro
 - Medium: https://medium.com/@caring_coder
 
-# Contact
+## Contact
 
 If this operating model matches your needs, reach out via LinkedIn or the blog. I’m open to short, outcome‑focused engagements and happy to start with a small audit or a spike to prove value quickly.

@@ -4,9 +4,9 @@ title: About
 author: Joseph
 ---
 
-I’m Joseph Verron. I help software teams build reliable systems and clear documentation. My work sits at the intersection of software craftsmanship and docs‑as‑code: practical techniques, repeatable pipelines, and small improvements that compound over time.
+I'm Joseph Verron. I help software teams build reliable systems and clear documentation. My work sits at the intersection of software craftsmanship and docs‑as‑code: practical techniques, repeatable pipelines, and small improvements that compound over time.
 
-Over the years I’ve worked across banking, insurance, energy, and communications. I care about maintainability, safe refactoring, and the kind of tooling that makes quality the default.
+Over the years I've worked across banking, insurance, energy, and communications. I care about maintainability, safe refactoring, and the kind of tooling that makes quality the default.
 
 ## Interests
 - Docs‑as‑Code pipelines and governance
@@ -14,4 +14,4 @@ Over the years I’ve worked across banking, insurance, energy, and communicatio
 - Testing strategies and characterization tests
 - Developer experience, automation, and CI/CD
 
-If you’re curious about what I’m working on, the home page highlights recent posts; the full list is in the Archive.
+If you're curious about what I'm working on, the home page highlights recent posts; the full list is in the Archive.
