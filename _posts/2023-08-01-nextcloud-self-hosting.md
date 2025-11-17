@@ -8,7 +8,7 @@ tags: [ self-hosting, privacy, hosting, nextcloud ]
 description: "Self‑hosting Nextcloud for family needs on a Gandi host: what worked, what didn’t, and the operational cost of running it with a provider."
 ---
 
-TL;DR — I self‑hosted Nextcloud on my Gandi host for family file sharing, calendars, and photos. It was a practical tool that delivered on privacy and flexibility, but still required steady maintenance (updates, backups, uptime). I later retired the instance for personal/professional reasons, not due to product dissatisfaction.
+I self‑hosted Nextcloud on my Gandi host for family file sharing, calendars, and photos. It was a practical tool that delivered on privacy and flexibility, but still required steady maintenance (updates, backups, uptime). I later retired the instance for personal/professional reasons, not due to product dissatisfaction.
 
 As a software engineer who prefers owning the tooling and data, I hosted a small Nextcloud instance on my Gandi infrastructure for my family. It let us run a truly practical shared tool without relying on a consumer SaaS. Below is a concise record of the interests that made it appealing, and the hurdles that matter if you operate it yourself.
 

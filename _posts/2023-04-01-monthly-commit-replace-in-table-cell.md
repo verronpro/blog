@@ -8,7 +8,7 @@ tags: [office-stamper,testing, java, templates, docs-as-code,wordprocessingml, a
 description: "Before fixing a tricky table‑cell bug, we invested in inspectable outputs, modern Java patterns, and stable assertions—turning infrastructure into leverage for complex WordprocessingML debugging."
 ---
 
-TL;DR: Before fixing a table cell bug, invest in the tools to understand it—this commit added debug-friendly test infrastructure, modernized code with Java 17 patterns, and built a stable assertion layer for complex WordprocessingML structures, proving that infrastructure work is feature work.
+Before fixing a table cell bug, invest in the tools to understand it—this commit added debug-friendly test infrastructure, modernized code with Java 17 patterns, and built a stable assertion layer for complex WordprocessingML structures, proving that infrastructure work is feature work.
 
 Commit: [7b387f5](https://github.com/verronpro/office-stamper/commit/7b387f5)
 

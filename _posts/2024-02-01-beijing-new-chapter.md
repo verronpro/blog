@@ -8,7 +8,7 @@ author: Joseph
 description: "Moving to Beijing to reunite with my significant other after years of separation due to pandemic restrictions. Transitioning from Software Craftsmanship Coach at TotalEnergies Digital Factory in Paris to IT Manager at EDF China, while continuing to maintain my open-source project office-stamper and share insights on software development best practices."
 ---
 
-TL;DR: After 14 years together and years of separation due to pandemic restrictions, I'm finally moving to Beijing to
+After 14 years together and years of separation due to pandemic restrictions, I'm finally moving to Beijing to
 reunite with my significant other.
 
 ## Personal Journey

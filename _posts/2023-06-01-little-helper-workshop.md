@@ -8,8 +8,8 @@ author: Joseph
 description: A timed, gamified workshop to reveal onboarding documentation gaps and turn them into an actionable backlog your team can execute.
 ---
 
-TL;DR: Can a new developer build, run, and test your project in under 4 hours using only a 240-character message? This
-gamified workshop exposes onboarding documentation gaps through timed challenges—turning painful "where's the docs?"
+Can a new developer build, run, and test your project in under 4 hours using only a 240-character message? This gamified
+workshop exposes onboarding documentation gaps through timed challenges—turning painful "where's the docs?"
 conversations into an actionable improvement backlog.
 
 A new contractor joins your team Monday morning. By lunch, they're still installing dependencies. By Wednesday, they're
@@ -237,10 +237,10 @@ Based on running this workshop with dozens of teams, here's what usually breaks:
 
 ### 1) Starting message (240 chars max)
 
-> - Clone https://github.com/yourorg/yourapp, 
+> - Clone https://github.com/yourorg/yourapp,
 > - Open README.md,
 > - Follow Quick Start.
-> - If missing tools, see .tool-versions or devcontainer.json. 
+> - If missing tools, see .tool-versions or devcontainer.json.
 > - Docs at https://wiki.yourco/yourapp/dev-setup
 
 ### 2) Observer notes (per round)

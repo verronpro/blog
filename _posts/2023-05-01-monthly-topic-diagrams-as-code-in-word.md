@@ -8,7 +8,7 @@ author: joseph-verron
 description: Treat diagrams as code and stamp generated images into Word templates with Office‑stamper. PlantUML vs Mermaid, build integration, pitfalls, and a production checklist.
 ---
 
-TL;DR: Keep your Word documents honest by generating diagrams from source and stamping them at build time. Use PlantUML or Mermaid to produce images, then let Office‑stamper inject them into `.docx` so reports stay versioned, reproducible, and automation‑friendly.
+Keep your Word documents honest by generating diagrams from source code and stamping them at build time. Use PlantUML or Mermaid to produce images, then let Office‑stamper inject them into `.docx` so reports stay versioned, reproducible, and automation‑friendly.
 
 ## Quick Facts
 

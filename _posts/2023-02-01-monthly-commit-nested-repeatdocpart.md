@@ -8,7 +8,7 @@ tags: [office-stamper, templates, testing, wordprocessingml, agility, craftsmans
 description: "Office‑stamper now supports arbitrarily nested repeat blocks via a small recursive change and comprehensive tests, letting templates mirror deep domain hierarchies safely."
 ---
 
-TL;DR: office-stamper now supports arbitrary nesting depth for repeated document sections. A 13-line recursive fix lets
+`Office-stamper` now supports arbitrary nesting depth for repeated document sections. A 13-line recursive fix lets
 templates mirror complex domain models (school → grades → classes → students) without data flattening. Includes
 comprehensive tests and works with existing templates.
 

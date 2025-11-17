@@ -8,7 +8,7 @@ tags: [office-stamper,toolchain, java, ci, devex, ci-cd, java17, junit5, devcont
 description: "Java 17 + JUnit 5 migration with a ready‑to‑code dev container—predictable builds, modern tests, and faster onboarding for enterprise adopters."
 ---
 
-TL;DR: Migrating to Java 17 LTS, JUnit 5, and a dev container turned maintenance overhead into competitive advantage—giving enterprise adopters predictable builds, modern tooling, and zero-friction onboarding in a solo-maintained project.
+Migrating to Java 17 LTS, JUnit 5, and a dev container turned maintenance overhead into a competitive advantage — giving enterprise adopters predictable builds, modern tooling, and zero-friction onboarding in a solo-maintained project.
 
 **Commits:**
 - Java 17: [49b6c09](https://github.com/verronpro/office-stamper/commit/49b6c09)

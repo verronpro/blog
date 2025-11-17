@@ -8,7 +8,7 @@ author: Joseph
 description: Centralized test assertion descriptions to make failures readable, replacing brittle object dumps with domain-meaningful narratives that accelerate debugging and onboard contributors.
 ---
 
-**TL;DR:** Centralized test result descriptions across 157 test cases, replacing ad-hoc assertions with a shared vocabulary. Tests now read like documentation and failures explain *what broke* in business terms, not XML structures.
+Centralized test result descriptions across 157 test cases, replacing ad-hoc assertions with shared vocabulary. Tests now read like documentation, and failures explain *what broke* in business terms, not XML structures.
 
 Commit: [7afd857](https://github.com/verronpro/office-stamper/commit/7afd857)
 
