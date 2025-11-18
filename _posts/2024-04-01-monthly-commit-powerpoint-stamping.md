@@ -28,31 +28,27 @@ The goal was not feature parity; it was to prove that the abstractions hold. If 
 
 The heart of the change is that PPTX traversal and text operations live in a dedicated adapter layer. The engine's “language” remains unchanged: find placeholders, evaluate, replace; do so over paragraphs/runs that might be split arbitrarily by the authoring tool.
 
-### Traversal seam (Mermaid)
+### Traversal seam (PlantUML)
 
 ```plantuml
-@startuml
-file PresentationMLPackage {
-card MainPresentationPart {
-collection SlidePart* {
-card Sld {
-card CommonSlideData {
-card GroupShape {
-collection Shape* {
-card CTTextBody {
-collection CTTextParagraph* {
-collection CTRegularTextRun* {
-
-}
-}
-}
-}
-}
-}
-}
-}
-}}
- @enduml
+@startmindmap
+top to bottom direction
++ PresentationMLPackage > MainPresentationPart
+++ SlidePart 1 > Sld > ...
+++ SlidePart ... > Sld > CommonSlideData > GroupShap
++++ Shape 1 > CTTextBody > ...
++++ Shape ... > CTTextBody
+++++ CTTextParagraph 1
++++++_ CTRegularTextRun ...
+++++ CTTextParagraph ...
++++++ CTRegularTextRun 1
++++++ CTRegularTextRun ...
++++++ CTRegularTextRun N
+++++ CTTextParagraph N
++++++_ CTRegularTextRun ...
++++ Shape N > CTTextBody > ...
+++ SlidePart N > Sld > ...
+@endmindmap
 ```
 
 The visitor walks the presentation structure and collects `CTTextParagraph` nodes. Paragraphs are wrapped in `PowerpointParagraph`, which aggregates runs and provides the same operations we use on DOCX paragraphs.
