@@ -8,9 +8,11 @@ author: Joseph
 description: A deep dive into adding PowerPoint (PPTX) stamping to Office‑stamper as a bounded adapter, validating that the engine model scales to a new format without polluting the core.
 ---
 
+PPTX stamping was added as a bounded adapter, proving the engine scales to a new format without touching the core.
+
 Commit: [b748e83](https://github.com/verronpro/office-stamper/commit/b748e83)
 
-I had a punctual production need in my new team at EDF China: stamp data into PowerPoint decks with the exact same mental model I'm used for Word. Instead of bolting format logic into the core, I treated PPTX as an adapter at the edges and used this as a test of the engine's design: placeholders → resolvers → traversal/execution.
+I had a punctual need in my new team at EDF China: stamp data into PowerPoint decks and repeat slides for each element of a collection. It made me eager to  apply the exact same mental model we use for Word. Instead of bolting format logic into the core, I treated PPTX as an adapter at the edges and used this as a test of the engine's design: placeholders → resolvers → traversal/execution.
 
 The goal was not feature parity; it was to prove that the abstractions hold. If the model is right, new formats plug in cleanly, and the engine remains pure.
 
