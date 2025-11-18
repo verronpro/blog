@@ -1,7 +1,7 @@
 ---
 layout: article
-title: "Making Knowledge a Feature: Improved Site Documentation"
-author: joseph-verron
+title: "Knowledge as a Feature: Improved Site Documentation"
+author: Joseph
 date: 2023-06-15 09:00:00
 categories: [office-stamper]
 tags: [docs-as-code, office-stamper, documentation, ci, asciidoctor, agility, craftsmanship, solo-maintainer, enterprise, developer-experience]

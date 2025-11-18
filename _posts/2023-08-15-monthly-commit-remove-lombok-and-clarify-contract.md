@@ -3,7 +3,7 @@ layout: article
 title: "Fewer Magic Annotations, Clearer Contracts: Removing Lombok and Aligning Javadoc"
 date: 2023-08-15 09:00:00
 categories: [ office-stamper ]
-author: joseph-verron
+author: Joseph
 tags: [ office-stamper, java, api, docs-as-code, maintainability ]
 description: Removing Lombok and making defaults explicit in code and Javadoc to improve clarity, tooling, and
   onboarding.

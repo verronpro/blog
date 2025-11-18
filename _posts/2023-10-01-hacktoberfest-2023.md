@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Hacktoberfest 2023 — Office‑stamper is in"
+title: "Hacktoberfest 2023: Office‑stamper is in"
 date: 2023-10-01
 categories: [ community ]
 tags: [ office-stamper, community, contributing ]

@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Monthly Commit — PPTX Stamping Lands Without Touching the Engine Core"
+title: "PPTX Stamping Lands Without Touching the Engine Core"
 date: 2024-04-01
 categories: [ office-stamper ]
 tags: [ office-stamper, java, templates, testing, extensibility, pptx, pptx4j, docx4j ]
@@ -30,21 +30,29 @@ The heart of the change is that PPTX traversal and text operations live in a ded
 
 ### Traversal seam (Mermaid)
 
-```mermaid
-flowchart TD
-  A[PresentationMLPackage] --> B[MainPresentationPart]
-  B --> C[SlidePart*]
-  C --> D[Sld]
-  D --> E[CommonSlideData]
-  E --> F[GroupShape]
-  F --> G[Shape*]
-  G --> H[CTTextBody]
-  H --> I[CTTextParagraph*]
-  I --> J[CTRegularTextRun*]
+```plantuml
+@startuml
+file PresentationMLPackage {
+card MainPresentationPart {
+collection SlidePart* {
+card Sld {
+card CommonSlideData {
+card GroupShape {
+collection Shape* {
+card CTTextBody {
+collection CTTextParagraph* {
+collection CTRegularTextRun* {
 
-  classDef seam fill:#eef,stroke:#55f,stroke-width:1px;
-  I:::seam
-  J:::seam
+}
+}
+}
+}
+}
+}
+}
+}
+}}
+ @enduml
 ```
 
 The visitor walks the presentation structure and collects `CTTextParagraph` nodes. Paragraphs are wrapped in `PowerpointParagraph`, which aggregates runs and provides the same operations we use on DOCX paragraphs.

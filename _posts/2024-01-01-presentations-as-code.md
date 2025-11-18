@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Presentations as Code with Asciidoctor, Reveal.js, and Maven"
+title: "Presentations as Code: Asciidoctor, Reveal.js, and Maven"
 date: 2024-01-01 09:00:00
 categories: [ documentation-as-code ]
 tags: [ docs-as-code, revealjs, asciidoctor, presentations ]

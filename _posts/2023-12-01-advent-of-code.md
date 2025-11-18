@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Advent of Code — A Small Daily Habit to Sharpen Algorithms and Team Energy"
+title: "Advent of Code: A Habit to Sharpen Algorithms and Team Energy"
 date: 2023-12-01
 categories: [ community ]
 tags: [ algorithms, craftsmanship, coaching, community, challenge ]
