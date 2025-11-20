@@ -14,7 +14,7 @@ Docs are product. This change turns the site into a first‑class, build‑verif
 
 | Aspect    | Details                                                               |
 |-----------|-----------------------------------------------------------------------|
-| Commit    | [8243bd7](https://github.com/verronpro/office-stamper/commit/8243bd7) |
+| Commit    | [`8243bd7`](https://github.com/verronpro/office-stamper/commit/8243bd7) |
 | Scope     | Readme/site format, structure, examples, navigation                   |
 | Why       | Reduce support, speed onboarding, align site with APIs                |
 | Outcome   | Fewer “how do I…?” questions; faster, safer adoption                  |
@@ -142,6 +142,6 @@ Optional link check (run occasionally for heavy pages): use `htmlproofer` or a l
 
 ## References
 
-- Commit: [8243bd7](https://github.com/verronpro/office-stamper/commit/8243bd7)
+- Commit: [`8243bd7`](https://github.com/verronpro/office-stamper/commit/8243bd7)
 - Related: site layout and concept pages under `engine/src/site/asciidoc/`
 - Javadoc packages: `pro.verron.officestamper.api`, `core`

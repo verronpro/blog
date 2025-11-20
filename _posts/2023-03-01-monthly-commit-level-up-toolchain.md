@@ -11,9 +11,9 @@ description: "Java 17 + JUnit 5 migration with a ready‑to‑code dev container
 Migrating to Java 17 LTS, JUnit 5, and a dev container turned maintenance overhead into a competitive advantage — giving enterprise adopters predictable builds, modern tooling, and zero-friction onboarding in a solo-maintained project.
 
 **Commits:**
-- Java 17: [49b6c09](https://github.com/verronpro/office-stamper/commit/49b6c09)
-- JUnit 5: [428d5d5](https://github.com/verronpro/office-stamper/commit/428d5d5)
-- Devcontainer docs: [2f53681](https://github.com/verronpro/office-stamper/commit/2f53681)
+- Java 17: [`49b6c09`](https://github.com/verronpro/office-stamper/commit/49b6c09)
+- JUnit 5: [`428d5d5`](https://github.com/verronpro/office-stamper/commit/428d5d5)
+- Devcontainer docs: [`2f53681`](https://github.com/verronpro/office-stamper/commit/2f53681)
 
 ## Why this stands out
 
@@ -100,6 +100,6 @@ Planning a similar migration? Use this:
 
 ## References
 
-- **Commits:** [49b6c09](https://github.com/verronpro/office-stamper/commit/49b6c09) (Java 17), [428d5d5](https://github.com/verronpro/office-stamper/commit/428d5d5) (JUnit 5), [2f53681](https://github.com/verronpro/office-stamper/commit/2f53681) (devcontainer)
+- **Commits:** [`49b6c09`](https://github.com/verronpro/office-stamper/commit/49b6c09) (Java 17), [`428d5d5`](https://github.com/verronpro/office-stamper/commit/428d5d5) (JUnit 5), [`2f53681`](https://github.com/verronpro/office-stamper/commit/2f53681) (devcontainer)
 - **Build:** Maven + Surefire/JUnit 5
 - **Docs:** CONTRIBUTING and devcontainer documentation

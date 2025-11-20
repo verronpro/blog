@@ -12,7 +12,7 @@ description: "Office‑stamper now supports arbitrarily nested repeat blocks via
 templates mirror complex domain models (school → grades → classes → students) without data flattening. Includes
 comprehensive tests and works with existing templates.
 
-Commit: [0a774c1](https://github.com/verronpro/office-stamper/commit/0a774c1)
+Commit: [`0a774c1`](https://github.com/verronpro/office-stamper/commit/0a774c1)
 
 ## Why this stands out
 
@@ -158,7 +158,7 @@ stamper.stampAndLoad(template, new School(grades));
 
 ## References
 
-- Commit: [0a774c1](https://github.com/verronpro/office-stamper/commit/0a774c1)
+- Commit: [`0a774c1`](https://github.com/verronpro/office-stamper/commit/0a774c1)
 - Issue: [Issue #92 · verronpro/office-stamper.](https://github.com/verronpro/office-stamper/issues/92)
 - PR: [Pull Request #100 · verronpro/office-stamper.](https://github.com/verronpro/office-stamper/pull/100)
-- Contributors: [NoNException](https://github.com/NoNException), [zongzi](https://github.com/zongzi)
+- Contributors: [`NoNException`](https://github.com/NoNException), [`zongzi`](https://github.com/zongzi)

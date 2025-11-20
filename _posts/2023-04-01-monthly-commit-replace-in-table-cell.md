@@ -10,7 +10,7 @@ description: "Before fixing a tricky table‑cell bug, we invested in inspectabl
 
 Before fixing a table cell bug, invest in the tools to understand it—this commit added debug-friendly test infrastructure, modernized code with Java 17 patterns, and built a stable assertion layer for complex WordprocessingML structures, proving that infrastructure work is feature work.
 
-Commit: [7b387f5](https://github.com/verronpro/office-stamper/commit/7b387f5)
+Commit: [`7b387f5`](https://github.com/verronpro/office-stamper/commit/7b387f5)
 
 ## What the commit actually does
 
@@ -148,7 +148,7 @@ The stage is set for:
 
 ## References
 
-- Commit: [7b387f5](https://github.com/verronpro/office-stamper/commit/7b387f5)
+- Commit: [`7b387f5`](https://github.com/verronpro/office-stamper/commit/7b387f5)
 - Issue: [#67 replacewordwith doesn't work within a table cell](https://github.com/verronpro/docx-stamper/issues/67)
 - Added tests: `ReplaceWordWithIntegrationTest.java` (shell), `ParagraphCollector.java` (new utility)
 - Refactored: `ObjectDeleter`, `TableCellUtil`, `ParagraphWrapper`, `AbstractDocx4jTest`
