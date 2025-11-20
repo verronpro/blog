@@ -6,13 +6,10 @@ description: >-
 baseurl: "/blog"
 url: "https://verron.pro"
 
-twitter_username: j_verron
 github_username: caring-coder
 
 repository: verronpro/blog
 
-# Custom theme (no remote theme gem)
-# Remove theme-specific options from previous theme
 lang: en
 timezone: Asia/Shanghai
 
