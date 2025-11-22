@@ -1,88 +1,147 @@
-### Three editorial angles to choose from
-
-1) Breaking for clarity: why a modular reorg beats slow drift
-   - Focus: the decision to introduce `engine/`, move `DocxStamper`/`DocxStamperConfiguration`, and delete legacy APIs. Explain the trade-offs and how “clean seams” speed up future work.
-   - Audience: maintainers and adopters evaluating upgrades.
-2) Solo maintainer, enterprise users: reducing risk with explicit boundaries
-   - Focus: how stable packages and smaller surfaces lower review cost and misuse risk. Emphasize migration guide, CI checks, and characterization tests.
-   - Audience: teams bringing the library into regulated or security-conscious environments.
-3) Towards 2.0: aligning APIs with the mental model
-   - Focus: the `2.0-SNAPSHOT` pivot, intention-revealing namespaces, and how examples/tests were updated to match the conceptual model.
-   - Audience: contributors and power users who care about API design and upgrade paths.
-
-### Questions for your perspective and color
-- What concrete pain pushed you over the edge to reorganize now? A PR that hurt, an on-call moment, or contributor confusion?
-- Which deprecated types did you most happily delete, and why?
-- For adopters: is the headline migration “old import → new import,” or are there subtle semantic changes worth flagging?
-- What CI or test evidence gave you confidence after the moves (specific suites, mutation testing thresholds, link checks)?
-- Any notable downstreams (companies, projects) you want to acknowledge or reassure?
-- Do you want the tone to be more release‑note like, or more reflective (craftsmanship/architecture)?
-
-Focus on the move to 2.0, with the target to provide intention revealing namespaces, that gives me more freedom to refactor the codebase in the core, vs the extension API that should stay as stable as possible.
-
-The main drive behind this reorganization is the need to have a safe space (the core) to deeply refactor the inner algorithm of the library, that suffered several long-standing design issue, without breaking too much the API that users knows, and that attracted me to the library in the first place.
-
-The deprecated types that I deleted or can now delete freely are all in the core package.
-
-For adopters, I think that switching to new import should be mostly working fine, but I advice on also switching to the factory methods inside the preset package as much as possible, if they are not explicitly trying to extends the library.
-
-All the test suites keeps running, the mutation testing values didn't greatly change, so it is sure nothing major broke.
-
-I want the tone to be reflective on the practices of craftsmanship and software architecture.
-
-
-
-### Draft article (~400 words) — Monthly Commit — Modular Reorg and Breaking Changes
-
-```yaml
 ---
 layout: article
-title: "Monthly Commit — Modular Reorg and Breaking Changes"
+title: "Monthly Commit — Modular Reorg on the Path to 2.0"
 date: 2024-06-01
-categories: [office-stamper]
-tags: [ office-stamper, java, api ]
+categories: [ office-stamper ]
+tags: [ office-stamper, java, api, architecture ]
 author: Joseph
-description: Introducing an engine module, intention‑revealing packages, and a leaner public surface on the path to 2.0.
+description: Intention‑revealing namespaces and a protected core to refactor deeply without destabilizing extensions.
 ---
-```
 
-Sustainable agility depends on boundaries you can explain and defend. In May I executed a deliberate reorganization: introduced an `engine` module, relocated core types to intention‑revealing packages, and removed legacy shims. These were breaking changes by design.
+Sustainable agility depends on boundaries you can explain and defend. This month I drew those boundaries explicitly: I
+introduced an `engine` module, moved public entry points into intention‑revealing packages, and removed legacy shims.
+The goal is clear seams: a stable extension surface for adopters, and a refactor‑friendly space in the core where I can
+fix long‑standing design issues without surprising users.
+
+Why now? A run of small but telling frictions piled up: PRs that had to thread through unrelated internals, reviewers
+second‑guessing where a class “should live,” and extension points that leaked too much of the engine’s shape. Those are
+symptoms of missing boundaries. The 2.0 push is my answer.
 
 Highlights
-- Relocated sources under `engine/` and `examples/` ([6bbcd21](https://github.com/verronpro/office-stamper/commit/6bbcd21)), adding a proper `engine/pom.xml` ([45d6fb8](https://github.com/verronpro/office-stamper/commit/45d6fb8)).
-- Moved `DocxStamper` to `pro.verron.officestamper.core` ([bfa7877](https://github.com/verronpro/office-stamper/commit/bfa7877)).
-- Moved `DocxStamperConfiguration` likewise and removed its deprecation ([5cb94a1](https://github.com/verronpro/office-stamper/commit/5cb94a1)).
-- Bumped the engine to `2.0-SNAPSHOT` to signal the new baseline ([592bd73](https://github.com/verronpro/office-stamper/commit/592bd73)).
 
-Why this matters
-- Clear seams beat tacit conventions. Modules and packages are user‑facing design decisions—make them visible and stable.
-- Smaller surfaces lower risk. Deleting deprecated branches reduces reviewer fatigue and the chance of misuse under time pressure.
-- Docs-as-code alignment. Examples and docs now compile against the same API adopters should rely on.
+- Split project into `engine/` and `examples/` ([6bbcd21](https://github.com/verronpro/office-stamper/commit/6bbcd21)),
+  with a dedicated `engine/pom.xml` ([45d6fb8](https://github.com/verronpro/office-stamper/commit/45d6fb8)).
+- Moved `DocxStamper` to
+  `pro.verron.officestamper.core` ([bfa7877](https://github.com/verronpro/office-stamper/commit/bfa7877)).
+- Moved `DocxStamperConfiguration` likewise; removed its
+  deprecation ([5cb94a1](https://github.com/verronpro/office-stamper/commit/5cb94a1)).
+- Bumped the engine to `2.0-SNAPSHOT` to signal a new
+  baseline ([592bd73](https://github.com/verronpro/office-stamper/commit/592bd73)).
+- Deleted deprecated types that only existed as transitional shims:
+  `AbstractToTextResolver` ([022679](https://github.com/verronpro/office-stamper/commit/022679)),
+  `LegacyFallbackResolver` ([7f88ebf](https://github.com/verronpro/office-stamper/commit/7f88ebf)), `StampTable` in the
+  legacy package ([7cb6a38](https://github.com/verronpro/office-stamper/commit/7cb6a38)), `CommentUtil` and
+  `CommentWrapper` ([51e6eb7](https://github.com/verronpro/office-stamper/commit/51e6eb7), [2acb655](https://github.com/verronpro/office-stamper/commit/2acb655)),
+  `Image` duplicate in the legacy path ([800d581](https://github.com/verronpro/office-stamper/commit/800d581)), and the
+  `UnresolvedExpressionException` that duplicated
+  `OfficeStamperException` ([dc83706](https://github.com/verronpro/office-stamper/commit/dc83706)).
+
+Intention‑revealing namespaces
+
+- `pro.verron.officestamper.core.*` is the safe workspace. I will refactor here aggressively to repair inner‑algorithm
+  debts (parser/walker invariants, placeholder replacement, resolver composition). Nothing here is a promise of
+  stability.
+- `pro.verron.officestamper.preset.*` is where I offer stable, batteries‑included factories and helpers:
+  `OfficeStampers`, `OfficeStamperConfigurations`, `Resolvers`, etc. Prefer these unless you are consciously extending.
+- Legacy `org.wickedsource.docxstamper.*` remains only where necessary for compatibility and will continue to shrink.
+
+```mermaid
+flowchart LR
+  subgraph Before
+    A[org.wickedsource.docxstamper.DocxStamper]
+    B[org.wickedsource.docxstamper.DocxStamperConfiguration]
+    C[org.wickedsource.docxstamper.* helpers]
+  end
+  subgraph After
+    A2[pro.verron.officestamper.core.DocxStamper]
+    B2[pro.verron.officestamper.core.DocxStamperConfiguration]
+    P[pro.verron.officestamper.preset.* factories]
+  end
+  A --> A2
+  B --> B2
+  C -. trimmed/removed .-> P
+```
 
 Migration notes (old → new)
+
 - Imports:
-  - `org.wickedsource.docxstamper.DocxStamper` → `pro.verron.officestamper.core.DocxStamper`
-  - `org.wickedsource.docxstamper.DocxStamperConfiguration` → `pro.verron.officestamper.core.DocxStamperConfiguration`
-- Prefer the preset entry points when possible:
-  - `OfficeStampers` and `OfficeStamperConfigurations` under `pro.verron.officestamper.preset.*`
+    - `org.wickedsource.docxstamper.DocxStamper` → `pro.verron.officestamper.core.DocxStamper`
+    - `org.wickedsource.docxstamper.DocxStamperConfiguration` → `pro.verron.officestamper.core.DocxStamperConfiguration`
+- Prefer preset factories:
+    - `pro.verron.officestamper.preset.OfficeStampers` (entry points)
+    - `pro.verron.officestamper.preset.OfficeStamperConfigurations` (sane defaults)
 
 Example before/after
+
 ```java
 // before
+
 import org.wickedsource.docxstamper.DocxStamper;
 // after
 import pro.verron.officestamper.core.DocxStamper;
 ```
 
-Risk and mitigation
-- Upgrade friction: provide a short mapping table (above) and keep semantics stable.
-- Missed couplings: run the full suite; examples and site build now verify integration.
-- Over‑deletion: stage removals; deprecate → migrate → delete across minor releases.
+Craftsmanship notes: stability where users live, freedom where I work
+The main drive behind the reorganization is to keep your adoption cost low while giving me room to improve the
+algorithm. The preset package is the “stable handle.” The core is the “workbench.” By declaring those intentions in the
+names, I can change internals without stealth breaks, and you can write code that ages more gracefully.
 
-Impact
-- Cleaner mental model; faster contributor onboarding; easier enterprise review of a focused `engine` artifact.
+What I removed, and why it helps
+
+- Deprecated adapters and duplicates masked the true extension surface. Removing them shrinks the cognitive load and the
+  chance of misuse under time pressure.
+- Examples: `LegacyFallbackResolver` now cleanly maps to `Resolvers.fallback()`; the duplicate `Image` and `StampTable`
+  live under `preset.*`; the custom `UnresolvedExpressionException` collapsed into the standard
+  `OfficeStamperException`.
+
+Evidence and risk mitigation
+
+- The full test suites continue to run green after the reorg. Mutation testing levels did not materially change, which
+  is a useful proxy that semantics stayed in place while types moved.
+- The examples module compiles and runs against the same surface you should use in
+  production ([f8dc1f0](https://github.com/verronpro/office-stamper/commit/f8dc1f0), [b5fd710](https://github.com/verronpro/office-stamper/commit/b5fd710)).
+- CI and local builds now verify the module graph and public exports (`module-info.java` updates
+  in [5cb94a1](https://github.com/verronpro/office-stamper/commit/5cb94a1)).
+
+How the engine works today (and where I’m heading)
+
+```mermaid
+flowchart TB
+  T[Template .docx] --> P1[Preprocessors\nRemoveProofErrors, MergeSameStyleRuns]
+  P1 --> R[CommentProcessorRegistry]
+  R --> OR[ObjectResolverRegistry]
+  OR --> PR[PlaceholderReplacer]
+  PR --> D[Stamped document]
+
+  %% Planned refactors (dashed)
+  R -. consolidate walkers .- PR
+  OR -. deterministic ordering & invariants .- R
+  PR -. streaming replacement, fewer passes .- D
+```
+
+Planned inner‑algorithm changes in `core` focus on invariants and passes:
+
+- One pass over the document tree, with an explicit, testable contract for “what a processor can change.”
+- Deterministic resolver composition with fewer surprises when multiple resolvers overlap.
+- Better separation between parsing, decision, and rendering stages to unblock future features (e.g., smarter table
+  handling).
+
+For adopters
+
+- If you only stamp documents (no custom processors), migrate imports and switch to the preset factories. That’s usually
+  a search‑replace.
+- If you extend the library, do it consciously against `preset` and `api` contracts; open issues if you find a seam
+  missing.
+- If you maintain downstream extensions, validate against `2.0-SNAPSHOT` early and report friction while the surface is
+  still being stabilized.
 
 Next
-- Stabilize the 2.0 public surface and expand migration snippets. If you maintain extensions, validate against `2.0-SNAPSHOT` and file issues early.
 
-References: commits around 2024‑05‑14 → 2024‑05‑17; see `engine/pom.xml` and `pro.verron.officestamper.core.*` for the new anchors.
+- Stabilize the 2.0 public surface and expand migration snippets for common scenarios.
+- Continue trimming legacy exports from `module-info.java` as presets cover more cases.
+- Publish characterization tests for the stamping pipeline so future changes in `core` stay honest.
+
+References
+
+- Commits around 2024‑05‑14 →
+  2024‑05‑17: [6bbcd21](https://github.com/verronpro/office-stamper/commit/6bbcd21), [45d6fb8](https://github.com/verronpro/office-stamper/commit/45d6fb8), [bfa7877](https://github.com/verronpro/office-stamper/commit/bfa7877), [5cb94a1](https://github.com/verronpro/office-stamper/commit/5cb94a1), [592bd73](https://github.com/verronpro/office-stamper/commit/592bd73), [dc83706](https://github.com/verronpro/office-stamper/commit/dc83706), [800d581](https://github.com/verronpro/office-stamper/commit/800d581), [7cb6a38](https://github.com/verronpro/office-stamper/commit/7cb6a38), [7f88ebf](https://github.com/verronpro/office-stamper/commit/7f88ebf), [022679](https://github.com/verronpro/office-stamper/commit/022679).
