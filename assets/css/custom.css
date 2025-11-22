@@ -1,12 +1,24 @@
 /* Caring-Coder brand customizations */
 :root {
-    --cc-primary: #2563EB; /* blue-600 */
-    --cc-accent: #10B981; /* emerald-500 */
-    --cc-text: #111827; /* gray-900 */
-    --cc-muted: #6B7280; /* gray-500 */
-    --cc-bg: #FFFFFF; /* page background */
-    --cc-surface: #FFFFFF; /* cards/blocks background */
-    --cc-border: #E5E7EB; /* gray-200 */
+    /* Brand & theme tokens */
+    --cc-primary: #30D000; /* CRT green */
+    --cc-accent: #30D000;  /* keep accent aligned with primary */
+
+    /* Solarized Light inspired base */
+    --cc-bg: #FDF6E3;      /* base3 */
+    --cc-surface: #EEE8D5; /* base2 */
+    --cc-text: #073642;    /* base02 */
+    --cc-muted: #657B83;   /* base00 */
+    --cc-border: #93A1A1;  /* base1 */
+
+    /* Useful derived tints of primary (for backgrounds) */
+    --cc-primary-05: rgba(48, 208, 0, .05);
+    --cc-primary-10: rgba(48, 208, 0, .10);
+
+    /* Code surfaces (light theme) */
+    --code-bg: var(--cc-surface);
+    --code-fg: #073642;     /* readable on light surfaces */
+    --code-border: var(--cc-border);
 }
 
 /* Prefer system fonts for performance */
@@ -60,7 +72,7 @@ code, pre {
     display: inline-block;
     padding: .15rem .5rem;
     border-radius: .375rem;
-    background: rgba(37, 99, 235, .10);
+    background: var(--cc-primary-10);
     color: var(--cc-primary);
     font-size: .85em
 }
@@ -69,7 +81,7 @@ code, pre {
 blockquote {
     border-left: 4px solid var(--cc-primary);
     padding: .5rem 1rem;
-    background: rgba(37, 99, 235, .05)
+    background: var(--cc-primary-05)
 }
 
 /* Code blocks */
@@ -86,9 +98,9 @@ pre {
 /* Base wrappers produced by Jekyll + Rouge */
 /* Provide the visible box (padding, border, radius) on the Rouge wrapper so inner <pre> can be unstyled */
 .highlighter-rouge .highlight, .diagram {
-    color: #E5E7EB;
-    background: var(--cc-surface);
-    border: none;
+    color: var(--code-fg);
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
     border-radius: .5rem;
     /* Same containment rule for the Rouge wrapper */
     overflow-x: auto;
@@ -168,17 +180,11 @@ html, body {
     margin: 0
 }
 
-/* Token colors */
+/* Token colors — Solarized Light inspired for light theme */
 .highlight .c, /* Comment */
-.highlight .cm, .highlight .c1 {
-    color: #9CA3AF;
-    font-style: italic
-}
+.highlight .cm, .highlight .c1 { color: #93A1A1; font-style: italic }
 
-.highlight .cp {
-    color: #FBBF24
-}
-
+.highlight .cp { color: #B58900 }
 /* Comment.Preproc */
 
 .highlight .k, /* Keyword */
@@ -187,80 +193,48 @@ html, body {
 .highlight .kp, /* Keyword.Pseudo */
 .highlight .kr, /* Keyword.Reserved */
 .highlight .kt /* Keyword.Type */
-{
-    color: #93C5FD
-}
+{ color: #859900 }
 
 .highlight .n, /* Name */
-.highlight .nx {
-    color: #E5E7EB
-}
+.highlight .nx { color: var(--code-fg) }
 
-.highlight .nc {
-    color: #F59E0B
-}
+.highlight .nc, /* Name.Class */
+.highlight .no  /* Name.Constant */
+{ color: #B58900 }
 
-/* Name.Class */
-.highlight .no {
-    color: #F59E0B
-}
+.highlight .na /* Name.Attribute */
+{ color: #268BD2 }
 
-/* Name.Constant */
-.highlight .na {
-    color: #A7F3D0
-}
+.highlight .ni /* Name.Entity */
+{ color: #CB4B16 }
 
-/* Name.Attribute */
-.highlight .ni {
-    color: #FBBF24
-}
+.highlight .ne /* Name.Exception */
+{ color: #DC322F }
 
-/* Name.Entity */
-.highlight .ne {
-    color: #F87171
-}
+.highlight .nf /* Name.Function */
+{ color: #268BD2 }
 
-/* Name.Exception */
-.highlight .nf {
-    color: #34D399
-}
+.highlight .nn /* Name.Namespace */
+{ color: #268BD2 }
 
-/* Name.Function */
-.highlight .nn {
-    color: #93C5FD
-}
-
-/* Name.Namespace */
-.highlight .nt {
-    color: #60A5FA
-}
-
-/* Name.Tag (HTML/XML) */
+.highlight .nt /* Name.Tag (HTML/XML) */
+{ color: #268BD2 }
 
 .highlight .l, /* Literal */
 .highlight .m, /* Literal.Number */
 .highlight .mb, .highlight .mf, .highlight .mh,
-.highlight .mi, .highlight .il, .highlight .mo {
-    color: #F472B6
-}
+.highlight .mi, .highlight .il, .highlight .mo { color: #D33682 }
 
 .highlight .s, /* Literal.String */
 .highlight .sa, .highlight .sb, .highlight .sc,
 .highlight .sd, .highlight .s1, .highlight .s2,
 .highlight .se, .highlight .sh, .highlight .si,
-.highlight .sr, .highlight .ss, .highlight .sx {
-    color: #34D399
-}
+.highlight .sr, .highlight .ss, .highlight .sx { color: #2AA198 }
 
 .highlight .o, /* Operator */
-.highlight .ow {
-    color: #FDE68A
-}
+.highlight .ow { color: #6C71C4 }
 
-.highlight .p {
-    color: #E5E7EB
-}
-
+.highlight .p { color: var(--code-fg) }
 /* Punctuation */
 
 .highlight .gd {
@@ -580,11 +554,16 @@ a:hover {
 /* Dark mode tokens */
 @media (prefers-color-scheme: dark) {
     :root {
-        --cc-text: #E5E7EB; /* gray-200 */
-        --cc-muted: #9CA3AF; /* gray-400 */
-        --cc-bg: #0B1220; /* deep navy */
-        --cc-surface: #111827; /* gray-900 */
-        --cc-border: #1F2937; /* gray-800 */
+        --cc-text: #E6E6E6;    /* light gray */
+        --cc-muted: #A3A3A3;   /* muted gray */
+        --cc-bg: #121212;      /* dark grey background */
+        --cc-surface: #1C1C1C; /* dark grey surface */
+        --cc-border: #2A2A2A;  /* subtle border */
+
+        /* Code surfaces (dark theme) */
+        --code-bg: #141414;
+        --code-fg: #E8E8E8;
+        --code-border: var(--cc-border);
     }
 
     body {
@@ -598,30 +577,32 @@ a:hover {
     }
 
     blockquote {
-        background: rgba(37, 99, 235, .10);
+        background: var(--cc-primary-10);
         border-left-color: var(--cc-primary)
     }
 
-    .highlighter-rouge .highlight {
-        border: none
-    }
+    .highlighter-rouge .highlight { border-color: var(--code-border) }
 
     .skip-link:focus {
         background: var(--cc-surface)
     }
 
-    /* Slightly brighter token colors in dark mode environments */
-    .highlight .c, .highlight .cm, .highlight .c1 {
-        color: #9CA3AF
-    }
-
-    .highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt {
-        color: #A5B4FC
-    }
-
-    .highlight .s, .highlight .sa, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s1, .highlight .s2, .highlight .se, .highlight .sh, .highlight .si, .highlight .sr, .highlight .ss, .highlight .sx {
-        color: #6EE7B7
-    }
+    /* Dark theme token colors (balanced for dark gray) */
+    .highlight .c, .highlight .cm, .highlight .c1 { color: #93A1A1; font-style: italic }
+    .highlight .cp { color: #B58900 }
+    .highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt { color: #A3C400 }
+    .highlight .n, .highlight .nx { color: var(--code-fg) }
+    .highlight .nc, .highlight .no { color: #E0B34B }
+    .highlight .na { color: #4EA4E0 }
+    .highlight .ni { color: #F0792B }
+    .highlight .ne { color: #EF4444 }
+    .highlight .nf { color: #4EA4E0 }
+    .highlight .nn { color: #4EA4E0 }
+    .highlight .nt { color: #4EA4E0 }
+    .highlight .l, .highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo { color: #F472B6 }
+    .highlight .s, .highlight .sa, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s1, .highlight .s2, .highlight .se, .highlight .sh, .highlight .si, .highlight .sr, .highlight .ss, .highlight .sx { color: #33D1B6 }
+    .highlight .o, .highlight .ow { color: #9F86FF }
+    .highlight .p { color: var(--code-fg) }
 }
 
 /* Tables: improve visibility with borders and subtle striping */
