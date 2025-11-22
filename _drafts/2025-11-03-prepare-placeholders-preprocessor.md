@@ -1,0 +1,107 @@
+---
+layout: article
+title:  ""
+date:   202X-XX-XX 09:00:00
+categories: []
+author: Joseph
+tags: [agility, craftsmanship, solo-maintainer, enterprise, platform, ci-cd, risk-management]
+description: ""
+---
+
+Commit:
+[822eff5](https://github.com/verronpro/office-stamper/commit/822eff5)
+
+# Why this stands out
+
+Real‑world templates are messy. Authors mix fields, comments, SDTs
+(content controls), and hand‑typed placeholders. A single `${token}`
+might be split across several runs; a control comment can start in one
+run and end three runs later; an SDT might unintentionally wrap part of
+a placeholder. When processors downstream must account for every one of
+these quirks, complexity leaks into feature code and correctness becomes
+expensive to maintain.
+
+`PreparePlaceholders` is a small preprocessor that does one thing well:
+normalize placeholder regions before stamping. It pushes incidental
+complexity to the front of the pipeline so core processors can assume
+cleaner inputs and focus on business intent. That shift is pragmatic
+agility for a solo‑maintained project: fewer surprises later, simpler
+code paths, clearer tests.
+
+# What actually changed
+
+- Introduced a deterministic pass that scans paragraphs for placeholder
+  tokens and makes them atomic (contiguous text where feasible), so
+  later operations like `Paragraph.replace` have predictable bounds.
+
+- Tightened boundaries: detects and adjusts comment ranges that cross
+  SDTs or split placeholders; flags pathological cases for early failure
+  rather than silent oddities later.
+
+- Encapsulated cleanup heuristics behind a tiny, documented contract:
+  idempotent, fast, and safe to run twice.
+
+- Co‑located examples and tests so behavior is easy to read and verify;
+  the preprocessor is now a named step in the site docs and
+  configuration presets.
+
+# Agile/craftsmanship/docs‑as‑code lens
+
+- Shift quality left. Normalization reduces edge cases that otherwise
+  sprawl across processors. Tests become simpler and assert invariants
+  (atomic placeholders, no cross‑SDT spans) instead of brittle object
+  graphs.
+
+- Keep the contract small. A preprocessor with clear inputs/outputs is
+  easier to reason about than sprinkling “fixups” in feature code. When
+  behavior changes by design, the docs and tests update in the same
+  PR—documentation‑as‑code.
+
+- Fail fast with context. When a template violates an invariant, produce
+  a precise message that helps authors repair it. Clear failures are
+  cheaper than silent data‑dependent behavior.
+
+# Solo maintainer + enterprise usage angle
+
+Office‑stamper is maintained by one person and adopted sporadically
+inside large companies. Normalizing placeholders up front reduces
+support tickets that start with “this template worked last quarter but
+fails now.” It also helps platform and security reviewers: a named,
+optional step with documented guarantees is easier to audit than an
+implicit tangle of call‑site fixups. For contributors who appear every
+few months, the preprocessor is a beacon—there is one place to harden
+rules, and improvements pay dividends across features.
+
+# Risks and mitigations
+
+- Risk: Over‑normalization changes layout. Mitigation: scope
+  transformations narrowly to placeholder regions; preserve run
+  properties unless the caller opts in to formatting.
+
+- Risk: Hidden behavior differences vs. prior hand‑rolled paths.
+  Mitigation: port characterization tests; expose metrics in debug runs
+  (e.g., “consolidated 3 placeholders, adjusted 1 cross‑SDT range”).
+
+- Risk: Performance on very large documents. Mitigation: linear scans,
+  bounded look‑ahead, and avoiding global rescans; profile with real
+  templates before optimizing.
+
+# How to apply this in your project
+
+- Add a pre‑normalization step before core processing. Keep it
+  deterministic and idempotent so multiple passes are safe.
+
+- Make placeholders atomic wherever possible; avoid relying on
+  coincidental run boundaries.
+
+- Treat normalization results as a contract and write a couple of
+  fixtures that assert invariants. Link those tests from your docs so
+  template authors learn by example.
+
+# References
+
+- Commit:
+  [822eff5](https://github.com/verronpro/office-stamper/commit/822eff5)
+
+- Related posts: `Paragraph.replace` API (Oct 2025); Post‑processing in
+  DocxStamper (Dec 2024); Template invariants (Jun 2023)

@@ -1,0 +1,107 @@
+---
+layout: article
+title:  ""
+date:   202X-XX-XX 09:00:00
+categories: []
+author: Joseph
+tags: [agility, craftsmanship, solo-maintainer, enterprise, platform, ci-cd, risk-management]
+description: ""
+---
+
+Commit:
+[0d18a0f](https://github.com/verronpro/office-stamper/commit/0d18a0f)
+
+# Why this commit stands out
+
+When your input format is XML, parser settings are security settings.
+DOCX, PPTX, and XLSX all contain XML under the hood; so do many of the
+auxiliary files we touch in tests and utilities. This commit enables
+secure processing by default and locks down XML factories to mitigate
+common classes of attacks (entity expansion/XXE, external entity
+resolution, and billion‑laughs style payloads). The change is
+intentionally small, but it raises the floor for everyone—callers don’t
+have to remember flags or copy boilerplate to be safe.
+
+In a project maintained by one person and adopted sporadically inside
+large companies, these defaults are a feature. Enterprise security and
+platform teams expect reasonable hardening out of the box. When the
+default is safe, onboarding is smoother and support questions are rarer.
+When something goes wrong, we can talk about business behavior instead
+of configuration footguns.
+
+# What actually changed
+
+- Centralized XML parser creation behind a small factory with secure
+  defaults enabled.
+
+- Disabled external entity resolution and DTD processing where they are
+  not required.
+
+- Adopted `XMLConstants.FEATURE_SECURE_PROCESSING` and related flags
+  consistently across code paths that build parsers.
+
+- Added/updated tests to assert the locked‑down behavior (no external
+  entity resolution; bounded entity expansion).
+
+- Documented the threat model and defaults in the site so reviewers can
+  see exactly what is enabled and why.
+
+# Agile/craftsmanship/docs‑as‑code lens
+
+- Make the pit of success shallow. Safe defaults beat “remember to set
+  three flags at every call site.”
+
+- Prefer explicit factories. By funneling parser creation through one
+  seam, we reduce duplicated configuration and avoid drift. Tests and
+  docs can focus on one place.
+
+- Documentation‑as‑code. The same PR that flips the flags updates the
+  docs and links to tests. If a future change adjusts the policy,
+  reviewers see code and narrative together.
+
+# Solo‑maintainer + enterprise usage angle
+
+As the sole maintainer, I need changes that reduce future incidents.
+Locked‑down XML means fewer surprises during audits and fewer production
+mysteries tied to environment differences. For big‑company adopters, the
+default aligns with internal policies: no outbound lookups during
+parsing, bounded resource usage, and explicit opt‑in if a special case
+demands otherwise. The commit link and docs give platform/security
+reviewers something concrete to evaluate.
+
+# Risks and mitigations
+
+- Risk: Breaking previously permissive behavior (e.g., templates relying
+  on external entities). Mitigation: document the change as intentional;
+  provide an opt‑in escape hatch behind configuration for vetted use
+  cases.
+
+- Risk: False sense of security. Mitigation: enumerate the protected
+  vectors (XXE, entity expansion) and what is out of scope; point to
+  tests and keep the factory small and auditable.
+
+- Risk: Divergence across modules. Mitigation: centralize creation;
+  forbid ad‑hoc parser instantiation in code review.
+
+# How to apply this in your project
+
+- Wrap parser creation in a tiny factory. Turn on secure processing,
+  disable external entities/DTDs, and document what’s allowed and why.
+
+- Add a characterization test that proves hostile inputs are
+  ignored/blocked and resource use is bounded.
+
+- Put a short “Security defaults” section in your docs that links to the
+  factory. Treat it like an API: intentional, versioned, and
+  test‑covered.
+
+# References
+
+- Commit:
+  [0d18a0f](https://github.com/verronpro/office-stamper/commit/0d18a0f)
+
+- Related posts: Java 25 migration (platform alignment); CLI
+  multi‑format support; Post‑processing pipeline
+
+- Standards: `XMLConstants.FEATURE_SECURE_PROCESSING`, XXE hardening
+  guides

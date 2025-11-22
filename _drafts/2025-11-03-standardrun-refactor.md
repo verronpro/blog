@@ -1,0 +1,102 @@
+---
+layout: article
+title:  ""
+date:   202X-XX-XX 09:00:00
+categories: []
+author: Joseph
+tags: [agility, craftsmanship, solo-maintainer, enterprise, platform, ci-cd, risk-management]
+description: ""
+---
+
+Commit:
+[dc47832](https://github.com/verronpro/office-stamper/commit/dc47832)
+
+# Why this refactor stands out
+
+Refactors that replace third‑party primitives with project‑owned
+abstractions are high‑leverage. Moving from docx4j’s raw `Run` to our
+`StandardRun` gives a home to invariants (what a run must/should
+contain), helper operations (merge/split, normalize), and a consistent
+mental model across call sites—without sprinkling docx4j specifics
+everywhere. This is how we turn a pile of microscripts into an API that
+reads like intent and resists regressions.
+
+For a solo‑maintained project adopted sporadically in big companies,
+this matters. Newcomers appear every few months. With `StandardRun`,
+they don’t need to remember the exact combination of text nodes,
+properties, and neighboring elements (fields, hyperlinks, comment refs)
+to perform basic operations: the abstraction does the heavy lifting and
+protects the invariants.
+
+# What actually changed
+
+- Replaced the majority of low‑level `Run` manipulations with
+  `StandardRun` across the code paths that handle text.
+
+- Centralized text/run behaviors behind a stable API we control (split,
+  merge, insert, replace, preserve formatting).
+
+- Clarified pre‑/postconditions in Javadoc (e.g., what happens to
+  whitespace, how adjacent runs are normalized).
+
+- Updated tests to hang off the new abstraction, shrinking call‑site
+  knowledge of docx4j internals.
+
+# Agile/craftsmanship/docs‑as‑code lens
+
+- Encapsulate complexity at the right seam. Cursor math and run surgery
+  belong behind a type that owns the contract.
+
+- Delete to accelerate. Once helpers move into `StandardRun`, call sites
+  get shorter; PRs focus on intent rather than mechanics. Smaller diffs
+  → faster reviews → fewer regressions.
+
+- Documentation‑as‑code. By centralizing behavior, the docs and examples
+  can point to one place. When the contract evolves, the code, the
+  Javadoc, and the site page update in the same PR.
+
+# Solo‑maintainer + enterprise usage angle
+
+As the only maintainer, I need changeability more than cleverness.
+`StandardRun` is a force multiplier: it reduces the surface area where
+mistakes can happen and provides a focal point for bug fixes. When an
+enterprise team hits a subtle edge case (comments interleaved with
+fields, hyperlinks splitting text), I can reproduce with a tiny fixture,
+fix the abstraction, and improve outcomes everywhere without hunting for
+bespoke loops in call sites.
+
+# Risks and mitigations
+
+- Risk: Behavior drift vs. raw `Run` operations. Mitigation: port
+  characterization tests; document and test whitespace and formatting
+  policies explicitly.
+
+- Risk: Over‑growth—`StandardRun` becomes a kitchen sink. Mitigation:
+  keep the surface small; prefer dedicated helpers in adjacent utilities
+  (`WmlUtils`) for rare operations.
+
+- Risk: Performance in paragraphs with many small runs. Mitigation: keep
+  operations near linear; avoid quadratic merges; micro‑bench with real
+  templates.
+
+# How to apply this in your project
+
+- Wrap third‑party classes in thin domain wrappers where you need
+  invariants and helpers. Own the contract.
+
+- Put preconditions and failure messages at the boundary so misuse fails
+  fast and readably.
+
+- Back the wrapper with a couple of micro‑tests and 1–2 realistic
+  fixtures. Link those tests from the docs so behavior is discoverable.
+
+# References
+
+- Commit:
+  [dc47832](https://github.com/verronpro/office-stamper/commit/dc47832)
+
+- Related APIs: `Paragraph.replace`; utilities in `WmlUtils`; traversal
+  via `TraversalUtil`/`DocxIterator`
+
+- See also: normalization preprocessor and iterator posts referenced in
+  the blog
