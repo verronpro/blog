@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Monthly Commit — Modular Reorg on the Path to 2.0"
+title: "Modular Reorg on the Path to 2.0"
 date: 2024-06-01
 categories: [ office-stamper ]
 tags: [ office-stamper, java, api, architecture ]
@@ -13,11 +13,12 @@ introduced an `engine` module, moved public entry points into intention‑reveal
 The goal is clear seams: a stable extension surface for adopters, and a refactor‑friendly space in the core where I can
 fix long‑standing design issues without surprising users.
 
-Why now? A run of small but telling frictions piled up: PRs that had to thread through unrelated internals, reviewers
+## Why now? 
+A run of small but telling frictions piled up: PRs that had to thread through unrelated internals, reviewers
 second‑guessing where a class “should live,” and extension points that leaked too much of the engine’s shape. Those are
 symptoms of missing boundaries. The 2.0 push is my answer.
 
-Highlights
+## Highlights
 
 - Split project into `engine/` and `examples/` ([6bbcd21](https://github.com/verronpro/office-stamper/commit/6bbcd21)),
   with a dedicated `engine/pom.xml` ([45d6fb8](https://github.com/verronpro/office-stamper/commit/45d6fb8)).
@@ -36,7 +37,7 @@ Highlights
   `UnresolvedExpressionException` that duplicated
   `OfficeStamperException` ([dc83706](https://github.com/verronpro/office-stamper/commit/dc83706)).
 
-Intention‑revealing namespaces
+## Intention‑revealing namespaces
 
 - `pro.verron.officestamper.core.*` is the safe workspace. I will refactor here aggressively to repair inner‑algorithm
   debts (parser/walker invariants, placeholder replacement, resolver composition). Nothing here is a promise of
@@ -62,7 +63,7 @@ flowchart LR
   C -. trimmed/removed .-> P
 ```
 
-Migration notes (old → new)
+## Migration notes (old → new)
 
 - Imports:
     - `org.wickedsource.docxstamper.DocxStamper` → `pro.verron.officestamper.core.DocxStamper`
@@ -81,12 +82,12 @@ import org.wickedsource.docxstamper.DocxStamper;
 import pro.verron.officestamper.core.DocxStamper;
 ```
 
-Craftsmanship notes: stability where users live, freedom where I work
-The main drive behind the reorganization is to keep your adoption cost low while giving me room to improve the
-algorithm. The preset package is the “stable handle.” The core is the “workbench.” By declaring those intentions in the
+> Craftsmanship notes: stability where users live, freedom where I work
+> The main drive behind the reorganization is to keep your adoption cost low while giving me room to improve the
+algorithm. The preset package is the "stable handle." The core is the "workbench." By declaring those intentions in the
 names, I can change internals without stealth breaks, and you can write code that ages more gracefully.
 
-What I removed, and why it helps
+### What I removed, and why it helps
 
 - Deprecated adapters and duplicates masked the true extension surface. Removing them shrinks the cognitive load and the
   chance of misuse under time pressure.
@@ -94,7 +95,7 @@ What I removed, and why it helps
   live under `preset.*`; the custom `UnresolvedExpressionException` collapsed into the standard
   `OfficeStamperException`.
 
-Evidence and risk mitigation
+### Evidence and risk mitigation
 
 - The full test suites continue to run green after the reorg. Mutation testing levels did not materially change, which
   is a useful proxy that semantics stayed in place while types moved.
@@ -128,7 +129,7 @@ Planned inner‑algorithm changes in `core` focus on invariants and passes:
 
 For adopters
 
-- If you only stamp documents (no custom processors), migrate imports and switch to the preset factories. That’s usually
+- If you only stamp documents (no custom processors), migrate imports and switch to the preset factories. That's usually
   a search‑replace.
 - If you extend the library, do it consciously against `preset` and `api` contracts; open issues if you find a seam
   missing.
