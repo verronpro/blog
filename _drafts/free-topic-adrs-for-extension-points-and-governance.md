@@ -130,3 +130,6 @@ When you're working with a solo-maintained project:
 
 The goal is to create a project that's self-service for users while sustainable for the maintainer. Decision records are
 how I've achieved that balance.
+
+Inspiration: Michael Nygard’s ADRs; "Decisions, not discussions" as a
+team habit.
