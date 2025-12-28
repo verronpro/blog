@@ -1,7 +1,7 @@
 ---
 layout: article
 title: "Resolver Safety: Managing Nulls, Optionals, and Exception Strategies"
-date: 2024-09-01
+date: 2024-10-01
 categories: [ office-stamper ]
 tags: [ craftsmanship, null-safety, exception-handling, office-stamper, java ]
 author: Joseph
