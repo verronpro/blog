@@ -1,107 +1,42 @@
 ---
 layout: article
-title:  ""
-date:   202X-XX-XX 09:00:00
-categories: []
+title: "Monthly Commit — ResetableIterator and DocxIterator"
+date: 2025-11-08
+categories: [office-stamper]
 author: Joseph
 tags: [agility, craftsmanship, solo-maintainer, enterprise, platform, ci-cd, risk-management]
-description: ""
+description: "Safe document mutation during traversal through a new ResetableIterator abstraction."
 ---
 
 Commit:
 [a0fa512](https://github.com/verronpro/office-stamper/commit/a0fa512)
 
 # Why this commit matters
-
-Walking and mutating a WordprocessingML tree at the same time invites
-iterator invalidation, off‑by‑one bugs, and subtle skips when nodes are
-inserted or removed. In real templates—lists, SDTs, hyperlinks,
-comments, fields—structure shifts as processors do their work. This
-change introduces a `ResetableIterator` and routes paragraph traversal
-through `DocxIterator` so processors can safely re‑iterate after
-structural changes. The result is less incidental complexity at call
-sites and a shared, testable contract for traversal across the codebase.
-
-For a solo‑maintained project used sporadically in big companies, this
-is the kind of investment that pays back quickly. A single,
-intention‑revealing traversal primitive reduces review time for
-contributors who appear every few months and lowers the chance of
-regressions in enterprise templates with tricky interleavings.
+- Mutating a WordprocessingML tree during traversal invites iterator invalidation and bugs.
+- Introduces `ResetableIterator` to allow safe re-iteration after structural changes (split/merge/delete).
+- Reduces incidental complexity at call sites by providing a shared, testable contract.
 
 # What actually changed
-
-- Added a `ResetableIterator` abstraction capable of rewinding to a
-  known position after a mutation, making it safe to re‑visit ranges
-  when processors split or merge runs, or delete nodes.
-
-- Centralized traversal with `DocxIterator` and aligned its behavior
-  with docx4j’s `TraversalUtil` so “what to visit” is declarative while
-  “how to walk” is uniform.
-
-- Updated core paragraph processing to rely on these primitives,
-  reducing bespoke loops and duplicated state.
-
-- Strengthened invariants: iterators expose a minimal surface (next,
-  hasNext, reset) and own the tricky parts of navigating around
-  `w:commentRangeStart/End`, fields, and hyperlinks.
+- Added `ResetableIterator` for rewinding to a known position after mutation.
+- Centralized traversal with `DocxIterator`, aligned with `TraversalUtil`.
+- Updated core processing to rely on these primitives instead of bespoke loops.
+- Strengthened invariants: iterators own the navigation of comments, fields, and hyperlinks.
 
 # Agile and craftsmanship lens
+- Delete to accelerate: narrow iterators reduce the amount of code to reason about.
+- Push complexity to the seam: iteration rules belong in the iterator, not the processor.
+- Tests as documentation: iterator behavior is demonstrated in tiny fixtures (nested SDTs, etc.).
 
-- Delete to accelerate. Replacing ad‑hoc loops with a narrow iterator
-  reduces the amount of code you need to reason about per feature.
-  Smaller diffs, faster reviews, fewer regressions.
-
-- Push complexity to the seam. Iteration rules belong in an iterator;
-  processors should read like intent (`repeat`, `replace`, `displayIf`)
-  without re‑implementing cursor math.
-
-- Tests as documentation. Iterator behavior can be demonstrated in tiny
-  fixtures (e.g., nested SDTs with comments). Those tests become the
-  examples we link to from docs—documentation‑as‑code.
-
-# Solo‑maintainer + enterprise usage angle
-
-When a large company adopts Office‑stamper for a short project, they
-need predictability more than novelty. A shared iterator abstraction
-gives reviewers (and my future self) a focal point: if traversal is
-wrong, there is one place to fix it. It also enables better support: a
-bug report can reference a specific iterator test, and the fix improves
-all processors that rely on it.
+# Solo-maintainer + enterprise usage angle
+- Predictability: shared iterator abstraction gives reviewers and maintainers a stable focal point.
+- Supportability: bug reports can target specific iterator tests; fixes benefit all processors.
 
 # Risks and mitigations
+- Hidden behavior changes: port characterization tests and run on representative documents.
+- Over-generalization: keep the surface minimal (iteration + reset).
+- Performance: bound iteration scope; use visitor patterns with early exits.
 
-- Risk: Hidden behavior changes when switching call sites to the
-  iterator. Mitigation: port characterization tests and run them on
-  representative documents; keep a changelog of iterator semantics.
-
-- Risk: Over‑generalizing the iterator. Mitigation: keep the surface
-  minimal (iteration + reset); build specific factories like
-  `DocxIterator.ofCRS` for clarity rather than flags.
-
-- Risk: Performance regressions in very large documents. Mitigation:
-  bound iteration scope; prefer visitor patterns with early exits;
-  profile with real templates.
-
-# How to apply this idea in your codebase
-
-- When you transform a collection while walking it, hide the cursor
-  logic behind a tiny interface and provide a reset capability if
-  mutations can invalidate positions.
-
-- Prefer declarative selection: create small factories for “what to
-  visit” (comments, fields, runs) and keep walking uniform across the
-  codebase.
-
-- Back your iterators with micro‑tests that mirror production shapes.
-  Link those tests from the docs so behavior is discoverable and
-  teachable.
-
-# References
-
-- Commit: a0fa512
-
-- Iteration helpers: `DocxIterator`, `DocxIterator.ofCRS` for comment
-  starts, docx4j `TraversalUtil`
-
-- Related posts: comment retrieval via `DocxIterator` (Nov 2025);
-  targeted traversal with `ofCRS` (Nov 2025)
+# How to apply
+- Hide cursor logic behind a tiny interface with reset capability if mutations invalidate positions.
+- Prefer declarative selection through small factories for specific node types.
+- Back iterators with micro-tests mirroring production document shapes.

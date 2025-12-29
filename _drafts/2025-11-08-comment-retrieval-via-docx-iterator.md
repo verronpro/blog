@@ -1,104 +1,43 @@
 ---
 layout: article
-title:  ""
-date:   202X-XX-XX 09:00:00
-categories: []
+title: "Monthly Commit — Comment Retrieval via DocxIterator"
+date: 2025-11-08
+categories: [office-stamper]
 author: Joseph
 tags: [agility, craftsmanship, solo-maintainer, enterprise, platform, ci-cd, risk-management]
-description: ""
+description: "Consolidating comment discovery behind a single DocxIterator primitive for predictable metadata retrieval."
 ---
 
 Commit:
 [640d654](https://github.com/verronpro/office-stamper/commit/640d654)
 
 # Why this stands out
-
-Fetching comments in WordprocessingML used to be a tangle of tree
-walking, `instanceof` checks, and duplicated filters sprinkled across
-the codebase. Comments aren’t just annotations in Office‑stamper; they
-are how users express control metadata that drives processors like
-`displayIf`, `repeat`, and `replaceWith`. When retrieval is scattered,
-behavior is hard to reason about and even harder to test. This change
-routes comment discovery through a single, intention‑revealing
-primitive—`DocxIterator`—so the rest of the code can read like intent
-instead of plumbing.
-
-For a solo‑maintained project used sporadically inside big companies,
-that consolidation is leverage. It reduces the surface area of traversal
-logic that a contributor must understand, improves predictability in
-tricky templates (nested SDTs, interleaved fields/hyperlinks), and turns
-a source of “heisenbugs” into a coherent contract.
+- Fetching comments was previously a tangle of tree walking and duplicated filters.
+- Comments drive control metadata (`displayIf`, `repeat`); retrieval must be robust and testable.
+- Consolidates discovery behind `DocxIterator` to turn plumbing into intent.
 
 # What actually changed
+- Centralized comment discovery behind `DocxIterator`, replacing ad-hoc loops and type checks.
+- Introduced named factories (`DocxIterator.ofCRS`) to state selection intent explicitly.
+- Aligned discovery with `TraversalUtil`: callers specify "what to visit", iterator handles safety.
+- Simplified call sites and removed redundant utility code.
 
-- Centralized comment discovery behind `DocxIterator`, replacing ad‑hoc
-  loops and type checks at call sites.
+# Agile and craftsmanship angles
+- Delete to accelerate: removing bespoke traversal clarifies reviews and reduces code touched.
+- One place to learn: docs, Javadoc, and examples point to `DocxIterator`.
+- Safer refactors: characterization tests lock behavior at the seam.
 
-- Introduced named factories (e.g., `DocxIterator.ofCRS`) to state
-  selection intent explicitly ("iterate comment starts").
-
-- Aligned discovery with our traversal approach based on docx4j’s
-  `TraversalUtil`: callers specify what to visit; the iterator handles
-  how to walk safely.
-
-- Simplified call sites and removed redundant utility code; retrieval
-  now returns well‑typed elements in a predictable order, ready for
-  processors to consume.
-
-# Agile/craftsmanship/docs‑as‑code lens
-
-- Delete to accelerate: removing bespoke traversal reduces code touched
-  per change and clarifies reviews.
-
-- One place to learn: documentation, Javadoc, and examples can point to
-  `DocxIterator` and its factories. When behavior changes by design,
-  examples and code evolve together—documentation‑as‑code.
-
-- Safer refactors: with selection rules centralized, characterization
-  tests can lock behavior at the seam; internal improvements don’t
-  require auditing dozens of call sites.
-
-# Solo maintainer + enterprise usage angle
-
-Office‑stamper is maintained by one person and adopted in short bursts
-by enterprise teams. A predictable comment retrieval path means a
-reviewer can focus on business intent rather than deciphering traversal.
-When something goes odd in production (“a comment wasn’t found in this
-SDT”), I can reproduce with a tiny fixture and test the iterator
-contract first. Fixing the iterator helps everyone downstream. For
-enterprise audits, a named, documented iterator is easier to explain
-than scattered loops—it conveys intent and boundaries quickly.
+# Solo-maintainer + enterprise usage angle
+- Leverage: reduces traversal logic contributors must understand.
+- predictable: fixes for "missing comments" in edge cases help all downstream processors.
+- Auditable: named, documented iterators are easier to explain than scattered loops.
 
 # Risks and mitigations
+- Behavior drift: port characterization tests for complex comment patterns (SDTs, hyperlinks).
+- Over-generalization: keep factories small and specific; avoid flag sprawl.
+- Performance: bound traversal scope and avoid quadratic filters.
 
-- Risk: Hidden behavior drift during consolidation. Mitigation: port
-  characterization tests for comment patterns (across SDTs, hyperlinks,
-  fields) and document ordering/containment guarantees.
-
-- Risk: Over‑generalization of iterators. Mitigation: keep factories
-  small and specific (`ofCRS`, `ofComments`, etc.) and resist adding
-  flags that conflate concerns.
-
-- Risk: Performance regressions on large documents. Mitigation: bound
-  traversal scope to relevant ancestors; benchmark on representative
-  templates; avoid quadratic filters.
-
-# How to apply this in your project
-
-- Centralize selection. Write a tiny iterator or visitor per selection
-  you rely on; make call sites declarative.
-
-- Prefer named factories over boolean flags. `ofCommentStarts()` is
-  clearer and safer than `iterator(filter=COMMENT_START)`.
-
-- Back iterators with micro‑tests that mirror your production shapes
-  (nested SDTs, interleaved runs). Link those tests from your docs so
-  behavior remains discoverable.
-
-# References
-
-- Commit:
-  [640d654](https://github.com/verronpro/office-stamper/commit/640d654)
-
-- Related posts: `DocxIterator.ofCRS` (Nov 2025); Resetable iterator +
-  traversal contract (Nov 2025); TraversalUtil integration (Nov 2024)
+# How to apply
+- Centralize selection; write small iterators or visitors to make call sites declarative.
+- Prefer named factories over boolean flags for clarity.
+- Back iterators with micro-tests mirroring production shapes.

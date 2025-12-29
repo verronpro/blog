@@ -1,104 +1,37 @@
 ---
 layout: article
-title:  ""
-date:   202X-XX-XX 09:00:00
-categories: []
+title: "Monthly Commit — CLI Modularization"
+date: 2025-03-05
+categories: [office-stamper]
 author: Joseph
 tags: [agility, craftsmanship, solo-maintainer, enterprise, platform, ci-cd, risk-management]
-description: ""
+description: "Decoupling the CLI from the core engine for better boundaries and independent releases."
 ---
 
 Commit:
 [fd98481](https://github.com/verronpro/office-stamper/commit/fd98481)
 
 # Why this is March’s highlight
-
-Agile teams win by delivering value in small, independently verifiable
-slices. This commit takes a decisive architectural step in that
-direction by modularizing the CLI into its own, independent module. It’s
-not merely a folder shuffle; it’s a boundary decision. By carving out
-the command‑line interface from the core engine, we reduce coupling,
-unlock separate release cadences, and make both sides easier to reason
-about and test.
-
-From a craftsmanship angle, strong module boundaries are a kindness to
-future maintainers. They localize decisions (parsing flags, validating
-inputs, mapping formats) and stop those concerns from leaking into the
-document‑processing core. Conversely, the engine focuses on stable
-abstractions—placeholders, processors, resolvers, traversal—without
-having to know anything about terminal UX or packaging quirks.
+- Modularizes the CLI into its own independent module.
+- Reduces coupling and enables separate release cadences.
 
 # What changed
-
-- Introduced an independent CLI module with its own `pom.xml`,
-  dependencies, and packaging.
-
-- Migrated CLI‑specific code and configuration (argument parsing, help
-  text, input adapters) out of the engine.
-
-- Cleaned up shared contracts so the engine exposes a thin,
-  format‑agnostic API that the CLI orchestrates.
-
-- Prepared the build to assemble the CLI distributable separately,
-  improving release clarity and testability.
+- Independent CLI module with its own `pom.xml`.
+- Migrated argument parsing and terminal UX out of the engine.
+- Cleaned up engine API to be format-agnostic and orchestratable.
+- Separate build and assembly for CLI distributables.
 
 # Agility and DX impact
+- Independent iteration: enhance CLI without touching core engine.
+- Better testing seams: engine (units/integration) vs. CLI (end-to-end).
+- Clearer ownership for tooling/UX vs. engine specialists.
 
-- Independent iteration: we can enhance CLI UX (flags, subcommands,
-  examples) without touching the engine, and vice‑versa. That means
-  smaller PRs and faster code review cycles.
-
-- Better testing seams: engine tests remain pure units and integration
-  tests; CLI tests focus on end‑to‑end flows with realistic inputs (CSV,
-  JSON, XML/HTML, Properties).
-
-- Clearer ownership: contributors who favor tooling/UX can work in the
-  CLI module; engine specialists can focus on WordprocessingML logic.
-
-This separation also embodies documentation‑as‑code. The CLI module can
-host task‑oriented docs ("stamp a folder of templates", "convert JSON to
-placeholders"), examples, and even sample datasets without polluting the
-engine’s narrative. In PRs, reviewers can evaluate CLI docs and UX
-alongside code changes.
-
-# Practical guidance for your projects
-
-- Identify modules by change frequency and stakeholder: if different
-  people touch a concern for different reasons, it’s a boundary.
-
-- Expose minimal interfaces at the seam. Keep the contract stable and
-  push variability (formats, flags) to the CLI.
-
-- Use versioned examples: treat `--help` output, sample commands, and
-  exit codes as part of the contract and include them in tests.
+# Practical guidance
+- Identify boundaries by change frequency and stakeholder.
+- Expose minimal interfaces; push variability (flags, formats) to the interface module.
+- Treat CLI output and exit codes as part of the contract.
 
 # Risks and mitigations
-
-- Risk: accidental duplication of utility code across modules.
-  Mitigation: centralize true shared utilities in a small shared library
-  or keep them in the engine with stable APIs.
-
-- Risk: drift between engine capabilities and CLI features. Mitigation:
-  create a checklist for new features—engine change, CLI flag, docs
-  update, example added.
-
-- Risk: packaging complexity. Mitigation: lean on Maven
-  assembly/jpackage; keep the CLI’s dependency surface tight and
-  auditable.
-
-# How to apply this thinking
-
-- Start with a dependency graph: reduce cross‑module references, push
-  boundaries toward product lines (engine vs. interface).
-
-- Keep CI granular: build and test modules independently; publish
-  artifacts that downstream jobs can consume.
-
-- Document the architecture with a small ADR (Architecture Decision
-  Record) so future engineers know why the boundary exists and how to
-  evolve it.
-
-Modularization is an investment that pays compounding returns. It
-sharpens responsibilities, makes tests meaningful, and lets teams move
-faster with fewer collisions—precisely the mechanics that make agility
-sustainable.
+- Duplication: use a small shared library or keep utilities in the engine.
+- Drift: use checklists for new features (Engine + CLI + Docs).
+- Packaging complexity: use Maven assembly; keep dependencies tight.

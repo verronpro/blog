@@ -1,124 +1,38 @@
 ---
 layout: article
-title:  ""
-date:   202X-XX-XX 09:00:00
-categories: []
+title: "Monthly Commit — TraversalUtil Integration"
+date: 2024-11-04
+categories: [office-stamper]
 author: Joseph
 tags: [agility, craftsmanship, solo-maintainer, enterprise, platform, ci-cd, risk-management]
-description: ""
+description: "Replacing custom DocumentWalker with docx4j's TraversalUtil for DOM traversal."
 ---
 
 Commit:
 [c3f2179](https://github.com/verronpro/office-stamper/commit/c3f2179)
 
 # Why this is November’s standout
-
-Walking a WordprocessingML document tree is notoriously fiddly. Between
-paragraphs, runs, fields, hyperlinks, SDTs, comments, and the occasional
-oddity, bespoke walkers tend to grow conditionals until they become a
-second engine. This commit retires a home‑grown `DocumentWalker` and
-standardizes traversal on docx4j’s `TraversalUtil`. The effect is both
-technical and sociotechnical: we reduce accidental complexity, adopt a
-well‑tested library primitive, and make the codebase more porous to new
-contributors who already know docx4j idioms.
-
-From an Agile perspective, this is a classic move toward smaller batch
-sizes and faster feedback. By deleting a custom walker, we’re deleting a
-surface area that required its own test pyramid, its own bugfixes, and
-its own mental model. Future features need fewer lines of traversal
-ceremony and can focus on intent—“find comment starts,” “replace a
-range,” “collect footnotes”—instead of re‑implementing the walk.
+- Retires home-grown `DocumentWalker` in favor of docx4j’s `TraversalUtil`.
+- Reduces accidental complexity and adopts well-tested library primitives.
 
 # What changed
-
-- Replaced the internal `DocumentWalker` with docx4j’s `TraversalUtil`
-  for DOM traversal.
-
-- Simplified call sites to use iterator/factory helpers and visitors
-  that express what to visit rather than how to walk.
-
-- Aligned internal utilities so they cooperate with `TraversalUtil`
-  (e.g., unwrapping, safe iteration across mutations when paired with
-  higher‑level iterators).
-
-The commitment here isn’t just “use a library.” It’s “speak the
-library’s language.” That means leaning on visitors, filters, and
-well‑understood extension points, so any engineer familiar with docx4j
-can jump in and get work done.
+- Replaced internal walker with `TraversalUtil`.
+- Simplified call sites using visitors expressing "what to visit" instead of "how to walk".
+- Aligned internal utilities with `TraversalUtil` idioms.
 
 # Agility and craftsmanship angles
-
-- Delete to accelerate: removing bespoke infrastructure compounds over
-  time. Fewer private abstractions means fewer things to learn, fewer
-  places for bugs to hide, and less friction in reviews.
-
-- Converge on common tools: contributors in the Java/WordprocessingML
-  ecosystem expect `TraversalUtil`. Choosing it lowers onboarding costs
-  and improves the quality of external advice you can tap into (docs,
-  examples, Q&A).
-
-- Strengthen invariants: a single traversal primitive lets you build
-  guardrails centrally (e.g., how to handle unexpected nodes) instead of
-  duplicating checks everywhere.
+- Delete to accelerate: removing bespoke infrastructure reduces surface area.
+- Converge on common tools: lower onboarding costs for docx4j-aware developers.
 
 # Practical guidance
+- Prefer visitors/filters over manual walking.
+- Keep traversal and mutation separate.
+- Write characterization tests for tricky document structures.
 
-- Prefer “what to visit” over “how to walk.” Write visitors and filters
-  that encode your domain concepts (comments, fields, runs, SDTs) and
-  let the traversal primitive do the walking.
-
-- Keep traversal and mutation separate when you can. When you must
-  mutate during a visit, push those mechanics behind small iterators
-  that can safely reset or replay.
-
-- Write characterization tests capturing tricky structures you see in
-  the wild: nested SDTs, interleaved comments and fields, hyperlinks
-  spanning runs. Let these tests guard the contract as you refactor.
-
-# Documentation‑as‑code tie‑in
-
-This refactor makes examples easier to write and understand.
-Documentation can show a minimal visitor that finds the elements of
-interest, and the code will look like the examples users find in
-docx4j’s ecosystem. Fewer custom concepts in the docs means less
-cognitive overhead and fewer opportunities for drift between “how the
-docs say it works” and “how it actually works.”
-
-# Solo‑maintainer + enterprise usage angle
-
-Office‑stamper is maintained by one person and adopted sporadically by
-teams inside big companies. Standardizing on `TraversalUtil` has two
-concrete benefits in that context. First, it lowers onboarding time for
-occasional contributors: engineers who already know docx4j can read our
-visitors and iterators without deciphering a home‑grown walker. Second,
-it simplifies audits and design reviews: platform teams can assess our
-traversal strategy against widely known library semantics instead of
-learning a private abstraction. Fewer custom primitives also means fewer
-docs to maintain—our site can link to stable, upstream references and
-keep local guidance focused on domain concepts (comments, runs, SDTs)
-and invariants.
+# Solo-maintainer + enterprise usage angle
+- Lowers onboarding time for occasional contributors.
+- Simplifies audits; security/platform teams can assess based on known library semantics.
 
 # Risks and mitigations
-
-- Risk: missing behaviors the custom walker handled. Mitigation: port
-  unit tests, add characterization tests, and audit call sites for
-  assumptions. Where necessary, add thin adapters around `TraversalUtil`
-  to preserve behavior.
-
-- Risk: performance changes. Mitigation: benchmark representative
-  documents; if needed, specialize visitors for hotspots while keeping
-  the general approach.
-
-# How to apply this thinking
-
-- Inventory bespoke infrastructure in your codebase. If a mainstream
-  library offers a battle‑tested alternative with a better learning
-  curve, consider converging.
-
-- Delete defensively: write tests first, wrap third‑party primitives
-  behind thin seams you own, and stage the change.
-
-By standing on the shoulders of `TraversalUtil`, we make the code
-simpler, safer, and more teachable—qualities that let Agile teams ship
-more confidently and spend their energy on user‑visible value rather
-than plumbing.
+- Missing behaviors: use characterization tests.
+- Performance: benchmark and specialize if needed.

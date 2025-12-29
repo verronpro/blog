@@ -1,108 +1,38 @@
 ---
 layout: article
-title:  ""
-date:   202X-XX-XX 09:00:00
-categories: []
+title: "Monthly Commit — Comprehensive AsciiDoc Documentation"
+date: 2025-07-03
+categories: [office-stamper]
 author: Joseph
-tags: [agility, craftsmanship, solo-maintainer, enterprise, platform, ci-cd, risk-management]
-description: ""
+tags: [agility, craftsmanship, solo-maintainer, enterprise, platform, ci-cd, risk-management, docs-as-code]
+description: "Adopting AsciiDoc for a teachable platform and documentation-as-code."
 ---
 
 Commit:
 [ba78c33](https://github.com/verronpro/office-stamper/commit/ba78c33)
 
 # Why this is July’s most interesting change
-
-Agility is not only how quickly you can change code, but how quickly a
-team can build a shared mental model. This commit lands a comprehensive
-AsciiDoc documentation set that transforms Office‑stamper from a
-powerful library into a teachable platform. By adopting AsciiDoc
-end‑to‑end, co‑locating content with the code, and wiring it into the
-build, we reduce onboarding friction, compress the feedback loop, and
-make refactors safer. That is documentation‑as‑code in its purest form:
-knowledge that version‑tracks with the implementation and compiles as
-part of the product.
-
-From a craftsmanship perspective, well‑structured docs are a force
-multiplier. They allow us to capture invariants, best practices, and
-examples once and reuse them across issues, PRs, and support. This
-commit also aligns tone and terminology so the API, Javadoc, and site
-agree on names and intent—fewer synonyms, fewer confusions, fewer bugs.
+- Transforms Office-stamper into a teachable platform with comprehensive docs.
+- Docs as code: content co-located with code and integrated into the build.
 
 # What changed
-
-- Introduced a comprehensive AsciiDoc documentation site with a coherent
-  navigation and topic map.
-
-- Documented core concepts (placeholders, comment processors,
-  resolvers), configuration, CLI usage, and extension points.
-
-- Ensured examples are copy‑pastable and compile against public API
-  types (e.g., `CommentProcessor`, `DocxStamperConfiguration`,
-  resolvers).
-
-- Integrated documentation into the Maven build so the site is generated
-  consistently in CI.
-
-The documentation is not a brochure; it is a working artifact. By
-relying on include files, shared attributes, and code blocks
-synchronized with the source, it becomes resilient to API drift.
-Reviewers can treat docs changes like code: discuss diffs, enforce
-consistency, and test links.
+- New AsciiDoc documentation site with coherent topic map.
+- Documented core concepts, configuration, CLI, and extension points.
+- Copy-pastable examples compiled against public API types.
+- Maven integration for consistent site generation in CI.
 
 # Agility and DX impact
+- Faster onboarding through task-oriented guides.
+- Shorter PR cycles: rationale lives next to the code under review.
+- Safer refactors: build catches broken links and inconsistent snippets.
 
-- Faster onboarding: new contributors ramp up using task‑oriented guides
-  rather than spelunking through tests.
-
-- Shorter PR cycles: examples and rationale live next to the code under
-  review, so intent is clearer and discussions are focused.
-
-- Safer refactors: when types move or contracts change, the build will
-  catch broken links and inconsistent snippets.
-
-# Documentation‑as‑code patterns to emulate
-
-- Co‑location: keep the docs folder in the same repo and PR as the
-  change. Tie examples to package names and class symbols you actually
-  own.
-
-- Small, runnable snippets: avoid “wall of prose.” Prefer small examples
-  that readers can paste into tests.
-
-- Single source: if an explanation exists in Javadoc, link to it in the
-  site. If the site offers a longer rationale, link back from Javadoc.
-  Eliminate duplication.
-
-- CI as a safety net: build the site, check for broken links, and run
-  any snippet‑based tests during pull requests.
+# Documentation-as-code patterns
+- Co-location: keep docs in the same repo/PR as code changes.
+- Small, runnable snippets: prefer examples readers can paste into tests.
+- Single source: link between Javadoc and site to eliminate duplication.
+- CI safety net: build site and check links in every PR.
 
 # Risks and mitigations
-
-- Risk: documentation rot. Mitigation: make updating docs part of the
-  Definition of Done and require reviewer sign‑off on docs for
-  user‑visible changes.
-
-- Risk: too much content. Mitigation: maintain a task‑oriented table of
-  contents; prune or archive stale pages regularly.
-
-- Risk: uneven voice. Mitigation: add a short style guide (tone,
-  terminology, code formatting) and lint with AsciiDoctor presets.
-
-# How to apply this in your project
-
-- Start with a “golden path” series—how to stamp a document, add a
-  custom function, and build a simple processor. Then iterate based on
-  support questions.
-
-- Attribute and include: use AsciiDoc attributes for product names and
-  versions; include code from real files where possible so it never goes
-  stale.
-
-- Treat the docs repo as a product. Triage issues, tag them, and measure
-  time‑to‑doc for significant features.
-
-This commit raises the organization’s capacity to learn and ship. By
-turning tacit knowledge into a maintained, testable asset, we trade
-interruptions and folklore for guided, repeatable practice—exactly what
-Agile software craftsmanship aims to achieve.
+- Documentation rot: make updates part of the Definition of Done.
+- Sprawl: maintain task-oriented TOC; prune stale pages.
+- Uneven voice: use a style guide and lint with AsciiDoctor presets.

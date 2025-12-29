@@ -1,178 +1,37 @@
 ---
 layout: article
-title: "Embracing the Rhythm of Solo Maintenance: Why I Stopped Treating Office-Stamper Like My Day Job"
-date: 202X-XX-XX 09:00:00
-categories: [ TODO ]
+title: "Solo Maintenance — Cadence and Quality Guardrails"
+date: 2025-12-29
+categories: [governance]
 author: Joseph
-tags: [ agility, craftsmanship, docs-as-code, solo-maintainer,
-        enterprise, process, quality ]
-description: "How I learned to shift from corporate development patterns to sustainable solo maintenance after leaving my software engineering role."
+tags: [agility, craftsmanship, docs-as-code, solo-maintainer, enterprise, process, quality]
+description: "Sustainable practices for solo maintainers: prioritizing changeability over constant motion."
 ---
 
-# The Harsh Reality Check
+# Thesis
+Solo maintenance isn't a day job. Success isn't measured by commit count, but by sustained changeability and the ability for sporadic contributors to self-serve. Embracing constraints and automating quality guardrails prevents burnout and keeps the project healthy across quarters.
 
-For a long time, I treated office-stamper like it was my day job. Even after leaving my software engineering role and
-moving in with my partner, I kept applying the same routines and patterns I used in corporate environments. Big mistake.
+# Technique: Sustainable Rhythm
+- Time-boxed maintenance: group chores (dependency bumps, chores) into focused blocks to minimize context loss.
+- ADRs for stability: record "why" to reduce re-litigating decisions months later.
+- Docs-as-code: co-locate AsciiDoc with code; require updates for user-visible changes.
+- Small, verifiable steps: split work into releasable PRs (e.g., upgrade toolchain before the code).
+- Invariants over implementations: test properties users care about (atomic placeholders, clean output) rather than object graph details.
+- Strategic restraint: every feature is a maintenance contract; say "no" to niche behaviors to keep the core stable.
 
-I'm not paid to maintain this project. I can't dedicate my full time to it. Yet I was still trying to harmonize this
-repository with "company codebase" practices - as if there was still a company codebase to harmonize with! This approach
-was burning me out and not benefiting the project or its users.
+# Pitfalls
+- Corporate routine trap: applying "day job" rituals to a solo project without the same resources.
+- Cleverness over clarity: grand refactorings that become impossible to pick up months later.
+- Ignoring constraints: fighting restricted environments instead of using them to drive simpler designs.
 
-# The Mindset Shift: Small Steps, Clear Documentation
+# Solo-maintainer + Enterprise value
+- Predictability: stable surface area is easier for enterprise teams to review and approve.
+- Scaling answers: docs and tests replace meetings and scale across time zones.
+- Triage efficiency: minimal repro artifacts (fixtures) accelerate support without the maintainer's constant availability.
 
-The turning point came when I realized that every effort invested in office-stamper should focus on small, iterative
-improvements and self-evident documentation. No more grand refactorings or trying to make the codebase look like
-something from my corporate past.
-
-This meant:
-
-- Accepting that good enough is often good enough
-- Prioritizing clarity over cleverness
-- Making sure every change is small enough that I can pick it up months later and understand what I was thinking
-
-# My Controversial Love Affair with Teamwork (As a Solo Developer)
-
-I'm a big believer in mob programming and having many eyes on code. In a team environment, this high-quality gatekeeping
-actually enhances long-term velocity, even if it seems slow at first. As a solo maintainer, I've had to adapt this
-mindset.
-
-Instead of mob programming, I now:
-
-- React quickly to sporadic contributors' feedback
-- Set up automated feedback loops (Maven fail modes for failed tests, missing Javadoc)
-- Integrate GitHub automated review tools (CodeQL, SonarQube, Renovate)
-
-It's not the same as having teammates, but it's the closest I can get to maintaining that quality mindset.
-
-# Quality Over Quantity: The New Approach
-
-I've learned to embrace constraints rather than fight them. Instead of trying to do everything, I focus on:
-
-- **Time-boxed maintenance windows**: I group chores into focused blocks rather than spreading them thin
-- **Documentation as a first-class citizen**: I co-locate AsciiDoc with code and require docs updates for user-visible
-  changes
-- **Small, verifiable steps**: Every PR keeps the repo releasable
-
-# Saying No (Loudly and Proudly)
-
-Every feature is a maintenance contract. As the sole maintainer, I've gotten comfortable saying "no for now" or "yes,
-but behind an adapter." This protects the core from format-specific leakage or niche behaviors that aren't broadly
-useful.
-
-This restraint is actually a benefit to enterprise adopters - a smaller, stable surface area is easier to review and
-approve under their constraints.
-
-# Practical Takeaways
-
-If you're maintaining a project solo:
-
-1. Stop treating it like your day job - it's not
-2. Focus on small improvements and clear documentation
-3. Automate quality checks to simulate team review
-4. Embrace saying no to features that don't serve the core purpose
-5. Create systems that work with your available time, not against it
-
-The goal isn't to maximize commits - it's to keep the project healthy and welcoming for when sporadic contributors do
-appear.
-
-# Why this topic for January
-
-Office‑stamper is maintained by one person and used in sporadic projects
-at large companies. That reality shapes the way work gets done: bursts
-of activity around real-world needs, long quiet periods, and occasional
-contributions every two or three months. In that environment,
-“productivity” isn’t about maximizing commit count—it’s about keeping
-the system easy to change without burning out the maintainer or
-confusing adopters. January is a good moment to write down the practices
-that keep the project healthy between sprints and across quarters.
-
-# The operating constraints
-
-- Sporadic enterprise usage: teams arrive with a goal, integrate the
-  engine or CLI, ship, and go quiet. Months later a new team appears
-  with a different set of constraints (locked-down CI, internal JDK
-  baseline, custom templates).
-
-- Single maintainer: there is no 24/7 support desk; context switching is
-  expensive; deep changes must be staged.
-
-- Occasional external contributions: valuable, but they require a
-  predictable path to land safely.
-
-If we optimize for sustained changeability rather than constant motion,
-we get a system that is welcoming when it matters.
-
-# Cadence that compounds
-
-- Time‑boxed maintenance windows Group chores (dependency bumps, small
-  refactors, test cleanup) into focused blocks. Keep `main` green at all
-  times and avoid dragging partial changes across weeks. This reduces
-  context loss and keeps releases predictable.
-
-- ADRs for decisions that stick Record why extension points exist and
-  what guarantees they offer. ADRs make reviews faster and reduce
-  re‑litigating the same debates months later.
-
-- Docs‑as‑code as a first‑class practice Co‑locate AsciiDoc with code;
-  require docs updates for user‑visible changes. This ensures sporadic
-  adopters can self‑serve without scheduling time together.
-
-- Small, verifiable steps Split work into PRs that each keep the repo
-  releasable. Platform upgrades? Update CI first, then the toolchain,
-  then the declared baseline. Refactors? Characterize behavior with
-  tests, then change one seam at a time.
-
-# Quality guardrails that scale
-
-- Invariants over implementations Tests assert properties users care
-  about (no leftover control comments, placeholders remain atomic, SDT
-  boundaries are respected), not just exact object graph shapes. This
-  keeps the suite resilient to benign changes and focused on intent.
-
-- Pre‑ and post‑processing Normalize inputs with a preprocessor like
-  `PreparePlaceholders`. Clean up artifacts at the end (collapse empty
-  paragraphs, remove scaffolding) with post‑processors. These phases
-  localize complexity and keep core logic simpler.
-
-- Minimal, expressive APIs Hide complexity behind intention‑revealing
-  methods (`Paragraph.replace`, iterator factories for comments/CRS).
-  Good names reduce the need for extra documentation and make tests
-  smaller.
-
-# Saying no (strategically)
-
-As a solo maintainer, every feature is a maintenance contract. Saying
-“no for now” or “yes, behind an adapter” protects the core from
-format‑specific leakage or niche behaviors that aren’t broadly useful.
-For enterprise adopters, that restraint is a benefit: a smaller, stable
-surface area is easier to review, approve, and operate under
-constraints.
-
-# How enterprise teams can help
-
-- Bring a tiny repro: a minimal `.docx` fixture or a code snippet with
-  `WmlFactory` helpers accelerates triage.
-
-- Align on invariants: if a template pattern breaks an invariant, we can
-  fix the template or improve the pre/post steps.
-
-- Expect asynchronous review: keep context in the issue/PR; link to
-  commits and docs pages you consulted.
-
-# How to apply this in your project
-
-- Establish a sustainable cadence: weekly maintenance hour, monthly
-  release window, quarterly platform audit.
-
-- Make docs and tests carry more weight than meetings: they scale better
-  across time zones and firewalls.
-
-- Prefer invariants, small APIs, and co‑located docs: they are the
-  cheapest way to keep complex systems changeable.
-
-# References
-
-- Practices referenced throughout 2024: ADRs for extension points;
-  `PreparePlaceholders`; post‑processing in `DocxStamper`; iterator
-  helpers under `DocxIterator`; expressive domain APIs (e.g.,
-  `Paragraph.replace`).
+# Checklist
+- [ ] Establish a maintenance cadence (e.g., weekly hour, monthly release window).
+- [ ] Automate feedback loops (CI, CodeQL, SonarQube, Renovate).
+- [ ] Ensure every user-visible change includes a corresponding documentation update.
+- [ ] Use pre/post-processing phases to localize complexity outside the core logic.
+- [ ] Maintain a "no network dependencies" policy for the build and test suite.

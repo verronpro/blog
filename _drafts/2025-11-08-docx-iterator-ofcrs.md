@@ -1,99 +1,41 @@
 ---
 layout: article
-title:  ""
-date:   202X-XX-XX 09:00:00
-categories: []
+title: "Monthly Commit — DocxIterator.ofCRS"
+date: 2025-11-08
+categories: [office-stamper]
 author: Joseph
 tags: [agility, craftsmanship, solo-maintainer, enterprise, platform, ci-cd, risk-management]
-description: ""
+description: "Adding a focused factory for iterating w:commentRangeStart elements (CRS) to clarify selection intent."
 ---
 
 Commit:
 [8550bfb](https://github.com/verronpro/office-stamper/commit/8550bfb)
 
 # Why this stands out
-
-Selecting exactly the right nodes in a complex document tree is half the
-battle. In WordprocessingML, comments are not just annotations—they are
-control metadata that drive processors like `displayIf`, `repeat`, or
-`replaceWith`. This commit adds `DocxIterator.ofCRS`, a focused factory
-for iterating `w:commentRangeStart` elements (CRS). By naming the
-selection explicitly, call sites stop speaking in generic loops and
-start reading like intent: “iterate comment starts here.” That clarity
-is a quality attribute: fewer mismatched filters, fewer off‑by‑one
-mistakes, and a shared mental model across the codebase.
+- Selecting correct nodes in complex trees is crucial; comments are control metadata.
+- `DocxIterator.ofCRS` names the selection explicitly, turning generic loops into intent.
+- Clarity reduces off-by-one mistakes and provides a shared mental model.
 
 # What actually changed
+- Introduced typed factory `DocxIterator.ofCRS` for enumerating `w:commentRangeStart` elements.
+- Traversal is now declarative ("what to visit") rather than imperative.
+- Semantics aligned with broader traversal strategy (`TraversalUtil`).
 
-- Introduced a typed, intention‑revealing factory `DocxIterator.ofCRS`
-  to enumerate `w:commentRangeStart` elements.
+# Agile and craftsmanship angles
+- One noun, one meaning: communicates selection semantics without ad-hoc type checks.
+- Delete to accelerate: replacing bespoke loops increases review speed.
+- Docs as executable knowledge: snippets can be copied directly into tests.
 
-- Removed ad‑hoc filtering at call sites; traversal is now declarative
-  (“what to visit”) rather than imperative (“how to walk and then
-  filter”).
-
-- Aligned iterator semantics with our broader traversal story (see
-  `TraversalUtil` integration and iterator posts), so behavior is
-  uniform and teachable.
-
-Together, these changes move traversal rules to the seam where they
-belong—the iterator—and let processors focus on business intent.
-
-# Agile/craftsmanship/docs‑as‑code lens
-
-- One noun, one meaning. A named factory communicates selection
-  semantics without sprinkling type checks around.
-
-- Delete to accelerate. Replacing bespoke loops with a narrow primitive
-  reduces code touched per feature and increases review speed.
-
-- Docs as executable knowledge. When examples show `DocxIterator.ofCRS`,
-  readers can copy the snippet into a test; when the API evolves, the
-  same PR updates code and docs.
-
-# Solo maintainer + enterprise usage angle
-
-Office‑stamper is maintained by one person and used in sporadic projects
-inside big companies. Iteration bugs are the kind of subtle defect that
-cost hours to reproduce and explain. Centralizing “how to pick CRS
-nodes” in one place gives me and contributors a stable focal point: if
-selection is wrong, we fix the iterator and all processors benefit. For
-enterprise adopters, a named factory also simplifies audits: reviewers
-see a single, well‑documented path for comment selection instead of a
-patchwork of `instanceof` checks.
+# Solo-maintainer + enterprise usage angle
+- stable focal point: if selection is wrong, fixing the iterator helps all processors.
+- Simplified audits: reviewers see a single documented path instead of `instanceof` patchwork.
 
 # Risks and mitigations
+- Hidden behavior differences: port characterization tests for complex comment patterns.
+- Over-generalization: use specific factories instead of flags on a mega-iterator.
+- Performance: bound traversal by ancestor scope.
 
-- Risk: Hidden behavior differences vs. prior ad‑hoc loops. Mitigation:
-  port characterization tests for comments, including interleavings with
-  SDTs, hyperlinks, and fields. Document iterator guarantees (ordering,
-  scope).
-
-- Risk: Over‑generalization. Mitigation: keep the surface tiny; add
-  specific factories (e.g., `ofCRS`, `ofComments`, `ofFields`) rather
-  than flags on one mega‑iterator.
-
-- Risk: Performance on very large documents. Mitigation: bound traversal
-  by ancestor scope when possible; profile with real templates before
-  optimizing.
-
-# How to apply this in your project
-
-- Prefer named factories for selections you perform often. “Pick the
-  right things” once; reuse everywhere.
-
-- Keep walking uniform. Let iterators own cursor math; let processors
-  read like intent (`repeat`, `replace`, `displayIf`).
-
-- Back factories with micro‑tests that mirror your production shapes
-  (e.g., CRS inside SDTs or across runs). Link these tests from your
-  documentation so behavior is discoverable.
-
-# References
-
-- Commit:
-  [8550bfb](https://github.com/verronpro/office-stamper/commit/8550bfb)
-
-- Related posts: TraversalUtil integration (Nov 2024); Iterator
-  robustness (ResetableIterator + DocxIterator, Nov 2025); Comment
-  retrieval via `DocxIterator` (Nov 2025)
+# How to apply
+- Use named factories for frequent selections; reuse everywhere.
+- Let iterators own cursor math; let processors read like intent.
+- Back factories with micro-tests mirroring production document shapes.

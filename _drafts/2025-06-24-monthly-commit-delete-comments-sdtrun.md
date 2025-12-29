@@ -1,94 +1,35 @@
 ---
 layout: article
-title:  ""
-date:   202X-XX-XX 09:00:00
-categories: []
+title: "Monthly Commit — Precise Comment Deletion in SdtRun"
+date: 2025-06-24
+categories: [office-stamper]
 author: Joseph
 tags: [agility, craftsmanship, solo-maintainer, enterprise, platform, ci-cd, risk-management]
-description: ""
+description: "Introducing precise support for deleting comments attached to SdtRun elements."
 ---
 
 Commit:
 [498f37e](https://github.com/verronpro/office-stamper/commit/498f37e)
 
 # Why this matters
-
-Structured document tags (SDTs, a.k.a. content controls) are everywhere
-in complex Word templates. They encapsulate regions of content for
-forms, repeating sections, or semantic tagging. Comments often intersect
-with SDTs—authors use comments as the control plane for processors
-(e.g., `displayIf`, `repeat`, `replaceWith`). When comments linger after
-processing, they become footguns: unexpected selectors for later passes,
-visual noise for end users, and even sources of incorrect behavior if a
-downstream tool re-interprets them.
-
-This commit introduces precise support for deleting comments that are
-attached to `SdtRun` elements. It seems humble, but it tightens a key
-invariant in the pipeline: processors should leave the document in a
-clean, predictable state with no dangling control metadata.
+- Comments used as control metadata (e.g., `displayIf`, `repeat`) can linger and cause issues.
+- Tightens the pipeline invariant: processors should leave documents in a clean state.
 
 # What changed
+- Support for removing comments from `w:sdt`/`w:sdtContent` when represented as `SdtRun`.
+- Utility methods to navigate and remove exact `w:commentRangeStart/End` and `w:commentReference`.
+- Idempotent and safe removal across nested structures.
 
-- Added support for removing comments from `w:sdt`/`w:sdtContent` when
-  the SDT is represented as a run (`SdtRun`).
-
-- Provided utility methods to navigate from the SDT boundary to the
-  exact `w:commentRangeStart`/`w:commentRangeEnd` and associated
-  `w:commentReference` runs.
-
-- Ensured removal is idempotent and safe across nested structures, so
-  calling it twice does not corrupt the tree.
-
-# Agile and craftsmanship angles
-
-- Make correctness cheap: small, well-tested primitives like this
-  prevent “heisenbugs” later in the pipeline. Fewer cleanups at the tail
-  mean faster feedback and smaller PRs.
-
-- Honor boundaries: SDTs delineate ownership regions. Removing control
-  comments once they’ve served their purpose enforces a clear lifecycle
-  for metadata.
-
-- Reduce cognitive load: when authors open the stamped document, they
-  should see only final content. Hidden control scaffolding is a
-  liability.
+# Agility and craftsmanship angles
+- Make correctness cheap: prevents "heisenbugs" later in the pipeline.
+- Honor boundaries: enforces a clear lifecycle for control metadata.
+- Reduce cognitive load: authors see only final content, not hidden scaffolding.
 
 # Practical guidance
-
-- Treat control metadata as ephemeral. If a comment is only used to
-  drive a transformation, remove it close to where you apply the change.
-
-- Prefer narrowly-scoped helpers that speak the domain (here: SdtRun +
-  comment removal) over generic DOM surgery. Specificity is clarity.
-
-- Write idempotent utilities. In pipelines where multiple processors can
-  touch the same region, repeating a cleanup should be safe.
+- Treat control metadata as ephemeral; remove it close to where it's consumed.
+- Prefer specific, domain-aware helpers over generic DOM surgery.
+- Write idempotent utilities for multi-processor pipelines.
 
 # Risks and mitigations
-
-- Risk: Over-removal—deleting comments that users intended to keep.
-  Mitigation: scope deletion to processor-owned comments or those in
-  known ranges; avoid global sweeps.
-
-- Risk: Breaking nested structures. Mitigation: rely on iterator/factory
-  helpers (like `DocxIterator`) and unit tests for nested SDTs, fields,
-  and hyperlinks.
-
-# How to apply this thinking
-
-- Map your pipeline’s metadata lifecycle. For each step, list what
-  control data it consumes and what it should remove. Codify that
-  contract in code and docs.
-
-- Add lightweight regression tests for interleavings you know your users
-  create (e.g., comments across SDTs, fields, and lists). Make the
-  tricky cases boring.
-
-- Surface these invariants in documentation-as-code. A short page with
-  examples of “before” and “after” around SDTs will save hours of
-  support later.
-
-Clean boundaries make systems easier to change. By enforcing “no
-leftover control comments” at SDT boundaries, we pay down a class of
-incidental complexity and make future processors simpler to write,
-reason about, and review.
+- Over-removal: scope deletion to processor-owned ranges.
+- Breaking nested structures: rely on `DocxIterator` and unit tests.

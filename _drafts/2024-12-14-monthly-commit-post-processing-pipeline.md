@@ -1,109 +1,36 @@
 ---
 layout: article
-title:  ""
-date:   202X-XX-XX 09:00:00
-categories: []
+title: "Monthly Commit — Post-processing Pipeline"
+date: 2024-12-14
+categories: [office-stamper]
 author: Joseph
 tags: [agility, craftsmanship, solo-maintainer, enterprise, platform, ci-cd, risk-management]
-description: ""
+description: "Adding a formal post-processing phase to DocxStamper for final document polish."
 ---
 
 Commit:
 [a85fb95](https://github.com/verronpro/office-stamper/commit/a85fb95)
 
 # Why this is December’s standout
-
-In real‑world templating, the first pass is rarely the last word. After
-placeholders resolve and processors run, documents often benefit from a
-final polish: remove scaffolding, normalize whitespace, collapse empty
-paragraphs, prune orphaned footnotes, or enforce house style. This
-commit adds a formal post‑processing phase to `DocxStamper`, turning an
-implicit “someone should clean this up later” into an explicit,
-composable pipeline step.
-
-From an Agile standpoint, this improves flow and feedback loops. Teams
-can deliver value incrementally: implement a feature, then iterate on
-presentation quality in a post‑processor without risking core logic.
-From a craftsmanship perspective, it establishes a separation of
-concerns—transformation vs. hygiene—so each module can be small,
-testable, and intention‑revealing.
+- Introduces formal post-processing phase for cleaning up resolved documents.
+- Separation of concerns: transformation vs. hygiene.
 
 # What changed
-
-- Introduced a post‑processing hook in `DocxStamper` so callers (or the
-  configuration) can register one or more post‑processors.
-
-- Shipped concrete post‑processors to remove orphaned footnotes/endnotes
-  and tidy up common artifacts produced during stamping.
-
-- Extracted and simplified utility code to make writing small
-  post‑processors straightforward and safe.
-
-The shape of the API encourages single‑purpose components. Think
-`RemoveDanglingComments`, `NormalizeRuns`, or `CollapseEmptyParagraphs`.
-Each can be tested in isolation with minimal fixtures and then composed
-in configuration order.
+- Post-processing hook in `DocxStamper`.
+- Concrete post-processors: remove orphaned footnotes, tidy artifacts.
+- Simplified utility code for writing custom post-processors.
 
 # Agility and developer experience
-
-- Safer iteration: presentation changes can be delivered without
-  touching the core stamping path, lowering the risk of regressions.
-
-- Shorter reviews: reviewers focus on the intent of a post‑processor
-  (e.g., “eliminate empty table rows”) instead of rediscovering how the
-  engine stamps documents.
-
-- Configurable outcomes: projects with different style guides can
-  assemble bespoke pipelines by combining small, reusable steps.
-
-This is documentation‑as‑code friendly as well. Post‑processors are
-named, versioned artifacts; their behavior can be demonstrated with
-before/after snippets in the docs, and linked directly from the
-configuration reference. When the implementation evolves, embedded
-examples evolve with it in the same PR.
+- Safer iteration on presentation without touching core logic.
+- Shorter reviews focusing on specific intent (e.g., "eliminate empty rows").
+- Configurable pipelines for bespoke style guides.
 
 # Practical guidance
-
-- Keep post‑processors pure and idempotent. Running the same step twice
-  should produce the same result after the first pass.
-
-- Make steps small. Prefer two simple post‑processors to one that tries
-  to “fix everything.” Simplicity compounds.
-
-- Document order guarantees. If steps depend on each other (e.g.,
-  normalize runs before collapsing paragraphs), state and test that
-  explicitly.
-
-- Use the iterator/helpers (e.g., `DocxIterator`, utility methods in
-  `WmlUtils`) to traverse safely, especially after earlier
-  transformations.
+- Keep post-processors pure and idempotent.
+- Prefer small, single-purpose steps.
+- Document and test ordering dependencies.
 
 # Risks and mitigations
-
-- Risk: hiding upstream defects with “cosmetic” cleanups. Mitigation:
-  add metrics or debug logging that indicate how much a post‑processor
-  changes; unexpected spikes may reveal upstream issues.
-
-- Risk: performance regressions in large documents. Mitigation: bound
-  traversal scope and prefer streaming over global scans; keep
-  complexity near linear per pass.
-
-- Risk: ordering sensitivity. Mitigation: define a canonical default
-  order and document how to customize it safely.
-
-# How to apply this in your project
-
-- Identify the top three paper cuts users notice after stamping (empty
-  artifacts, formatting glitches). Implement one post‑processor per
-  paper cut.
-
-- Write characterization tests with “before/after” fixtures. These
-  double as living documentation.
-
-- Add configuration examples to your docs and README, so users can turn
-  on the steps that matter to them.
-
-By elevating post‑processing to a first‑class concept, the project gives
-teams a structured, testable way to ship polished documents—without
-entangling hygiene with core behavior. That’s a pragmatic improvement
-that enables agility while maintaining craftsmanship.
+- Hiding defects: use metrics/logging to track changes.
+- Performance: bound traversal scope and prefer streaming.
+- Ordering sensitivity: define and document canonical order.

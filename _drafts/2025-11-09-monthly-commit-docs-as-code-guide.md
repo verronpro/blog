@@ -1,90 +1,42 @@
 ---
 layout: article
-title:  ""
-date:   202X-XX-XX 09:00:00
-categories: []
+title: "Monthly Commit — Docs-as-Code Guide Integration"
+date: 2025-11-09
+categories: [office-stamper]
 author: Joseph
 tags: [agility, craftsmanship, solo-maintainer, enterprise, platform, ci-cd, risk-management]
-description: ""
+description: "Elevating documentation to a first-class artifact with a versioned extension guide."
 ---
 
 Commit:
 [04e2de1](https://github.com/verronpro/office-stamper/commit/04e2de1)
 
 # Why this commit stands out
-
-Agility is about sustaining a pace of change without sacrificing shared
-understanding. In mature codebases, the bottleneck rarely sits in
-writing code; it’s in making intent legible to the next engineer (or
-your future self). This commit elevates documentation to a first‑class
-artifact by shipping a comprehensive, versioned guide showing how to
-build custom comment processors and placeholder resolvers.
-
-Instead of sprinkling tribal knowledge across issues and PR comments,
-the guide lives where it belongs: next to the code, referenced by
-package names, and updated in the same change set as the APIs. That is
-documentation‑as‑code in action. It shortens the “time to first
-extension,” trims back‑and‑forth on PRs, and makes it safer to refactor
-because examples and references evolve alongside the implementation.
+- Bottleneck in mature codebases is legibility of intent, not writing code.
+- Elevates documentation to a first-class artifact; guide lives next to the code and evolves in same PR.
+- Shortens "time to first extension" and trims back-and-forth on reviews.
 
 # What actually changed
-
-- A detailed AsciiDoc tutorial explains the extension model:
-  `CommentProcessor`, `AbstractCommentProcessor`, `ObjectResolver`,
-  `StringResolver<T>`, and `ExpressionResolver`.
-
-- It points readers to wiring components (`CommentProcessorRegistry`,
-  `CommentProcessors`, and `DocxStamperConfiguration`) so they can
-  navigate from concept to code in seconds.
-
-- The guide includes copy‑pastable snippets that compile against the
-  public API, encouraging learning by doing.
-
-Taken together, this turns our extension points into a discoverable,
-teachable surface. New contributors can implement a processor like
-`watermark("CONFIDENTIAL")` or a resolver for custom value types without
-spelunking through internals.
+- Detailed AsciiDoc tutorial for `CommentProcessor`, `ObjectResolver`, etc.
+- Points readers to wiring components for rapid concept-to-code navigation.
+- Includes copy-pastable snippets that compile against public APIs.
+- Integrated into Maven/Asciidoctor build to catch link rot early.
 
 # Craftsmanship and Agile impact
+- Build the "pit of success": clear path for extensions reduces misuse and accelerates delivery.
+- Treat docs like code: version, review, and ship atomically with API changes.
+- Intent-revealing examples: small, runnable snippets act as documentation tests.
 
-- Build the “pit of success.” A clear path for extensions reduces
-  misuse, narrows the bug surface, and accelerates feature delivery.
+# Solo-maintainer + Enterprise value
+- Scaling answers: guide turns repeated explanations into linkable artifacts.
+- Risk reduction: clarifies supported vs. internal APIs for enterprise adopters.
+- Asynchronous collaboration: teams can implement extensions on their schedule.
 
-- Treat docs like code: version them, review them, and ship them
-  atomically with the changes they explain. Your Definition of Done
-  should call this out explicitly.
-
-- Prefer intent‑revealing examples over exhaustive prose. Small,
-  runnable snippets act as tests for documentation; they break when APIs
-  drift.
-
-This is also about feedback loops. When a developer gets stuck, their
-question often reveals a docs gap. By keeping the guide in the repo, we
-can patch those gaps in minutes and keep the whole team moving.
-
-# How to apply this in your team
-
-- Co‑locate documentation next to the code it explains. If a symbol
-  moves, update the docs in the same PR.
-
-- Start with a “golden path” tutorial: one end‑to‑end, minimal example
-  per extension point. Link to it from Javadoc and the README.
-
-- Automate docs in CI. Treat link checks and AsciiDoc builds like tests
-  so drift is detected early.
-
-- Encourage documentation pull requests from reviewers. If a line of
-  code sparks a “why,” the answer belongs in the guide.
+# How to apply
+- Co-locate documentation next to the code; update both in the same PR.
+- Start with a "golden path" tutorial per extension point.
+- Automate docs in CI: treat link checks and builds like tests.
 
 # What to watch out for
-
-- Keep examples small and idiomatic. Long, kitchen‑sink snippets age
-  quickly and clog refactors.
-
-- Avoid duplicating API explanations across Javadoc, site docs, and
-  comments. Prefer a single source and link to it.
-
-This commit is a force multiplier: it doesn’t add new runtime features,
-but it increases the organization’s capacity to ship them. That’s
-agility practiced through documentation‑as‑code and careful developer
-experience design.
+- Snippet size: keep examples small and idiomatic to avoid refactor friction.
+- Duplication: prefer a single source (Javadoc vs. site) and link between them.

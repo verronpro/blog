@@ -1,125 +1,42 @@
 ---
 layout: article
-title:  ""
-date:   202X-XX-XX 09:00:00
-categories: []
+title: "Monthly Commit — Consolidate WmlUtils"
+date: 2025-11-02
+categories: [office-stamper]
 author: Joseph
 tags: [agility, craftsmanship, solo-maintainer, enterprise, platform, ci-cd, risk-management]
-description: ""
+description: "Reducing maintenance tax by consolidating run and paragraph helpers into a unified WmlUtils class."
 ---
 
 Commit:
 [d832b84](https://github.com/verronpro/office-stamper/commit/d832b84)
 
 # Why this refactor matters
-
-Utility sprawl is a maintenance tax that compounds. Over time, small
-helper methods grow in different corners of a codebase: copying text,
-splitting runs, finding the smallest common parent, creating comments,
-or normalizing whitespace. When those helpers live in multiple classes
-with near‑duplicate names (or subtly different semantics), even
-experienced contributors pay a discovery tax—and solo maintainers pay it
-twice. This change consolidates run‑ and paragraph‑related helpers into
-a single `WmlUtils` home and removes the separate `RunUtil` class.
-
-From a craftsmanship perspective, this is classic cohesion: related
-behavior lives together with clear naming and consistent semantics. From
-an Agile perspective, it is about reducing the size of a change. Instead
-of touching three utility classes and five call sites per improvement,
-most work now targets one module with one vocabulary. Reviews get
-faster; regressions become less likely because there is one canonical
-implementation to harden with tests.
+- Utility sprawl (near-duplicate helpers) creates a discovery tax.
+- Consolidation improves cohesion: related behavior lives together with consistent naming.
+- Reduces change size: targeting one module with one vocabulary instead of multiple classes.
 
 # What actually changed
-
 - Consolidated helpers into `WmlUtils` and removed `RunUtil`.
+- Standardized method names and pre/postconditions.
+- Aligned iterator helpers with `DocxIterator`/`TraversalUtil` patterns.
+- Updated call sites and Javadoc for explicit contracts.
 
-- Standardized method names and pre/postconditions; cleaned up edge‑case
-  handling (nulls, empty runs, field/hyperlink interleavings) so call
-  sites need fewer defensive checks.
+# Agile and craftsmanship angles
+- One noun, one meaning: centralizing behavior makes reviews crisper.
+- Lower WIP: developers touch fewer files per change.
+- Docs as code: single source for examples and Javadoc links.
 
-- Aligned iterator helpers with `DocxIterator`/`TraversalUtil` so
-  traversal patterns read the same everywhere in the code.
-
-- Updated call sites to use the unified API and added Javadoc on the
-  consolidated methods so contracts are explicit.
-
-Taken together, the codebase now has one place to look for run/paragraph
-utilities. When a subtle bug appears in a tricky WordprocessingML
-structure (nested SDTs, interleaved comments/fields), we fix it once and
-every user benefits.
-
-# Agile/craftsmanship/docs‑as‑code lens
-
-- One noun, one meaning. By deleting duplicate names and centralizing
-  behavior, we make discussions and reviews crisper.
-
-- Stronger seams. Tests hang off a single module; examples in the
-  documentation can reference `WmlUtils` without hedging.
-
-- Lower WIP. Developers touch fewer files per change, which shortens
-  review cycles and lowers merge conflict risk.
-
-- Docs‑as‑code friendly. The site and Javadoc can link to one place;
-  examples stay accurate as the implementation evolves.
-
-# Solo‑maintainer + enterprise usage angle
-
-Office‑stamper is maintained by one person and used in sporadic projects
-inside big companies. Consolidation is how I keep support affordable.
-When a contributor shows up every few months, they should not have to
-guess which helper to use or relearn subtle differences. Similarly, when
-a large organization evaluates an extension, one utility module with
-clear contracts is easier to audit than a scatter of helpers.
-Procurement and compliance reviewers can read the names, see
-preconditions, and follow links to tests.
-
-For me as the maintainer, this is about sustainable speed. Fewer names
-mean fewer places to break, fewer docs to update, and less cognitive
-overhead when triaging issues. When a user reports a run‑splitting bug,
-I open `WmlUtils`, fix the implementation behind a well‑named method,
-extend a test, and move on.
+# Solo-maintainer + enterprise usage angle
+- Sustainable speed: fewer names to break, fewer docs to update.
+- Easier audits: enterprise reviewers follow one utility module with clear contracts.
 
 # Risks and mitigations
+- Hidden behavior changes: use characterization tests during consolidation.
+- Kitchen sink anti-pattern: keep a high bar for inclusion in `WmlUtils`.
+- Naming churn: provide mapping tables in docs and use clear deprecations.
 
-- Risk: Hidden behavior changes during consolidation. Mitigation: port
-  characterization tests before merging; keep the behavior of public
-  helpers stable; flag breaking changes loudly in release notes if any
-  are unavoidable.
-
-- Risk: Overgrowth—`WmlUtils` becomes a kitchen sink. Mitigation: keep a
-  tiny acceptance bar: utilities that operate on WordprocessingML
-  primitives (runs/paragraphs/comments) and are broadly used belong
-  here; niche helpers stay local.
-
-- Risk: Naming churn confuses contributors. Mitigation: provide a short
-  table in the docs mapping old names to new ones and prefer
-  deprecations with clear replacements over silent renames.
-
-# How to apply this in your project
-
-- Map the hotspots where similar helpers have drifted. Consolidate into
-  one module with intentional naming.
-
-- Add lightweight tests on the utility surface before moving code; copy
-  a couple of real‑world fixtures into tests so you guard against
-  regressions that matter.
-
-- Document the utility catalogue in your site (one page listing
-  categories: traversal, run surgery, comments). Link to Javadoc. Keep
-  examples small, copy‑pastable, and aligned with `DocxIterator`
-  patterns.
-
-- Treat the utilities as a public contract. If a helper becomes
-  internal, move it, but keep the user‑facing surface stable and
-  explained.
-
-# References
-
-- Commit:
-  [d832b84](https://github.com/verronpro/office-stamper/commit/d832b84)
-
-- Traversal: docx4j `TraversalUtil`; project iterators in `DocxIterator`
-
-- Related posts: Paragraph.replace API (Oct 2025); TraversalUtil
-  integration (Nov 2024); Post‑processing pipeline (Dec 2024)
+# How to apply
+- Map hotspots where similar helpers have drifted and consolidate.
+- Document the utility catalogue (traversal, surgery, comments) on the site.
+- Treat utilities as a public contract with stable examples.
