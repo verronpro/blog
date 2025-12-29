@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Monthly Commit — Normalizing Template Chaos with Pre-Processing"
+title: "Normalizing Template Chaos with Pre-Processing"
 date: 2024-12-01
 categories: [ office-stamper ]
 tags: [ office-stamper, java, preprocessing, refactoring, craftsmanship ]
