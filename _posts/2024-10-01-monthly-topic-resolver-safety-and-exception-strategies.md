@@ -12,7 +12,7 @@ In document automation, your templates are more than just layouts; they are the 
 
 But what happens when the data is missing? What if `customer.photo` is `null`, or the `invoice` object itself is absent? In a solo-maintained project serving large enterprises, these "edge cases" are actually the norm. Unpredictable failures lead to broken documents, midnight support threads, and lost trust.
 
-To address this, we've refined the inner workings of Office‑stamper to move from "accidental" error handling to an explicit, strategy-based architecture.
+To address this, we've refined the inner workings of Office‑stamper to move from "accidental" error handling to an explicit, strategy-based architecture. This continues the "Make Implicit Explicit" journey we started in 2023 when we [removed Lombok and clarified our API contracts](/office-stamper/2023/08/15/monthly-commit-remove-lombok-and-clarify-contract.html).
 
 ## Principles for Safe Resolvers
 

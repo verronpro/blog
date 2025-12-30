@@ -8,29 +8,48 @@ author: Joseph
 description: "Why moving from brittle XML-based unit tests to holistic characterization tests is a game-changer for complex document processing engines."
 ---
 
-In the world of document automation, we often fall into the trap of testing the *how* instead of the *what*. For years, `office-stamper` tests were heavily focused on the underlying XML structure of WordProcessingML. We would assert that a specific `w:p` (paragraph) contained a specific `w:r` (run), and that the run had the correct `w:t` (text).
+In the world of document automation, we often fall into the trap of testing the *how* instead of the *what*. For years,
+`office-stamper` tests were heavily focused on the underlying XML structure of WordProcessingML. We would assert that a
+specific `w:p` (paragraph) contained a specific `w:r` (run), and that the run had the correct `w:t` (text).
 
-Here's the stark reality: Users aren't concerned with XML operations. Their focus is on whether the intended duplication of a line occurred, and if the table row designated for removal has indeed been removed.
+Here's the stark reality: Users aren't concerned with XML operations. Their focus is on whether the intended duplication
+of a line occurred, and if the table row designated for removal has indeed been removed.
 
-As part of the ongoing evolution of `office-stamper`, I’ve been shifting our testing strategy toward **Characterization Testing** (also known as Golden Master testing). The goal is to test high-level features holistically while making the tests themselves readable enough to serve as documentation.
+As part of the ongoing evolution of `office-stamper`, I’ve been shifting our testing strategy toward **Characterization
+Testing** (also known as Golden Master testing). This journey began in early 2024 (
+see [Unit Tests Don’t Mean What You Think](/office-stamper/2024/03/01/monthly-topic-testing-wordprocessingml-characterization-tests.html))
+when I first introduced the `Stringifier`.
+
+Since then, the goal has evolved from merely "surviving XML churn" to testing high-level features holistically while
+making the tests themselves readable enough to serve as documentation. This strategy was the bedrock of
+our [2.0 Modular Reorg](/office-stamper/2024/06/01/monthly-commit-modular-reorg-on-path-to-2.0.html), allowing deep
+internal changes without regression.
 
 ## The Technique Taxonomy: XML vs. Stringification
 
 ### 1. Low-Level XML Assertions (The Legacy)
-Initially, tests used XPath or deep object traversal to verify output. 
+
+Initially, tests used XPath or deep object traversal to verify output.
+
 - **Pros**: Precise.
-- **Cons**: Brittle. A minor refactor in how runs are split (common in Word) would break dozens of tests even if the visual output was identical.
+- **Cons**: Brittle. A minor refactor in how runs are split (common in Word) would break dozens of tests even if the
+  visual output was identical.
 
 ### 2. Characterization via Stringification (The Future)
-Instead of looking at XML, we turn the document into a simplified textual representation. We then compare this "stringified" document against a baseline.
+
+Instead of looking at XML, we turn the document into a simplified textual representation. We then compare this "
+stringified" document against a baseline.
+
 - **Pros**: Holistic, readable, and captures the user's perspective.
 - **Cons**: Requires a carefully tuned "Stringifier" to avoid noise.
 
 ## The `Stringifier` Utility: Docs-as-Code for Tests
 
-The heart of this new approach is a `Stringifier` utility. It traverses the `WordprocessingMLPackage` and converts complex elements into a human-readable format. 
+The heart of this new approach is a `Stringifier` utility. It traverses the `WordprocessingMLPackage` and converts
+complex elements into a human-readable format.
 
-What makes it powerful is the **Visibility Heuristic**: *If a normal user cannot see the difference when opening the document in Word, the difference shouldn't exist in our test representation.*
+What makes it powerful is the **Visibility Heuristic**: *If a normal user cannot see the difference when opening the
+document in Word, the difference shouldn't exist in our test representation.*
 
 For example, we map Word styles to simple text markers:
 
@@ -39,8 +58,8 @@ private Function<? super String, String> decorateWithStyle(String value) {
     return switch (value) {
         case "heading 1" -> "== %s\n"::formatted;
         case "heading 2" -> "=== %s\n"::formatted;
-        case "caption"   -> ".%s"::formatted;
-        default          -> "[%s] %%s".formatted(value)::formatted;
+        case "caption" -> ".%s"::formatted;
+        default -> "[%s] %%s".formatted(value)::formatted;
     };
 }
 ```
@@ -56,33 +75,48 @@ This turns a multi-megabyte XML structure into something like this in our test a
 
 ## Impact: Sped-up Development and Hidden Bug Discovery
 
-Moving to large textual assertions in tests like `ConditionalDisplayTest` has provided two unexpected benefits:
+Moving to large textual assertions in tests like `ConditionalDisplayTest` has provided two major advantages, especially
+when paired with
+our [Declarative Testing](/office-stamper/2024/09/01/monthly-topic-declarative-testing-text-to-template-generation.html)
+approach:
 
-1.  **Increased Velocity**: When I refactored the internal configuration and registry system, I didn't have to fix dozens of broken XML paths. As long as the stringified output matched, I knew the feature was intact.
-2.  **Holistic Awareness**: Because these tests watch the *entire* document, they catch regressions that targeted unit tests miss—like a paragraph accidentally losing its spacing or a footer being unintentionally stripped.
+1. **Increased Velocity**: When I refactored the internal configuration and registry system, I didn't have to fix dozens
+   of broken XML paths. By using `makeResource` to generate templates from text and `Stringifier` to verify the output,
+   we've created a complete "text-to-text" pipeline. As long as the stringified output matched, I knew the feature was
+   intact.
+2. **Holistic Awareness**: Because these tests watch the *entire* document, they catch regressions that targeted unit
+   tests miss—like a paragraph accidentally losing its spacing or a footer being unintentionally stripped.
 
 ## The Solo Maintainer's Perspective: Managing Risk
 
-Does this replace API testing? **Absolutely not.** Characterization tests are great for verifying behavior, but they won't stop you from breaking your public API. 
+Does this replace API testing? **Absolutely not.** Characterization tests are great for verifying behavior, but they
+won't stop you from breaking your public API.
 
 As a solo maintainer, I use a layered defense:
+
 - **`core` package isolation**: The messy internals stay in `core`, which clients aren't supposed to touch.
 - **`api` and `preset` packages**: These are the stable extension points.
-- **CLI Client**: I maintain a "vanilla" client in the `cli` module. If the CLI still works, the primary user path is safe.
+- **CLI Client**: I maintain a "vanilla" client in the `cli` module. If the CLI still works, the primary user path is
+  safe.
 
-Characterization tests sit alongside these, providing the confidence to refactor the "scary" parts of the engine without fear.
+Characterization tests sit alongside these, providing the confidence to refactor the "scary" parts of the engine without
+fear.
 
 ## Pitfalls to Avoid
 
-- **Noise Pollution**: If you include XML IDs or timestamps in your string representation, your tests will fail on every run. Apply the visibility heuristic ruthlessly.
-- **The "Over-Green" Trap**: It is easy to just update the baseline when a test fails. Always review the `diff` to ensure the change in output is actually what you intended.
+- **Noise Pollution**: If you include XML IDs or timestamps in your string representation, your tests will fail on every
+  run. Apply the visibility heuristic ruthlessly.
+- **The "Over-Green" Trap**: It is easy to just update the baseline when a test fails. Always review the `diff` to
+  ensure the change in output is actually what you intended.
 
 ## Checklist — Implementing Characterization Tests
 
-1.  **Define Visibility**: Decide which formatting elements (bold, headers, lists) actually matter to your users.
-2.  **Automate Stringification**: Build a utility that converts your output format to a stable, text-based representation.
-3.  **Establish Baselines**: Run your existing, trusted code to generate "Golden Masters."
-4.  **Review Diffs**: Treat test failures as a conversation. "Is this change in the document intentional?"
-5.  **Isolate the Core**: Ensure your high-level tests aren't coupled to the same interfaces you're trying to refactor.
+1. **Define Visibility**: Decide which formatting elements (bold, headers, lists) actually matter to your users.
+2. **Automate Stringification**: Build a utility that converts your output format to a stable, text-based
+   representation.
+3. **Establish Baselines**: Run your existing, trusted code to generate "Golden Masters."
+4. **Review Diffs**: Treat test failures as a conversation. "Is this change in the document intentional?"
+5. **Isolate the Core**: Ensure your high-level tests aren't coupled to the same interfaces you're trying to refactor.
 
-By focusing on what the user sees, we make our tests more resilient, our documentation more accurate, and our maintenance more sustainable.
+By focusing on what the user sees, we make our tests more resilient, our documentation more accurate, and our
+maintenance more sustainable.

@@ -18,7 +18,7 @@ I no longer have the luxury of dedicated "craft days." Since moving to Beijing a
 
 To make this work, I've had to master two things:
 - **Context Preservation**: Every session must end with a "clean" state, or a failing test that tells me exactly what to do next.
-- **Impact Slicing**: Breaking work into increments so small they can be finished in a single sitting, yet so impactful they move the needle.
+- **Impact Slicing**: Breaking work into increments so small they can be finished in a single sitting, yet so impactful they move the needle. The 2024 refactorings for [Contextual Clarity](/office-stamper/2024/11/01/monthly-commit-refactoring-for-contextual-clarity.html) and [Template Normalization](/office-stamper/2024/12/01/monthly-commit-pre-processing-for-template-normalization.html) are prime examples: each introduced a single, focused abstraction that simplified the engine without breaking a single test.
 
 ## Strategic "Not Yet"
 Restraint isn't just about saying "no"; it's about "not yet." Take [Issue #80](https://github.com/verronpro/office-stamper/issues/80)—"Only attempt to resolve variable if they actually are shown." It has been pending since October 2022. I haven't ignored it; I've been waiting for the library's architecture to be ready to handle it without a bespoke hack. That delay allowed for a deeper conversation with the requester and a more sensible implementation strategy.
@@ -32,7 +32,7 @@ Living in China as a digital nomad turned the "No Network" rule from a preferenc
 - **Perfect as the Enemy of Done**: Sometimes you have to deliver a lower-quality increment to see the end result you envision. Refine it in the next "downtime" block.
 
 # Solo-maintainer + Enterprise value
-- **Predictability**: A stable, well-documented project is easier for enterprise teams to trust, even if the maintainer is "sporadic."
+- **Predictability**: A stable, well-documented project is easier for enterprise teams to trust, even if the maintainer is "sporadic." The [2.0 Modular Reorg](/office-stamper/2024/06/01/monthly-commit-modular-reorg-on-path-to-2.0.html) proved that we could change the entire project structure while keeping the "stable handle" intact for adopters.
 - **Scaling through Docs**: My documentation and tests are my "virtual teammates." They answer the questions I don't have time to answer in real-time meetings.
 - **Resilience**: A build that works offline in a Beijing coffee shop will work anywhere.
 

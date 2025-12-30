@@ -8,15 +8,23 @@ author: Joseph
 description: Intention‑revealing namespaces and a protected core to refactor deeply without destabilizing extensions.
 ---
 
-Sustainable agility depends on boundaries you can explain and defend. This month I drew those boundaries explicitly: I
-introduced an `engine` module, moved public entry points into intention‑revealing packages, and removed legacy shims.
+Sustainable agility depends on boundaries you can explain and defend. This month I drew those boundaries explicitly,
+codifying the intent I first shared
+in [Package contracts as code](/office-stamper/2024/05/01/monthly-commit-package-contract-as-code.html).
+
+I introduced an `engine` module, moved public entry points into intention‑revealing packages, and removed legacy shims.
 The goal is clear seams: a stable extension surface for adopters, and a refactor‑friendly space in the core where I can
 fix long‑standing design issues without surprising users.
 
-## Why now? 
+## Why now?
+
 A run of small but telling frictions piled up: PRs that had to thread through unrelated internals, reviewers
 second‑guessing where a class “should live,” and extension points that leaked too much of the engine’s shape. Those are
-symptoms of missing boundaries. The 2.0 push is my answer.
+symptoms of missing boundaries.
+
+The 2.0 push is my answer, and it’s made possible by the foundation we laid in 2023 when
+we [leveled up the toolchain to Java 17 and JUnit 5](/office-stamper/2023/03/01/monthly-commit-level-up-toolchain.html).
+With a modern runtime and test stack, I can now use records and modularity to enforce the boundaries I need.
 
 ## Highlights
 
@@ -84,8 +92,8 @@ import pro.verron.officestamper.core.DocxStamper;
 
 > Craftsmanship notes: stability where users live, freedom where I work
 > The main drive behind the reorganization is to keep your adoption cost low while giving me room to improve the
-algorithm. The preset package is the "stable handle." The core is the "workbench." By declaring those intentions in the
-names, I can change internals without stealth breaks, and you can write code that ages more gracefully.
+> algorithm. The preset package is the "stable handle." The core is the "workbench." By declaring those intentions in
+> the names, I can change internals without stealth breaks, and you can write code that ages more gracefully.
 
 ### What I removed, and why it helps
 

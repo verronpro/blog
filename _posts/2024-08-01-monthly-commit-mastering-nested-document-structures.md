@@ -13,6 +13,8 @@ In document automation, the "what you see is what you get" promise of Word often
 ## Context
 The catalyst for this change was [Issue #286](https://github.com/verronpro/office-stamper/issues/286), reported in April. Users found that expressions placed inside "Plain Text Form Controls" (Structured Document Tags, or SDTs) were simply being ignored by the engine. 
 
+This is a structural variation of the "nesting" problem we first tackled in 2023 with [nested repeat blocks](/office-stamper/2023/02/01/monthly-commit-nested-repeatdocpart.html). While that earlier fix focused on *logical* nesting (recursion in comment extraction), this month's challenge was *physical* nesting—how Word wraps content in XML layers.
+
 The reason was simple: our `StandardParagraph` implementation was looking at the paragraph's content as a flat list. If a placeholder was wrapped in an SDT, it was "hidden" inside a nested container that the engine wasn't looking into.
 
 ## Change summary
@@ -24,7 +26,7 @@ The reason was simple: our `StandardParagraph` implementation was looking at the
 ## Why Recursion?
 While I could have added more `if/else` checks to the existing loop, WordprocessingML technically allows for unbounded nesting. A placeholder might be inside a Run, which is inside an SDT, which might itself be wrapped in another JAXB container. 
 
-Recursion is the natural architectural fit for tree-like structures. It allows the engine to "peel the onion" layer by layer until it reaches the actual `R` (Run) elements where the text lives, regardless of how many wrappers Word has decided to put around it.
+Recursion is the natural architectural fit for tree-like structures. Just as it solved [nested comment extraction in 2023](/office-stamper/2023/02/01/monthly-commit-nested-repeatdocpart.html), it now allows the engine to "peel the onion" layer by layer until it reaches the actual `R` (Run) elements where the text lives, regardless of how many wrappers Word has decided to put around it.
 
 ```java
 private int add(int index, Object object) {

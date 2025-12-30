@@ -152,7 +152,7 @@ Notes:
 
 - One interface tweak, many canvases: by making `Paragraph` generic, both DOCX and PPTX provide the same operations over native runs, keeping the engine unpolluted.
 - Bounded adapter: PPTX traversal and mutations live behind the visitor/collector/paragraph classes. The core doesn’t know or care about `pptx4j`.
-- Tests as truth: a single golden‑path test encodes behavior and guards against regressions while we iterate.
+- Tests as truth: a single golden‑path test encodes behavior and guards against regressions while we iterate. This uses the [Characterization Testing](/office-stamper/2024/03/01/monthly-topic-testing-wordprocessingml-characterization-tests.html) approach we standardized last month, ensuring that PPTX output remains visually correct even as the engine evolves.
 
 ### Scope choice — text first, images later
 

@@ -214,7 +214,9 @@ With this configuration, a simple `mvn clean package` produces HTML slides in `t
 ### Authoring: slides, code, and diagrams
 
 - Source includes: I prefer tagging production-like examples and reusing them in slides via `include::`.
-- Diagrams: `asciidoctor-diagram` renders PlantUML, Mermaid (via Kroki), Graphviz, and more at build time. Example:
+- Diagrams: `asciidoctor-diagram` renders PlantUML, Mermaid (via Kroki), Graphviz, and more at build time. This is a practical application of the [Diagrams as Code](/documentation-as-code/2023/09/01/diagram-as-code.html) philosophy: the diagrams are version-controlled, diffable, and stay in sync with the slide narrative.
+
+Example:
 
 **PlantUML**
 ```plantuml
