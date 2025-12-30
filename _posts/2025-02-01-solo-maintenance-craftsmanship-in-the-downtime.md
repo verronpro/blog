@@ -9,7 +9,7 @@ description: "Sustainable practices for solo maintainers: embracing constraints,
 ---
 
 # Thesis
-Solo maintenance isn't a day job—especially when your day job is managing IT in a different time zone. Success isn't measured by commit frequency but by sustained changeability and the ability to pick up exactly where you left off, whether you're in a Beijing coffee shop or on a long commute. Embracing the constraints of limited time and unreliable networks isn't just a survival tactic; it's a forcing function for better design.
+Solo maintenance isn't a day job—especially when your day job is managing IT in a different time zone. Success isn't measured by commit frequency but by sustained changeability, and the ability to pick up exactly where you left off, whether you're in a Beijing coffee shop or on a long commute. Embracing the constraints of limited time and unreliable networks isn't just a survival tactic; it's a forcing function for better design.
 
 # Technique: Sustainable Rhythm
 

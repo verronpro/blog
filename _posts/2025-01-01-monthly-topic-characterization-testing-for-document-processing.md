@@ -8,11 +8,9 @@ author: Joseph
 description: "Why moving from brittle XML-based unit tests to holistic characterization tests is a game-changer for complex document processing engines."
 ---
 
-## Thesis — Testing Features, Not Implementations
-
 In the world of document automation, we often fall into the trap of testing the *how* instead of the *what*. For years, `office-stamper` tests were heavily focused on the underlying XML structure of WordProcessingML. We would assert that a specific `w:p` (paragraph) contained a specific `w:r` (run), and that the run had the correct `w:t` (text).
 
-But here is the hard truth: **Users don't care about XML runs.** They care if the line that should be duplicated is actually duplicated. They care if the table row that should be hidden is gone.
+Here's the stark reality: Users aren't concerned with XML operations. Their focus is on whether the intended duplication of a line occurred, and if the table row designated for removal has indeed been removed.
 
 As part of the ongoing evolution of `office-stamper`, I’ve been shifting our testing strategy toward **Characterization Testing** (also known as Golden Master testing). The goal is to test high-level features holistically while making the tests themselves readable enough to serve as documentation.
 
@@ -77,7 +75,7 @@ Characterization tests sit alongside these, providing the confidence to refactor
 ## Pitfalls to Avoid
 
 - **Noise Pollution**: If you include XML IDs or timestamps in your string representation, your tests will fail on every run. Apply the visibility heuristic ruthlessly.
-- **The "Over-Green" Trap**: It's easy to just update the baseline when a test fails. Always review the `diff` to ensure the change in output is actually what you intended.
+- **The "Over-Green" Trap**: It is easy to just update the baseline when a test fails. Always review the `diff` to ensure the change in output is actually what you intended.
 
 ## Checklist — Implementing Characterization Tests
 

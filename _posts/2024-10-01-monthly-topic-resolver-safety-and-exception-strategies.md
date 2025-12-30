@@ -8,8 +8,6 @@ author: Joseph
 description: "How to build resilient document templates by mastering nullability, Java Optionals, and the newly introduced ExceptionResolver architecture in Office‑stamper."
 ---
 
-## Thesis — The document is your public API
-
 In document automation, your templates are more than just layouts; they are the contract between your data and your users. When a template contains `${invoice.total}` or `${image(customer.photo)}`, you are making a promise that the engine can fulfill that request.
 
 But what happens when the data is missing? What if `customer.photo` is `null`, or the `invoice` object itself is absent? In a solo-maintained project serving large enterprises, these "edge cases" are actually the norm. Unpredictable failures lead to broken documents, midnight support threads, and lost trust.

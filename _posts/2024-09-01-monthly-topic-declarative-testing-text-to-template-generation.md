@@ -9,8 +9,6 @@ description: "Reducing friction in document automation testing by replacing bina
 toc: true
 ---
 
-## Thesis — The "Binary Friction" of Document Testing
-
 In the world of **Office-stamper**, testing has always been a heavy-duty affair. To verify a single edge case—say, how the engine preserves a tabulation character inside a run—you traditionally had to:
 1. Open Microsoft Word.
 2. Create a new document.

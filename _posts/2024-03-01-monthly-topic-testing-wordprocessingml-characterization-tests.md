@@ -8,8 +8,6 @@ author: Joseph
 description: "I replaced brittle XML‑level assertions with a textual, AsciiDoc‑like view of DOCX output. Here’s how characterization tests made Office‑stamper’s refactors safer and test suites readable."
 ---
 
-## Thesis — “Unit test” doesn’t mean what you think it means
-
 When you stamp DOCX, “unit tests” that assert on internal XML shape are a trap. WordprocessingML is a forest of paragraphs, runs, SDTs (content controls), fields, bookmarks, headers/footers, and paste‑artifacts. Tiny refactors cause harmless run splits/merges or node reordering, and brittle tests explode. Users don’t care about the exact run tree; they care that the result reads right, looks right, and keeps invariants intact.
 
 For Office‑stamper (a Java library that fills placeholders and executes comment‑based Spring SpEL instructions to repeat or conditionally render content), I switched to characterization tests over a textual, AsciiDoc‑like representation of the final document. I call the helper the `Stringifier`. Instead of spelunking XML, tests compare strings that reveal text, styles, table and note structure—what users actually perceive.

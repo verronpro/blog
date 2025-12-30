@@ -8,8 +8,6 @@ author: Joseph
 description: Introducing ProcessorContext and domain-adjacent logic to remove primitive obsession and clarify engine contracts.
 ---
 
-## Context — The "Boy Scout" of Document Processing
-
 In October 2024, I found myself squinting at the `CommentProcessorRegistry`. The engine had developed three distinct (and slightly inconsistent) ways of handling logic: inline placeholders acting as processors, processors restricted to a single paragraph, and those spanning multiple paragraphs. 
 
 The code was suffering from **primitive obsession**, passing around raw maps and loosely typed parameters that made the "state of the world" during stamping hard to track. Following the **Boy Scout Rule**—leaving the campground cleaner than I found it—I decided to introduce a formal `ProcessorContext` and refine our domain boundaries to make these behaviors explicit and, eventually, identical.
