@@ -1,7 +1,7 @@
 ---
 layout: article
 title: "Modularizing the Toolchain: The CLI/Engine Split"
-date: 2025-03-01
+date: 2025-04-01
 categories: [ office-stamper ]
 tags: [ office-stamper, java, cli, modularization, craftsmanship, jpackage, agility ]
 author: Joseph
