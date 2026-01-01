@@ -27,16 +27,20 @@ To move beyond the illusion, we use **Mutation Testing**. Instead of checking if
 
 In a recent audit of our comment processors, standard coverage reported "green" for several edge cases. However, mutation testing revealed survived mutants in the logic that handles nested comment ranges.
 
-Consider a snippet that cleans up technical metadata:
+Consider a snippet from our `CommentUtil` that cleans up technical metadata:
 
 ```java
-if (comment.getAuthor().equals("officestamper")) {
-    removeComment(comment);
-    adjustRange(comment.getRange());
+public static void deleteComment(Comment comment) {
+    CommentRangeEnd end = comment.getCommentRangeEnd();
+    if (end != null) {
+        ContentAccessor parent = (ContentAccessor) end.getParent();
+        parent.getContent().remove(end);
+    }
+    // ... similar logic for CommentRangeStart and CommentReference
 }
 ```
 
-Standard tests ensured this block was entered. But a mutant that deleted the `adjustRange` call survived. Why? Because the [Characterization Tests](/office-stamper/2025/01/01/monthly-topic-characterization-testing-for-document-processing.html) I relied on were checking the *content* but not the underlying *structure* of the remaining ranges. The tests were "green," but the code was brittle.
+Standard tests ensured this block was entered. But a mutant that deleted the `parent.getContent().remove(end)` call survived. Why? Because the [Characterization Tests](/office-stamper/2025/01/01/monthly-topic-characterization-testing-for-document-processing.html) I relied on were checking the *content* but not the underlying *structure* of the document. The tests were "green" because the visible text was gone, but the orphaned XML tags remained, potentially breaking downstream tools.
 
 By identifying these survived mutants, I was able to add specific assertions to my [Declarative Tests](/office-stamper/2024/09/01/monthly-topic-declarative-testing-text-to-template-generation.html), ensuring that structural hygiene is as strictly verified as content generation.
 
@@ -44,6 +48,11 @@ By identifying these survived mutants, I was able to add specific assertions to 
 
 ### 1. The Performance Tax
 Mutation testing is slow. It generates hundreds of variants of your code and runs the test suite against each. For a [solo maintainer](/governance/2025/02/01/solo-maintenance-craftsmanship-in-the-downtime.html), running this locally on every build is a productivity killer.
+
+However, many techniques can be used to improve the run speed:
+*   **Incremental Analysis**: Running only on the diff of changed files.
+*   **Caching**: Storing and re-using mutation results from previous runs.
+*   **Test Prioritization**: Only executing tests that actually cover the mutated line.
 
 **The Solution**: I’ve integrated Pitest (using the latest `pitest-junit5-plugin`) into the remote CI pipeline. It runs as part of the site documentation generation (`mvn verify site`) only on merges to `main`. This keeps the local feedback loop fast while ensuring the "Quality Master" is updated regularly.
 
