@@ -60,15 +60,18 @@ This ensures that no side effects from one part of the document can leak into an
 
 The biggest pitfall is, of course, the **breaking change**. Moving to document-order processing and a stack-based context means that some templates might behave differently if they relied on the "accidental" resolution order of v2.x.
 
+Additionally, the `OfficeStamper` interface has been made more functional. Instead of taking an `OutputStream` and performing side-effect I/O, the `stamp` method now returns the stamped document directly. This simplifies post-processing and testing, though it requires an extra step if you want to save to a stream immediately.
+
 As a solo maintainer, I'm concerned about the friction this causes for my users. But for the long-term health of the library—and for my own goals of handling complex business logic—this migration was unavoidable. 
 
 ## Checklist for v3 Migration
 
 If you are upgrading this week:
 1. [ ] **Update imports**: Core interfaces moved to `pro.verron.officestamper.api`.
-2. [ ] **Switch to Factory**: Replace `EvaluationContextConfigurer` with `EvaluationContextFactory`.
-3. [ ] **Test Nested Scopes**: Verify your repeaters and conditional comments.
-4. [ ] **Check Order**: If you have comments and placeholders on the same line, verify they still resolve in the order you expect.
+2. [ ] **Update `stamp` calls**: The method now returns the document; use `StreamStamper` if you need the old I/O behavior.
+3. [ ] **Switch to Factory**: Replace `EvaluationContextConfigurer` with `EvaluationContextFactory`.
+4. [ ] **Test Nested Scopes**: Verify your repeaters and conditional comments.
+5. [ ] **Check Order**: If you have comments and placeholders on the same line, verify they still resolve in the order you expect.
 
 ## Final Thoughts
 
