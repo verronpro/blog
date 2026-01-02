@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Monthly Commit — High-Fidelity Table of Contents & Google Docs Harmony"
+title: "High-Fidelity Table of Contents & Google Docs Harmony"
 date: 2025-07-01
 categories: [ office-stamper ]
 tags: [agility, craftsmanship, solo-maintainer, office-stamper, java, testing]

@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Monthly Commit — The Great Documentation Offensive"
+title: "The Great Documentation Offensive"
 date: 2025-08-01
 categories: [ office-stamper ]
 tags: [agility, craftsmanship, solo-maintainer, office-stamper, java, documentation]
