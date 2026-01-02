@@ -44,7 +44,7 @@ The `Stringifier.stringifyWord` utility is a game-changer for characterization t
 
 By removing `TestDocxStamper`, `IOStreams`, and `ThrowingSupplier`, I've reduced the maintenance surface of the project's test module by nearly 40%. 
 
-*   **Faster Builds**: Fewer classes to compile and simpler test flows mean the CI pipeline is snappier.
+*   **Faster Builds**: Fewer classes to compile and simpler test flows mean the CI pipeline is snappier. It also makes automated dependency updates—like the recent Renovate bump of JavaFX 26-ea+21—completely transparent and risk-free.
 *   **Clarity**: New contributors (and future-Joseph) can read a test and see exactly how the library is being used, without having to navigate through layers of test-only abstractions.
 *   **Consistency**: The same `OfficeStamper` interface is used in the library, in the CLI, and in the tests.
 
