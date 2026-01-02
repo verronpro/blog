@@ -73,6 +73,7 @@ body {
     background: var(--cc-bg);
     color: var(--cc-text);
     max-width: 100%;
+    margin: 0;
 }
 
 h1, h2, h3, h4 {
@@ -233,7 +234,7 @@ tbody tr:nth-child(even) { background: rgba(17, 24, 39, .02); }
     align-items: center;
     justify-content: space-between;
     gap: .75rem;
-    padding: .5rem 1rem;
+    padding: 0;
 }
 .site-header__brand {
     display: flex;
