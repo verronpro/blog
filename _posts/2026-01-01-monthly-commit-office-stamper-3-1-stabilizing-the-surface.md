@@ -31,7 +31,7 @@ I've moved core extension interfaces to a central `pro.verron.officestamper.api`
 This move signals that these are the primary touchpoints for extending `office-stamper`. Everything else is now strictly internal.
 
 ### 2. Pruning the Public Surface
-I've removed or made private over a dozen internal utility classes. These were effectively "implementation leaks." By hiding them, I've reduced the library's public footprint, making it easier for new users to find the classes they *actually* need to interact with.
+I've removed or made private over a dozen internal utility classes. These were effectively "implementation leaks." By hiding them, I've reduced the library public footprint, making it easier for new users to find the classes they *actually* need to interact with.
 
 ### 3. Unified Post-processing with `Postprocessors`
 The legacy `cleanTags` functionality, which was scattered across different configuration methods, has been replaced by a more flexible and unified pipeline. 
