@@ -1,5 +1,32 @@
-1. One of the main error I made with office-stamper is approach it like it is my day job, actually it is not, and even though i spend considerable time on it, i am not paid to maintain it and cannot dedicate my full time on it since i moved in with my partner, and since i left my software engineering role. From now on, every effort invested into should be targeting small iterative  improvements and self-evident documentation, instead of applying my usual and routine code patterns to harmonize this reposiory with the rest of the company codebase (there is no more company codebase, I am solo maintainer now!)
-2. I really like asciidoctor for the complex document generation it provides, but markdown still wins for its simplicity and for the fact that it is largely integrated. Then Pandoc can provide the link to format harder to manipulate. All these are inspiration for office-stamper. After that, all living documentation tools such a test engine reports, or code scanning tool like doxygen are really good scaffolding tools, especially when combined with diagram-as-code tooling such as plantuml, mermaid, graphviz and gnuplot.
-3. My most controversial opinion about software development practices would be the importance of teamwork and high quality work. I love the practice of mob-programming, and I feel that having a lot of eyes on the code and high quality gatekeeping code actually enhance the long term velocity of development, even when it looks slow at first glance. It is a real challenge to keep this mindset as a solo maintainer, but I try to adjust by reacting fast to the sporadic contributors feedback, and by putting a lot of automated feedback loops such as maven fail mode for failed test, missing javadoc, and integrating Github automated review tools such as CodeQL, SonarQube and Renovate (Mend.io).
-4. There are several stories that marked me: the days we as a team spend solely focused on finding a design solution instead of trying to code through our problem, the time where I implemented a test engine for an electrotechnical computation engine to improve the developer experience of eletrotechnical engineer unused to software development practices, the time I taught step-by-step to an overconfident engineer colleagues how i could safely refactor his untestable but otherwise correct code into something that we could integrate in our codebase, the time I first discovered the extreme startup game and I got surprisingly good result by mitigating the code beauty ideals, and anticipating small edge cases into the first implementations to rise on top and go on and on.
-5. Mob programming is of course impossible as a solo-maintainer, but even in a enterprise team, we noted that it was not a catch all practice, design phase are maybe more suited to solo or pair brainstorming by the most experimented in the topic at hand, and mob programming can come later. Other practices such as lombok are no more useful since the Java language really improved the available primitives. The layer pattern is still useful as a concept, but a lot of apps nowadays do not really need them since they are more a lyer around an API or a specific database, expecially in micoservice context, so scraping the layer, for a spring-booot automated rest controller directly linked to the data format might make more sense. I stopped generating rest-docs from code, instead i generate the controllers from the rest-doc, since it is the contract I want my code to adhere to, and it facilitate the work of downstream teams, it also change my mindset on unit test and test-driven-development, since the contract method becomes the unit I test, instead of the inner working of my implmentation.
+---
+layout: page
+title: Opinions & Perspectives
+permalink: /opinions.html
+description: A diary of my evolving thoughts on software craftsmanship, solo maintainership, and the pragmatic trade-offs of building reliable systems.
+aside:
+  toc: true
+---
+
+This page serves as a living diary of my thoughts and ideas—a memory bank of the principles that guide my work. These opinions are shaped by years in the industry and my current journey as a solo maintainer and IT leader.
+
+## On Solo Maintainership & Context
+One of the most significant lessons from my work on **Office-stamper** is the importance of matching your approach to your reality. I initially treated it like a high-stakes "day job," but since moving to China and transitioning into an IT Manager/CISO role, I’ve realized it is a passion project. Every effort now targets small, iterative improvements and self-evident documentation. I no longer try to "harmonize" the repository with a non-existent company codebase; I am the solo maintainer, and lean, focused progress is the new gold standard.
+
+## On Documentation & Scaffolding
+I have a deep appreciation for **Asciidoctor** and the complex document generation it enables, but **Markdown** remains the undisputed winner for simplicity and ecosystem integration. My strategy is to use Markdown for the core and leverage **Pandoc** as a bridge for harder formats. I’ve found that "living documentation" tools—test reports, code scanners (like Doxygen), and diagram-as-code (PlantUML, Mermaid, Graphviz)—are exceptional scaffolding tools when you need to keep mental models in sync with reality.
+
+## The Solo Quality Challenge
+My most "controversial" stance remains the absolute importance of high-quality gatekeeping. I love **mob programming** for the sheer number of eyes it puts on code, which invariably enhances long-term velocity. Maintaining this mindset as a solo maintainer is a challenge. I compensate by building a **Virtual Team**: aggressive automated feedback loops (Qodana, PIT), strict test failures, and automated review tools (CodeQL, SonarQube, Renovate). I aim to react fast to sporadic contributors, treating their feedback as the "human" element of my mob.
+
+## Stories That Shaped Me
+Several moments define my craft:
+- The days we spent purely on design solutions, refusing to touch the keyboard until the problem was solved.
+- Building a test engine for electrotechnical engineers to bring software rigor to a domain unused to it.
+- Safely refactoring an overconfident colleague's "untestable" code into a robust, integrated component.
+- Discovering that "code beauty" can sometimes be secondary to anticipating edge cases, as I learned during an intense "extreme startup" session where pragmatic speed won the day.
+
+## On Patterns & Evolution
+Mob programming isn't a catch-all; design phases are often better suited for solo or pair brainstorming. Similarly, technology evolves: **Lombok** is largely redundant now that Java's primitives have matured. I’ve also moved away from strict "layering" for modern microservices—if an app is just a layer over an API or DB, scraping the boilerplate for automated controllers makes more sense. I now prefer generating controllers *from* documentation (contracts) rather than the other way around; the contract is the unit I test, not just the implementation.
+
+## Rebuild Lean vs. Reuse Heavy
+I generally prefer reuse over rebuilding, but I’ve learned to identify when "standard" tools become a source of friction. A prime example is my recent **AsciiDoc Pivot**. I chose to build a custom, zero-dependency Java parser for internal conversions rather than adopting the heavy JRuby-based AsciidoctorJ runtime. If a tool’s weight threatens the main goal, I will always choose to build a leaner, focused alternative that unblocks progress.

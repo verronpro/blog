@@ -24,6 +24,8 @@ Looking for the long, curated resource list? See the Resources page: [/resources
 These are not name‑drops; they shape concrete choices in how I work with you.
 
 - Team Topologies — structure teams for fast flow and clear responsibilities.
+- Virtual Team (Qodana, PIT) — as a solo maintainer, I rely on automated gatekeepers to catch what a human reviewer would.
+- GenAI Integration — leveraging AI for rapid scaffolding and lean tool development.
 - Docs‑as‑Code and Diagram‑as‑Code — text, versioned, reviewable, automated.
 - BDD and example‑guided development — make intent executable.
 - Conventional Commits and lightweight governance — predictable history, easier automation.
@@ -50,6 +52,7 @@ Think of it as a small, reliable factory:
 
 - Inputs: business intent, examples, existing assets, and constraints.
 - Process: capture intent as text (docs), examples as tests, architecture as diagrams; automate generation and validation; iterate in small PRs.
+- Virtual Team: bots enforce standards and quality gates autonomously, ensuring long-term maintainability without human oversight.
 - Outputs: working software or automations, repeatable documentation, accurate diagrams, and a CI pipeline that keeps them in sync.
 
 You get rapid feedback, lower integration risk, and artifacts you can evolve without me.

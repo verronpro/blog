@@ -97,14 +97,23 @@ This page is an organized catalog of tools, references, and inspirations I use. 
 ### Ubuntu & Java
 - https://attacomsian.com/blog/change-default-java-version-ubuntu
 
-### Spring Boot
+### Spring Boot & SpEL
+- [Spring SpEL](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#expressions) — Powering the Expression Pivot in template resolution.
 - https://www.baeldung.com/spring-boot-h2-database
 
 ### WSL
 - https://github.com/microsoft/WSL
 - https://www.bing.com/search?pglt=169&q=ubuntu+wsl+update+time&cvid=6469b67d51b14f8a98e8a7b350459ed2&aqs=edge.0.0l9j69i11004.14262j0j1&FORM=ANNAB1&PC=U531
 
-## Experiments with generative AI
+## Automation & AI
+
+### n8n
+- [n8n.io](https://n8n.io/) — Low-code workflow automation for building internal tools.
+
+### Ollama
+- [Ollama](https://ollama.com/) — Local LLM runner for private, lightweight AI integration.
+
+### Experiments with generative AI
 - https://chat.openai.com/
 - https://platform.openai.com/
 
@@ -154,6 +163,14 @@ This page is an organized catalog of tools, references, and inspirations I use. 
 ### TDD
 - https://osherove.com/tdd-kata-1
 - https://www.amazon.com/Test-Driven-Development-Kent-Beck-ebook/dp/B095SQ9WP4?ref_=ast_author_dp
+
+## Quality, Security & Static Analysis
+
+### Qodana
+- [Qodana by JetBrains](https://www.jetbrains.com/qodana/) — Static analysis engine for CI.
+
+### PIT (Mutation Testing)
+- [PITest](https://pitest.org/) — Real-world test effectiveness auditor.
 
 ### SonarQube
 

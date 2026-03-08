@@ -13,9 +13,9 @@ Tip: Items marked with “seeded from Resources” originate from the curated li
 
 ## Ongoing projects
 
-- Office‑stamper improvements (Java)
-  - Scope: tighten template semantics (placeholders, invariants, pre/post‑processing) and expand test coverage for .docx and .pptx. See Monthly Commit drafts in `_drafts/`.
-  - Status: active; several drafts in progress (e.g., comment retrieval, resettable iterators, pre‑processing of placeholders).
+- Office‑stamper (Java) — **Stable Core**
+  - Scope: tighten template semantics (placeholders, invariants, pre/post‑processing).
+  - Status: **Shipped 3.1 & 3.2**. Resettable iterators are now live, improving code readability. Pre-processing and post-processing are equally shipped, enhancing context management for nested scope resolutions.
 
 - Docs‑as‑Code pipelines for diagrams — seeded from Resources.
   - Scope: standardize PlantUML/Mermaid/Graphviz flows via Kroki; ensure diagrams build in CI alongside docs.
@@ -27,13 +27,13 @@ Tip: Items marked with “seeded from Resources” originate from the curated li
 
 # Next ideas / backlog
 
-- Share my Anki Chinese learning deck
-  - Description: publish a cleaned subset of my Mandarin Anki cards (HSK‑oriented), plus a short guide on how I maintain the deck and schedule reviews.
-  - Output: a post with a download link and maintenance tips; possibly a GitHub repo release.
+- Anki inspired app for Chinese learners
+  - Description: Partnering with a local enthusiast in China to develop a dedicated app for Chinese learners that integrates and streamlines the learning process. (Replacing the previous idea of sharing a static HSK deck).
+  - Output: Functional app and write-up on the development journey.
 
 - Mock screenshot generator for Office apps (Word/PowerPoint)
-  - Description: generate images that mimic editor chrome, and a sample document layout from a simple text input (for presentations and docs without leaking real data).
-  - Output: small CLI or web demo; template packs for Word and PowerPoint themes; write‑up on approach and constraints.
+  - Description: generate images that mimic editor chrome, and a sample document layout from a simple text input.
+  - Status: **Prototype phase**. Using JavaFX as the graphical engine and the Office-stamper AsciiDoc module to compile formatted text to a JavaFX Scene. Rendering is functional but still needs refinement for clean, usable outputs.
 
 - Link checker CI for this site — seeded from Resources
   - Description: lightweight GitHub Action to validate internal and external links on PRs.
@@ -42,10 +42,6 @@ Tip: Items marked with “seeded from Resources” originate from the curated li
 - Diagram‑as‑Code cookbook — seeded from Resources
   - Description: practical snippets for PlantUML, Mermaid, and Graphviz (themes, layout tricks, and export recipes) with copy‑paste ready examples.
   - Output: post series, or a dedicated repo linked from the blog.
-
-- Resolver safety and defaults in Office‑stamper
-  - Description: consolidate findings on optional/nullability defaults and safe resolver patterns.
-  - Output: Monthly Topic post with a taxonomy, pitfalls, and a checklist; code samples in the library.
 
 - Presentations‑as‑Code starter
   - Description: a thin starter showing Reveal.js or Marp with syntax‑highlighting presets and CI export to PDF.
