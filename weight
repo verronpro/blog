@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight Tracker (90 kg Goal)</title>
+    <!-- Chart.js from CDN (make sure you have internet access, or download and use locally) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 15px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .input-group input, .input-group button {
+            padding: 10px;
+            font-size: 16px;
+        }
+        .input-group input[type="date"] {
+            flex: 2;
+            min-width: 180px;
+        }
+        .input-group input[type="number"] {
+            flex: 1;
+            min-width: 100px;
+        }
+        .input-group button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            flex: 0.5;
+            min-width: 80px;
+        }
+        .input-group button.clear {
+            background: #f44336;
+        }
+        canvas {
+            max-height: 400px;
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .note {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📉 Weight Tracker – Target 90 kg</h1>
+    <div class="input-group">
+        <input type="date" id="dateInput" />
+        <input type="number" id="weightInput" step="0.1" placeholder="Weight (kg)" />
+        <button onclick="addEntry()">Add Entry</button>
+        <button class="clear" onclick="clearData()">Clear All</button>
+    </div>
+
+    <canvas id="weightChart"></canvas>
+
+    <h3>📋 Recent Entries</h3>
+    <table id="entriesTable">
+        <thead>
+            <tr><th>Date</th><th>Weight (kg)</th></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div class="note">
+        ⚡ The chart shows your daily weigh‑ins (dots) and a <strong>7‑day moving average</strong> (line).<br>
+        🔴 The red horizontal line is your 90 kg goal.
+    </div>
+</div>
+
+<script>
+    // ===== Data handling using localStorage =====
+    const STORAGE_KEY = 'weightData';
+
+    // Load saved data or initialize empty array
+    let weightData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+    // Sort by date (oldest first) – important for chart & moving average
+    function sortData() {
+        weightData.sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
+    sortData(); // ensure existing data is sorted
+
+    // Save to localStorage
+    function saveData() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(weightData));
+    }
+
+    // Add new entry (replaces if same date exists)
+    function addEntry() {
+        const dateInput = document.getElementById('dateInput');
+        const weightInput = document.getElementById('weightInput');
+
+        const date = dateInput.value;
+        const weight = parseFloat(weightInput.value);
+
+        if (!date || isNaN(weight)) {
+            alert('Please enter both date and weight.');
+            return;
+        }
+
+        // Check for existing entry with same date
+        const existingIndex = weightData.findIndex(entry => entry.date === date);
+        if (existingIndex !== -1) {
+            // Replace
+            weightData[existingIndex].weight = weight;
+        } else {
+            // Add new
+            weightData.push({ date, weight });
+        }
+
+        sortData();
+        saveData();
+        updateUI();
+
+        // Clear inputs, default date to today
+        dateInput.value = new Date().toISOString().split('T')[0];
+        weightInput.value = '';
+    }
+
+    // Clear all data
+    function clearData() {
+        if (confirm('Delete all weight entries?')) {
+            weightData = [];
+            saveData();
+            updateUI();
+        }
+    }
+
+    // ===== Chart =====
+    let chart = null;
+
+    function renderChart() {
+        const ctx = document.getElementById('weightChart').getContext('2d');
+
+        // If chart exists, destroy it before creating new one
+        if (chart) {
+            chart.destroy();
+        }
+
+        if (weightData.length === 0) {
+            // No data – show empty chart or just skip
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: { labels: [], datasets: [] },
+                options: { plugins: { title: { display: true, text: 'No data yet' } } }
+            });
+            return;
+        }
+
+        // Prepare labels (dates) and weight values
+        const labels = weightData.map(entry => entry.date);
+        const weightValues = weightData.map(entry => entry.weight);
+
+        // Compute 7‑day moving average (by index, not calendar day)
+        const movingAvgValues = [];
+        for (let i = 0; i < weightValues.length; i++) {
+            const start = Math.max(0, i - 6);
+            const count = i - start + 1; // number of entries in this window
+            const sum = weightValues.slice(start, i + 1).reduce((acc, val) => acc + val, 0);
+            movingAvgValues.push(sum / count);
+        }
+
+        // Create dataset
+        chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Daily Weight (kg)',
+                        data: weightValues,
+                        borderColor: 'rgba(54, 162, 235, 0.2)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+                        pointRadius: 4,
+                        tension: 0.1,
+                        order: 2 // drawn behind the average line
+                    },
+                    {
+                        label: '7‑Day Moving Average',
+                        data: movingAvgValues,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'transparent',
+                        pointRadius: 0,
+                        borderWidth: 3,
+                        tension: 0.2,
+                        order: 1 // drawn on top
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        min: 85,  // give some room below goal
+                        max: Math.max(110, ...weightValues) + 2,
+                        title: { display: true, text: 'Weight (kg)' }
+                    }
+                },
+                plugins: {
+                    annotation: {
+                        annotations: {
+                            goalLine: {
+                                type: 'line',
+                                yMin: 90,
+                                yMax: 90,
+                                borderColor: 'red',
+                                borderWidth: 2,
+                                borderDash: [6, 6],
+                                label: {
+                                    content: 'Goal: 90 kg',
+                                    enabled: true,
+                                    position: 'end'
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // ===== Table of recent entries =====
+    function updateTable() {
+        const tbody = document.querySelector('#entriesTable tbody');
+        tbody.innerHTML = '';
+
+        // Show most recent entries first (reverse chronological)
+        const reversed = [...weightData].reverse();
+        reversed.forEach(entry => {
+            const row = tbody.insertRow();
+            const cellDate = row.insertCell();
+            const cellWeight = row.insertCell();
+            cellDate.textContent = entry.date;
+            cellWeight.textContent = entry.weight.toFixed(1) + ' kg';
+        });
+    }
+
+    // ===== Update everything after data change =====
+    function updateUI() {
+        updateTable();
+        renderChart();
+    }
+
+    // ===== Initialisation =====
+    window.onload = function() {
+        // Set today's date as default in date input
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('dateInput').value = today;
+
+        // Load and display existing data
+        updateUI();
+    };
+</script>
+<!-- Chart.js annotation plugin is NOT included because we use a simple horizontal line via annotation plugin? Actually we didn't include the plugin; we need either include it or draw line manually. The annotation plugin requires an additional script. Let's simplify: instead of using annotation plugin, we can just add a manually drawn line? Or we can include the plugin. I'll add the plugin CDN and enable it. -->
+<!-- Include chartjs-plugin-annotation -->
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0/dist/chartjs-plugin-annotation.min.js"></script>
+<script>
+    // Register the plugin
+    Chart.register(annotationPlugin);
+    // But we need to ensure annotationPlugin is defined. The above script adds it to window. We'll register after Chart is loaded.
+    // To be safe, we'll wrap chart creation in a function that runs after plugins are ready.
+    // Actually we need to make sure the plugin script is loaded before we create the chart.
+    // The onload will run after all scripts, so it should be fine.
+</script>
+</body>
+</html>
