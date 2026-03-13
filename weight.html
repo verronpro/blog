@@ -1,82 +1,126 @@
 ---
 layout: default
-title: Weight
+title: Weight Tracker
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weight Tracker (90 kg Goal)</title>
-    <!-- Chart.js from CDN (make sure you have internet access, or download and use locally) -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-    <style>
+
+<style>
+    .weight-card {
+        margin: 2rem 0;
+        padding: 1.5rem;
+        background: var(--cc-surface);
+        border: 1px solid var(--cc-border);
+        border-radius: 4px;
+    }
+    .weight-card h1 {
+        text-align: center;
+        margin-top: 0;
+        color: var(--cc-primary);
+    }
+    .input-group {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+    .input-group input {
+        padding: 8px 12px;
+        font-size: 16px;
+        background: var(--cc-bg);
+        color: var(--cc-text);
+        border: 1px solid var(--cc-border);
+        border-radius: 4px;
+        flex: 1;
+    }
+    .input-group input[type="date"] {
+        flex: 2;
+        min-width: 150px;
+    }
+    .input-group .btn {
+        padding: 8px 16px;
+        font-size: 14px;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+        font-weight: 600;
+        flex: 0.5;
+        min-width: 100px;
+        text-align: center;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-add { background: var(--cc-primary); color: #fff; }
+    .btn-clear { background: #DC322F; color: #fff; }
+    .btn-export { background: #268BD2; color: #fff; }
+    .btn-import { background: #B58900; color: #fff; }
+
+    .btn:hover { filter: brightness(1.1); }
+
+    .chart-container {
+        position: relative;
+        height: 400px;
+        width: 100%;
+        margin: 20px 0;
+        background: var(--cc-bg);
+        border: 1px solid var(--cc-border);
+        border-radius: 4px;
+        padding: 10px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        border: 1px solid var(--cc-border);
+        padding: 10px;
+        text-align: center;
+    }
+    thead th {
+        background: var(--cc-surface);
+        color: var(--cc-text);
+        font-weight: bold;
+    }
+    tbody tr:nth-child(even) {
+        background: rgba(128, 128, 128, 0.05);
+    }
+    .note {
+        font-size: 0.9em;
+        color: var(--cc-muted);
+        margin-top: 15px;
+        text-align: center;
+        line-height: 1.5;
+    }
+    .note strong { color: var(--cc-text); }
+
+    @media (max-width: 600px) {
         .input-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+            flex-direction: column;
         }
-        .input-group input, .input-group button {
-            padding: 10px;
-            font-size: 16px;
-        }
-        .input-group input[type="date"] {
-            flex: 2;
-            min-width: 180px;
-        }
-        .input-group input[type="number"] {
-            flex: 1;
-            min-width: 100px;
-        }
-        .input-group button {
-            background: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            flex: 0.5;
-            min-width: 80px;
-        }
-        .input-group button.clear {
-            background: #f44336;
-        }
-        .input-group button.export {
-            background: #2196F3;
-        }
-        .input-group button.import {
-            background: #FF9800;
-        }
-        canvas {
-            max-height: 400px;
-            margin: 20px 0;
-        }
-        table {
+        .input-group input, .input-group .btn {
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+            flex: none;
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-<div class="container">
+    }
+</style>
+
+<div class="weight-card">
     <h1>📉 Weight Tracker – Target 90 kg</h1>
     <div class="input-group">
         <input type="date" id="dateInput" aria-label="Date"/>
         <input type="number" id="weightInput" step="0.1" placeholder="Weight (kg)" aria-label="Weight"/>
-        <button onclick="addEntry()">Add Entry</button>
-        <button class="clear" onclick="clearData()">Clear All</button>
-        <button class="export" onclick="exportData()">Export Data</button>
-        <button class="import" onclick="document.getElementById('importFile').click()">Import File</button>
+        <button class="btn btn-add" onclick="addEntry()">Add Entry</button>
+        <button class="btn btn-clear" onclick="clearData()">Clear All</button>
+        <button class="btn btn-export" onclick="exportData()">Export</button>
+        <button class="btn btn-import" onclick="document.getElementById('importFile').click()">Import</button>
         <input type="file" id="importFile" style="display:none" onchange="importData(event)" accept=".json,.xml" />
     </div>
 
-    <canvas id="weightChart"></canvas>
+    <div class="chart-container">
+        <canvas id="weightChart"></canvas>
+    </div>
 
     <h3>📋 Recent Entries</h3>
     <table id="entriesTable">
@@ -85,46 +129,45 @@ title: Weight
         </thead>
         <tbody></tbody>
     </table>
+    <div class="note">
+        ⚡ The chart shows your daily weigh‑ins (dots) and a <strong>7‑day moving average</strong> (line).<br>
+        🔴 The dashed red horizontal line is your <strong>90 kg goal</strong>.
+    </div>
 </div>
+
+<!-- Chart.js and Plugins -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0/dist/chartjs-plugin-annotation.min.js"></script>
 
 <script>
     // ===== Data handling using localStorage =====
     const STORAGE_KEY = 'weightData';
-
-    // Load saved data or initialize empty array
     let weightData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
-    // Sort by date (oldest first) – important for chart & moving average
     function sortData() {
         weightData.sort((a, b) => new Date(a.date) - new Date(b.date));
     }
-    sortData(); // ensure existing data is sorted
+    sortData();
 
-    // Save to localStorage
     function saveData() {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(weightData));
     }
 
-    // Add new entry (replaces if same date exists)
     function addEntry() {
         const dateInput = document.getElementById('dateInput');
         const weightInput = document.getElementById('weightInput');
-
         const date = dateInput.value;
-        const weight = Number.parseFloat(weightInput.value);
+        const weight = parseFloat(weightInput.value);
 
-        if (!date || Number.isNaN(weight)) {
+        if (!date || isNaN(weight)) {
             alert('Please enter both date and weight.');
             return;
         }
 
-        // Check for existing entry with same date
         const existingIndex = weightData.findIndex(entry => entry.date === date);
         if (existingIndex === -1) {
-            // Add new
             weightData.push({date, weight});
         } else {
-            // Replace
             weightData[existingIndex].weight = weight;
         }
 
@@ -132,12 +175,10 @@ title: Weight
         saveData();
         updateUI();
 
-        // Clear inputs, default date to today
         dateInput.value = new Date().toISOString().split('T')[0];
         weightInput.value = '';
     }
 
-    // Clear all data
     function clearData() {
         if (confirm('Delete all weight entries?')) {
             weightData = [];
@@ -146,7 +187,6 @@ title: Weight
         }
     }
 
-    // ===== Import/Export =====
     function exportData() {
         const dataStr = JSON.stringify(weightData, null, 2);
         const blob = new Blob([dataStr], { type: 'application/json' });
@@ -161,7 +201,6 @@ title: Weight
     function importData(event) {
         const file = event.target.files[0];
         if (!file) return;
-
         const reader = new FileReader();
         reader.onload = function(e) {
             const content = e.target.result;
@@ -170,7 +209,7 @@ title: Weight
             } else {
                 handleJSONImport(content);
             }
-            event.target.value = ''; // Reset input
+            event.target.value = '';
         };
         reader.readAsText(file);
     }
@@ -184,101 +223,86 @@ title: Weight
                     if (confirm(`Import ${data.length} entries? This will merge with current data.`)) {
                         mergeData(data);
                     }
-                } else {
-                    alert('Invalid JSON format. Expected array of {date, weight}.');
-                }
-            } else {
-                alert('Invalid JSON format. Expected an array.');
-            }
-        } catch (err) {
-            alert('Error parsing JSON: ' + err.message);
-        }
+                } else { alert('Invalid JSON format.'); }
+            } else { alert('Invalid JSON format.'); }
+        } catch (err) { alert('Error parsing JSON: ' + err.message); }
     }
 
     function handleAppleHealthXML(content) {
-        // Regex to match Record elements of type HKQuantityTypeIdentifierBodyMass
         const recordRegex = /<Record type="HKQuantityTypeIdentifierBodyMass"([^>]*)\/>/g;
         const valueRegex = /value="([^"]*)"/;
         const dateRegex = /startDate="([^"]*)"/;
-
         const newEntries = [];
         let match;
         while ((match = recordRegex.exec(content)) !== null) {
             const attrs = match[1];
             const valueMatch = attrs.match(valueRegex);
             const dateMatch = attrs.match(dateRegex);
-
             if (valueMatch && dateMatch) {
-                const weight = Number.parseFloat(valueMatch[1]);
+                const weight = parseFloat(valueMatch[1]);
                 const dateStr = new Date(dateMatch[1]).toISOString().split('T')[0];
-                if (!Number.isNaN(weight) && dateStr !== 'NaN-aN-aN') {
+                if (!isNaN(weight) && dateStr !== 'NaN-aN-aN') {
                     newEntries.push({ date: dateStr, weight: weight });
                 }
             }
         }
-
         if (newEntries.length > 0) {
-            // Sort new entries chronologically (Apple Health can be mixed)
             newEntries.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-            if (confirm(`Found ${newEntries.length} weight records in Apple Health file. Import them?`)) {
-                mergeData(newEntries);
-            }
-        } else {
-            alert('No weight records found in the XML file. Ensure it is an Apple Health export.xml.');
-        }
+            if (confirm(`Found ${newEntries.length} records. Import them?`)) { mergeData(newEntries); }
+        } else { alert('No weight records found.'); }
     }
 
     function mergeData(newEntries) {
         newEntries.forEach(newEntry => {
             const existingIndex = weightData.findIndex(e => e.date === newEntry.date);
-            if (existingIndex === -1) {
-                weightData.push(newEntry);
-            } else {
-                weightData[existingIndex].weight = newEntry.weight;
-            }
+            if (existingIndex === -1) { weightData.push(newEntry); }
+            else { weightData[existingIndex].weight = newEntry.weight; }
         });
         sortData();
         saveData();
         updateUI();
-        alert('Data imported successfully.');
+        alert('Import successful.');
     }
 
     // ===== Chart =====
     let chart = null;
 
+    function getThemeColors() {
+        const style = getComputedStyle(document.documentElement);
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        return {
+            text: style.getPropertyValue('--cc-text').trim() || (isDark ? '#E6E6E6' : '#073642'),
+            border: style.getPropertyValue('--cc-border').trim() || (isDark ? '#2A2A2A' : '#93A1A1'),
+            primary: style.getPropertyValue('--cc-primary').trim() || '#30D000',
+            muted: style.getPropertyValue('--cc-muted').trim() || (isDark ? '#A3A3A3' : '#657B83'),
+            grid: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
+        };
+    }
+
     function renderChart() {
         const ctx = document.getElementById('weightChart').getContext('2d');
+        const colors = getThemeColors();
 
-        // If chart exists, destroy it before creating new one
-        if (chart) {
-            chart.destroy();
-        }
+        if (chart) { chart.destroy(); }
 
         if (weightData.length === 0) {
-            // No data – show empty chart or just skip
             chart = new Chart(ctx, {
                 type: 'line',
                 data: { labels: [], datasets: [] },
-                options: { plugins: { title: { display: true, text: 'No data yet' } } }
+                options: { plugins: { title: { display: true, text: 'No data yet', color: colors.text } } }
             });
             return;
         }
 
-        // Prepare labels (dates) and weight values
         const labels = weightData.map(entry => entry.date);
         const weightValues = weightData.map(entry => entry.weight);
-
-        // Compute 7‑day moving average (by index, not calendar day)
         const movingAvgValues = [];
         for (let i = 0; i < weightValues.length; i++) {
             const start = Math.max(0, i - 6);
-            const count = i - start + 1; // number of entries in this window
             const sum = weightValues.slice(start, i + 1).reduce((acc, val) => acc + val, 0);
-            movingAvgValues.push(sum / count);
+            movingAvgValues.push(sum / (i - start + 1));
         }
 
-        // Create dataset
         chart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -287,22 +311,22 @@ title: Weight
                     {
                         label: 'Daily Weight (kg)',
                         data: weightValues,
-                        borderColor: 'rgba(54, 162, 235, 0.2)',
-                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                        pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+                        borderColor: 'rgba(48, 208, 0, 0.3)',
+                        backgroundColor: 'rgba(48, 208, 0, 0.1)',
+                        pointBackgroundColor: colors.primary,
                         pointRadius: 4,
                         tension: 0.1,
-                        order: 2 // drawn behind the average line
+                        order: 2
                     },
                     {
-                        label: '7‑Day Moving Average',
+                        label: '7-Day Moving Average',
                         data: movingAvgValues,
-                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderColor: '#CB4B16', // Solarized Orange
                         backgroundColor: 'transparent',
                         pointRadius: 0,
                         borderWidth: 3,
                         tension: 0.2,
-                        order: 1 // drawn on top
+                        order: 1
                     }
                 ]
             },
@@ -310,26 +334,35 @@ title: Weight
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
+                    x: {
+                        ticks: { color: colors.text },
+                        grid: { color: colors.grid }
+                    },
                     y: {
-                        min: 85,  // give some room below goal
-                        max: Math.max(110, ...weightValues) + 2,
-                        title: { display: true, text: 'Weight (kg)' }
+                        min: Math.min(85, ...weightValues) - 2,
+                        max: Math.max(100, ...weightValues) + 2,
+                        ticks: { color: colors.text },
+                        grid: { color: colors.grid },
+                        title: { display: true, text: 'Weight (kg)', color: colors.text }
                     }
                 },
                 plugins: {
+                    legend: { labels: { color: colors.text } },
                     annotation: {
                         annotations: {
                             goalLine: {
                                 type: 'line',
                                 yMin: 90,
                                 yMax: 90,
-                                borderColor: 'red',
+                                borderColor: '#DC322F', // Solarized Red
                                 borderWidth: 2,
                                 borderDash: [6, 6],
                                 label: {
                                     content: 'Goal: 90 kg',
                                     enabled: true,
-                                    position: 'end'
+                                    position: 'end',
+                                    backgroundColor: 'rgba(220, 50, 47, 0.8)',
+                                    color: '#fff'
                                 }
                             }
                         }
@@ -339,47 +372,33 @@ title: Weight
         });
     }
 
-    // ===== Table of recent entries =====
     function updateTable() {
         const tbody = document.querySelector('#entriesTable tbody');
         tbody.innerHTML = '';
-
-        // Show most recent entries first (reverse chronological)
-        const reversed = [...weightData].reverse();
-        reversed.forEach(entry => {
+        [...weightData].reverse().forEach(entry => {
             const row = tbody.insertRow();
-            const cellDate = row.insertCell();
-            const cellWeight = row.insertCell();
-            cellDate.textContent = entry.date;
-            cellWeight.textContent = entry.weight.toFixed(1) + ' kg';
+            row.insertCell().textContent = entry.date;
+            row.insertCell().textContent = entry.weight.toFixed(1) + ' kg';
         });
     }
 
-    // ===== Update everything after data change =====
     function updateUI() {
         updateTable();
         renderChart();
     }
 
-    // ===== Initialisation =====
     window.onload = function() {
-        // Set today's date as default in date input
+        // Register the plugin (global access from the CDN)
+        const plugin = window['chartjs-plugin-annotation'] || window['annotationPlugin'];
+        if (plugin) {
+            Chart.register(plugin);
+        }
         document.getElementById('dateInput').value = new Date().toISOString().split('T')[0];
-
-        // Load and display existing data
         updateUI();
     };
+
+    // Listen for theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        renderChart();
+    });
 </script>
-<!-- Chart.js annotation plugin is NOT included because we use a simple horizontal line via annotation plugin? Actually we didn't include the plugin; we need either include it or draw line manually. The annotation plugin requires an additional script. Let's simplify: instead of using annotation plugin, we can just add a manually drawn line? Or we can include the plugin. I'll add the plugin CDN and enable it. -->
-<!-- Include chartjs-plugin-annotation -->
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0/dist/chartjs-plugin-annotation.min.js"></script>
-<script>
-    // Register the plugin
-    Chart.register(annotationPlugin);
-    // But we need to ensure annotationPlugin is defined. The above script adds it to window. We'll register after Chart is loaded.
-    // To be safe, we'll wrap chart creation in a function that runs after plugins are ready.
-    // Actually we need to make sure the plugin script is loaded before we create the chart.
-    // The onload will run after all scripts, so it should be fine.
-</script>
-</body>
-</html>
