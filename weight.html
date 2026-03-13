@@ -3,7 +3,7 @@ layout: default
 title: Weight
 ---
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,6 +58,12 @@ title: Weight
         .input-group button.clear {
             background: #f44336;
         }
+        .input-group button.export {
+            background: #2196F3;
+        }
+        .input-group button.import {
+            background: #FF9800;
+        }
         canvas {
             max-height: 400px;
             margin: 20px 0;
@@ -91,10 +97,13 @@ title: Weight
 <div class="container">
     <h1>📉 Weight Tracker – Target 90 kg</h1>
     <div class="input-group">
-        <input type="date" id="dateInput" />
-        <input type="number" id="weightInput" step="0.1" placeholder="Weight (kg)" />
+        <input type="date" id="dateInput" aria-label="Date"/>
+        <input type="number" id="weightInput" step="0.1" placeholder="Weight (kg)" aria-label="Weight"/>
         <button onclick="addEntry()">Add Entry</button>
         <button class="clear" onclick="clearData()">Clear All</button>
+        <button class="export" onclick="exportData()">Export Data</button>
+        <button class="import" onclick="document.getElementById('importFile').click()">Import File</button>
+        <input type="file" id="importFile" style="display:none" onchange="importData(event)" accept=".json,.xml" />
     </div>
 
     <canvas id="weightChart"></canvas>
@@ -136,21 +145,21 @@ title: Weight
         const weightInput = document.getElementById('weightInput');
 
         const date = dateInput.value;
-        const weight = parseFloat(weightInput.value);
+        const weight = Number.parseFloat(weightInput.value);
 
-        if (!date || isNaN(weight)) {
+        if (!date || Number.isNaN(weight)) {
             alert('Please enter both date and weight.');
             return;
         }
 
         // Check for existing entry with same date
         const existingIndex = weightData.findIndex(entry => entry.date === date);
-        if (existingIndex !== -1) {
+        if (existingIndex === -1) {
+            // Add new
+            weightData.push({date, weight});
+        } else {
             // Replace
             weightData[existingIndex].weight = weight;
-        } else {
-            // Add new
-            weightData.push({ date, weight });
         }
 
         sortData();
@@ -169,6 +178,104 @@ title: Weight
             saveData();
             updateUI();
         }
+    }
+
+    // ===== Import/Export =====
+    function exportData() {
+        const dataStr = JSON.stringify(weightData, null, 2);
+        const blob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `weight_data_${new Date().toISOString().split('T')[0]}.json`;
+        link.click();
+        URL.revokeObjectURL(url);
+    }
+
+    function importData(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const content = e.target.result;
+            if (file.name.toLowerCase().endsWith('.xml')) {
+                handleAppleHealthXML(content);
+            } else {
+                handleJSONImport(content);
+            }
+            event.target.value = ''; // Reset input
+        };
+        reader.readAsText(file);
+    }
+
+    function handleJSONImport(content) {
+        try {
+            const data = JSON.parse(content);
+            if (Array.isArray(data)) {
+                const isValid = data.every(entry => entry.date && typeof entry.weight === 'number');
+                if (isValid) {
+                    if (confirm(`Import ${data.length} entries? This will merge with current data.`)) {
+                        mergeData(data);
+                    }
+                } else {
+                    alert('Invalid JSON format. Expected array of {date, weight}.');
+                }
+            } else {
+                alert('Invalid JSON format. Expected an array.');
+            }
+        } catch (err) {
+            alert('Error parsing JSON: ' + err.message);
+        }
+    }
+
+    function handleAppleHealthXML(content) {
+        // Regex to match Record elements of type HKQuantityTypeIdentifierBodyMass
+        const recordRegex = /<Record type="HKQuantityTypeIdentifierBodyMass"([^>]*)\/>/g;
+        const valueRegex = /value="([^"]*)"/;
+        const dateRegex = /startDate="([^"]*)"/;
+
+        const newEntries = [];
+        let match;
+        while ((match = recordRegex.exec(content)) !== null) {
+            const attrs = match[1];
+            const valueMatch = attrs.match(valueRegex);
+            const dateMatch = attrs.match(dateRegex);
+
+            if (valueMatch && dateMatch) {
+                const weight = Number.parseFloat(valueMatch[1]);
+                const dateStr = new Date(dateMatch[1]).toISOString().split('T')[0];
+                if (!Number.isNaN(weight) && dateStr !== 'NaN-aN-aN') {
+                    newEntries.push({ date: dateStr, weight: weight });
+                }
+            }
+        }
+
+        if (newEntries.length > 0) {
+            // Sort new entries chronologically (Apple Health can be mixed)
+            newEntries.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            if (confirm(`Found ${newEntries.length} weight records in Apple Health file. Import them?`)) {
+                mergeData(newEntries);
+            }
+        } else {
+            alert('No weight records found in the XML file. Ensure it is an Apple Health export.xml.');
+        }
+    }
+
+    function mergeData(newEntries) {
+        newEntries.forEach(newEntry => {
+            const existingIndex = weightData.findIndex(e => e.date === newEntry.date);
+            if (existingIndex === -1) {
+                weightData.push(newEntry);
+            } else {
+                weightData[existingIndex].weight = newEntry.weight;
+            }
+        });
+        sortData();
+        saveData();
+        updateUI();
+        alert('Data imported successfully.');
     }
 
     // ===== Chart =====
@@ -291,8 +398,7 @@ title: Weight
     // ===== Initialisation =====
     window.onload = function() {
         // Set today's date as default in date input
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById('dateInput').value = today;
+        document.getElementById('dateInput').value = new Date().toISOString().split('T')[0];
 
         // Load and display existing data
         updateUI();
