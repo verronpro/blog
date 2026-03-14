@@ -11,23 +11,6 @@ title: Weight
     <!-- Chart.js from CDN (make sure you have internet access, or download and use locally) -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 0 15px;
-            background: #f5f5f5;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
         .input-group {
             display: flex;
             gap: 10px;
@@ -78,19 +61,6 @@ title: Weight
             padding: 8px;
             text-align: center;
         }
-        th {
-            background: #4CAF50;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background: #f9f9f9;
-        }
-        .note {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 10px;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
@@ -115,10 +85,6 @@ title: Weight
         </thead>
         <tbody></tbody>
     </table>
-    <div class="note">
-        ⚡ The chart shows your daily weigh‑ins (dots) and a <strong>7‑day moving average</strong> (line).<br>
-        🔴 The red horizontal line is your 90 kg goal.
-    </div>
 </div>
 
 <script>
