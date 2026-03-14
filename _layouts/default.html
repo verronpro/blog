@@ -8,8 +8,8 @@
     <meta name="description" content="{{ page.description | default: site.description | strip | escape }}">
     {% include head/favicon.html %}
     <!-- Diagrams-as-Code dependencies: Mermaid (client-side) and Pako (for Kroki compression) -->
-    <script defer src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script>
+    <script defer src="/blog/assets/js/mermaid_v10.js"></script>
+    <script defer src="/blog/assets/js/pako_v2.1.0.js"></script>
     <script>
         function createDiagramElement(className) {
             const element = document.createElement('div');
