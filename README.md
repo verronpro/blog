@@ -9,7 +9,7 @@ Overview
 - Language/stack: Ruby, Bundler
 - Content: Markdown under `_posts/` and `_drafts/`
 - Hosting: GitHub Pages
-- Base URL: `/blog` (see `_config.yml`)
+- Base URL: `/` (see `_config.yml`)
 
 Requirements
 

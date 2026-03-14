@@ -87,7 +87,7 @@ You get rapid feedback, lower integration risk, and artifacts you can evolve wit
 
 ## Where to find me
 
-- Blog: https://blog.verron.pro/
+- Blog: https://verron.pro/
 - LinkedIn: https://www.linkedin.com/in/josephverron/ & https://www.linkedin.com/company/caring-coder
 - GitHub: https://github.com/caring-coder & https://github.com/verronpro
 - Medium: https://medium.com/@caring_coder
