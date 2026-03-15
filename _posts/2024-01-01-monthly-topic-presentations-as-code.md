@@ -8,22 +8,28 @@ author: Joseph
 description: "How I build and publish slide decks as code using Asciidoctor Reveal.js and a reproducible Maven build — with live code and diagram generation."
 ---
 
-I build my talks and workshops as code. The slides live in Git, are reproducible on any machine, and are published from CI with the exact same toolchain I run locally. The source for my decks is public:
+I build my talks and workshops as code. The slides live in Git, are reproducible
+on any machine, and are published from CI with the same toolchain I run
+locally. The source for my decks is public:
 
 - Repository: https://github.com/caring-coder/presentations
 
-This post documents the approach and shows a concrete `pom.xml` I use to compile AsciiDoc into a Reveal.js deck, with diagrams rendered at build time.
+This post documents the approach and shows a concrete `pom.xml` I use to compile
+AsciiDoc into a Reveal.js deck, with diagrams rendered at build time.
 
 ### Abstract
 
 - Authoring format: AsciiDoc (AsciidoctorJ)
 - Slide engine: Reveal.js
-- Build tool: Maven, fully reproducible, downloads its own dependencies (JRuby, gems, Reveal.js)
-- Extras: `asciidoctor-diagram` for PlantUML/Graphviz and friends; include tagged source code from the repo
+- Build tool: Maven, fully reproducible, downloads its own dependencies (JRuby,
+  gems, Reveal.js)
+- Extras: `asciidoctor-diagram` for PlantUML/Graphviz and friends; include
+  tagged source code from the repo.
 
 ### Slide deck source and layout
 
-I keep each presentation as an isolated Maven module or folder under the repo. The typical layout is:
+I keep each presentation as an isolated Maven module or folder under the repo.
+The typical layout is:
 
 ```
 <deck-name>/
@@ -35,7 +41,9 @@ I keep each presentation as an isolated Maven module or folder under the repo. T
 docs/                # real code samples to include via tags (optional)
 ```
 
-AsciiDoc gives me strong authoring primitives (includes, conditionals, attributes) and lets me pull real, compilable code straight into slides with tagged regions:
+AsciiDoc gives me strong authoring primitives (includes, conditionals,
+attributes) and lets me pull real, compilable code straight into slides with
+tagged regions:
 
 ```adoc
 [source,java]
@@ -48,11 +56,14 @@ When the implementation changes, the slides change with it.
 
 ### Build: Maven + Asciidoctor Reveal.js
 
-The Maven build downloads Reveal.js, provisions gems, enables `asciidoctor-diagram`, and emits HTML into `target/generated-slides`. Here is a representative `pom.xml` I use in those presentation modules:
+The Maven build downloads Reveal.js, provisions gems, enables
+`asciidoctor-diagram`, and emits HTML into `target/generated-slides`. Here is a
+representative `pom.xml` I use in those presentation modules:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>pro.verron</groupId>
@@ -62,11 +73,13 @@ The Maven build downloads Reveal.js, provisions gems, enables `asciidoctor-diagr
     <description>A presentation about diagram-as-code tools.</description>
 
     <properties>
-        <project.slides.directory>${project.build.directory}/generated-slides</project.slides.directory>
+        <project.slides.directory>${project.build.directory}/generated-slides
+        </project.slides.directory>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <asciidoctor.maven.plugin.version>3.2.0</asciidoctor.maven.plugin.version>
+        <asciidoctor.maven.plugin.version>3.2.0
+        </asciidoctor.maven.plugin.version>
         <asciidoctorj.version>3.0.0</asciidoctorj.version>
         <asciidoctorj.diagram.version>3.0.1</asciidoctorj.diagram.version>
         <jruby.version>10.0.2.0</jruby.version>
@@ -107,10 +120,14 @@ The Maven build downloads Reveal.js, provisions gems, enables `asciidoctor-diagr
                             <goal>wget</goal>
                         </goals>
                         <configuration>
-                            <url>https://github.com/hakimel/reveal.js/archive/${revealjs.version}.zip</url>
+                            <url>
+                                https://github.com/hakimel/reveal.js/archive/${revealjs.version}.zip
+                            </url>
                             <unpack>true</unpack>
-                            <outputFileName>reveal.js-${revealjs.version}.zip</outputFileName>
-                            <outputDirectory>${project.slides.directory}</outputDirectory>
+                            <outputFileName>reveal.js-${revealjs.version}.zip
+                            </outputFileName>
+                            <outputDirectory>${project.slides.directory}
+                            </outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
@@ -168,7 +185,8 @@ The Maven build downloads Reveal.js, provisions gems, enables `asciidoctor-diagr
                     </requires>
                     <sourceDirectory>src/docs/asciidoc</sourceDirectory>
                     <attributes>
-                        <sourcedir-definition>${project.basedir}/docs</sourcedir-definition>
+                        <sourcedir-definition>${project.basedir}/docs
+                        </sourcedir-definition>
                     </attributes>
                 </configuration>
                 <executions>
@@ -184,13 +202,17 @@ The Maven build downloads Reveal.js, provisions gems, enables `asciidoctor-diagr
                                 <require>asciidoctor-revealjs</require>
                                 <require>asciidoctor-diagram</require>
                             </requires>
-                            <outputDirectory>${project.slides.directory}</outputDirectory>
+                            <outputDirectory>${project.slides.directory}
+                            </outputDirectory>
                             <backend>revealjs</backend>
                             <attributes>
-                                <revealjsdir>reveal.js-${revealjs.version}</revealjsdir>
+                                <revealjsdir>reveal.js-${revealjs.version}
+                                </revealjsdir>
                                 <revealjs_theme>serif</revealjs_theme>
-                                <revealjs_transition>linear</revealjs_transition>
-                                <project-version>${project.version}</project-version>
+                                <revealjs_transition>linear
+                                </revealjs_transition>
+                                <project-version>${project.version}
+                                </project-version>
                             </attributes>
                         </configuration>
                     </execution>
@@ -209,22 +231,32 @@ The Maven build downloads Reveal.js, provisions gems, enables `asciidoctor-diagr
 </project>
 ```
 
-With this configuration, a simple `mvn clean package` produces HTML slides in `target/generated-slides`. Open the generated `index.html` (or the name of your `index.adoc` output) directly in a browser, or serve the folder via any static file server.
+With this configuration, a simple `mvn clean package` produces HTML slides in
+`target/generated-slides`. Open the generated `index.html` (or the name of your
+`index.adoc` output) directly in a browser, or serve the folder via any static
+file server.
 
 ### Authoring: slides, code, and diagrams
 
-- Source includes: I prefer tagging production-like examples and reusing them in slides via `include::`.
-- Diagrams: `asciidoctor-diagram` renders PlantUML, Mermaid (via Kroki), Graphviz, and more at build time. This is a practical application of the [Diagrams as Code](/documentation-as-code/2023/09/01/diagram-as-code.html) philosophy: the diagrams are version-controlled, diffable, and stay in sync with the slide narrative.
+- Source includes: I prefer tagging production-like examples and reusing them in
+  slides via `include::`.
+- Diagrams: `asciidoctor-diagram` renders PlantUML, Mermaid (via Kroki),
+  Graphviz, and more at build time. This is a practical application of
+  the [Diagrams as Code](/documentation-as-code/2023/09/01/diagram-as-code.html)
+  philosophy: the diagrams are version-controlled, diffable, and stay in sync
+  with the slide narrative.
 
 Example:
 
 **PlantUML**
+
 ```plantuml
 Alice -> Bob: request
 Bob --> Alice: response
 ```
 
 **Mermaid**
+
 ```mermaid
 flowchart TD
     A[Idea] --> B{Prototype?}
@@ -235,22 +267,31 @@ flowchart TD
     E --  No  --> D
 ```
 
-If your diagrams require native tools (e.g., Graphviz), install them locally or route rendering through Kroki.
+If your diagrams require native tools (e.g., Graphviz), install them locally or
+route rendering through Kroki.
 
 ### Local run and CI
 
-- Prerequisites: Java 17+ and Maven. JRuby and gems are provisioned by the build; no system Ruby is required.
+- Prerequisites: Java 17+ and Maven. JRuby and gems are provisioned by the
+  build; no system Ruby is required.
 - Build locally: `mvn clean package` then open `target/generated-slides/*.html`.
-- CI publishing: copy the `generated-slides` folder to GitHub Pages (I use a simple deploy step per deck) so attendees always see the version tied to a tag.
+- CI publishing: copy the `generated-slides` folder to GitHub Pages (I use a
+  simple deploy step per deck) so attendees always see the version tied to a
+  tag.
 
 ### Troubleshooting
 
-- If Reveal.js assets don’t load, ensure the archive was downloaded into `target/generated-slides/` and the `revealjsdir` attribute matches the folder name.
-- For diagram failures, check that `asciidoctor-diagram` is required and that any native dependencies (like Graphviz) are installed or that Kroki is enabled.
+- If Reveal.js assets don’t load, ensure the archive was downloaded into
+  `target/generated-slides/` and the `revealjsdir` attribute matches the folder
+  name.
+- For diagram failures, check that `asciidoctor-diagram` is required and that
+  any native dependencies (like Graphviz) are installed or that Kroki is
+  enabled.
 
 ### References
 
 - Presentations repo: https://github.com/caring-coder/presentations
-- Asciidoctor Maven Plugin: https://github.com/asciidoctor/asciidoctor-maven-plugin
+- Asciidoctor Maven
+  Plugin: https://github.com/asciidoctor/asciidoctor-maven-plugin
 - Asciidoctor Reveal.js: https://github.com/asciidoctor/asciidoctor-reveal.js
 - Asciidoctor Diagram: https://github.com/asciidoctor/asciidoctor-diagram

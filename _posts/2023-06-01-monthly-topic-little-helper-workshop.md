@@ -8,14 +8,17 @@ author: Joseph
 description: A timed, gamified workshop to reveal onboarding documentation gaps and turn them into an actionable backlog your team can execute.
 ---
 
-Can a new developer build, run, and test your project in under 4 hours using only a 240-character message? This gamified
-workshop exposes onboarding documentation gaps through timed challenges—turning painful "where's the docs?"
+Can a new developer build, run, and test your project in under 4 hours using
+only a 240-character message? This gamified workshop exposes onboarding
+documentation gaps through timed challenges—turning painful "where's the docs?"
 conversations into an actionable improvement backlog.
 
-A new contractor joins your team Monday morning. By lunch, they're still installing dependencies. By Wednesday, they're
-Slacking you about environment variables. By Friday, they've made zero commits. Sound familiar? The problem isn't
-talent—it's missing documentation. This workshop surfaces those gaps in 60 minutes through a simple challenge: can
-someone set up your dev environment using only a 240-character starting message? If not, you've just found your next
+A new contractor joins your team Monday morning. By lunch, they're still
+installing dependencies. By Wednesday, they're Slacking you about environment
+variables. By Friday, they've made zero commits. Sound familiar? The problem
+isn't talent—it's missing documentation. This workshop surfaces those gaps in 60
+minutes through a simple challenge: can someone set up your dev environment
+using only a 240-character starting message? If not, you've just found your next
 sprint's documentation work.
 
 ## Workshop Quick Facts
@@ -36,8 +39,9 @@ digraph D {
 
 ## Why run it (Goal)
 
-Highlight missing or rotting developer documentation by setting up the dev environment from a blank machine. If a
-newcomer cannot get to build/run/tests within half a day, the issue is not talent—it's discoverability, environment
+Highlight missing or rotting developer documentation by setting up the dev
+environment from a blank machine. If a newcomer cannot get to build/run/tests
+within half a day, the issue is not talent—it is discoverability, environment
 design, or both.
 
 ## Roles and Setup
@@ -53,8 +57,9 @@ Give the player exactly one starting message (max 240 characters). Nothing else.
 ## The 240-Character Rule
 
 **Why the limit?**  
-Forces you to link to *discoverable* documentation instead of institutional knowledge. If your starting message is "Ask
-Sarah about the database," you've already failed.
+Forces you to link to *discoverable* documentation instead of institutional
+knowledge. If your starting message is "Ask Sarah about the database," you've
+already failed.
 
 **Good examples:**
 
@@ -65,7 +70,7 @@ Sarah about the database," you've already failed.
 **Bad examples:**
 
 - ❌ "Sarah knows the setup, DM her"
-- ❌ "It's documented somewhere, check the wiki"
+- ❌ "It is documented somewhere, check the wiki"
 - ❌ "Run install.sh (ignore the errors, they're fine)"
 
 ## Run of Show (Rounds)
@@ -75,7 +80,8 @@ Run one to four rounds. A micro‑retro time‑boxes and follows each round.
 1. Setup (5 min): read the 240‑char message, open links, start.
 2. Round N (15 min): player advances toward build/run/tests. No questions.
 3. Feedback (5 min): structured retro (see prompts below).
-4. Backlog (10 min after the last round): consolidate action items, assign owners.
+4. Backlog (10 min after the last round): consolidate action items, assign
+   owners.
 
 ### Scoring Checklist (8 core points)
 
@@ -98,8 +104,8 @@ Bonus points (optional, +10 max):
 - CI/CD access instructions (2 pts)
 - Observability/monitoring access (2 pts)
 
-If any questions arise, the observing team shouldn’t give any more information, but can take notes or start drafting the
-documentation they feel is missing.
+If any questions arise, the observing team shouldn’t give any more information,
+but can take notes or start drafting the documentation they feel is missing.
 
 ### 5-Min Feedback (Structured Retro)
 
@@ -128,12 +134,14 @@ Use these prompts to keep feedback focused:
 
 ### Ending (Backlog Creation)
 
-Create a prioritized backlog of the missing documentation needed to onboard a colleague, coach, or maintenance team. Add
-these items immediately to your Jira board (or equivalent), with owners and due dates.
+Create a prioritized backlog of the missing documentation needed to onboard a
+colleague, coach, or maintenance team. Add these items immediately to your Jira
+board (or equivalent), with owners and due dates.
 
 ### Gamification (optional)
 
-To compare teams or add energy, award points per checklist item each round. Publish a scoreboard over time.
+To compare teams or add energy, award points per checklist item each round.
+Publish a scoreboard over time.
 
 ## Example Workshop Run: E-Commerce Platform Team
 
@@ -165,7 +173,8 @@ To compare teams or add energy, award points per checklist item each round. Publ
 Use your workshop score to gauge maturity:
 
 **Level 1: Broken (0–3 points)**  
-Can't even build the project. Documentation likely doesn't exist or is severely outdated.  
+Can't even build the project. Documentation likely doesn't exist or is severely
+outdated.  
 🚨 **Action:** Stop feature work, invest a sprint in docs.
 
 **Level 2: Fragile (4–6 points)**  
@@ -201,23 +210,27 @@ Based on running this workshop with dozens of teams, here's what usually breaks:
 
 ### Before the workshop:
 
-- **Prepare the machine:** VM snapshot, cloud workspace (GitHub Codespaces), or wiped laptop
-- **Set expectations:** Tell the player they can't ask questions during timed rounds
+- **Prepare the machine:** VM snapshot, cloud workspace (GitHub Codespaces), or
+  wiped laptop.
+- **Set expectations:** Tell the player they can't ask questions during timed
+  rounds.
 - **Prepare observers:** Give them a note-taking template (see below)
-- **Choose the right player:** Either a new team member (realistic) or an experienced dev (finds gaps faster)
+- **Choose the right player:** Either a new team member (realistic), or an
+  experienced dev (finds gaps faster)
 
 ### During the workshop:
 
 - **Keep strict time:** Use a visible timer, no extensions
 - **Record the session:** Screen recording helps identify navigation struggles
-- **Take notes on *silence*:** When the player stalls, that's a documentation gap
+- **Take notes on *silence*:** When the player stalls, that's a documentation
+  gap.
 - **Ban helpful hints:** Observers must stay quiet (hard but essential!)
 
 ### After the workshop:
 
 - **Prioritize the backlog:** Fix quick wins immediately (same day if possible)
 - **Assign owners:** Don't leave action items orphaned
-- **Schedule next run:** Set a calendar reminder for 1–2 months out
+- **Schedule next run:** Set a calendar reminder for 1–2 months out.
 
 ## When Teams Push Back
 
@@ -228,10 +241,12 @@ Based on running this workshop with dozens of teams, here's what usually breaks:
 → Response: "This workshop will show you exactly what to simplify."
 
 **"We only onboard once a year"**  
-→ Response: "Documentation rots. This keeps it fresh for contractors, coaches, and team transfers."
+→ Response: "Documentation rots. This keeps it fresh for contractors, coaches,
+and team transfers."
 
 **"Our docs are fine, we don't need this"**  
-→ Response: "Great! This will prove it and give you a maturity score to brag about."
+→ Response: "Great! This will prove it and give you a maturity score to brag
+about."
 
 ## Copy‑paste Templates
 
@@ -301,6 +316,7 @@ Body: 60‑min rerun to keep docs fresh. Bring a clean VM. Use the same 240‑ch
 
 ## Conclusion
 
-The best documentation is the documentation that gets used. This workshop forces you to experience onboarding from a
-newcomer's perspective and turns insights into a concrete backlog. Run it once. Then look your next new hire in the eye
+The best documentation is the documentation that gets used. This workshop forces
+you to experience onboarding from a newcomer's perspective and turns insights
+into a concrete backlog. Run it once. Then look your next new hire in the eye
 and say: "You'll be committing code by lunch."
