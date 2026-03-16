@@ -11,17 +11,20 @@ title: Weight Tracker
         border: 1px solid var(--cc-border);
         border-radius: 4px;
     }
+
     .weight-card h1 {
         text-align: center;
         margin-top: 0;
         color: var(--cc-primary);
     }
+
     .input-group {
         display: flex;
         gap: 10px;
         margin-bottom: 20px;
         flex-wrap: wrap;
     }
+
     .input-group input {
         padding: 8px 12px;
         font-size: 16px;
@@ -31,10 +34,12 @@ title: Weight Tracker
         border-radius: 4px;
         flex: 1;
     }
+
     .input-group input[type="date"] {
         flex: 2;
         min-width: 150px;
     }
+
     .input-group .btn {
         padding: 8px 16px;
         font-size: 14px;
@@ -50,12 +55,29 @@ title: Weight Tracker
         justify-content: center;
     }
 
-    .btn-add { background: var(--cc-primary); color: #fff; }
-    .btn-clear { background: #DC322F; color: #fff; }
-    .btn-export { background: #268BD2; color: #fff; }
-    .btn-import { background: #B58900; color: #fff; }
+    .btn-add {
+        background: var(--cc-primary);
+        color: #fff;
+    }
 
-    .btn:hover { filter: brightness(1.1); }
+    .btn-clear {
+        background: #DC322F;
+        color: #fff;
+    }
+
+    .btn-export {
+        background: #268BD2;
+        color: #fff;
+    }
+
+    .btn-import {
+        background: #B58900;
+        color: #fff;
+    }
+
+    .btn:hover {
+        filter: brightness(1.1);
+    }
 
     .chart-container {
         position: relative;
@@ -73,19 +95,23 @@ title: Weight Tracker
         border-collapse: collapse;
         margin-top: 20px;
     }
+
     th, td {
         border: 1px solid var(--cc-border);
         padding: 10px;
         text-align: center;
     }
+
     thead th {
         background: var(--cc-surface);
         color: var(--cc-text);
         font-weight: bold;
     }
+
     tbody tr:nth-child(even) {
         background: rgba(128, 128, 128, 0.05);
     }
+
     .note {
         font-size: 0.9em;
         color: var(--cc-muted);
@@ -93,12 +119,16 @@ title: Weight Tracker
         text-align: center;
         line-height: 1.5;
     }
-    .note strong { color: var(--cc-text); }
+
+    .note strong {
+        color: var(--cc-text);
+    }
 
     @media (max-width: 600px) {
         .input-group {
             flex-direction: column;
         }
+
         .input-group input, .input-group .btn {
             width: 100%;
             flex: none;
@@ -110,12 +140,16 @@ title: Weight Tracker
     <h1>📉 Weight Tracker – Target 90 kg</h1>
     <div class="input-group">
         <input type="date" id="dateInput" aria-label="Date"/>
-        <input type="number" id="weightInput" step="0.1" placeholder="Weight (kg)" aria-label="Weight"/>
+        <input type="number" id="weightInput" step="0.1"
+               placeholder="Weight (kg)" aria-label="Weight"/>
         <button class="btn btn-add" onclick="addEntry()">Add Entry</button>
         <button class="btn btn-clear" onclick="clearData()">Clear All</button>
         <button class="btn btn-export" onclick="exportData()">Export</button>
-        <button class="btn btn-import" onclick="document.getElementById('importFile').click()">Import</button>
-        <input type="file" id="importFile" style="display:none" onchange="importData(event)" accept=".json,.xml" />
+        <button class="btn btn-import"
+                onclick="document.getElementById('importFile').click()">Import
+        </button>
+        <input type="file" id="importFile" style="display:none"
+               onchange="importData(event)" accept=".json,.xml"/>
     </div>
 
     <div class="chart-container">
@@ -125,12 +159,16 @@ title: Weight Tracker
     <h3>📋 Recent Entries</h3>
     <table id="entriesTable">
         <thead>
-            <tr><th>Date</th><th>Weight (kg)</th></tr>
+        <tr>
+            <th>Date</th>
+            <th>Weight (kg)</th>
+        </tr>
         </thead>
         <tbody></tbody>
     </table>
     <div class="note">
-        ⚡ The chart shows your daily weigh‑ins (dots), and a <strong>7‑day moving average</strong> (line).<br>
+        ⚡ The chart shows your daily weigh‑ins (dots), and a <strong>7‑day
+        moving average</strong> (line).<br>
         🔴 The dashed red horizontal line is your <strong>90 kg goal</strong>.
     </div>
 </div>
@@ -147,6 +185,7 @@ title: Weight Tracker
     function sortData() {
         weightData.sort((a, b) => new Date(a.date) - new Date(b.date));
     }
+
     sortData();
 
     function saveData() {
@@ -157,9 +196,9 @@ title: Weight Tracker
         const dateInput = document.getElementById('dateInput');
         const weightInput = document.getElementById('weightInput');
         const date = dateInput.value;
-        const weight = parseFloat(weightInput.value);
+        const weight = Number.parseFloat(weightInput.value);
 
-        if (!date || isNaN(weight)) {
+        if (!date || Number.isNaN(weight)) {
             alert('Please enter both date and weight.');
             return;
         }
@@ -189,7 +228,7 @@ title: Weight Tracker
 
     function exportData() {
         const dataStr = JSON.stringify(weightData, null, 2);
-        const blob = new Blob([dataStr], { type: 'application/json' });
+        const blob = new Blob([dataStr], {type: 'application/json'});
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
@@ -198,34 +237,36 @@ title: Weight Tracker
         URL.revokeObjectURL(url);
     }
 
-    function importData(event) {
+    async function importData(event) {
         const file = event.target.files[0];
         if (!file) return;
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const content = e.target.result;
+
+        try {
+            const content = await file.text();
             if (file.name.toLowerCase().endsWith('.xml')) {
                 handleAppleHealthXML(content);
             } else {
                 handleJSONImport(content);
             }
             event.target.value = '';
-        };
-        reader.readAsText(file);
+        } catch (err) {
+            alert('Error reading file: ' + err.message);
+        }
     }
 
     function handleJSONImport(content) {
         try {
             const data = JSON.parse(content);
-            if (Array.isArray(data)) {
-                const isValid = data.every(entry => entry.date && typeof entry.weight === 'number');
-                if (isValid) {
-                    if (confirm(`Import ${data.length} entries? This will merge with current data.`)) {
-                        mergeData(data);
-                    }
-                } else { alert('Invalid JSON format.'); }
-            } else { alert('Invalid JSON format.'); }
-        } catch (err) { alert('Error parsing JSON: ' + err.message); }
+            if (!Array.isArray(data)) {
+                alert('Invalid JSON format.');
+            } else if (!data.every(entry => entry.date && typeof entry.weight === 'number')) {
+                alert('Invalid JSON format.');
+            } else if (confirm(`Import ${data.length} entries? This will merge with current data.`)) {
+                mergeData(data);
+            }
+        } catch (err) {
+            alert('Error parsing JSON: ' + err.message);
+        }
     }
 
     function handleAppleHealthXML(content) {
@@ -239,24 +280,31 @@ title: Weight Tracker
             const valueMatch = attrs.match(valueRegex);
             const dateMatch = attrs.match(dateRegex);
             if (valueMatch && dateMatch) {
-                const weight = parseFloat(valueMatch[1]);
+                const weight = Number.parseFloat(valueMatch[1]);
                 const dateStr = new Date(dateMatch[1]).toISOString().split('T')[0];
-                if (!isNaN(weight) && dateStr !== 'NaN-aN-aN') {
-                    newEntries.push({ date: dateStr, weight: weight });
+                if (!Number.isNaN(weight) && dateStr !== 'NaN-aN-aN') {
+                    newEntries.push({date: dateStr, weight: weight});
                 }
             }
         }
-        if (newEntries.length > 0) {
+        if (newEntries.length <= 0) {
+            alert('No weight records found.');
+        } else {
             newEntries.sort((a, b) => new Date(a.date) - new Date(b.date));
-            if (confirm(`Found ${newEntries.length} records. Import them?`)) { mergeData(newEntries); }
-        } else { alert('No weight records found.'); }
+            if (confirm(`Found ${newEntries.length} records. Import them?`)) {
+                mergeData(newEntries);
+            }
+        }
     }
 
     function mergeData(newEntries) {
         newEntries.forEach(newEntry => {
             const existingIndex = weightData.findIndex(e => e.date === newEntry.date);
-            if (existingIndex === -1) { weightData.push(newEntry); }
-            else { weightData[existingIndex].weight = newEntry.weight; }
+            if (existingIndex === -1) {
+                weightData.push(newEntry);
+            } else {
+                weightData[existingIndex].weight = newEntry.weight;
+            }
         });
         sortData();
         saveData();
@@ -269,7 +317,7 @@ title: Weight Tracker
 
     function getThemeColors() {
         const style = getComputedStyle(document.documentElement);
-        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const isDark = globalThis.matchMedia('(prefers-color-scheme: dark)').matches;
         return {
             text: style.getPropertyValue('--cc-text').trim() || (isDark ? '#E6E6E6' : '#073642'),
             border: style.getPropertyValue('--cc-border').trim() || (isDark ? '#2A2A2A' : '#93A1A1'),
@@ -283,13 +331,23 @@ title: Weight Tracker
         const ctx = document.getElementById('weightChart').getContext('2d');
         const colors = getThemeColors();
 
-        if (chart) { chart.destroy(); }
+        if (chart) {
+            chart.destroy();
+        }
 
         if (weightData.length === 0) {
             chart = new Chart(ctx, {
                 type: 'line',
-                data: { labels: [], datasets: [] },
-                options: { plugins: { title: { display: true, text: 'No data yet', color: colors.text } } }
+                data: {labels: [], datasets: []},
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'No data yet',
+                            color: colors.text
+                        }
+                    }
+                }
             });
             return;
         }
@@ -335,19 +393,23 @@ title: Weight Tracker
                 maintainAspectRatio: false,
                 scales: {
                     x: {
-                        ticks: { color: colors.text },
-                        grid: { color: colors.grid }
+                        ticks: {color: colors.text},
+                        grid: {color: colors.grid}
                     },
                     y: {
                         min: Math.min(85, ...weightValues) - 2,
                         max: Math.max(100, ...weightValues) + 2,
-                        ticks: { color: colors.text },
-                        grid: { color: colors.grid },
-                        title: { display: true, text: 'Weight (kg)', color: colors.text }
+                        ticks: {color: colors.text},
+                        grid: {color: colors.grid},
+                        title: {
+                            display: true,
+                            text: 'Weight (kg)',
+                            color: colors.text
+                        }
                     }
                 },
                 plugins: {
-                    legend: { labels: { color: colors.text } },
+                    legend: {labels: {color: colors.text}},
                     annotation: {
                         annotations: {
                             goalLine: {
@@ -387,7 +449,7 @@ title: Weight Tracker
         renderChart();
     }
 
-    window.onload = function() {
+    window.onload = function () {
         // Register the plugin (global access from the CDN)
         const plugin = window['chartjs-plugin-annotation'] || window['annotationPlugin'];
         if (plugin) {
@@ -398,7 +460,7 @@ title: Weight Tracker
     };
 
     // Listen for theme changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    globalThis.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
         renderChart();
     });
 </script>
