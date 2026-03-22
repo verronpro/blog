@@ -33,27 +33,24 @@ enforce the boundaries I need.
 ## Highlights
 
 - Split project into `engine/` and
-  `examples/` ([6bbcd21](https://github.com/verronpro/office-stamper/commit/6bbcd21)),
-  with a dedicated
-  `engine/pom.xml` ([45d6fb8](https://github.com/verronpro/office-stamper/commit/45d6fb8)).
+  `examples/` ([6bbcd21]({{gh_os}}/commit/6bbcd21)), with a dedicated
+  `engine/pom.xml` ([45d6fb8]({{gh_os}}/commit/45d6fb8)).
 - Moved `DocxStamper` to
-  `pro.verron.officestamper.core` ([bfa7877](https://github.com/verronpro/office-stamper/commit/bfa7877)).
+  `pro.verron.officestamper.core` ([bfa7877]({{gh_os}}/commit/bfa7877)).
 - Moved `DocxStamperConfiguration` likewise; removed its
-  deprecation ([5cb94a1](https://github.com/verronpro/office-stamper/commit/5cb94a1)).
+  deprecation ([5cb94a1]({{gh_os}}/commit/5cb94a1)).
 - Bumped the engine to `2.0-SNAPSHOT` to signal a new
-  baseline ([592bd73](https://github.com/verronpro/office-stamper/commit/592bd73)).
+  baseline ([592bd73]({{gh_os}}/commit/592bd73)).
 - Deleted deprecated types that only existed as transitional shims:
-  `AbstractToTextResolver` ([022679](https://github.com/verronpro/office-stamper/commit/022679)),
-  `LegacyFallbackResolver` ([7f88ebf](https://github.com/verronpro/office-stamper/commit/7f88ebf)),
-  `StampTable` in the legacy
-  package ([7cb6a38](https://github.com/verronpro/office-stamper/commit/7cb6a38)),
+  `AbstractToTextResolver` ([022679]({{gh_os}}/commit/022679)),
+  `LegacyFallbackResolver` ([7f88ebf]({{gh_os}}/commit/7f88ebf)),
+  `StampTable` in the legacy package ([7cb6a38]({{gh_os}}/commit/7cb6a38)),
   `CommentUtil` and
-  `CommentWrapper` ([51e6eb7](https://github.com/verronpro/office-stamper/commit/51e6eb7), [2acb655](https://github.com/verronpro/office-stamper/commit/2acb655)),
-  `Image` duplicate in the legacy
-  path ([800d581](https://github.com/verronpro/office-stamper/commit/800d581)),
+  `CommentWrapper` ([51e6eb7]({{gh_os}}/commit/51e6eb7), [2acb655]({{gh_os}}/commit/2acb655)),
+  `Image` duplicate in the legacy path ([800d581]({{gh_os}}/commit/800d581)),
   and the
   `UnresolvedExpressionException` that duplicated
-  `OfficeStamperException` ([dc83706](https://github.com/verronpro/office-stamper/commit/dc83706)).
+  `OfficeStamperException` ([dc83706]({{gh_os}}/commit/dc83706)).
 
 ## Intention‑revealing namespaces
 
@@ -129,11 +126,10 @@ import pro.verron.officestamper.core.DocxStamper;
   levels did not materially change, which is a useful proxy that semantics
   stayed in place while types moved.
 - The examples module compiles and runs against the same surface you should use
-  in
-  production ([f8dc1f0](https://github.com/verronpro/office-stamper/commit/f8dc1f0), [b5fd710](https://github.com/verronpro/office-stamper/commit/b5fd710)).
+  in production ([f8dc1f0]({{gh_os}}/commit/f8dc1f0),
+  [b5fd710]({{gh_os}}/commit/b5fd710)).
 - CI and local builds now verify the module graph and public exports (
-  `module-info.java` updates
-  in [5cb94a1](https://github.com/verronpro/office-stamper/commit/5cb94a1)).
+  `module-info.java` updates in [5cb94a1]({{gh_os}}/commit/5cb94a1)).
 
 How the engine works today (and where I’m heading)
 
@@ -180,5 +176,14 @@ Next
 
 References
 
-- Commits around 2024‑05‑14 →
-  2024‑05‑17: [6bbcd21](https://github.com/verronpro/office-stamper/commit/6bbcd21), [45d6fb8](https://github.com/verronpro/office-stamper/commit/45d6fb8), [bfa7877](https://github.com/verronpro/office-stamper/commit/bfa7877), [5cb94a1](https://github.com/verronpro/office-stamper/commit/5cb94a1), [592bd73](https://github.com/verronpro/office-stamper/commit/592bd73), [dc83706](https://github.com/verronpro/office-stamper/commit/dc83706), [800d581](https://github.com/verronpro/office-stamper/commit/800d581), [7cb6a38](https://github.com/verronpro/office-stamper/commit/7cb6a38), [7f88ebf](https://github.com/verronpro/office-stamper/commit/7f88ebf), [022679](https://github.com/verronpro/office-stamper/commit/022679).
+- Commits around 2024‑05‑14 → 2024‑05‑17:
+	- [6bbcd21]({{gh_os}}/commit/6bbcd21),
+	- [45d6fb8]({{gh_os}}/commit/45d6fb8),
+	- [bfa7877]({{gh_os}}/commit/bfa7877),
+	- [5cb94a1]({{gh_os}}/commit/5cb94a1),
+	- [592bd73]({{gh_os}}/commit/592bd73),
+	- [dc83706]({{gh_os}}/commit/dc83706),
+	- [800d581]({{gh_os}}/commit/800d581),
+	- [7cb6a38]({{gh_os}}/commit/7cb6a38),
+	- [7f88ebf]({{gh_os}}/commit/7f88ebf),
+	- [022679]({{gh_os}}/commit/022679).

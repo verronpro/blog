@@ -12,7 +12,7 @@ Centralized test result descriptions across 157 test cases, replacing ad-hoc
 assertions with shared vocabulary. Tests now read like documentation, and
 failures explain *what broke* in business terms, not XML structures.
 
-Commit: [`7afd857`](https://github.com/verronpro/office-stamper/commit/7afd857)
+Commit: [`7afd857`]({{gh_os}}/commit/7afd857)
 
 ## Why this is October's standout
 
@@ -153,8 +153,7 @@ string—anyone can verify correctness without DOCX4J knowledge.
 
 ## References
 
-- Commit: [
-  `7afd857`](https://github.com/verronpro/office-stamper/commit/7afd857)
+- Commit: [`7afd857`]({{gh_os}}/commit/7afd857)
 - Test suite refactoring: `DefaultTests.java` (157 parameterized tests),
   `MultiStampTest.java` (DOM→string conversion)
 - Context consolidation: removed `Name.java`, `NamesContext.java`; added

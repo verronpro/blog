@@ -13,8 +13,7 @@ Removed Lombok and made contracts explicit in code and Javadoc. Outcome: clearer
 stack traces, predictable reflection, and easier onboarding for sporadic
 contributors.
 
-Commit: [
-`0419cc4c`](https://github.com/verronpro/office-stamper/commit/0419cc4c)
+Commit: [`0419cc4c`]({{gh_os}}/commit/0419cc4c)
 
 ## Why this is July's standout
 
@@ -148,8 +147,7 @@ Javadoc sites work reliably with standard tooling. No special plugins required.
 
 ## References
 
-- Commit: [
-  `0419cc4c`](https://github.com/verronpro/office-stamper/commit/0419cc4c)
+- Commit: [`0419cc4c`]({{gh_os}}/commit/0419cc4c)
 
 - Comprehensive Javadoc updates across 66 files including all processors,
   utilities, and core API classes.

@@ -13,7 +13,7 @@ Package‑level contracts, visible to humans and tools. I added
 boundaries: `core` is internal and volatile, `api` is the extension surface,
 `preset` is a safe bootstrap and living examples.
 
-Commit: [`6d00de1`](https://github.com/verronpro/office-stamper/commit/6d00de1)
+Commit: [`6d00de1`]({{gh_os}}/commit/6d00de1)
 
 ## Context
 

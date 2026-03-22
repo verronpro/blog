@@ -16,11 +16,9 @@ and opened the door to a wider ecosystem of templates.
 
 ## Context
 
-The catalyst for this change
-was [Issue #286](https://github.com/verronpro/office-stamper/issues/286),
-reported in April. Users found that expressions placed inside "Plain Text Form
-Controls" (Structured Document Tags, or SDTs) were simply being ignored by the
-engine.
+The catalyst for this change was [Issue #286]({{gh_os}}/issues/286), reported in
+April. Users found that expressions placed inside "Plain Text Form Controls" (
+Structured Document Tags, or SDTs) were simply being ignored by the engine.
 
 This is a structural variation of the "nesting" problem we first tackled in 2023
 with [nested repeat blocks](/office-stamper/2023/02/01/monthly-commit-nested-repeatdocpart.html).
@@ -90,7 +88,6 @@ with Word's native features rather than fighting against them.
   optimize the traversal engine.
 
 ---
-*Referenced
-Issue:* [#286](https://github.com/verronpro/office-stamper/issues/286)
+*Referenced Issue:* [#286]({{gh_os}}/issues/286)
 *Referenced Commits:* `3a78067` (StandardParagraph recursion), `e21fd9e` (
 IndexedRun optimizations).

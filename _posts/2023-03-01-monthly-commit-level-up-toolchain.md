@@ -14,12 +14,9 @@ project.
 
 **Commits:**
 
-- Java 17: [
-  `49b6c09`](https://github.com/verronpro/office-stamper/commit/49b6c09)
-- JUnit 5: [
-  `428d5d5`](https://github.com/verronpro/office-stamper/commit/428d5d5)
-- Devcontainer docs: [
-  `2f53681`](https://github.com/verronpro/office-stamper/commit/2f53681)
+- Java 17: [`49b6c09`]({{gh_os}}/commit/49b6c09)
+- JUnit 5: [`428d5d5`]({{gh_os}}/commit/428d5d5)
+- Devcontainer docs: [`2f53681`]({{gh_os}}/commit/2f53681)
 
 ## Why this stands out
 
@@ -39,7 +36,9 @@ epoch reduces friction for everyone who touches the code or the CLI.
 
 ## What the commits reveal
 
-### Java 17: Future-Proofing Without Breaking Production (commit [49b6c09](https://github.com/verronpro/office-stamper/commit/49b6c09))
+### Java 17: Future-Proofing Without Breaking Production
+
+Commit [49b6c09]({{gh_os}}/commit/49b6c09)
 
 **Problem:** Java 11 reaches EOL; enterprises standardize on LTS versions.  
 **Solution:** Unified upgrade across build, CI, and docs.
@@ -54,7 +53,9 @@ epoch reduces friction for everyone who touches the code or the CLI.
 **Impact:** No breaking changes for end users; dev environment matches
 enterprise standards.
 
-### JUnit 5 migration (commit [428d5d5](https://github.com/verronpro/office-stamper/commit/428d5d5))
+### JUnit 5 migration
+
+Commit [428d5d5]({{gh_os}}/commit/428d5d5)
 
 This large commit completed the transition from JUnit 4 to JUnit 5 across the
 entire test suite (50 files changed):
@@ -78,7 +79,9 @@ The migration was not just find-and-replace; it involved rethinking test
 patterns (optional returns, cleaner assertions) and establishing a consistent
 style that future contributors can follow without re-learning old conventions.
 
-### Dev Container: From "Works on My Machine" to "Works Everywhere" (commit [2f53681](https://github.com/verronpro/office-stamper/commit/2f53681))
+### Dev Container: From "Works on My Machine" to "Works Everywhere"
+
+Commit [2f53681]({{gh_os}}/commit/2f53681)
 
 The contributor journey:
 
@@ -148,11 +151,8 @@ Planning a similar migration? Use this:
 ## References
 
 - **Commits:**
-	- [`49b6c09`](https://github.com/verronpro/office-stamper/commit/49b6c09) (
-	  Java 17),
-	- [`428d5d5`](https://github.com/verronpro/office-stamper/commit/428d5d5) (
-	  JUnit 5),
-	- [`2f53681`](https://github.com/verronpro/office-stamper/commit/2f53681) (
-	  devcontainer)
+	- [`49b6c09`]({{gh_os}}/commit/49b6c09) (Java 17),
+	- [`428d5d5`]({{gh_os}}/commit/428d5d5) (JUnit 5),
+	- [`2f53681`]({{gh_os}}/commit/2f53681) (devcontainer)
 - **Build:** Maven + Surefire/JUnit 5
 - **Docs:** CONTRIBUTING and devcontainer documentation

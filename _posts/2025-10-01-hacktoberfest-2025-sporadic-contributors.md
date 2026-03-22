@@ -38,9 +38,8 @@ the constraints of your environment:
 ### 1. Find a Trailhead
 
 Look for issues labeled `good first issue` or `help wanted` in
-the [office-stamper repository](https://github.com/verronpro/office-stamper).
-These are scoped to be impactful without requiring a deep dive into the entire
-WordprocessingML abyss.
+the [office-stamper repository]({{gh_os}}). These are scoped to be impactful
+without requiring a deep dive into the entire WordprocessingML abyss.
 
 ### 2. Provide a Repro
 

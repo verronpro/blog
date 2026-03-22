@@ -14,12 +14,12 @@ docs don’t drift.
 
 ## Quick Facts
 
-| Aspect  | Details                                                                 |
-|---------|-------------------------------------------------------------------------|
-| Commit  | [`8243bd7`](https://github.com/verronpro/office-stamper/commit/8243bd7) |
-| Scope   | Readme/site format, structure, examples, navigation                     |
-| Why     | Reduce support, speed onboarding, align site with APIs                  |
-| Outcome | Fewer “how do I…?” questions; faster, safer adoption                    |
+| Aspect  | Details                                                |
+|---------|--------------------------------------------------------|
+| Commit  | [`8243bd7`]({{gh_os}}/commit/8243bd7)                  |
+| Scope   | Readme/site format, structure, examples, navigation    |
+| Why     | Reduce support, speed onboarding, align site with APIs |
+| Outcome | Fewer “how do I…?” questions; faster, safer adoption   |
 
 ## Why this is May's highlight
 
@@ -173,7 +173,6 @@ lightweight script to validate external links.
 
 ## References
 
-- Commit: [
-  `8243bd7`](https://github.com/verronpro/office-stamper/commit/8243bd7)
+- Commit: [`8243bd7`]({{gh_os}}/commit/8243bd7)
 - Related: site layout and concept pages under `engine/src/site/asciidoc/`
 - Javadoc packages: `pro.verron.officestamper.api`, `core`

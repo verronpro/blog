@@ -12,12 +12,11 @@ In the world of "docs-as-code," we often treat Word documents as a commodity. We
 assume that as long as we follow the WordprocessingML (OOXML) specification, our
 templates will be portable across any editor.
 
-This month, a deep dive
-into [Issue #539](https://github.com/verronpro/office-stamper/issues/539)
-reminded me that the "standard" is only as good as the tools we use to interpret
-it. What began as a bug report about a broken Table of Contents (TOC) evolved
-into a cleanup of our `SdtRun` processing and a lesson in the hidden ambiguities
-of library abstractions.
+This month, a deep dive into [Issue #539]({{gh_os}}/issues/539) reminded me that
+the "standard" is only as good as the tools we use to interpret it. What began
+as a bug report about a broken Table of Contents (TOC) evolved into a cleanup of
+our `SdtRun` processing and a lesson in the hidden ambiguities of library
+abstractions.
 
 ## The Discovery: When a Text is not a Text
 

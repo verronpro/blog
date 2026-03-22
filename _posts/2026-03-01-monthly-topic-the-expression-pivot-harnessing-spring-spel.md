@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "The Expression Pivot: Harnessing Spring SpEL for Dynamic Contexts"
+title: "Back to Spring SpEL ExpressionParser"
 date: 2026-03-01
 categories: [ office-stamper ]
 tags: [ office-stamper, java, api, architecture ]
@@ -23,8 +23,8 @@ as our core expression engine.
 The primary driver for this change was the challenge of managing nested contexts
 within templates. In version 3.0, we introduced hierarchical context resolution,
 which allowed the engine to keep track of parent scopes. While this worked for
-simple POJOs and Map with String keys, our v3.0 implementation struggled
-to provide a consistent way to handle more complex structures, such as:
+simple POJOs and Map with String keys, our v3.0 implementation struggled to
+provide a consistent way to handle more complex structures, such as:
 
 * **`List`-based contexts**
 * **Deeply nested structures**
@@ -34,8 +34,8 @@ to provide a consistent way to handle more complex structures, such as:
 Technically, the `ExpressionParser` interface we provided in v3.0 was already
 part of the SpEL project, designed to allow alternative parser implementations.
 And before v3.0, we were letting users provide a `ParserConfiguration` to
-control the behavior of the inner `SpelExpressionParser`. So we decided to
-come back to the previous status quo and standardizing strictly on Spring's
+control the behavior of the inner `SpelExpressionParser`. So we decided to come
+back to the previous status quo and standardizing strictly on Spring's
 `SpelExpressionParser`. It provides a massive advantage: we can now fully
 leverage its native ability to manage nested contexts using `#this` and `#root`.
 
@@ -54,10 +54,9 @@ a `List` or a `List<List<Object>>`.
 ## List of Lists: Finally Supported
 
 This change also allows us to officially support Issue #623 (originally reported
-by **robfero**
-in [Discussion #557](https://github.com/verronpro/office-stamper/discussions/557)).
-Rob was looking for a way to render a list of lists within a document—a task
-that previously required custom comment resolvers.
+by **robfero** in [Discussion #557]({{gh_os}}/discussions/557)). Rob was looking
+for a way to render a list of lists within a document—a task that previously
+required custom comment resolvers.
 
 With the new engine, you can reliably iterate over deeply nested collections:
 
