@@ -1,11 +1,11 @@
 ---
 layout: article
-title: "Resolver Safety: Managing Nulls, Optionals, and Exception Strategies"
+title: Resolver Safety - Managing Nulls, Optionals, and Exception Strategies"
 date: 2024-10-01
 categories: [ office-stamper ]
 tags: [ craftsmanship, null-safety, exception-handling, office-stamper, java ]
 author: Joseph
-description: "How to build resilient document templates by mastering nullability, Java Optionals, and the newly introduced ExceptionResolver architecture in Office‑stamper."
+description: How to build resilient document templates by mastering nullability, Java Optionals, and the newly introduced ExceptionResolver architecture in Office‑stamper.
 ---
 
 In document automation, your templates are more than just layouts; they are the
@@ -21,7 +21,8 @@ failures lead to broken documents, midnight support threads, and lost trust.
 To address this, we've refined the inner workings of Office‑stamper to move
 from "accidental" error handling to an explicit, strategy-based architecture.
 This continues the "Make Implicit Explicit" journey we started in 2023 when
-we [removed Lombok and clarified our API contracts](/office-stamper/2023/08/15/monthly-commit-remove-lombok-and-clarify-contract.html).
+we [removed Lombok and clarified our API contracts]({% post_url
+2023-08-15-monthly-commit-remove-lombok-and-clarify-contract %}).
 
 ## Principles for Safe Resolvers
 
@@ -184,6 +185,6 @@ data-entry step when a mandatory field is missing.
    empty. If the engine doesn't behave as expected, adjust your
    `ExceptionResolver`.
 
-Robustness isn't about avoiding errors; it's about making them predictable and
+Robustness isn't about avoiding errors; it is about making them predictable and
 manageable. With `ExceptionResolver`, Office‑stamper gives you the tools to
 fulfill that promise.

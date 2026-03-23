@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Feedback Loops and the AsciiDoc Pivot"
+title: Feedback Loops and the AsciiDoc Pivot
 date: 2026-02-01
 categories: [ office-stamper ]
 tags: [ office-stamper, java, ci-cd, docs-as-code, refactoring ]
@@ -33,7 +33,7 @@ official Qodana badge, replacing the generic "analyze" workflow status.
 
 Similarly, PIT (Mutation Testing) has been our quality auditor, but I’ve now
 tightened its integration into the main `mvn verify` cycle. As
-I [discussed previously]({{ site.baseurl }}{% post_url
+I [discussed previously]({% post_url
 2025-06-01-monthly-topic-mutation-testing-the-truth-beyond-coverage %}), line
 coverage is often an illusion. By making PIT results a first-class citizen in
 our CI reports, I’ve been able to identify and fix several "dark corners" in our
@@ -42,8 +42,7 @@ our CI reports, I’ve been able to identify and fix several "dark corners" in o
 ## The AsciiDoc Pivot: Zero Dependencies
 
 The most significant architectural change this month happened in the `asciidoc`
-module. In late December, I had [planned to adopt AsciidoctorJ]({{
-site.baseurl }}{% post_url
+module. In late December, I had [planned to adopt AsciidoctorJ]({% post_url
 2025-12-22-monthly-commit-the-high-fidelity-utils-module %}) to handle our
 internal doc-to-text conversions.
 
@@ -52,8 +51,8 @@ JRuby runtime and the AsciidoctorJ wrapper increased our build times and
 introduced a heavy dependency chain that felt out of place for a "lightweight"
 library.
 
-At the same time, I've been following exciting work by the **Eclipse Foundation
-** on
+At the same time, I've been following exciting work by the
+**Eclipse Foundation** on
 the [AsciiDoc Language project](https://projects.eclipse.org/projects/asciidoc.asciidoc-lang),
 working toward a formal specification and a native Java implementation. While we
 wait for that standard to mature, I decided to pivot.

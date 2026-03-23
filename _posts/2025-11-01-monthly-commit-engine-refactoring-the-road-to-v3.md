@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Engine Refactoring: The Road to v3"
+title: Engine Refactoring, The Road to v3
 date: 2025-11-01
 categories: [ office-stamper ]
 tags: [ office-stamper, java, refactoring, craftsmanship ]

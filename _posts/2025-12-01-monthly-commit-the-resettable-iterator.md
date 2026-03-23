@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "The Resetable Iterator: Engineering Predictable Order"
+title: The Resetable Iterator, Engineering Predictable Order
 date: 2025-12-01
 categories: [ office-stamper ]
 tags: [ office-stamper, java, refactoring, v3 ]

@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Refactoring for Contextual Clarity"
+title: Refactoring for Contextual Clarity
 date: 2024-11-01
 categories: [ office-stamper ]
 tags: [ office-stamper, java, refactoring, craftsmanship ]

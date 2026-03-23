@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Normalizing Template Chaos with Pre-Processing"
+title: Normalizing Template Chaos with Pre-Processing
 date: 2024-12-01
 categories: [ office-stamper ]
 tags: [ office-stamper, java, preprocessing, refactoring, craftsmanship ]
@@ -8,12 +8,12 @@ author: Joseph
 description: Moving template normalization into a dedicated PreProcessor stage to simplify the core engine and handle real-world document quirks.
 ---
 
-In November 2024, I spent a significant amount of time wrestling with "
-imbricated" comments—nested or overlapping comment ranges in Word documents that
-were causing the core stamping engine to trip over itself. Word also loves to
-embed `proofError` tags and other irrelevant XML noise that, while harmless to
-Word, mess up our indexing, test characterizations, and general reasoning about
-the document structure.
+In November 2024, I spent a significant amount of time wrestling with
+"imbricated" comments—nested or overlapping comment ranges in Word documents
+that were causing the core stamping engine to trip over itself. Word also loves
+to embed `proofError` tags and other irrelevant XML noise that, while harmless
+to Word, mess up our indexing, test characterizations, and general reasoning
+about the document structure.
 
 The core engine was becoming cluttered with edge-case handling for these "messy"
 inputs. I realized that instead of teaching the engine how to survive in a

@@ -1,14 +1,14 @@
 ---
 layout: article
-title: "Readable Document Testing: The Power of Characterization"
+title: Readable Document Testing, The Power of Characterization
 date: 2025-01-01
 categories: [ office-stamper ]
 tags: [ craftsmanship, testing, office-stamper, java, docs-as-code ]
 author: Joseph
-description: "Why moving from brittle XML-based unit tests to holistic characterization tests is a game-changer for complex document processing engines."
+description: Why moving from brittle XML-based unit tests to holistic characterization tests is a game-changer for complex document processing engines.
 ---
 
-In the world of document automation, we often fall into the trap of testing the
+In the world of document automation, we often fall into the trap of testing
 *how* instead of the *what*. For years, `office-stamper` tests were heavily
 focused on the underlying XML structure of WordProcessingML. We would assert
 that a specific `w:p` (paragraph) contained a specific `w:r` (run), and that the
@@ -18,17 +18,19 @@ Here's the stark reality: Users aren't concerned with XML operations. Their
 focus is on whether the intended duplication of a line occurred, and if the
 table row designated for removal has indeed been removed.
 
-As part of the ongoing evolution of `office-stamper`, I’ve been shifting our
+As part of the ongoing evolution of `office-stamper`, I've been shifting our
 testing strategy toward **Characterization Testing** (also known as Golden
 Master testing). This journey began in early 2024 (
-see [Unit Tests Don’t Mean What You Think](/office-stamper/2024/03/01/monthly-topic-testing-wordprocessingml-characterization-tests.html))
+see [Unit Tests Don’t Mean What You Think]({% post_url
+2024-03-01-monthly-topic-testing-wordprocessingml-characterization-tests %}))
 when I first introduced the `Stringifier`.
 
 Since then, the goal has evolved from merely "surviving XML churn" to testing
 high-level features holistically while making the tests themselves readable
 enough to serve as documentation. This strategy was the bedrock of
-our [2.0 Modular Reorg](/office-stamper/2024/06/01/monthly-commit-modular-reorg-on-path-to-2.0.html),
-allowing deep internal changes without regression.
+our [2.0 Modular Reorg]({% post_url
+2024-06-01-monthly-commit-modular-reorg-on-path-to-2.0 %}), allowing deep
+internal changes without regression.
 
 ## The Technique Taxonomy: XML vs. Stringification
 
@@ -86,7 +88,8 @@ assertions:
 
 Moving to large textual assertions in tests like `ConditionalDisplayTest` has
 provided two major advantages, especially when paired with
-our [Declarative Testing](/office-stamper/2024/09/01/monthly-topic-declarative-testing-text-to-template-generation.html)
+our [Declarative Testing]({% post_url
+2024-09-01-monthly-topic-declarative-testing-text-to-template-generation %})
 approach:
 
 1. **Increased Velocity**: When I refactored the internal configuration and

@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Predicting the Unpredictable: The v3 Context Overhaul"
+title: Predicting the Unpredictable, The v3 Context Overhaul
 date: 2025-12-15
 categories: [ office-stamper ]
 tags: [ office-stamper, java, architecture, v3 ]
@@ -13,8 +13,8 @@ Yesterday, December 14th, we officially released `office-stamper` v3.0.0. While
 the version number changed by just one digit, the architectural overhaul under
 the hood is the most significant since I forked the project.
 
-Today, I want to dive into the core of this release: the move to a *
-*hierarchical context system**.
+Today, I want to dive into the core of this release: the move to a
+**hierarchical context system**.
 
 ## The Thesis: Predictability is King
 

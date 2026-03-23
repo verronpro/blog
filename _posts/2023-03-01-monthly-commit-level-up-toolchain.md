@@ -1,11 +1,11 @@
 ---
 layout: article
-title: "Leveling Up the Toolchain: Java 17, JUnit 5, and a Dev Container"
+title: Leveling Up the Toolchain with Java 17, JUnit 5, and a Dev Container
 date: 2023-03-01 09:00:00
 categories: [ office-stamper ]
 author: Joseph
 tags: [ office-stamper, toolchain, java, ci, devex, ci-cd, java17, junit5, devcontainers, agility, craftsmanship, docs-as-code, solo-maintainer, enterprise, maintenance, platform, maven ]
-description: "Java 17 + JUnit 5 migration with a ready‑to‑code dev container—predictable builds, modern tests, and faster onboarding for enterprise adopters."
+description: Java 17 + JUnit 5 migration with a ready‑to‑code dev container—predictable builds, modern tests, and faster onboarding for enterprise adopters.
 ---
 
 Migrating to Java 17 LTS, JUnit 5, and a dev container to give enterprise

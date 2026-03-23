@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Mastering Nested Document Structures"
+title: Mastering Nested Document Structures
 date: 2024-08-01
 categories: [ office-stamper ]
 tags: [ office-stamper, java, refactoring, wordprocessingml, sdt ]
@@ -21,10 +21,10 @@ April. Users found that expressions placed inside "Plain Text Form Controls" (
 Structured Document Tags, or SDTs) were simply being ignored by the engine.
 
 This is a structural variation of the "nesting" problem we first tackled in 2023
-with [nested repeat blocks](/office-stamper/2023/02/01/monthly-commit-nested-repeatdocpart.html).
-While that earlier fix focused on *logical* nesting (recursion in comment
-extraction), this month's challenge was *physical* nesting—how Word wraps
-content in XML layers.
+with [nested repeat blocks]({% post_url
+2023-02-01-monthly-commit-nested-repeat %}). While that earlier fix focused on
+*logical* nesting (recursion in comment extraction), this month's challenge was
+*physical* nesting—how Word wraps content in XML layers.
 
 The reason was simple: our `StandardParagraph` implementation was looking at the
 paragraph's content as a flat list. If a placeholder was wrapped in an SDT, it
@@ -51,10 +51,11 @@ be inside a Run, which is inside an SDT, which might itself be wrapped in
 another JAXB container.
 
 Recursion is the natural architectural fit for tree-like structures. Just as it
-solved [nested comment extraction in 2023](/office-stamper/2023/02/01/monthly-commit-nested-repeatdocpart.html),
-it now allows the engine to "peel the onion" layer by layer until it reaches the
-actual `R` (Run) elements where the text lives, regardless of how many wrappers
-Word has decided to put around it.
+solved [nested comment extraction in 2023]({% post_url
+2023-02-01-monthly-commit-nested-repeat %}), it now allows the engine to "peel
+the onion" layer by layer until it reaches the actual `R` (Run) elements where
+the text lives, regardless of how many wrappers Word has decided to put around
+it.
 
 ```java
 private int add(int index, Object object) {
@@ -89,5 +90,5 @@ with Word's native features rather than fighting against them.
 
 ---
 *Referenced Issue:* [#286]({{gh_os}}/issues/286)
-*Referenced Commits:* `3a78067` (StandardParagraph recursion), `e21fd9e` (
-IndexedRun optimizations).
+*Referenced Commits:* [`3a78067`]({{gh_os}}/commit/3a78067) (StandardParagraph
+recursion), [`e21fd9e`]({{gh_os}}/commit/e21fd9e) (IndexedRun optimizations).

@@ -1,11 +1,11 @@
 ---
 layout: article
-title: "How-to: Unified Test Reports across Java, Python, and TypeScript"
+title: How-to unify Test Reports across Java, Python, and TypeScript
 date: 2023-07-01 09:00:00
 categories: [ docs-as-code ]
 author: Joseph
 tags: [ testing, docs-as-code, ci, qa, test, report, java, python, typescript ]
-description: "Practical steps to produce JUnit-style reports in Java, Python, and TypeScript, then aggregate them under the Open Test Reporting initiative."
+description: Practical steps to produce JUnit-style reports in Java, Python, and TypeScript, then aggregate them under the Open Test Reporting initiative.
 ---
 
 Testing is only useful if you can trust, compare, and publish the results. This
@@ -17,14 +17,14 @@ initiative aiming to unify how we view and share results across tools.
 
 - Machine‑readable (XML/JSON) outputs that CI can parse.
 - Human‑friendly HTML summaries for a quick scan.
-- Stable file names and locations so pipelines are simple.
+- Stable file names and locations so pipelines are straightforward.
 - Consistent schemas across languages (JUnit XML is the lowest common
   denominator).
 
 ## Prerequisites
 
 - CI or local shell with the respective toolchains.
-- A place to store artifacts (e.g., `./build/reports`, `./reports`, or CI’s
+- A place to store artifacts (e.g., `./build/reports`, `./reports`, or CI's
   artifact step).
 - For aggregation: see the Open Test Reporting repo notes below.
 
@@ -153,7 +153,7 @@ standardize on JUnit XML as input and use adapters to feed a unified viewer or
 storage.
 
 Start
-here: [ota4j-team/open-test-reporting](https://github.com/ota4j-team/open-test-reporting)
+here: [ota4j/open-test...](https://github.com/ota4j-team/open-test-reporting)
 
 Suggested pattern
 

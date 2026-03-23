@@ -1,11 +1,11 @@
 ---
 layout: article
-title: "Solo Maintenance — Craftsmanship in the Downtime"
+title: Solo Maintenance — Craftsmanship in the Downtime
 date: 2025-02-01
 categories: [ governance ]
 author: Joseph
 tags: [ agility, craftsmanship, docs-as-code, solo-maintainer, enterprise, process, quality ]
-description: "Sustainable practices for solo maintainers: embracing constraints, coffee-shop rituals, and the power of 'not yet'."
+description: Sustainable practices for solo maintainers. Embracing constraints, coffee-shop rituals, and the power of 'not yet'.
 ---
 
 Solo maintenance isn't a day job—especially when your day job is managing IT in
@@ -30,9 +30,10 @@ To make this work, I've had to master two things:
   failing test that tells me exactly what to do next.
 - **Impact Slicing**: Breaking work into increments so small they can be
   finished in a single sitting, yet so impactful they move the needle. The 2024
-  refactorings
-  for [Contextual Clarity](/office-stamper/2024/11/01/monthly-commit-refactoring-for-contextual-clarity.html)
-  and [Template Normalization](/office-stamper/2024/12/01/monthly-commit-pre-processing-for-template-normalization.html)
+  refactorings for [Contextual Clarity]({% post_url
+  2024-11-01-monthly-commit-refactoring-for-contextual-clarity %})
+  and [Template Normalization]({% post_url
+  2024-12-01-monthly-commit-pre-processing-for-template-normalization %})
   are prime examples: each introduced a single, focused abstraction that
   simplified the engine without breaking a single test.
 
@@ -70,7 +71,8 @@ worker.
 
 - **Predictability**: A stable, well-documented project is easier for enterprise
   teams to trust, even if the maintainer is "sporadic."
-  The [2.0 Modular Reorg](/office-stamper/2024/06/01/monthly-commit-modular-reorg-on-path-to-2.0.html)
+  The [2.0 Modular Reorg]({% post_url
+  2024-06-01-monthly-commit-modular-reorg-on-path-to-2.0 %})
   proved that we could change the entire project structure while keeping the "
   stable handle" intact for adopters.
 - **Scaling through Docs**: My documentation and tests are my "virtual

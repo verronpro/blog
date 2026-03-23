@@ -1,11 +1,11 @@
 ---
 layout: article
-title: "Diagrams as Code: Practical Benefits in Real-World Projects"
+title: Diagrams as Code; Practical Benefits in Real-World Projects"
 date: 2023-09-01 09:00:00
 categories: [ documentation-as-code ]
 author: Joseph
 tags: [ diagram-as-code, plantuml, graphviz, developerexperience, documentation ]
-description: "Why diagrams‑as‑code scales better than drag‑and‑drop tools, with PlantUML and Graphviz examples you can embed and version alongside code."
+description: Why diagrams‑as‑code scales better than drag‑and‑drop tools, with PlantUML and Graphviz examples you can embed and version alongside code.
 ---
 
 In several of my projects, I've integrated **Graphviz** and **PlantUML** into
@@ -14,12 +14,12 @@ described and stored in plain text format — a practice often called *Diagrams 
 Code*.
 
 While traditional tools like draw.io or Visio are familiar and visual, they
-don't scale well in collaborative environments. In contrast, diagram DSLs (
-domain-specific languages) make it possible to treat visuals like any other code
-artifact: version-controlled, diffable, and automation-friendly. We've already
-seen how
-this [integrates with Word templates](/documentation-as-code/2023/05/01/monthly-topic-diagrams-as-code-in-word.html),
-but the philosophy extends much further.
+don't scale well in collaborative environments. In contrast, diagram DSLs make
+it possible to treat visuals like any other code artifact: version-controlled,
+diffable, and automation-friendly. We've already seen how
+this [integrates with Word templates]({% post_url
+2023-05-01-monthly-topic-diagrams-as-code-in-word %}), but the philosophy
+extends much further.
 
 ## Why Diagrams as Code?
 
@@ -54,8 +54,8 @@ Project starts the 2025/05/01
 ```
 
 This short description produces a visual timeline we can embed in internal docs
-or onboarding pages. Because the source is plain text, it is easy to adjust dates
-or durations — no dragging and resizing needed.
+or onboarding pages. Because the source is plain text, it is easy to adjust
+dates or durations — no dragging and resizing needed.
 
 ---
 

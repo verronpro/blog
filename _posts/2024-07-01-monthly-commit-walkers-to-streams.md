@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "From Walkers to Streams"
+title: From Walkers to Streams
 date: 2024-07-01
 categories: [ office-stamper ]
 tags: [ office-stamper, java, refactoring, clean-code ]
@@ -51,18 +51,18 @@ the actual hierarchy of how OfficeStamper interprets a document:
    and footers where official Word comments are technically prohibited.
 
 ```java
-main(){
+main() {
     // Simplified view of the new registry logic
     DocumentUtil.streamParagraphs(document)
-            .flatMap(p ->p.getContent().stream())
-            .filter(R .class::isInstance)
+            .flatMap(p -> p.getContent().stream())
+            .filter(R.class::isInstance)
             .forEach(run -> runProcessorsOnRunComment(...));
-    
+
     DocumentUtil.streamParagraphs(document)
-                    .forEach(paragraph -> runProcessorsOnParagraphComment(...));
-    
+            .forEach(paragraph -> runProcessorsOnParagraphComment(...));
+
     DocumentUtil.streamParagraphs(document)
-                    .forEach(paragraph -> runProcessorsOnInlineContent(...));
+            .forEach(paragraph -> runProcessorsOnInlineContent(...));
 }
 ```
 
@@ -84,5 +84,5 @@ expression failed without cluttering the production logs for everyone else.
 - Expand characterization tests to cover the new three-phase processing order.
 
 ---
-*Referenced Commits:* `367b16c` (Walkers to Streams), `5241817` (OfficeStamper
-branding).
+*Referenced Commits:* [`367b16c`]({{gh_os}}/commit/367b16c) (Walkers to
+Streams), [`5241817`]({{gh_os}}/commit/5241817) (OfficeStamper branding).

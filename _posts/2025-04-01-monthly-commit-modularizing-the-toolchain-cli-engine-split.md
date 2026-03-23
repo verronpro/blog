@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Modularizing the Toolchain: The CLI/Engine Split"
+title: Modularizing the Toolchain, The CLI/Engine Split"
 date: 2025-04-01
 categories: [ office-stamper ]
 tags: [ office-stamper, java, cli, modularization, craftsmanship, jpackage, agility ]
@@ -75,8 +75,8 @@ download an EXE, point it at a template, and go.
 ## The "Boring" Hygiene: Asynchronous Communication
 
 During this refactor, I spent significant time on "boring" POM cleanup. To some,
-this might look like bike-shedding, but for
-a [Solo Maintainer](/governance/2025/02/01/solo-maintenance-craftsmanship-in-the-downtime.html),
+this might look like bike-shedding, but for a [Solo Maintainer]({% post_url
+2025-02-01-solo-maintenance-craftsmanship-in-the-downtime %}/governance/.html),
 it is essential.
 
 I view build warnings as a form of **ultimate asynchronous communication**. A
@@ -101,8 +101,8 @@ Now that the CLI is its own entity, I plan to:
 
 1. Expand the `jpackage` configuration to support macOS and Linux installers.
 2. Add more built-in "keyword" templates beyond the `diagnostic` one to showcase
-   complex features
-   like [Excel data sources](/office-stamper/2025/03/01/monthly-commit-excel-as-data-source.html).
+   complex features like [Excel data sources]({% post_url
+   2025-03-01-monthly-commit-excel-as-data-source %}).
 3. Implement a plugin architecture for the CLI to allow users to add their own
    custom resolvers without re-compiling the core.
 
@@ -110,11 +110,11 @@ Now that the CLI is its own entity, I plan to:
 
 ### Checklist: CLI Best Practices
 
-- [x] **Separate Concerns**: Keep the CLI skin (parsing, I/O) separate from the
+- [ ] **Separate Concerns**: Keep the CLI skin (parsing, I/O) separate from the
   engine logic.
-- [x] **Native First**: Provide self-contained binaries to avoid "
+- [ ] **Native First**: Provide self-contained binaries to avoid "
   Java-dependency" friction.
-- [x] **Clean Build**: Treat warnings as a learning opportunity; don't let them
+- [ ] **Clean Build**: Treat warnings as a learning opportunity; don't let them
   accumulate.
-- [x] **Canary Testing**: Use your own CLI as the primary integration test for
+- [ ] **Canary Testing**: Use your own CLI as the primary integration test for
   your library's API.

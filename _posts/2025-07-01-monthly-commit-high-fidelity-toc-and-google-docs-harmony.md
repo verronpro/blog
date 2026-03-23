@@ -1,11 +1,11 @@
 ---
 layout: article
-title: "High-Fidelity Table of Contents & Google Docs Harmony"
+title: High-Fidelity Table of Contents & Google Docs Support
 date: 2025-07-01
 categories: [ office-stamper ]
 tags: [ agility, craftsmanship, solo-maintainer, office-stamper, java, testing ]
 author: Joseph
-description: "How resolving a subtle Docx4j ambiguity unlocked cross-editor compatibility and robust Table of Contents validation."
+description: How resolving a subtle Docx4j ambiguity unlocked cross-editor compatibility and robust Table of Contents validation.
 ---
 
 In the world of "docs-as-code," we often treat Word documents as a commodity. We
@@ -59,7 +59,8 @@ I've refactored `SdtRun` processing to be more robust, including:
 
 ### 3. Stringifier Evolution: FldChar and Hyperlinks
 
-Our [Characterization Testing](/office-stamper/2025/01/01/monthly-topic-characterization-testing-for-document-processing.html)
+Our [Characterization Testing]({% post_url
+2025-01-01-monthly-topic-characterization-testing-for-document-processing %})
 pipeline got an upgrade. The `Stringifier` utility now includes:
 
 - **`FldChar`**: Exposing field boundaries in test assertions.
@@ -71,11 +72,11 @@ document still "looks" fine in a basic viewer.
 
 ## Agility and Craftsmanship Impact
 
-As
-a [solo maintainer](/governance/2025/02/01/solo-maintenance-craftsmanship-in-the-downtime.html),
-I cannot afford to manual-test every template in both Word and Google Docs.
-These changes reflect a core principle of this project: **Correctness must be
-built into the pipeline.**
+As a [solo maintainer]({% post_url
+2025-02-01-solo-maintenance-craftsmanship-in-the-downtime %}), I cannot afford
+to manual-test every template in both Word and Google Docs. These changes
+reflect a core principle of this project: **Correctness must be built into the
+pipeline.**
 
 - **Reduced Brittle-ness**: By cleaning up `SdtRun` and acknowledging the
   `instrText` ambiguity, we've removed a class of bugs that felt like "magic"

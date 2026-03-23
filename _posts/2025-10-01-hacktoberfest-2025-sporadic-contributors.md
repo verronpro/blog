@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Hacktoberfest 2025: Engineering for the Sporadic Contributor"
+title: Hacktoberfest 2025, Engineering for the Sporadic Contributor
 date: 2025-10-01
 categories: [ community ]
 tags: [ office-stamper, community, craftsmanship, governance ]

@@ -1,12 +1,11 @@
 ---
 layout: article
-title: "Fewer Magic Annotations, Clearer Contracts: Removing Lombok and Aligning Javadoc"
+title: Fewer Magic Annotations, Clearer Contracts, Removing Lombok and Aligning Javadoc
 date: 2023-08-15 09:00:00
 categories: [ office-stamper ]
 author: Joseph
 tags: [ office-stamper, java, api, docs-as-code, maintainability ]
-description: Removing Lombok and making defaults explicit in code and Javadoc to improve clarity, tooling, and
-  onboarding.
+description: Removing Lombok and making defaults explicit in code and Javadoc to improve clarity, tooling, and onboarding.
 ---
 
 Removed Lombok and made contracts explicit in code and Javadoc. Outcome: clearer
@@ -121,8 +120,7 @@ Javadoc sites work reliably with standard tooling. No special plugins required.
   `<failOnError>false</failOnError>` from the build—documentation must be
   correct, or the build fails.
 
-- **Risk:** Utility class instantiation (now prevented by private
-  constructors).
+- **Risk:** Utility class instantiation (now prevented by private constructors).
   **Mitigation:** Clear error messages via `DocxStamperException` guide
   developers toward correct usage.
 

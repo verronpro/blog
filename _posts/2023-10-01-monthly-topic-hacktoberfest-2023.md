@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Hacktoberfest 2023: Office‑stamper is in"
+title: Hacktoberfest 2023, Office‑stamper is in
 date: 2023-10-01
 categories: [ community ]
 tags: [ office-stamper, community, contributing ]
@@ -13,7 +13,7 @@ contributors to land their first pull request. In 2023, Office‑stamper joined 
 with a set of small, scoped issues that improve reliability, tests, and
 documentation without requiring to understand the whole codebase.
 
-What is it (30‑second version):
+What is it:
 
 - Hacktoberfest is a month‑long contribution drive. See the official rules and
   timeline at https://hacktoberfest.com.
@@ -35,7 +35,7 @@ How Office‑stamper participates
 	- Tighten error messages and README snippets where setup tripped users.
 	- Small refactors that clarify contracts without changing behavior.
 
-Workflow (copy‑paste friendly)
+Workflow
 
 1) Pick one labeled issue that matches your experience. Prefer the smallest
    viable change.

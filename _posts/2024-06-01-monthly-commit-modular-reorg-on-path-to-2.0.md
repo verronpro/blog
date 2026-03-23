@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Modular Reorg on the Path to 2.0"
+title: Modular Reorg on the Path to 2.0
 date: 2024-06-01
 categories: [ office-stamper ]
 tags: [ office-stamper, java, api, architecture ]
@@ -10,7 +10,8 @@ description: Intention‑revealing namespaces and a protected core to refactor d
 
 Sustainable agility depends on boundaries you can explain and defend. This month
 I drew those boundaries explicitly, codifying the intent I first shared
-in [Package contracts as code](/office-stamper/2024/05/01/monthly-commit-package-contract-as-code.html).
+in [Package contracts as code]({% post_url
+2024-05-01-monthly-commit-package-contract-as-code%}).
 
 I introduced an `engine` module, moved public entry points into
 intention‑revealing packages, and removed legacy shims. The goal is clear seams:
@@ -25,10 +26,9 @@ extension points that leaked too much of the engine's shape. Those are symptoms
 of missing boundaries.
 
 The 2.0 push is my answer, and it is made possible by the foundation we laid in
-2023 when
-we [leveled up the toolchain to Java 17 and JUnit 5](/office-stamper/2023/03/01/monthly-commit-level-up-toolchain.html).
-With a modern runtime and test stack, I can now use records and modularity to
-enforce the boundaries I need.
+2023 when we [leveled up the toolchain to Java 17 and JUnit 5]({% post_url
+2023-03-01-monthly-commit-level-up-toolchain %}). With a modern runtime and test
+stack, I can now use records and modularity to enforce the boundaries I need.
 
 ## Highlights
 

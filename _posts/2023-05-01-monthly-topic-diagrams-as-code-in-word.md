@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Diagrams as Code in Word Templates with Office‑stamper"
+title: Diagrams as Code in Word Templates with Office‑stamper
 date: 2023-05-01 09:00:00
 categories: [ documentation-as-code ]
 tags: [ documentation-as-code, office-stamper, diagram-as-code, word, plantuml, mermaid,  automation ]

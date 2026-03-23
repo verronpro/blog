@@ -1,11 +1,11 @@
 ---
 layout: article
-title: "Debugging Docx Generation with Inspectable Output"
+title: Debugging Docx Generation with Inspectable Output
 date: 2023-04-01 09:00:00
 categories: [ office-stamper ]
 author: Joseph
-tags: [ office-stamper,testing, java, templates, docs-as-code,wordprocessingml, agility, craftsmanship, test-infrastructure, refactoring, tables, java17, debugging-tool ]
-description: "Before fixing a tricky table‑cell bug, we invested in inspectable outputs, modern Java patterns, and stable assertions—turning infrastructure into leverage for complex WordprocessingML debugging."
+tags: [ office-stamper,testing, java, templates, docs-as-code, wordprocessingml, agility, craftsmanship, test-infrastructure, refactoring, tables, java17, debugging-tool ]
+description: Before fixing a tricky table‑cell bug, we invested in inspectable outputs, modern Java patterns, and stable assertions—turning infrastructure into leverage for complex WordprocessingML debugging.
 ---
 
 Before fixing a table cell bug, invest in the tools to understand it — this
@@ -180,7 +180,7 @@ The stage is set for:
 - Fixes to `TableCellUtil`, `ObjectDeleter`, or `DocumentWalker` that make those
   assertions pass
 - Confidence that the test harness can detect regressions in nested table
-  structures
+  structures.
 
 ## References
 

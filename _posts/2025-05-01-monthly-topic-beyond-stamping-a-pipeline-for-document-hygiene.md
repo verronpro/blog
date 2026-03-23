@@ -1,11 +1,11 @@
 ---
 layout: article
-title: "Beyond Stamping: A Pipeline for Document Hygiene"
+title: Beyond Stamping, A Pipeline for Document Hygiene
 date: 2025-05-01
 categories: [ office-stamper ]
 tags: [ agility, craftsmanship, solo-maintainer, enterprise, platform, ci-cd, risk-management ]
 author: Joseph
-description: "How to implement a formal post-processing phase to ensure document hygiene and professional polish."
+description: How to implement a formal post-processing phase to ensure document hygiene and professional polish.
 ---
 
 In document automation, generating the content is only half the battle. Once the
@@ -14,16 +14,15 @@ contains technical artifacts: processor comments that should be gone, orphaned
 footnotes, or empty paragraphs left behind by conditional logic.
 
 If we want documents that look authored by humans, we need formal **Post
-processing** phase. This phase decouples the *transformation* logic (
-stamping) from the *hygiene* logic (cleaning up).
+processing** phase. This phase decouples the *transformation* logic (stamping)
+from the *hygiene* logic (cleaning up).
 
-As
-a [solo maintainer](/governance/2025/02/01/solo-maintenance-craftsmanship-in-the-downtime.html),
-I've found that a clear pipeline lets me help more people in less time. If a
-team shares a minimal `.docx` that reproduces a glitch, I can run pre &rarr;
-core &rarr; post and see which stage failed the contract. Because the stages are
-small and intention-revealing, fixes are localized, and improvements benefit
-everyone.
+As a [solo maintainer]({% post_url
+2025-02-01-solo-maintenance-craftsmanship-in-the-downtime %}), I've found that a
+clear pipeline lets me help more people in less time. If a team shares a minimal
+`.docx` that reproduces a glitch, I can run pre &rarr; core &rarr; post and see
+which stage failed the contract. Because the stages are small and
+intention-revealing, fixes are localized, and improvements benefit everyone.
 
 ## Technique Taxonomy: Types of Post-processors
 
@@ -68,7 +67,7 @@ the text that pointed to them was removed by a `displayIf` directive.
 - **Performance**: Document traversal can be expensive. Prefer bounded scopes
   and streaming over full-document scans where possible.
 - **Ordering Sensitivity**: Removing a comment might leave a paragraph empty; if
-  the paragraph-collapser runs *before* the comment-remover, you’ll end up with
+  the paragraph-collapser runs *before* the comment-remover, you'll end up with
   an empty paragraph. Define and document a canonical order.
 
 ## Checklist for Document Hygiene

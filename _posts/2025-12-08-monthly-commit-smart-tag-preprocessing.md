@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Smart Tag Preprocessing: Taming Word’s Run Fragmentation"
+title: Smart Tag Preprocessing, Taming Word’s Run Fragmentation
 date: 2025-12-08
 categories: [ office-stamper ]
 tags: [ office-stamper, java, robustness, templates ]
@@ -13,8 +13,8 @@ encountered the "split run" nightmare. You type `${name}` in Word, but
 internally, Word saves it as three separate XML runs: `<w:r>${</w:r>`,
 `<w:r>na</w:r>`, `<w:r>me}</w:r>`.
 
-When this happens, a simple search-and-replace engine fails because it never "
-sees" the full expression. This month, I've introduced a structural solution to
+When this happens, a simple search-and-replace engine fails because it never
+"sees" the full expression. This month, I've introduced a structural solution to
 this problem in `office-stamper`: **Smart Tag Preprocessing**.
 
 ## Why Smart Tags?

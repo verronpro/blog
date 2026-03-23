@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Office-stamper 3.1: Stabilizing the Surface"
+title: Office-stamper 3.1, Stabilizing the Surface
 date: 2026-01-01
 categories: [ office-stamper ]
 tags: [ office-stamper, java, api, refactoring ]
@@ -10,7 +10,7 @@ description: Consolidating the public API, hiding internal utilities, and refini
 
 Following the major overhaul of v3.0, my focus for `office-stamper` has shifted
 from "making it work" to "making it stable." Last week,
-I [detailed how I deleted 12,000 lines]({{ site.baseurl }}{% post_url
+I [detailed how I deleted 12,000 lines]({% post_url
 2025-12-29-monthly-commit-test-suite-modernization %}) of legacy test utilities.
 Today, I'm bringing that same pruning shears to the production engine with the
 release of version 3.1.
@@ -32,8 +32,8 @@ without a major version bump.
 
 ## The Solution: Consolidation and Encapsulation
 
-Version 3.1 introduces several breaking changes aimed at clarifying what is "
-API" and what is "Implementation."
+Version 3.1 introduces several breaking changes aimed at clarifying what is
+"API" and what is "Implementation."
 
 ### 1. The `.api` Package Consolidation
 

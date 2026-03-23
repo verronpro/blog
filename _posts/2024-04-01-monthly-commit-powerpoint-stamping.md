@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "PPTX Stamping Lands Without Touching the Engine Core"
+title: PPTX Stamping Without Touching the Engine Core
 date: 2024-04-01
 categories: [ office-stamper ]
 tags: [ office-stamper, java, templates, testing, extensibility, pptx, pptx4j, docx4j ]
@@ -98,10 +98,10 @@ Replacing text must keep typography intact. The adapter copies the original
 run/paragraph style to the replacement run:
 
 ```java
-// Example from the PPTX adapter
-replacement.setRPr(firstRun.run().
-
-getRPr()); // keep per-run style
+void example() {
+    // Example from the PPTX adapter
+    replacement.setRPr(firstRun.run().getRPr()); // keep per-run style
+}
 
 // Also apply paragraph default style when creating new runs
 private static void applyParagraphStyle(CTTextParagraph p, CTRegularTextRun run) {
@@ -184,8 +184,9 @@ Notes:
   visitor/collector/paragraph classes. The core doesn’t know or care about
   `pptx4j`.
 - Tests as truth: a single golden‑path test encodes behavior and guards against
-  regressions while we iterate. This uses
-  the [Characterization Testing](/office-stamper/2024/03/01/monthly-topic-testing-wordprocessingml-characterization-tests.html)
+  regressions while we iterate. This uses the [Characterization Testing]({%
+  post_url
+  2024-03-01-monthly-topic-testing-wordprocessingml-characterization-tests %})
   approach we standardized last month, ensuring that PPTX output remains
   visually correct even as the engine evolves.
 

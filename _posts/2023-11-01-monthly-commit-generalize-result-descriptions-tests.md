@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Make Tests Tell a Story: Generalizing Result Descriptions"
+title: Make Tests Tell a Story, Generalizing Result Descriptions"
 date: 2023-11-01
 categories: [ office-stamper ]
 tags: [ office-stamper,testing, craftsmanship, agility, docs-as-code, solo-maintainer, enterprise, readability, maintainability ]

@@ -1,11 +1,11 @@
 ---
 layout: article
-title: "The Great Documentation Offensive"
+title: The Great Documentation Offensive
 date: 2025-08-01
 categories: [ office-stamper ]
 tags: [ agility, craftsmanship, solo-maintainer, office-stamper, java, documentation ]
 author: Joseph
-description: "Why I spent July rewriting Javadocs and adding JetBrains annotations to a 3-year-old codebase."
+description: Why I spent July rewriting Javadocs and adding JetBrains annotations to a 3-year-old codebase.
 ---
 
 As I prepare `office-stamper` for its version 3.0 milestone, I've spent much of

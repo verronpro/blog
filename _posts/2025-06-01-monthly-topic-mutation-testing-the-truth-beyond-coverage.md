@@ -1,11 +1,11 @@
 ---
 layout: article
-title: "Mutation Testing: The Truth Beyond 100% Coverage"
+title: Mutation Testing, The Truth Beyond 100% Coverage
 date: 2025-06-01
 categories: [ office-stamper ]
 tags: [ agility, craftsmanship, solo-maintainer, testing, office-stamper, java, ci-cd ]
 author: Joseph
-description: "Why standard line coverage is an illusion of quality and how mutation testing reveals the real gaps in your test suite."
+description: Why standard line coverage is an illusion of quality and how mutation testing reveals the real gaps in your test suite.
 ---
 
 In software engineering, we often treat 100% code coverage as a badge of honor.
@@ -13,8 +13,8 @@ In a project like `office-stamper`, where the engine handles complex document
 structures and dynamic expression resolution, high coverage is a prerequisite
 for stability.
 
-However, coverage is a measurement of which lines were *executed*, not which
-lines were *verified*.
+However, coverage is a measurement of which lines were *executed*, not lines
+that were *verified*.
 
 This is the "Quality Illusion." You can have a test suite that touches every
 line of code but asserts nothing about the side effects. In the context of
@@ -61,13 +61,15 @@ public static void deleteComment(Comment comment) {
 
 Standard tests ensured this block was entered. But a mutant that deleted the
 `parent.getContent().remove(end)` call survived. Why? Because
-the [Characterization Tests](/office-stamper/2025/01/01/monthly-topic-characterization-testing-for-document-processing.html)
+the [Characterization Tests]({% post_url
+2025-01-01-monthly-topic-characterization-testing-for-document-processing %})
 I relied on were checking the *content* but not the underlying *structure* of
 the document. The tests were "green" because the visible text was gone, but the
 orphaned XML tags remained, potentially breaking downstream tools.
 
 By identifying these survived mutants, I was able to add specific assertions to
-my [Declarative Tests](/office-stamper/2024/09/01/monthly-topic-declarative-testing-text-to-template-generation.html),
+my [Declarative Tests]({% post_url
+2024-09-01-monthly-topic-declarative-testing-text-to-template-generation %}),
 ensuring that structural hygiene is as strictly verified as content generation.
 
 ## Pitfalls and the Solo Maintainer's Reality
@@ -75,9 +77,9 @@ ensuring that structural hygiene is as strictly verified as content generation.
 ### 1. The Performance Tax
 
 Mutation testing is slow. It generates hundreds of variants of your code and
-runs the test suite against each. For
-a [solo maintainer](/governance/2025/02/01/solo-maintenance-craftsmanship-in-the-downtime.html),
-running this locally on every build is a productivity killer.
+runs the test suite against each. For a [solo maintainer]({% post_url
+2025-02-01-solo-maintenance-craftsmanship-in-the-downtime %}), running this
+locally on every build is a productivity killer.
 
 However, many techniques can be used to improve the run speed:
 
@@ -86,7 +88,7 @@ However, many techniques can be used to improve the run speed:
 * **Test Prioritization**: Only executing tests that actually cover the mutated
   line.
 
-**The Solution**: I’ve integrated Pitest (using the latest
+**The Solution**: I've integrated Pitest (using the latest
 `pitest-junit5-plugin`) into the remote CI pipeline. It runs as part of the site
 documentation generation (`mvn verify site`) only on merges to `main`. This
 keeps the local feedback loop fast while ensuring the "Quality Master" is
@@ -94,8 +96,8 @@ updated regularly.
 
 ### 2. The Over-Testing Trap
 
-It is tempting to try and kill every single mutant. This often leads to "
-tautological tests"—tests that simply mirror the implementation code without
+It is tempting to try and kill every single mutant. This often leads to
+"tautological tests"—tests that simply mirror the implementation code without
 adding functional value.
 
 **The Heuristic**: My priority is a **non-decreasing mutation score**. I aim
@@ -106,10 +108,10 @@ at all.
 
 ## Checklist — Implementing Mutation Testing
 
-1. **Start Small**: Don't run it on your whole project at once. Target your "
-   engine" or "core" logic first.
-2. **Plugin Alignment**: Ensure your mutation engine matches your test runner (
-   e.g., using the `pitest-junit5-plugin` for JUnit 5 projects).
+1. **Start Small**: Don't run it on your whole project at once. Target your
+   "engine" or "core" logic first.
+2. **Plugin Alignment**: Ensure your mutation engine matches your test runner
+   (e.g., using the `pitest-junit5-plugin` for JUnit 5 projects).
 3. **Establish a Baseline**: Run it once to see your current score. Don't be
    discouraged if it is lower than your line coverage.
 4. **Remote Execution**: Offload the heavy lifting to your CI/CD pipeline to

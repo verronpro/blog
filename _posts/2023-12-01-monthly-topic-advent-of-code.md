@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Advent of Code: A Habit to Sharpen Algorithms and Team Energy"
+title: Advent of Code, A Habit to Sharpen Algorithms and Team Energy
 date: 2023-12-01
 categories: [ community ]
 tags: [ algorithms, craftsmanship, coaching, community, challenge ]
@@ -19,9 +19,8 @@ some days jump far outside a comfortable timebox. When that happens, I
 intentionally keep the workload light and spread the tougher puzzles across the
 year. The goal is sustainable practice, not a perfect streak.
 
-My solutions and notes live here: https://github.com/caring-coder/adventofcode (
-use for ideas only—don’t copy the scaffolding; it is personal and
-Java‑oriented).
+My solutions live here: https://github.com/caring-coder/adventofcode (use for
+ideas only—don’t copy the scaffolding; it is personal and Java‑oriented).
 
 ## What makes Advent of Code effective
 

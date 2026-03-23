@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Workshop: Developer Onboarding Workshop Template"
+title: Workshop Template for Developer Onboarding
 date: 2023-06-01 09:00:00
 categories: [ workshop ]
 tags: [ onboarding, docs-as-code, developer-experience, workshop, documentation, team-practices ]
@@ -16,8 +16,8 @@ conversations into an actionable improvement backlog.
 A new contractor joins your team Monday morning. By lunch, they're still
 installing dependencies. By Wednesday, they're Slacking you about environment
 variables. By Friday, they've made zero commits. Sound familiar? The problem
-isn't talent—it's missing documentation. This workshop surfaces those gaps in 60
-minutes through a simple challenge: can someone set up your dev environment
+isn't talent—it is missing documentation. This workshop surfaces those gaps in
+60 minutes through a simple challenge: can someone set up your dev environment
 using only a 240-character starting message? If not, you've just found your next
 sprint's documentation work.
 
@@ -148,10 +148,10 @@ Publish a scoreboard over time.
 **Round 1 (15 min)**
 
 - **Message:** "Clone github.com/acme/shop-api, see README"
-- **Player:** Found README, but it said "install Java" without version
-- **Result:** Installed Java 21, project needs Java 17 → build failed
+- **Player:** Found README, but it said "install Java" without a version
+- **Result:** Installed Java 21, the project needs Java 17 → build failed.
 - **Score:** 0/8 points
-- **Action items:** Add Java version + download link to README
+- **Action items:** Add a Java version and download link to README
 
 **Round 2 (15 min)**
 
@@ -159,27 +159,27 @@ Publish a scoreboard over time.
 - **Player:** Built successfully, but `mvn test` skipped integration tests
 - **Result:** Build works, tests run but incomplete
 - **Score:** 4/8 points (build + build-clean + tests partial)
-- **Action items:** Document how to run full test suite (with Docker deps)
+- **Action items:** Document how to run the full test suite (with Docker deps)
 
 **Round 3 (15 min)**
 
 - **Message:** Same as Round 1
 - **Player:** Everything worked! Found Swagger UI for endpoints
 - **Score:** 8/8 points ✅
-- **Outcome:** Team feels confident handing project to another squad
+- **Outcome:** Team feels confident handing the project to another squad
 
 ## How Mature Is Your Onboarding?
 
 Use your workshop score to gauge maturity:
 
 **Level 1: Broken (0–3 points)**  
-Can't even build the project. Documentation likely doesn't exist or is severely
+Can't even build the project. Documentation likely doesn't exist or is
 outdated.  
 🚨 **Action:** Stop feature work, invest a sprint in docs.
 
 **Level 2: Fragile (4–6 points)**  
 Builds work, but tests or runtime fail. Documentation exists but has gaps.  
-⚠️ **Action:** Document missing prerequisites, add troubleshooting section.
+⚠️ **Action:** Document missing prerequisites, add a troubleshooting section.
 
 **Level 3: Functional (7–10 points)**  
 Core setup works. Some advanced features undocumented.  

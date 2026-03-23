@@ -1,11 +1,11 @@
 ---
 layout: article
-title: "Knowledge as a Feature: Improved Site Documentation"
+title: Knowledge as a Feature, Improved Site Documentation
 author: Joseph
 date: 2023-06-15 09:00:00
 categories: [ office-stamper ]
 tags: [ docs-as-code, office-stamper, documentation, ci, asciidoctor, agility, craftsmanship, solo-maintainer, enterprise, developer-experience ]
-description: "Turning the website into a first-class, build-verified artifact: clearer concepts, copy‑paste examples, and CI‑friendly docs that scale a solo‑maintained library inside enterprises."
+description: Turning the website into a first-class, build-verified artifact. Clearer concepts, copy‑paste examples, and CI‑friendly docs that scale a solo‑maintained library inside enterprises.
 ---
 
 Docs are product. This change turns the site into a first‑class, build‑verified

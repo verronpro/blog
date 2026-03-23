@@ -1,12 +1,11 @@
 ---
 layout: article
-title: "Declarative Testing: Text-to-Template Generation"
+title: Declarative Testing, Text-to-Template Generation
 date: 2024-09-01
 categories: [ office-stamper ]
 tags: [ testing, docs-as-code, office-stamper, java, wordprocessingml ]
 author: Joseph
-description: "Reducing friction in document automation testing by replacing binary .docx artifacts with a textual DSL for template generation."
-toc: true
+description: Reducing friction in document automation testing by replacing binary .docx artifacts with a textual DSL for template generation.
 ---
 
 In the world of **Office-stamper**, testing has always been a heavy-duty affair.

@@ -1,16 +1,16 @@
 ---
 layout: article
-title: "Presentations as Code: Asciidoctor, Reveal.js, and Maven"
+title: Presentations as Code, Asciidoctor, Reveal.js, and Maven
 date: 2024-01-01 09:00:00
 categories: [ documentation-as-code ]
 tags: [ docs-as-code, revealjs, asciidoctor, presentations ]
 author: Joseph
-description: "How I build and publish slide decks as code using Asciidoctor Reveal.js and a reproducible Maven build — with live code and diagram generation."
+description: How I build and publish slide decks as code using Asciidoctor Reveal.js and a reproducible Maven build — with live code and diagram generation.
 ---
 
 I build my talks and workshops as code. The slides live in Git, are reproducible
-on any machine, and are published from CI with the same toolchain I run
-locally. The source for my decks is public:
+on any machine, and are published from CI with the same toolchain I run locally.
+The source for my decks is public:
 
 - Repository: https://github.com/caring-coder/presentations
 
@@ -242,7 +242,8 @@ file server.
   slides via `include::`.
 - Diagrams: `asciidoctor-diagram` renders PlantUML, Mermaid (via Kroki),
   Graphviz, and more at build time. This is a practical application of
-  the [Diagrams as Code](/documentation-as-code/2023/09/01/diagram-as-code.html)
+  the [Diagrams as Code]({% post_url
+  2023-09-01-2023-09-01-monthly-topic-diagram-as-code %})
   philosophy: the diagrams are version-controlled, diffable, and stay in sync
   with the slide narrative.
 

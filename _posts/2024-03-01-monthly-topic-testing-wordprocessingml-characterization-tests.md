@@ -1,11 +1,11 @@
 ---
 layout: article
-title: "Unit Tests Don’t Mean What You Think: Characterization Testing WordprocessingML in Office‑stamper"
+title: Unit Tests Don’t Mean What You Think, Characterization Testing WordprocessingML in Office‑stamper
 date: 2024-03-01
 categories: [ office-stamper ]
 tags: [ testing, docs-as-code, office-stamper, wordprocessingml, java ]
 author: Joseph
-description: "I replaced brittle XML‑level assertions with a textual, AsciiDoc‑like view of DOCX output. Here’s how characterization tests made Office‑stamper’s refactors safer and test suites readable."
+description: I replaced brittle XML‑level assertions with a textual, AsciiDoc‑like view of DOCX output. Here’s how characterization tests made Office‑stamper’s refactors safer and test suites readable.
 ---
 
 When you stamp DOCX, “unit tests” that assert on internal XML shape are a trap.

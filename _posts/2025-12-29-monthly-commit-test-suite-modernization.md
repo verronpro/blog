@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Test Suite Modernization: 12,000 Lines Lighter"
+title: Test Suite Modernization, 12,000 Lines Lighter
 date: 2025-12-29
 categories: [ office-stamper ]
 tags: [ office-stamper, java, testing, refactoring ]

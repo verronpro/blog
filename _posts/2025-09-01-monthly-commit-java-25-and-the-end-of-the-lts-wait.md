@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Java 25 and the End of the LTS Wait"
+title: Java 25 and the End of the LTS Wait
 date: 2025-09-01
 categories: [ office-stamper ]
 tags: [ office-stamper, java, ci, renovate, craftsmanship, maintenance ]

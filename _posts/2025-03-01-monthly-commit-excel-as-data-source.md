@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Monthly Commit — Beyond JSON: Using Excel as a Data Source"
+title: Monthly Commit — Beyond JSON, Using Excel as a Data Source
 date: 2025-03-01
 categories: [ office-stamper ]
 tags: [ office-stamper, java, excel, business-automation, docs-as-code, agility ]
@@ -8,8 +8,8 @@ author: Joseph
 description: Bridging the gap between developers and business users by allowing XLSX files to serve as data context for document stamping.
 ---
 
-In my role as an IT Manager, I’m in constant contact with Finance and HR teams
-who live almost exclusively in Excel. While I’ve spent years advocating for
+In my role as an IT Manager, I'm in constant contact with Finance and HR teams
+who live almost exclusively in Excel. While I've spent years advocating for
 “docs-as-code” and structured data like JSON or CSV, the reality is that for
 many stakeholders, the spreadsheet *is* the source of truth.
 
@@ -21,11 +21,12 @@ lets you "bring your own spreadsheet" as a data source for Office-stamper.
 ## Why this matters
 
 The goal of Office-stamper has always been to simplify document generation. We
-previously
-improved [Contextual Clarity](/office-stamper/2024/11/01/monthly-commit-refactoring-for-contextual-clarity.html)
-and [Template Normalization](/office-stamper/2024/12/01/monthly-commit-pre-processing-for-template-normalization.html),
-but we were still largely assuming that the data context would be a Java POJO or
-a Map prepared by a developer.
+previously improved [Contextual Clarity]({% post_url
+2024-11-01-monthly-commit-refactoring-for-contextual-clarity %})
+and [Template Normalization]({% post_url
+2024/12/01/monthly-commit-pre-processing-for-template-normalization %}), but we
+were still largely assuming that the data context would be a Java POJO or a Map
+prepared by a developer.
 
 By introducing Excel as a native context candidate, we unlock a new workflow:
 
@@ -84,10 +85,10 @@ officestamper --input-file data.xlsx --template-file template.pptx --output-path
 
 ## The "Strategic Not Yet" (Experimental Caveats)
 
-Following
-the [Solo Maintenance](/governance/2025/02/01/solo-maintenance-craftsmanship-in-the-downtime.html)
-philosophy, this is an "impact slice" rather than a finished product. It comes
-with some intentional sharp edges:
+Following the [Solo Maintenance]({% post_url
+2025-02-01-solo-maintenance-craftsmanship-in-the-downtime %}) philosophy, this
+is an "impact slice" rather than a finished product. It comes with some
+intentional sharp edges:
 
 - **Memory Heavy**: The entire workbook is loaded into memory.
 - **Strict Layout**: It expects a clean table starting at A1 with no blank

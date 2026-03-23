@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Package contracts as code"
+title: Package contracts as code
 date: 2024-05-01
 categories: [ office-stamper ]
 tags: [ office-stamper, java, api ]
@@ -68,6 +68,5 @@ import org.springframework.lang.NonNullApi;
 - Keep relying on IDE signals short‑term; add ArchUnit tests to automate
   architectural rules later.
 
-References: commit [
-`6d00de1`](https://github.com/jverron/office-stamper/commit/6d00de1); file path
+References: commit [`6d00de1`]({{gh_os}}/commit/6d00de1); file path
 `src/main/java/pro/verron/docxstamper/preset/package-info.java`.

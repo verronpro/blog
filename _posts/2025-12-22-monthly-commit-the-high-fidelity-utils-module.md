@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "The High-Fidelity Utils Module"
+title: The High-Fidelity Utils Module
 date: 2025-12-22
 categories: [ office-stamper ]
 tags: [ office-stamper, java, architecture, v3 ]
@@ -39,7 +39,7 @@ twofold:
 The heart of the `utils` module is the `ResetableIterator` interface. It
 provides a unified way to walk through different Office formats while allowing
 the engine to "reset" the state when a mutation occurs (a technique
-I [detailed earlier this month]({{ site.baseurl }}{% post_url
+I [detailed earlier this month]({% post_url
 2025-12-01-monthly-commit-the-resettable-iterator %})).
 
 We now have high-fidelity implementations for the three major formats:

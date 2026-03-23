@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "Back to Spring SpEL ExpressionParser"
+title: Back to Spring SpEL ExpressionParser
 date: 2026-03-01
 categories: [ office-stamper ]
 tags: [ office-stamper, java, api, architecture ]
