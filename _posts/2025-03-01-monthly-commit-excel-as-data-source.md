@@ -24,7 +24,7 @@ The goal of Office-stamper has always been to simplify document generation. We
 previously improved [Contextual Clarity]({% post_url
 2024-11-01-monthly-commit-refactoring-for-contextual-clarity %})
 and [Template Normalization]({% post_url
-2024/12/01/monthly-commit-pre-processing-for-template-normalization %}), but we
+2024-12-01-monthly-commit-pre-processing-for-template-normalization %}), but we
 were still largely assuming that the data context would be a Java POJO or a Map
 prepared by a developer.
 
