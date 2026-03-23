@@ -243,7 +243,7 @@ file server.
 - Diagrams: `asciidoctor-diagram` renders PlantUML, Mermaid (via Kroki),
   Graphviz, and more at build time. This is a practical application of
   the [Diagrams as Code]({% post_url
-  2023-09-01-2023-09-01-monthly-topic-diagram-as-code %})
+  2023-09-01-monthly-topic-diagram-as-code %})
   philosophy: the diagrams are version-controlled, diffable, and stay in sync
   with the slide narrative.
 
