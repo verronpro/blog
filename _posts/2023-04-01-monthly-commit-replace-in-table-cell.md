@@ -13,7 +13,7 @@ commit added debug-friendly test infrastructure, modernized code with Java 17
 patterns, and built a stable assertion layer for complex WordprocessingML
 structures, proving that infrastructure work is feature work.
 
-Commit: [`7b387f5`]({{gh_os}}/commit/7b387f5)
+Commit: [`7b387f5`]({{site.ghos}}/commit/7b387f5)
 
 ## What the commit actually does
 
@@ -184,8 +184,8 @@ The stage is set for:
 
 ## References
 
-- Commit: [`7b387f5`]({{gh_os}}/commit/7b387f5)
-- Issue: [#67 replacewordwith doesn't wo...]({{gh_os}}/issues/67)
+- Commit: [`7b387f5`]({{site.ghos}}/commit/7b387f5)
+- Issue: [#67 replacewordwith doesn't wo...]({{site.ghos}}/issues/67)
 - Added tests:
 	- `ReplaceWordWithIntegrationTest.java` (shell),
 	- `ParagraphCollector.java` (new utility)

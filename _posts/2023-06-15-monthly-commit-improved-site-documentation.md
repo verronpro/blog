@@ -16,7 +16,7 @@ docs don’t drift.
 
 | Aspect  | Details                                                |
 |---------|--------------------------------------------------------|
-| Commit  | [`8243bd7`]({{gh_os}}/commit/8243bd7)                  |
+| Commit  | [`8243bd7`]({{site.ghos}}/commit/8243bd7)                  |
 | Scope   | Readme/site format, structure, examples, navigation    |
 | Why     | Reduce support, speed onboarding, align site with APIs |
 | Outcome | Fewer “how do I…?” questions; faster, safer adoption   |
@@ -173,6 +173,6 @@ lightweight script to validate external links.
 
 ## References
 
-- Commit: [`8243bd7`]({{gh_os}}/commit/8243bd7)
+- Commit: [`8243bd7`]({{site.ghos}}/commit/8243bd7)
 - Related: site layout and concept pages under `engine/src/site/asciidoc/`
 - Javadoc packages: `pro.verron.officestamper.api`, `core`

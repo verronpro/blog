@@ -40,7 +40,7 @@ To make this work, I've had to master two things:
 ## Strategic "Not Yet"
 
 Restraint isn't just about saying "no"; it is about "not yet."
-Take [Issue #80]({{gh_os}}/issues/80)—"Only attempt to resolve variable if they
+Take [Issue #80]({{site.ghos}}/issues/80)—"Only attempt to resolve variable if they
 actually are shown." It has been pending since October 2022. I haven't ignored
 it; I've been waiting for the library's architecture to be ready to handle it
 without a bespoke hack. That delay allowed for a deeper conversation with the

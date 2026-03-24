@@ -84,5 +84,5 @@ expression failed without cluttering the production logs for everyone else.
 - Expand characterization tests to cover the new three-phase processing order.
 
 ---
-*Referenced Commits:* [`367b16c`]({{gh_os}}/commit/367b16c) (Walkers to
-Streams), [`5241817`]({{gh_os}}/commit/5241817) (OfficeStamper branding).
+*Referenced Commits:* [`367b16c`]({{site.ghos}}/commit/367b16c) (Walkers to
+Streams), [`5241817`]({{site.ghos}}/commit/5241817) (OfficeStamper branding).

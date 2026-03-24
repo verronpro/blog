@@ -54,7 +54,7 @@ a `List` or a `List<List<Object>>`.
 ## List of Lists: Finally Supported
 
 This change also allows us to officially support Issue #623 (originally reported
-by **robfero** in [Discussion #557]({{gh_os}}/discussions/557)). Rob was looking
+by **robfero** in [Discussion #557]({{site.ghos}}/discussions/557)). Rob was looking
 for a way to render a list of lists within a document—a task that previously
 required custom comment resolvers.
 

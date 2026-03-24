@@ -11,7 +11,7 @@ description: A deep dive into adding PowerPoint (PPTX) stamping to Office‑stam
 PPTX stamping was added as a bounded adapter, proving the engine scales to a new
 format without touching the core.
 
-Commit: [`b748e83`]({{gh_os}}/commit/b748e83)
+Commit: [`b748e83`]({{site.ghos}}/commit/b748e83)
 
 I had a punctual need in my new team at EDF China: stamp data into PowerPoint
 decks and repeat slides for each element of a collection. It made me eager to
@@ -218,7 +218,7 @@ avoid quadratic edits.
 
 ### References
 
-- Commit: [`b748e83`]({{gh_os}}/commit/b748e83)
+- Commit: [`b748e83`]({{site.ghos}}/commit/b748e83)
 - Related notes and examples (see `engine/src/site/asciidoc` in the repository).
 
 ---

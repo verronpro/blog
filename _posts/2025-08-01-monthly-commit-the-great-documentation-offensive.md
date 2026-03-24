@@ -20,7 +20,7 @@ predecessor, it needs to be *inviting*.
 
 This month, I launched what I'm calling "The Great Documentation Offensive."
 
-Commit: [00c1c82]({{gh_os}}/commit/00c1c82)
+Commit: [00c1c82]({{site.ghos}}/commit/00c1c82)
 
 ## Motivation: The Road to 3.0
 

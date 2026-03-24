@@ -7,7 +7,7 @@ baseurl: "/"
 url: "https://verron.pro"
 
 github_username: caring-coder
-gh_os: "https://github.com/verronpro/office-stamper"
+ghos: "https://github.com/verronpro/office-stamper"
 
 repository: verronpro/blog
 

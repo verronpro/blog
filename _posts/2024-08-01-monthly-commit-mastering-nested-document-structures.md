@@ -16,7 +16,7 @@ and opened the door to a wider ecosystem of templates.
 
 ## Context
 
-The catalyst for this change was [Issue #286]({{gh_os}}/issues/286), reported in
+The catalyst for this change was [Issue #286]({{site.ghos}}/issues/286), reported in
 April. Users found that expressions placed inside "Plain Text Form Controls" (
 Structured Document Tags, or SDTs) were simply being ignored by the engine.
 
@@ -89,6 +89,6 @@ with Word's native features rather than fighting against them.
   optimize the traversal engine.
 
 ---
-*Referenced Issue:* [#286]({{gh_os}}/issues/286)
-*Referenced Commits:* [`3a78067`]({{gh_os}}/commit/3a78067) (StandardParagraph
-recursion), [`e21fd9e`]({{gh_os}}/commit/e21fd9e) (IndexedRun optimizations).
+*Referenced Issue:* [#286]({{site.ghos}}/issues/286)
+*Referenced Commits:* [`3a78067`]({{site.ghos}}/commit/3a78067) (StandardParagraph
+recursion), [`e21fd9e`]({{site.ghos}}/commit/e21fd9e) (IndexedRun optimizations).
