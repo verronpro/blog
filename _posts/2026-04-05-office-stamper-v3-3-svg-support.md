@@ -103,3 +103,12 @@ and handle the SVG-specific logic.
 - **Refactor**: Replaced legacy `DocxRenderer` and `ByteUtils` with internal
   Docx-to-Asciidoc toolchain.
 - **Chore**: Updated core dependencies (Spring 7, Jackson 2.21).
+
+## Post‑scriptum: WMF and EMF considerations (added May 2026)
+
+While SVG is the headline feature of v3.3, I also explored legacy vector formats **WMF** and **EMF** during this work.
+
+- Why a new image pipeline? Historically, `docx4j` handled raster formats and also supported WMF/EMF, but it lacked native **SVG** support. On the other hand, Java’s built‑in `ImageIO` comfortably covers raster formats (PNG/JPG/BMP…) yet offers no vector readers (SVG/EMF/WMF). Third‑party options I evaluated tended to support one vector format at a time, never the three together.
+- As part of the long‑term plan to reduce `docx4j` dependencies in `office‑stamper`, I started rolling my own **ImageIO plugins** to unify handling of SVG/EMF/WMF behind a single, modern pipeline. SVG remains the hero format for quality and file size. WMF/EMF are supported for compatibility, but expect a few sharp edges in non‑Word editors.
+
+This post stays focused on SVG; the broader unification (including EMF/WMF) is detailed in the May 3rd Monthly Commit post.
