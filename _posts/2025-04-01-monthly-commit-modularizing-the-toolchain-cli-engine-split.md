@@ -76,7 +76,7 @@ download an EXE, point it at a template, and go.
 
 During this refactor, I spent significant time on "boring" POM cleanup. To some,
 this might look like bike-shedding, but for a [Solo Maintainer]({% post_url
-2025-02-01-solo-maintenance-craftsmanship-in-the-downtime %}/governance/.html),
+2025-02-01-solo-maintenance-craftsmanship-in-the-downtime %}),
 it is essential.
 
 I view build warnings as a form of **ultimate asynchronous communication**. A
