@@ -16,7 +16,7 @@
 ### 🛠️ Technical SEO
 - [x] **Create and upload `robots.txt`** (allow all, point to sitemap).
 - [x] **Generate a full `sitemap.xml`** (all important pages) and submit it to **Google Search Console** and **Bing Webmaster Tools**.
-- [ ] **Register both properties in Google Search Console:** `verron.pro` and `verronpro.github.io` (to track cross-domain data).
+- [ ] **Register both properties in Google Search Console:** `verron.pro` and `office-stamper.verron.pro` (to track cross-domain data).
 - [ ] **Verify SSL/HTTPS** is enforced; fix any mixed-content warnings (use a free crawler like Screaming Frog).
 - [ ] **Check Core Web Vitals** via PageSpeed Insights; optimize images if needed.
 
@@ -71,7 +71,7 @@
     - Cross-post a summary on LinkedIn to spark discussion.
 
 ### 📦 Office-Stamper Integration (Week 2)
-- [ ] **In the new pillar post, link deeply to relevant pages on the `verronpro.github.io` documentation.**
+- [ ] **In the new pillar post, link deeply to relevant pages on the `office-stamper.verron.pro` documentation.**
 - [ ] **On the documentation site**, add a sidebar or footer to every page: “*Handcrafted with care by Joseph Verron. Read the stories behind the code on verron.pro.*”
 
 ---
