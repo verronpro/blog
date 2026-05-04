@@ -16,14 +16,14 @@
 ### 🛠️ Technical SEO
 - [x] **Create and upload `robots.txt`** (allow all, point to sitemap).
 - [x] **Generate a full `sitemap.xml`** (all important pages) and submit it to **Google Search Console** and **Bing Webmaster Tools**.
-- [ ] **Register both properties in Google Search Console:** `verron.pro` and `office-stamper.verron.pro` (to track cross-domain data).
-- [ ] **Verify SSL/HTTPS** is enforced; fix any mixed-content warnings (use a free crawler like Screaming Frog).
+- [x] **Register both properties in Google Search Console:** `verron.pro` and `office-stamper.verron.pro` (to track cross-domain data).
+- [x] **Verify SSL/HTTPS** is enforced; fix any mixed-content warnings (use a free crawler like Screaming Frog).
 - [ ] **Check Core Web Vitals** via PageSpeed Insights; optimize images if needed.
 
 ### 🛠️✍️ Site Structure & Navigation
 - [ ] **Create a dedicated `/blog/` page** on verron.pro listing all posts chronologically with titles and excerpts.
 - [ ] **Add a global navigation menu** to every page with: Home, Blog, Projects, About, Contact.
-- [ ] **Ensure an RSS feed** (`/feed.xml`) is available and linked from the blog page.
+- [x] **Ensure an RSS feed** (`/feed.xml`) is available and linked from the blog page.
 - [ ] **Add a simple search functionality** or, at minimum, tag/category filtering on the blog index.
 
 ### ✍️ Content Optimization (Quick Wins)
