@@ -23,7 +23,7 @@
 ### 🛠️✍️ Site Structure & Navigation
 - [ ] **Create a dedicated `/blog/` page** on verron.pro listing all posts chronologically with titles and excerpts.
 - [ ] **Add a global navigation menu** to every page with: Home, Blog, Projects, About, Contact.
-- [x] **Ensure an RSS feed** (`/feed.xml`) is available and linked from the blog page.
+- [ ] **Ensure an RSS feed** (`/feed.xml`) is available and linked from the blog page.
 - [ ] **Add a simple search functionality** or, at minimum, tag/category filtering on the blog index.
 
 ### ✍️ Content Optimization (Quick Wins)
