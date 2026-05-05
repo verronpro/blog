@@ -22,9 +22,9 @@
 
 ### 🛠️✍️ Site Structure & Navigation
 - [x] **Update `/archive/` page** on verron.pro to list all posts chronologically with titles and excerpts.
-- [ ] **Add a global navigation menu** to every page with: Home, Blog, Projects, About, Contact.
-- [ ] **Ensure an RSS feed** (`/feed.xml`) is available and linked from the blog page.
-- [ ] **Add a simple search functionality** or, at minimum, tag/category filtering on the blog index.
+- [x] **Add a global navigation menu** to every page with: Home, Blog, Projects, About, Contact.
+- [x] **Ensure an RSS feed** (`/feed.xml`) is available and linked from the blog page.
+- [x] **Add a simple search functionality** or, at minimum, tag/category filtering on the blog index.
 
 ### ✍️ Content Optimization (Quick Wins)
 - [ ] **Write unique meta descriptions** for the top 5 most important posts and for the About page.
