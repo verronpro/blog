@@ -103,6 +103,12 @@ a:hover {
     padding-inline: 1rem;
 }
 
+.logo {
+    width: 2em;
+    height: 2em;
+    padding: 0.35em;
+}
+
 .hero { padding: 3rem 0; }
 .hero h1 { font-size: 2.25rem; line-height: 1.2; margin-bottom: .5rem; }
 .hero p.lead { font-size: 1.125rem; color: var(--cc-muted); margin: .5rem 0 1rem; }
