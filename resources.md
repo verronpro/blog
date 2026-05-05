@@ -5,7 +5,7 @@ aside:
   toc: true
 ---
 
-This page is an organized catalog of tools, references, and inspirations I use. For an overview of how these fit together, see the Operating Model page: [/operating-model.html](/operating-model.html).
+This page is an organized catalog of tools, references, and inspirations I use. For an overview of how these fit together, see the **Operating Model** section on the [About](/about.html#operating-model) page.
 
 ## Diagrams as code and other print‑oriented DSLs
 

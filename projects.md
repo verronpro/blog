@@ -1,13 +1,13 @@
 ---
 layout: page
-title: Ideas & Ongoing Projects
-permalink: /ideas.html
-description: A living list of ongoing work and ideas I’d like to explore when time allows — from docs-as-code tooling to Office automation experiments.
+title: Projects
+permalink: /projects.html
+description: A living list of ongoing work and projects I’m actively building — from docs-as-code tooling to Office automation experiments.
 aside:
   toc: true
 ---
 
-This page tracks small initiatives I’m actively exploring, and a backlog of ideas I’d like to tackle. If you want to collaborate on any of these, or if a topic would help your team, reach out via LinkedIn (see Operating Model) or GitHub issues.
+This page tracks current projects and initiatives I’m actively building, along with a focused backlog of work in progress. If you want to collaborate on any of these, or if a topic would help your team, reach out via LinkedIn (see About) or GitHub issues.
 
 Tip: Items marked with “seeded from Resources” originate from the curated list on [/resources.html](/resources.html).
 
