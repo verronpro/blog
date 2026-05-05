@@ -267,5 +267,24 @@
 <footer class="site-footer" role="contentinfo">
     {% include footer/custom.html %}
 </footer>
+<script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>
+<script>
+  (function() {
+    var searchInput = document.getElementById('search-input');
+    var resultsContainer = document.getElementById('results-container');
+    if (searchInput && resultsContainer) {
+      new SimpleJekyllSearch({
+        searchInput: searchInput,
+        resultsContainer: resultsContainer,
+        json: '{{ site.baseurl }}/search.json',
+        searchResultTemplate: '<li><a href="{url}">{title}</a><br><small>{date}</small></li>',
+        noResultsText: 'No results found',
+        limit: 10,
+        fuzzy: false,
+        exclude: ['Welcome']
+      });
+    }
+  })();
+</script>
 </body>
 </html>

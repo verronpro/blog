@@ -647,3 +647,33 @@ tbody tr:nth-child(even) {
         max-height: none;
     }
 }
+
+/* Search Results Styles */
+#results-container {
+    list-style: none;
+    padding-left: 0;
+}
+
+#results-container li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--cc-border);
+}
+
+#results-container li:last-child {
+    border-bottom: none;
+}
+
+#results-container a {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#results-container small {
+    color: var(--cc-muted);
+}
+
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}

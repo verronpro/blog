@@ -36,6 +36,24 @@
   {% endif %}
 
   <div class="card">
+    <h3>Search</h3>
+    <div id="search-container">
+      <input type="text" id="search-input" placeholder="Search posts..." style="width: stretch; padding: 0.5rem; border: 1px solid var(--cc-border); border-radius: 4px; background: var(--cc-bg); color: var(--cc-text);">
+      <ul id="results-container" style="list-style: none; padding-left: 0; margin-top: 0.5rem; max-height: 300px; overflow-y: auto;"></ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Tags</h3>
+    <div class="tag-cloud">
+      {% assign tags = site.tags | sort %}
+      {% for tag in tags %}
+        <span class="tag" style="cursor:pointer" onclick="document.getElementById('search-input').value='{{ tag[0] }}'; document.getElementById('search-input').dispatchEvent(new Event('input'));">{{ tag[0] }}</span>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="card">
     <h3>About</h3>
     <p>I'm Joseph Verron — software craftsmanship coach and docs‑as‑code practitioner. I help teams build reliable systems and clear documentation.</p>
     <p class="muted" style="margin-top:.5rem">
