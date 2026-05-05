@@ -43,19 +43,6 @@
         x="419.0618"
         y="83.95623"/></g></mask></defs>
 
-    <style
-            type="text/css"
-            id="style1">
-g.prefab path {
-  vector-effect:non-scaling-stroke;
-  -inkscape-stroke:hairline;
-  fill: none;
-  fill-opacity: 1;
-  stroke-opacity: 1;
-  stroke: #00349c;
-}
-</style>
-
     <g
             id="logo"
             style="image-rendering:auto"
