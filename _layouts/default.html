@@ -7,6 +7,7 @@
     <title>{% if page.title %}{{page.title}} · {% endif %}{{site.title}}</title>
     <meta name="description"
           content="{{ page.description | default: site.description | strip | escape }}">
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
     {% include head/favicon.html %}
     <script defer src="/assets/js/mermaid_v10.js"></script>
     <script defer src="/assets/js/pako_v2.1.0.js"></script>

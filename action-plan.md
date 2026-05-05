@@ -27,9 +27,9 @@
 - [x] **Add a simple search functionality** or, at minimum, tag/category filtering on the blog index.
 
 ### ✍️ Content Optimization (Quick Wins)
-- [ ] **Write unique meta descriptions** for the top 5 most important posts and for the About page.
-- [ ] **Add alt text** to all images and code screenshots in those posts.
-- [ ] **Implement `rel=canonical` tags** on all pages to self-reference, protecting against future duplicate content.
+- [x] **Write unique meta descriptions** for the top 5 most important posts and for the About page.
+- [x] **Add alt text** to all images and code screenshots in those posts.
+- [x] **Implement `rel=canonical` tags** on all pages to self-reference, protecting against future duplicate content.
 
 ### 🧑‍💻 Professional Image – About Page Overhaul
 - [ ] **Add a professional headshot.**
