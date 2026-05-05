@@ -21,7 +21,7 @@
 - [ ] **Check Core Web Vitals** via PageSpeed Insights; optimize images if needed.
 
 ### 🛠️✍️ Site Structure & Navigation
-- [ ] **Create a dedicated `/blog/` page** on verron.pro listing all posts chronologically with titles and excerpts.
+- [x] **Update `/archive/` page** on verron.pro to list all posts chronologically with titles and excerpts.
 - [ ] **Add a global navigation menu** to every page with: Home, Blog, Projects, About, Contact.
 - [ ] **Ensure an RSS feed** (`/feed.xml`) is available and linked from the blog page.
 - [ ] **Add a simple search functionality** or, at minimum, tag/category filtering on the blog index.
